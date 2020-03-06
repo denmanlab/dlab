@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.ndimage as ndimage
-from braintv_ephys_dev.workstation.danield.generalephys import placeAxesOnGrid, smoothRF
+from dlab.generalephys import placeAxesOnGrid, smoothRF
 from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
 import scipy.optimize as opt

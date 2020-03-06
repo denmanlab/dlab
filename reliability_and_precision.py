@@ -4,8 +4,8 @@ from scipy import stats
 from scipy.signal import boxcar,convolve,correlate,resample,argrelextrema
 from scipy.cluster.vq import kmeans,kmeans2
 from scipy.stats import pearsonr
-from braintv_ephys_dev.workstation.danield import cleanAxes
-from braintv_ephys_dev.workstation.danield import psth_and_raster as psth_
+from dlab import cleanAxes
+from dlab import psth_and_raster as psth_
 
 def smooth_boxcar(data,boxcar_size):
     smoothed = convolve(data,boxcar(int(boxcar_size)))/boxcar_size

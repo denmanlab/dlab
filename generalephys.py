@@ -30,8 +30,8 @@ import pyqtgraph.opengl as gl
 #from PyQt4 import QtGui, QtCore
 
 #from pykCSD.pykCSD import KCSD
-import djd.electrode_maps as maps
-import djd.OpenEphys as oe
+# import djd.electrode_maps as maps
+# import djd.OpenEphys as oe
 
 try:
     import phy
@@ -53,13 +53,13 @@ option234_positions[:,0][1::4] = 53
 option234_positions[:,0][2::4] = 5
 option234_positions[:,0][3::4] = 37
 option234_positions[:,1] = np.floor(np.linspace(383,0,384)/2) * 20
-imecp3_image = plt.imread(os.path.join(os.path.dirname(os.path.abspath(maps.__file__)),'imec_p3.png'))
+# imecp3_image = plt.imread(os.path.join(os.path.dirname(os.path.abspath(maps.__file__)),'imec_p3.png'))
 
 imec_p2_positions = np.zeros((128,2))
 imec_p2_positions[:,0][::2] = 18
 imec_p2_positions[:,0][1::2] = 48
 imec_p2_positions[:,1] = np.floor(np.linspace(0,128,128)/2) * 20;imec_p2_positions[:,1][-1]=1260.
-imecp2_image = plt.imread(os.path.join(os.path.dirname(os.path.abspath(maps.__file__)),'imec_p2.png'))
+# imecp2_image = plt.imread(os.path.join(os.path.dirname(os.path.abspath(maps.__file__)),'imec_p2.png'))
 
 #a set of 50 maximally distinct colors, from http://tools.medialab.sciences-po.fr/iwanthue/
 color50 = ["#67572e",
@@ -145,7 +145,7 @@ def load_phy_kwik(filepath,**kwargs):
 	session.store.times = times
 	return session
 
-def load_phy_template(path,site_positions = option234_positions,**kwargs):
+def load_phy_template(path,cluster_file='KS2',site_positions = option234_positions,**kwargs):
 # load spike data that has been manually sorted with the phy-template GUI
 # the site_positions should contain coordinates of the channels in probe space. for example, in um on the face of the probe
 # returns a dictionary of 'good' units, each of which includes:
@@ -153,48 +153,123 @@ def load_phy_template(path,site_positions = option234_positions,**kwargs):
 #	template: template used for matching
 #	ypos: y position on the probe, calculated from the template. requires an accurate site_positions. averages template from 100 spikes.
 #	xpos: x position on the probe, calcualted from the template. requires an accurate site_positions. averages template from 100 spikes.
-	clusters = np.load(open(os.path.join(path,'spike_clusters.npy')))
-	spikes = np.load(open(os.path.join(path,'spike_times.npy')))
-	spike_templates = np.load(open(os.path.join(path,'spike_templates.npy')))
-	templates = np.load(open(os.path.join(path,'templates.npy')))
-	cluster_id = [];
-	[cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_groups.csv')))];
-	if 'sampling_rate' in kwargs.keys():
-		samplingrate = kwargs['sampling_rate']
-	else:
-		samplingrate =30000.
-		print('no sampling rate specified, using default of 30kHz')
-		
-	units = {}
-	for i in np.arange(1,np.shape(cluster_id)[0]):
-		if cluster_id[i][0].split('\t')[1] == 'good' :#:or cluster_id[i][0].split('\t')[1] == 'unsorted' :#if it is a 'good' cluster by manual sort
-			unit = int(cluster_id[i][0].split('\t')[0])
-			units[str(unit)] = {}
-			
-			#get the unit spike times
-			units[str(unit)]['times'] = spikes[np.where(clusters==unit)]/samplingrate
-			units[str(unit)]['times'] = units[str(unit)]['times'].flatten()
-			
-			#get the mean template used for this unit
-			all_templates = spike_templates[np.where(clusters==unit)].flatten()
-			n_templates_to_subsample = 100
-			random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
-			mean_template = np.mean(random_subsample_of_templates,axis=0)
-			units[str(unit)]['template'] = mean_template
-			
-			#take a weighted average of the site_positions, where the weights is the absolute value of the template for that channel
-			#this gets us the x and y positions of the unit on the probe.
-			weights = np.zeros(site_positions.shape)
-			for channel in range(site_positions.shape[0]):
-				weights[channel,:]=np.trapz(np.abs(mean_template.T[channel,:]))
-			weights = weights/np.max(weights)
-			low_values_indices = weights < 0.25  # Where values are low,
-			weights[low_values_indices] = 0      # make the weight 0
-			(xpos,ypos)=np.average(site_positions,axis=0,weights=weights)
-			units[str(unit)]['waveform_weights'] = weights
-			units[str(unit)]['xpos'] = xpos
-			units[str(unit)]['ypos'] = ypos #- site_positions[-1][1]
-	return units
+    clusters = np.load(open(os.path.join(path,'spike_clusters.npy'),'rb'))
+    spikes = np.load(open(os.path.join(path,'spike_times.npy'),'rb'))
+    spike_templates = np.load(open(os.path.join(path,'spike_templates.npy'),'rb'))
+    templates = np.load(open(os.path.join(path,'templates.npy'),'rb'))
+    cluster_id = []
+    if cluster_file == 'KS2':
+        [cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_KSLabel.tsv')))]
+    else:
+        if os.path.isfile(os.path.join(path,'cluster_group.tsv')):
+            # cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))][1:]
+            [cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))]
+        else:
+            if os.path.isfile(os.path.join(path,'cluster_groups.csv')):
+                # cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_groups.csv')))][1:]
+                [cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_groups.csv')))]
+            else: print('cant find cluster groups, either .tsv or .csv')
+    if 'sampling_rate' in kwargs.keys():
+        samplingrate = kwargs['sampling_rate']
+    else:
+        samplingrate =30000.
+        # print('no sampling rate specified, using default of 30kHz')
+        
+    units = {}
+    for i in np.arange(1,np.shape(cluster_id)[0]):
+        if cluster_id[i][0].split('\t')[1] == 'good' :#:or cluster_id[i][0].split('\t')[1] == 'unsorted' :#if it is a 'good' cluster by manual sort
+            unit = int(cluster_id[i][0].split('\t')[0])
+            units[str(unit)] = {}
+            
+            #get the unit spike times
+            units[str(unit)]['times'] = spikes[np.where(clusters==unit)]/samplingrate
+            units[str(unit)]['times'] = units[str(unit)]['times'].flatten()
+            
+            #get the mean template used for this unit
+            all_templates = spike_templates[np.where(clusters==unit)].flatten()
+            n_templates_to_subsample = 100
+            random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
+            mean_template = np.mean(random_subsample_of_templates,axis=0)
+            units[str(unit)]['template'] = mean_template
+            
+            #take a weighted average of the site_positions, where the weights is the absolute value of the template for that channel
+            #this gets us the x and y positions of the unit on the probe.
+            # print(mean_template.T.shape)
+            weights = np.zeros(site_positions.shape)
+            for channel in range(mean_template.T.shape[0]):
+                weights[channel,:]=np.trapz(np.abs(mean_template.T[channel,:]))
+            weights = weights/np.max(weights)
+            low_values_indices = weights < 0.25  # Where values are low,
+            weights[low_values_indices] = 0      # make the weight 0
+            (xpos,ypos)=np.average(site_positions,axis=0,weights=weights)
+            units[str(unit)]['waveform_weights'] = weights
+            units[str(unit)]['xpos'] = xpos
+            units[str(unit)]['ypos'] = ypos #- site_positions[-1][1]
+    return units
+
+def df_from_phy(path,site_positions = option234_positions,**kwargs):
+    units = load_phy_template(path,site_positions)
+    #structures is a dictionary that defines the bounds of the structure e.g.:{'v1':(0,850), 'hpc':(850,2000)}
+    mouse = [];experiment=[];cell = [];ypos = [];xpos = [];waveform=[];template=[];structure=[];times=[]
+    index = []; count = 1
+    nwb_id = [];probe_id=[]
+    depth=[];#print(list(nwb_data.keys()));print(list(nwb_data['processing'].keys()));
+    if 'probe' in kwargs.keys():
+        for probe in list(nwb_data['processing'].keys()):
+            if 'UnitTimes' in list(nwb_data['processing'][probe].keys()): 
+                for i,u in enumerate(list(nwb_data['processing'][probe]['UnitTimes'].keys())):
+                    if u != 'unit_list':
+                        nwb_id.append(nwbid)
+                        probe_id.append(probe)
+                        index.append(count);count+=1
+                        mouse.append(str(np.array(nwb_data.get('identifier'))))
+                        experiment.append(1)
+                        cell.append(u)
+                        times.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['times']));# print(list(nwb_data['processing'][probe]['UnitTimes'][u].keys()))
+                        if 'ypos' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+                            ypos.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['ypos']))
+                            has_ypos = True
+                        else:
+                            ypos.append(None)
+                            has_ypos = False				
+                        if 'depth' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+                            depth.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['depth']))
+                        else:
+                            if has_ypos:
+                                depth.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['ypos']))
+                            else:
+                                depth.append(None)
+                        if 'xpos' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+                            xpos.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['xpos']))
+                            has_xpos = True
+                        else:
+                            xpos.append(None)
+                            has_xpos = False
+                        template.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['template']))
+                        waveform.append(get_peak_waveform_from_template(template[-1]))
+                        if not structures == None:
+                            structur = None
+                            for struct, bounds in structures.iteritems():
+                                if ypos[-1] > bounds[0] and ypos[-1]< bounds[1] :
+                                    structur=struct
+                        else:
+                            structur = None
+                        structure.append(structur)
+    df = pd.DataFrame(index=index)
+    df = df.fillna(np.nan)
+    df['nwb_id'] = nwb_id
+    df['mouse'] = mouse
+    df['experiment'] = experiment
+    df['probe'] = probe_id
+    df['structure'] = structure
+    df['cell'] = cell
+    df['times'] = times
+    df['ypos'] = ypos
+    df['xpos'] = xpos
+    df['depth'] = depth
+    df['waveform'] = waveform
+    df['template'] = template
+    return df
 
 def kwik_to_csv(filepath,sampling_rate=20000.,name='units'):
 	import csv

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from braintv_ephys_dev.workstation.danield.generalephys import color50
+from dlab.generalephys import color50
 
 #compute and optionally plot a peri-stimulus time histogram
 #plot is a line plot, with options for error display [bars or shaded]
