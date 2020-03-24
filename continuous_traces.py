@@ -472,3 +472,58 @@ def get_probe_spikeband(path,start=2.,end=10.,sampling_rate=30000,plot=False,fil
 	del mm
 	return rms
 #=================================================================================================
+
+#=================================================================================================
+#=======plotting=============================================================================
+#=================================================================================================
+def get_chunk(mm,start,end,channels,sampling_rate=30000):
+	chunk = mm[int(start*sampling_rate*int(channels)):int(np.floor(end*sampling_rate*(int(channels))))]
+	#print np.shape(chunk)
+	return np.reshape(chunk,(int(channels),-1),order='F')  * 0.195
+
+def get_duration(mm,channels,sampling_rate=30000.):
+    chunk=np.reshape(mm,(int(channels),-1),order='F')
+    return chunk.shape[1]/float(sampling_rate)
+
+def get_spike(spks_path,times,number_channels,pre=0.015,post=0.025,sampling_rate=30000):
+    mm = np.memmap(spks_path, dtype=np.int16, mode='r')
+    average = np.zeros((number_channels,int(sampling_rate*(pre+post))))
+    count=0
+    for time in times:
+        try:
+            temp = traces.get_chunk(mm,time-pre,time+post,number_channels,sampling_rate=sampling_rate)
+            average += temp
+            count+=1
+        except:
+            pass
+    temp = temp/float(count)
+    spikes_average = np.array(average.T - np.mean(average,1).T).T
+    del(mm)
+
+def get_lfp(lfp_path,times,number_channels,pre=0.015,post=0.025,sampling_rate=2500):
+    mm = np.memmap(lfp_path, dtype=np.int16, mode='r')
+    average = np.zeros((number_channels,int(sampling_rate*(pre+post))))
+    count=0
+    for time in sub_times:
+        try:
+            temp = traces.get_chunk(mm,time-pre,time+post,number_channels,sampling_rate=sampling_rate)
+            average += temp
+            count+=1
+        except:
+            pass
+    temp = temp/float(count)
+    lfp_average = np.array(average.T - np.mean(average,1).T).T
+    del(mm)
+
+def make_range_slider(data,start,window,num_channels=384,channels = [10],sampling_rate=2500,y_spacing=500,CAR=False):
+    fig,ax=plt.subplots(figsize=(20,5))
+    chunk = get_chunk(data,start,start+window,num_channels,sampling_rate=2500)
+    if CAR:
+        chunk_CAR = np.mean(chunk, axis=0)
+    x = np.linspace(int(start),(start+window),int(window*sampling_rate))
+    for i,ch in enumerate(channels):
+        chunkch = chunk[ch,:]
+        offset = np.mean(chunkch)
+        if CAR: chunkch = chunkch - chunk_CAR
+        ax.plot(x,chunkch-offset+i*y_spacing,'k',lw=.5)
+#=================================================================================================
