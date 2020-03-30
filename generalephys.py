@@ -25,8 +25,8 @@ from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
 
 
-import pyqtgraph as pg
-import pyqtgraph.opengl as gl
+# import pyqtgraph as pg
+# import pyqtgraph.opengl as gl
 #from PyQt4 import QtGui, QtCore
 
 #from pykCSD.pykCSD import KCSD
