@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from dlab.generalephys import get_waveform_duration,get_waveform_PTratio,get_waveform_repolarizationslope
+from dlab.generalephys import get_waveform_duration,get_waveform_PTratio,get_waveform_repolarizationslope,option234_positions
 from scipy.cluster.vq import kmeans2
 import seaborn as sns;sns.set_style("ticks")
 import matplotlib.pyplot as plt
@@ -21,7 +21,82 @@ def get_peak_waveform_from_template(template):
             ind = i
             peak = wv
     return peak
-	
+
+def df_from_phy(folder,expnum='1',recnum='1',site_positions = option234_positions,**kwargs):
+    if 'est' not in folder:
+        base_folder = os.path.basename(folder)
+        cohort_ = os.path.basename(base_folder).split('_')[-2]
+        mouse_  = os.path.basename(base_folder).split('_')[-1]
+
+        #traverse down tree to data
+        if 'open-ephys-neuropix' in base_folder:
+            try:
+                rec_folder = glob.glob(folder+'/*')[0]
+            except:
+                print(base_folder)
+                return None
+        else:
+            rec_folder = folder
+        raw_path = os.path.join(rec_folder,'experiment'+str(expnum),'recording'+str(recnum),'continuous')
+        if len(glob.glob(raw_path+'/*100.0*'))>0:
+            raw_path = glob.glob(raw_path+'/*100.0*')[0]
+            print('loading from '+raw_path)
+        else:
+            
+            print('could not find data folder for '+raw_path)
+    
+        if os.path.isfile(os.path.join(raw_path,'spike_clusters.npy')) :                  
+    #             df = df_from_phy(raw_path,site_positions = ephys.option234_positions,cluster_file='KS2',cohort=cohort,mouse=mouse)
+
+            path = raw_path
+            units = ephys.load_phy_template(path,cluster_file='KS2',site_positions=site_positions)
+            #structures is a dictionary that defines the bounds of the structure e.g.:{'v1':(0,850), 'hpc':(850,2000)}
+            mouse = [];experiment=[];cell = [];ypos = [];xpos = [];waveform=[];template=[];structure=[];times=[]
+            index = []; count = 1; cohort = []
+            probe_id=[]
+            depth=[];#print(list(nwb_data.keys()));print(list(nwb_data['processing'].keys()));
+
+            for unit in list(units.keys()):
+                if 'probe' in kwargs.keys():
+                    probe_id.extend([kwargs['probe']])
+                else:
+                    probe_id.extend(['A'])
+                if 'mouse' in kwargs.keys():
+                    mouse.extend([kwargs['mouse']])
+                else:
+                    mouse.extend([mouse_])
+                if 'experiment' in kwargs.keys():
+                    experiment.extend([kwargs['experiment']])
+                else:
+                    experiment.extend(['placeholder'])
+                if 'cohort' in kwargs.keys():
+                    cohort.extend([kwargs['cohort']])
+                else:
+                    cohort.extend([cohort_])
+
+                xpos.extend([units[unit]['xpos']])
+                ypos.extend([units[unit]['ypos']])
+                template.extend([units[unit]['template']])
+                times.append(units[unit]['times'])
+                waveform.append(units[unit]['waveform_weights'])
+
+            df = pd.DataFrame(index=index)
+            df = df.fillna(np.nan)
+        #     df['nwb_id'] = nwb_id
+            df['mouse'] = mouse
+            df['experiment'] = experiment
+            df['probe'] = probe_id
+        #     df['structure'] = structure
+            df['cell'] = units.keys()
+            df['cohort'] = cohort
+            df['times'] = times
+            df['ypos'] = ypos
+            df['xpos'] = xpos
+    #         df['depth'] = depth
+            df['waveform'] = waveform
+            df['template'] = template
+            return df
+
 def df_from_nwb(nwb_data,structures=None,insertion_angle=55,nwbid=0):
     if type(nwb_data)==str:
         #print(nwb_data)
@@ -91,58 +166,74 @@ def df_from_nwb(nwb_data,structures=None,insertion_angle=55,nwbid=0):
     df['template'] = template
     return df
 
-def classify_waveform_shape(df,plots=False,save_plots=False,basepath=''):
-    durations = np.zeros(np.shape(df)[0])
-    PTratio = np.zeros(np.shape(df)[0])
-    repolarizationslope = np.zeros(np.shape(df)[0])
-    for i,waveform in enumerate(df.waveform):
-        try:
-            durations[i]=get_waveform_duration(waveform)
-            PTratio[i]=get_waveform_PTratio(waveform)
-            repolarizationslope[i]=get_waveform_repolarizationslope(waveform,window=18)
-        except:
-            durations[i]=np.nan
-            PTratio[i]=np.nan
-            repolarizationslope[i]=np.nan
-    df['waveform_duration'] = durations
-    df['waveform_PTratio'] = PTratio
-    df['waveform_repolarizationslope'] = repolarizationslope
-	
-	
-    waveform_k = kmeans2(np.vstack(((durations-np.min(durations))/np.max((durations-np.min(durations))),
-                                    (PTratio-np.min(PTratio))/np.max((PTratio-np.min(PTratio))),
-                                    (repolarizationslope-np.min(repolarizationslope))/np.max((repolarizationslope-np.min(repolarizationslope))))).T,
-                         2, iter=300, thresh=5e-6,minit='points')
+def classify_waveform_shape(df,plots=False,save_plots=False,basepath='',kmeans=0):
+	durations = np.zeros(np.shape(df)[0])
+	PTratio = np.zeros(np.shape(df)[0])
+	repolarizationslope = np.zeros(np.shape(df)[0])
+	for i,waveform in enumerate(df.waveform):
+        # try:
+		durations[i]=get_waveform_duration(waveform)
+		PTratio[i]=get_waveform_PTratio(waveform)
+		repolarizationslope[i]=get_waveform_repolarizationslope(waveform,window=18)
+        # except:
+        #     durations[i]=np.nan
+        #     PTratio[i]=np.nan
+        #     repolarizationslope[i]=np.nan
+	df['waveform_duration'] = durations
+	df['waveform_PTratio'] = PTratio
+	df['waveform_repolarizationslope'] = repolarizationslope
+
+	waveform_k = kmeans2(np.vstack(((durations-np.min(durations))/np.max((durations-np.min(durations))),
+									(PTratio-np.min(PTratio))/np.max((PTratio-np.min(PTratio))),
+									(repolarizationslope-np.min(repolarizationslope))/np.max((repolarizationslope-np.min(repolarizationslope))))).T,
+							2, iter=300, thresh=5e-6,minit='points')
     # waveform_k = kmeans2(np.vstack((durations/np.max(durations),PTratio/np.max(PTratio))).T, 2, iter=300, thresh=5e-6,minit='points')
     # waveform_k = kmeans2(np.vstack((durations/np.max(durations),(repolarizationslope-np.min(repolarizationslope))/np.max(repolarizationslope))).T, 2, iter=900, thresh=5e-7,minit='points')
     
     #assign fs and rs to the kmeans results
-    if np.mean(durations[np.where(waveform_k[1]==0)[0]]) < np.mean(durations[np.where(waveform_k[1]==1)[0]]):
-        fs_k = 0;rs_k = 1
-        waveform_class_ids = ['fs','rs',]
-    else:
-        rs_k = 0;fs_k = 1
-        waveform_class_ids = ['rs','fs']
-    waveform_class = [waveform_class_ids[k] for k in waveform_k[1]]
-    
-    #uncomment this to ignore the preceding kmeans and just split on the marginal distribution of durations
-    waveform_class = ['fs' if duration < 0.00037 else 'rs' for i,duration in enumerate(durations) ]
-    
-    #force upwards spikes to have the own class, because we're not sure how they fit in this framework
-    waveform_class = [waveform_class[i] if ratio < 1.0 else 'up' for i,ratio in enumerate(PTratio) ]
-    df['waveform_class']=waveform_class
-    
-    #mark narrow upwards spikes as axons
-    waveform_class = ['axon' if all([duration < 0.0004,waveform_class[i]=='up']) else waveform_class[i] for i,duration in enumerate(durations) ]
-    df['waveform_class']=waveform_class
-    
-    # #mark narrow downward spike at the very bottom of cortex as axons
-    #waveform_class = ['axon' if all([duration < 0.0004,waveform_class[i]=='fs',df['depth'][i+1] > 750, df['depth'][i+1]<1050]) else waveform_class[i] for i,duration in enumerate(durations) ]
-    df['waveform_class']=waveform_class
-    
-    if plots:
-        plot_waveform_classification(durations, PTratio, repolarizationslope,df,save_plots=save_plots,basepath=basepath)
-    return df
+	if np.mean(durations[np.where(waveform_k[1]==0)[0]]) < np.mean(durations[np.where(waveform_k[1]==1)[0]]):
+		fs_k = 0;rs_k = 1
+		waveform_class_ids = ['fs','rs']
+	else:
+		rs_k = 0;fs_k = 1
+		waveform_class_ids = ['rs','fs']
+	waveform_class = [waveform_class_ids[k] for k in waveform_k[1]]
+
+	#uncomment this to ignore the preceding kmeans and just split on the marginal distribution of durations
+	if kmeans==0:
+		waveform_class = ['fs' if duration < 0.0004 else 'rs' for i,duration in enumerate(durations) ]
+	else:
+		waveform_k = kmeans2(np.vstack(((durations-np.min(durations))/np.max((durations-np.min(durations))),
+										(PTratio-np.min(PTratio))/np.max((PTratio-np.min(PTratio))),
+										(repolarizationslope-np.min(repolarizationslope))/np.max((repolarizationslope-np.min(repolarizationslope))))).T,
+								kmeans, iter=300, thresh=5e-6,minit='points')
+		# waveform_k = kmeans2(np.vstack((durations/np.max(durations),PTratio/np.max(PTratio))).T, 2, iter=300, thresh=5e-6,minit='points')
+		# waveform_k = kmeans2(np.vstack((durations/np.max(durations),(repolarizationslope-np.min(repolarizationslope))/np.max(repolarizationslope))).T, 2, iter=900, thresh=5e-7,minit='points')
+		
+		#assign fs and rs to the kmeans results
+		if np.mean(durations[np.where(waveform_k[1]==0)[0]]) < np.mean(durations[np.where(waveform_k[1]==1)[0]]):
+			fs_k = 0;rs_k = 1
+			waveform_class_ids = ['fs','rs']
+		else:
+			rs_k = 0;fs_k = 1
+			waveform_class_ids = ['rs','fs']
+		waveform_class = [waveform_class_ids[k] for k in waveform_k[1]]
+
+	#force upwards spikes to have the own class, because we're not sure how they fit in this framework
+	waveform_class = [waveform_class[i] if ratio < 1.0 else 'up' for i,ratio in enumerate(PTratio) ]
+	df['waveform_class']=waveform_class
+
+	#mark narrow upwards spikes as axons
+	waveform_class = ['axon' if all([duration < 0.0004,waveform_class[i]=='up']) else waveform_class[i] for i,duration in enumerate(durations) ]
+	df['waveform_class']=waveform_class
+
+	# #mark narrow downward spike at the very bottom of cortex as axons
+	#waveform_class = ['axon' if all([duration < 0.0004,waveform_class[i]=='fs',df['depth'][i+1] > 750, df['depth'][i+1]<1050]) else waveform_class[i] for i,duration in enumerate(durations) ]
+	df['waveform_class']=waveform_class
+
+	if plots:
+		plot_waveform_classification(durations, PTratio, repolarizationslope,df,save_plots=save_plots,basepath=basepath)
+	return df
 
 def plot_waveform_classification(durations, PTratio, repolarizationslope, df,save_plots=False, basepath=''):
 	f,ax = plt.subplots(1,3,figsize=(8,3))

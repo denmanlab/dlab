@@ -1,0 +1,20 @@
+import numpy as np
+import os,sys,glob
+import pandas as pd
+from scipy.stats import pearsonr, spearmanr, zscore
+
+def pairwise_correlation(df,col,method='pearson',z_score=True):
+    output_matrix = np.zeros((df.shape[0],df.shape[0]))
+    output_matrix[:,:] = np.nan
+    for i,d1 in df[col].iteritems():
+        for j,d2 in df[col].iteritems():
+            if z_score:
+                d1 = zscore(d1)
+                d2 = zscore(d2)
+            try:
+                if method =='pearson' :
+                    output_matrix[i-df.index[0]][j-df.index[0]]= pearsonr(d1,d2)[0]
+                if method == 'spearman':
+                    output_matrix[i][j]= spearmanr(d1,d2)[0]
+            except: output_matrix[i-df.index[0]][j-df.index[0]] = np.nan
+    return output_matrix

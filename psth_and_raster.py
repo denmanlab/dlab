@@ -193,7 +193,7 @@ def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig'
                 axes.plot(np.array(times[start:end-1])-t-pre,
                           np.ones(len(np.array(times[start:end-1])-t))*i+1,
                           "|",mew=linewidth,ms=ms,color=color)
-            else: bytrial.append([])
+        else: bytrial.append([])
                 
                 
     if output!='data':

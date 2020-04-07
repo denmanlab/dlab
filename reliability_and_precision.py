@@ -92,7 +92,7 @@ def get_binarized(spike_times,stimulus_times,pre=0.,post=15.,convolve=0.):
 
 def get_binned(spike_times,stimulus_times,binsize,pre=0.,post=15.,convolve=0.):
     bytrial = psth_.raster(spike_times,stimulus_times,pre=pre,post=post,timeDomain=True,output='data')
-    print(np.array(bytrial).shape())
+    # print(np.array(bytrial).shape())
     binarized = []
     for trial in bytrial:
         binarized_ = np.zeros(int((post-pre)*1000/(1000*binsize)+1))#use binsize msec bins
