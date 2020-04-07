@@ -4,7 +4,7 @@ from dlab.generalephys import color50
 
 #compute and optionally plot a peri-stimulus time histogram
 #plot is a line plot, with options for error display [bars or shaded]
-def psth_line(times,triggers,pre=0.5,timeDomain=False,post=1,binsize=0.05,ymax=75,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='',alpha=0.5,**kwargs):
+def psth_line(times,triggers,pre=0.5,timeDomain=True,post=1,binsize=0.05,ymax=75,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='shaded',alpha=0.5,**kwargs):
     post = post + 1
     peris=[]#np.zeros(len(triggers),len(times))
     p=[]

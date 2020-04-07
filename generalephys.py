@@ -14,6 +14,7 @@ from scipy.stats import linregress
 from scipy.stats import ttest_ind
 from scipy.ndimage import zoom
 import os, csv
+import pandas as pd
 #from skimage import transform
 
 import matplotlib.gridspec as gridspec
@@ -25,8 +26,8 @@ from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
 
 
-import pyqtgraph as pg
-import pyqtgraph.opengl as gl
+# import pyqtgraph as pg
+# import pyqtgraph.opengl as gl
 #from PyQt4 import QtGui, QtCore
 
 #from pykCSD.pykCSD import KCSD
@@ -205,7 +206,8 @@ def load_phy_template(path,cluster_file='KS2',site_positions = option234_positio
             units[str(unit)]['waveform_weights'] = weights
             units[str(unit)]['xpos'] = xpos
             units[str(unit)]['ypos'] = ypos #- site_positions[-1][1]
-    return units
+    
+    return pd.DataFrame.from_dict(units,orient='index')
 
 def df_from_phy(path,site_positions = option234_positions,**kwargs):
     units = load_phy_template(path,site_positions)
