@@ -54,7 +54,7 @@ def make_tensor(df,time,duration,binsize):
 
 def dimensionality_PCA(ten):
     ev=[]
-    for i in range (ten.shape[0]-1):
+    for i in range(min(ten.shape[0], ten.shape[1])-1):
         PCA = decomposition.PCA(n_components=i)
         f=PCA.fit(ten)
         ev.append(sum(PCA.explained_variance_))
