@@ -206,8 +206,11 @@ def load_phy_template(path,cluster_file='KS2',site_positions = option234_positio
             units[str(unit)]['waveform_weights'] = weights
             units[str(unit)]['xpos'] = xpos
             units[str(unit)]['ypos'] = ypos #- site_positions[-1][1]
-    
-    return pd.DataFrame.from_dict(units,orient='index')
+    if 'return' in kwargs.keys():
+	if kwagrs['return']=='df':
+		return pd.DataFrame.from_dict(units,orient='index')
+	else: return units
+    else: return units
 
 def df_from_phy(path,site_positions = option234_positions,**kwargs):
     units = load_phy_template(path,site_positions)
