@@ -114,7 +114,7 @@ def cpop_autoparse(nidaq_dlr):
         stop = start+d1_frames[j]
         stim_ts = np.array(d1[start:stop])      
         stimulus_timestamps.update({str(i): stim_ts})
-    stimulus_timestamps.update({'color matrix':d3[1:7200]})   
+    stimulus_timestamps.update({'color matrix':d3[1:]})   
     return(stimulus_timestamps)
 
 #Takes pkl output from stimulus timestamps from cpop_autoparse to make 
@@ -135,7 +135,7 @@ def cpop_mtx_int(matrix_pkl, timestamps, output_path, save=True):
     else:
         highspeed_data = {'times':timestamps, 'frames':matrix_pkl}
         if save==True:
-            pkl.dump(highspeed,open(os.path.join(output_path, 'highspeed.pkl'),'wb'))
+            pkl.dump(highspeed_data,open(os.path.join(output_path, 'highspeed.pkl'),'wb'))
         return(highspeed_data)
 
 #returns a dataframe for each gratings stimulus
