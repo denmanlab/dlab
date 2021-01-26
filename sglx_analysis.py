@@ -4,6 +4,7 @@ import datetime as dt
 import pandas as pd
 import os, h5py, json,glob
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
@@ -102,8 +103,8 @@ def cpop_autoparse(nidaq_dlr):
     else:
         nidaq = nidaq_dlr
     #isolate the keys containing timestaps from lines D1 and D3
-    d1 = np.array(nidaq['D6'])/1e7#ONLY FOR TESTING FIX BEFORE USING
-    d3 = np.array(nidaq['D4'])/1e7#ONLY FOR TESTING FIX BEFORE USING
+    #d1 = np.array(nidaq['D6'])/1e7#ONLY FOR TESTING FIX BEFORE USING
+    #d3 = np.array(nidaq['D4'])/1e7#ONLY FOR TESTING FIX BEFORE USING
     
     #parse into dictionary
     stop=0
