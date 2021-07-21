@@ -121,10 +121,10 @@ def load_phy_template(path,site_positions = option234_positions,**kwargs):
 #	template: template used for matching
 #	ypos: y position on the probe, calculated from the template. requires an accurate site_positions. averages template from 100 spikes.
 #	xpos: x position on the probe, calcualted from the template. requires an accurate site_positions. averages template from 100 spikes.
-    clusters = np.load(open(os.path.join(path,'spike_clusters.npy')))
-    spikes = np.load(open(os.path.join(path,'spike_times.npy')))
-    spike_templates = np.load(open(os.path.join(path,'spike_templates.npy')))
-    templates = np.load(open(os.path.join(path,'templates.npy')))
+    clusters = np.load(open(os.path.join(path,'spike_clusters.npy'),'rb'))
+    spikes = np.load(open(os.path.join(path,'spike_times.npy'),'rb'))
+    spike_templates = np.load(open(os.path.join(path,'spike_templates.npy'),'rb'))
+    templates = np.load(open(os.path.join(path,'templates.npy'),'rb'))
     cluster_id = [];
     #[cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))];
     if os.path.isfile(os.path.join(path,'cluster_group.tsv')):
@@ -415,15 +415,20 @@ def masked_cluster_quality_sparse(spike_clusters,pc_features,pc_feature_ind,spik
                         pass
                             
                 #reshape to the arrays to dimensions: [number of spikes, (number of features * number of channels)]
-                fet_other_clusters = np.array(fet_other_clusters).reshape((np.shape(fet_other_clusters)[0],-1))
-                fet_this_cluster = fet_this_cluster.reshape((len(these_spikes),-1))
+                try:
+                    fet_other_clusters = np.array(fet_other_clusters).reshape((np.shape(fet_other_clusters)[0],-1))
+                    fet_this_cluster = fet_this_cluster.reshape((len(these_spikes),-1))
+                except ValueError:
+                    pass
 
                 #pass the features to core to calculate isolation distance and mahalanobis contamination
                 unit_quality[i],contamination_rate[i] = masked_cluster_quality_core(fet_this_cluster,fet_other_clusters,plots=False)
                 
                 #pass the features to flda to calculate the d prime of this cluster from all other spikes, using Fisher's LDA
-                flda[i] = masked_cluster_quality_flda(fet_this_cluster,fet_other_clusters,plots=False)
-                
+                try:
+                    flda[i] = masked_cluster_quality_flda(fet_this_cluster,fet_other_clusters,plots=False)
+                except ValueError:
+                    pass
                 #pass spike times to neighbor similarity to measure the distance between 
                 #neighbor_similarity[i],spike_similarity = masked_waveform_similarity(these_spikes,spikes_other_clusters,number_to_average=250,metric='euclidean')
                 

@@ -3,8 +3,8 @@ import numpy as np
 import datetime as dt
 import pandas as pd
 import os, h5py, json,glob
-from tqdm import tqdm
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
@@ -35,8 +35,6 @@ def sglx_nidaq(bin_path, seconds=True):
     #Memory map the bin file and parse into binary lines
     mm = np.memmap(glob.glob(bin_path+'*bin')[0],dtype=np.uint16)
     digital_words = mm[8::9]
-    '{0:08b}'.format(digital_words[:600040][0])
-    '{0:08b}'.format(digital_words[:64][1])
     
     #Extract the number of digital channels from the meta file
     meta = readMeta(bin_path)
@@ -52,12 +50,12 @@ def sglx_nidaq(bin_path, seconds=True):
     digital_lines_falling = {}
     for i in tqdm(range(digital_words.shape[0])[::10]): #note that this downsamples by factor 10, to 100kHz
         if i==0:
-            state_previous_sample = '{0:08b}'.format(digital_words[i])
+            state_previous_sample = '{0:08b}'.format(digital_words[i]) #Parse digital words into binary lines. 1=High, 0=Low
             for line in range(num_digital_channels):
                 digital_lines_rising['D'+str(line)] = [] #initialize empty list
                 digital_lines_falling['D'+str(line)] = [] #initialize empty list
         else:
-            state_this_sample = '{0:08b}'.format(digital_words[i])
+            state_this_sample = '{0:08b}'.format(digital_words[i]) #Parse digital words into binary lines. 1=High, 0=Low
             changes = [j for j in range(len(state_previous_sample)) if state_previous_sample[j] != state_this_sample[j]]
             for line in changes:   
                     if state_this_sample[line] == '1':
@@ -95,7 +93,7 @@ def sglx_nidaq_plot(digital_lines_rising):
 #autoparse the output of sglx_nidaq into a dictionary of timestamps 
 #SPECIFIC TO COLOR_POPULATION.PY
 #requires 2 lists 1)stimulus names for line D1 in order 2)number of frames per stimulus in order
-def cpop_autoparse(nidaq_dlr):
+def cpop_autoparse(nidaq_dlr, d1frames, d1stims, d2frames, d2stims):
     #NIDAQ digital lines rising data will either come from a saved pkl file or a dictionary output of spikeglx_nidaq
     if isinstance(nidaq_dlr, str):
         with open(nidaq_dlr, 'rb') as a:
@@ -103,19 +101,26 @@ def cpop_autoparse(nidaq_dlr):
     else:
         nidaq = nidaq_dlr
     #isolate the keys containing timestaps from lines D1 and D3
-    #d1 = np.array(nidaq['D6'])/1e7#ONLY FOR TESTING FIX BEFORE USING
-    #d3 = np.array(nidaq['D4'])/1e7#ONLY FOR TESTING FIX BEFORE USING
+    d1 = np.array(nidaq['D1'])/1e7#ONLY FOR TESTING FIX BEFORE USING
+    d2 = np.array(nidaq['D2'])/1e7#ONLY FOR TESTING FIX BEFORE USING
     
     #parse into dictionary
     stop=0
     stimulus_timestamps={}
-    for i,j in zip(d1stims, enumerate(d1_frames)):
+    for i,j in zip(d1stims, enumerate(d1frames)):
         j=int(j[0])
         start = stop
-        stop = start+d1_frames[j]
+        stop = start+d1frames[j]
         stim_ts = np.array(d1[start:stop])      
         stimulus_timestamps.update({str(i): stim_ts})
-    stimulus_timestamps.update({'color matrix':d3[1:]})   
+
+    for i,j in zip(d2stims, enumerate(d2frames)):
+            j=int(j[0])
+            start = stop
+            stop = start+d2frames[j]
+            stim_ts = np.array(d2[start:stop])      
+            stimulus_timestamps.update({str(i): stim_ts})
+ 
     return(stimulus_timestamps)
 
 #Takes pkl output from stimulus timestamps from cpop_autoparse to make 
@@ -225,6 +230,7 @@ def sglx_unitTimes_int(dataPath):
         imec_meta = readMeta(folder[0]+'\\') #extract meta file
         sampRate = imec_meta['imSampRate'] #get sampling rate (Hz)
         cluster_groups = pd.read_csv(os.path.join(folder[0], 'cluster_group.tsv'), '\t')
+        cluster_info = pd.read_csv(os.path.join(folder[0], 'cluster_info.tsv'), '\t')
         spike_times = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_times.npy')))
         spike_seconds = np.ndarray.flatten(spike_times/float(sampRate)) #convert spike times to seconds from samples
         spike_clusters = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_clusters.npy')))
@@ -233,8 +239,10 @@ def sglx_unitTimes_int(dataPath):
         for index, unitID in enumerate(cluster_groups['cluster_id'].values):
             if cluster_groups['group'][index] == 'good':
                 unit_times.append({'probe':probe_names[i],
-                                   'unit id': unitID,
-                                   'times':spike_seconds[spike_clusters == unitID],
+                                   'unit_id': unitID,
+                                   'depth':cluster_info['depth'][i],
+                                   'no_spikes': cluster_info['n_spikes'][i],
+                                   'times': spike_seconds[spike_clusters == unitID],
                                   })
         unit_times_df = pd.DataFrame(unit_times)
     #Remove clusters with no associated spike times left over from Phy
