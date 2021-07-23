@@ -207,7 +207,7 @@ def cpop_scene_int(scene_pkl,timestamps):
 #returns a unit times data frame which can either be used immediately 
 #or saved locally to restart kernel and conserve RAM
 #dataPath is the path holding ALL probe folders
-def sglx_unitTimes_int(dataPath):
+def unitTimes(dataPath,save=True):
     #get individual folders for each probe
     folder_paths = []
     imec0_path = glob.glob(dataPath+'*imec0')
@@ -228,26 +228,30 @@ def sglx_unitTimes_int(dataPath):
     for i, folder in enumerate(tqdm(folder_paths)):
         probe_names = ['imec0', 'imec1', 'imec2', 'imec3']
         imec_meta = readMeta(folder[0]+'\\') #extract meta file
-        sampRate = imec_meta['imSampRate'] #get sampling rate (Hz)
-        cluster_groups = pd.read_csv(os.path.join(folder[0], 'cluster_group.tsv'), '\t')
+        sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
+        #cluster_groups = pd.read_csv(os.path.join(folder[0], 'cluster_group.tsv'), '\t') #redundant data found in cluster_info
         cluster_info = pd.read_csv(os.path.join(folder[0], 'cluster_info.tsv'), '\t')
         spike_times = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_times.npy')))
-        spike_seconds = np.ndarray.flatten(spike_times/float(sampRate)) #convert spike times to seconds from samples
+        spike_seconds = np.ndarray.flatten(spike_times/sampRate) #convert spike times to seconds from samples
         spike_clusters = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_clusters.npy')))
     
         #Generate Unit Times Table
         for index, unitID in enumerate(cluster_groups['cluster_id'].values):
-            if cluster_groups['group'][index] == 'good':
+            if cluster_info.group[index] == 'good':
                 unit_times.append({'probe':probe_names[i],
                                    'unit_id': unitID,
-                                   'depth':cluster_info['depth'][i],
-                                   'no_spikes': cluster_info['n_spikes'][i],
+                                   'depth':cluster_info.depth[index],
+                                   'no_spikes': cluster_info.n_spikes[index],
+                                   'amplitude':cluster_info.Amplitude[index],
                                    'times': spike_seconds[spike_clusters == unitID],
                                   })
-        unit_times_df = pd.DataFrame(unit_times)
+        unit_times = pd.DataFrame(unit_times)
     #Remove clusters with no associated spike times left over from Phy
-    for i,j in enumerate(unit_times_df['times']):
-        if len(unit_times_df['times'][i])==0:
-            unit_times_df.times[i]='empty'
-    unit_times_df = unit_times_df[unit_times_df.times!='empty']
-    return(unit_times_df)
+    for i,j in enumerate(unit_times.times):
+        if len(unit_times.times[i])==0:
+            unit_times.times[i]='empty'
+    unit_times = unit_times[unit_times.times!='empty']
+    
+    #if save==True:
+        #Put in save line
+    return(unit_times)

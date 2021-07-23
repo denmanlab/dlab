@@ -207,8 +207,8 @@ def load_phy_template(path,cluster_file='KS2',site_positions = option234_positio
             units[str(unit)]['xpos'] = xpos
             units[str(unit)]['ypos'] = ypos #- site_positions[-1][1]
     if 'return' in kwargs.keys():
-	if kwagrs['return']=='df':
-		return pd.DataFrame.from_dict(units,orient='index')
+    if kwagrs['return']=='df':
+	    return pd.DataFrame.from_dict(units,orient='index')
 	else: return units
     else: return units
 
