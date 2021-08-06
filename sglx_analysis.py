@@ -207,7 +207,7 @@ def cpop_scene_int(scene_pkl,timestamps):
 #returns a unit times data frame which can either be used immediately 
 #or saved locally to restart kernel and conserve RAM
 #dataPath is the path holding ALL probe folders
-def unitTimes(dataPath,save=True):
+def unitTimes(dataPath):
     #get individual folders for each probe
     folder_paths = []
     imec0_path = glob.glob(dataPath+'*imec0')
@@ -236,7 +236,7 @@ def unitTimes(dataPath,save=True):
         spike_clusters = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_clusters.npy')))
     
         #Generate Unit Times Table
-        for index, unitID in enumerate(cluster_groups['cluster_id'].values):
+        for index, unitID in enumerate(cluster_info['id'].values):
             if cluster_info.group[index] == 'good':
                 unit_times.append({'probe':probe_names[i],
                                    'unit_id': unitID,
@@ -245,13 +245,10 @@ def unitTimes(dataPath,save=True):
                                    'amplitude':cluster_info.Amplitude[index],
                                    'times': spike_seconds[spike_clusters == unitID],
                                   })
-        unit_times = pd.DataFrame(unit_times)
+        unit_times2 = pd.DataFrame(unit_times)
     #Remove clusters with no associated spike times left over from Phy
-    for i,j in enumerate(unit_times.times):
-        if len(unit_times.times[i])==0:
-            unit_times.times[i]='empty'
-    unit_times = unit_times[unit_times.times!='empty']
-    
-    #if save==True:
-        #Put in save line
+    for i,j in enumerate(unit_times2.times):
+        if len(unit_times2.times[i])==0:
+            unit_times2.times[i]='empty'
+    unit_times = unit_times2[unit_times2.times!='empty']
     return(unit_times)
