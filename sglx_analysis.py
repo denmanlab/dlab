@@ -9,12 +9,12 @@ from tqdm import tqdm
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
 def readMeta(bin_path):
-    metaPath = glob.glob(bin_path+'*meta')
-    metaName = os.path.basename(metaPath[0])
+    metaPath = glob.glob(bin_path+'\*ap.meta')[0]
+    metaName = os.path.basename(metaPath)
     metaDict = {}
-    if os.path.isfile(metaPath[0]):
+    if os.path.isfile(metaPath):
         # print("meta file present")
-        with open(metaPath[0]) as f:
+        with open(metaPath) as f:
             mdatList = f.read().splitlines()
             # convert the list entries into key value pairs
             for m in mdatList:
