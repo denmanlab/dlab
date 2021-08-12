@@ -204,8 +204,8 @@ def cpop_scene_int(scene_pkl,timestamps):
     scene_df1['times'] = timestamps
     return(scene_df1)
 
-#returns a unit times data frame which can either be used immediately 
-#or saved locally to restart kernel and conserve RAM
+#returns a data frame which contains all spike time data as well as the relevant info contained in cluster_info
+#Highly recommend exporting the dataframe to .json
 #dataPath is the path holding ALL probe folders
 def unitTimes(dataPath,**sampling_rate):
     #get individual folders for each probe
@@ -244,7 +244,7 @@ def unitTimes(dataPath,**sampling_rate):
                 unit_times.append({'probe':probe_names[i],
                                    'unit_id': unitID,
                                    'depth':cluster_info.depth[index],
-                                   'no_spikes': cluster_info.n_spikes[index],
+                                   'no_spikes': cluster_info.n_spikes[index], #
                                    'amplitude':cluster_info.Amplitude[index],
                                    'times': spike_seconds[spike_clusters == unitID],
                                   })
