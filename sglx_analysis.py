@@ -207,7 +207,7 @@ def cpop_scene_int(scene_pkl,timestamps):
 #returns a unit times data frame which can either be used immediately 
 #or saved locally to restart kernel and conserve RAM
 #dataPath is the path holding ALL probe folders
-def unitTimes(dataPath):
+def unitTimes(dataPath,**sampling_rate):
     #get individual folders for each probe
     folder_paths = []
     imec0_path = glob.glob(dataPath+'*imec0')
@@ -227,8 +227,11 @@ def unitTimes(dataPath):
     unit_times = []
     for i, folder in enumerate(tqdm(folder_paths)):
         probe_names = ['imec0', 'imec1', 'imec2', 'imec3']
-        imec_meta = readMeta(folder[0]+'\\') #extract meta file
-        sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
+        if not sampling_rate:
+            imec_meta = readMeta(folder[0]+'\\') #extract meta file
+            sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
+        else:
+            sampRate  = float(sampling_rate['sampling_rate'])
         #cluster_groups = pd.read_csv(os.path.join(folder[0], 'cluster_group.tsv'), '\t') #redundant data found in cluster_info
         cluster_info = pd.read_csv(os.path.join(folder[0], 'cluster_info.tsv'), '\t')
         spike_times = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_times.npy')))
