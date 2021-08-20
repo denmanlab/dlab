@@ -41,10 +41,10 @@ def read_kilosort_params(filename):
 def read_cluster_groups_CSV(directory):
     cluster_id = [];
     if os.path.isfile(os.path.join(directory,'cluster_group.tsv')):
-        cluster_id = [row for row in csv.reader(open(os.path.join(directory,'cluster_group.tsv')))][1:];
+        cluster_id = [row for row in csv.reader(open(os.path.join(directory,'cluster_group.tsv')))];
     else:
         if os.path.isfile(os.path.join(directory,'cluster_groups.csv')):
-            cluster_id = [row for row in csv.reader(open(os.path.join(directory,'cluster_groups.csv')))][1:];
+            cluster_id = [row for row in csv.reader(open(os.path.join(directory,'cluster_groups.csv')))];
         else:
             print('could not find cluster groups csv or tsv')
             return None
