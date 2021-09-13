@@ -8,8 +8,28 @@ from tqdm import tqdm
 
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
-def readMeta(bin_path):
+def readAPMeta(bin_path):
     metaPath = glob.glob(bin_path+'\*ap.meta')[0]
+    metaName = os.path.basename(metaPath)
+    metaDict = {}
+    if os.path.isfile(metaPath):
+        # print("meta file present")
+        with open(metaPath) as f:
+            mdatList = f.read().splitlines()
+            # convert the list entries into key value pairs
+            for m in mdatList:
+                csList = m.split(sep='=')
+                if csList[0][0] == '~':
+                    currKey = csList[0][1:len(csList[0])]
+                else:
+                    currKey = csList[0]
+                metaDict.update({currKey: csList[1]})
+    else:
+        print("no meta file")
+    return(metaDict)
+
+def readNIMeta(bin_path):
+    metaPath = glob.glob(bin_path+'\*nidq.meta')[0]
     metaName = os.path.basename(metaPath)
     metaDict = {}
     if os.path.isfile(metaPath):
@@ -37,7 +57,7 @@ def sglx_nidaq(bin_path, seconds=True):
     digital_words = mm[8::9]
     
     #Extract the number of digital channels from the meta file
-    meta = readMeta(bin_path)
+    meta = readNIMeta(bin_path)
     nchans = meta['niXDChans1']
     ncs = nchans.split(":")
     nChans = int(ncs[1])-int(ncs[0])+1
@@ -227,15 +247,16 @@ def unitTimes(dataPath,**sampling_rate):
     unit_times = []
     for i, folder in enumerate(tqdm(folder_paths)):
         probe_names = ['imec0', 'imec1', 'imec2', 'imec3']
-        if not sampling_rate:
-            imec_meta = readMeta(folder[0]+'\\') #extract meta file
-            sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
-        else:
-            sampRate  = float(sampling_rate['sampling_rate'])
+        # if not sampling_rate:
+        #     imec_meta = readMeta(folder[0]+'\\') #extract meta file
+        #     sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
+        # else:
+        #     sampRate  = float(sampling_rate['sampling_rate'])
         #cluster_groups = pd.read_csv(os.path.join(folder[0], 'cluster_group.tsv'), '\t') #redundant data found in cluster_info
         cluster_info = pd.read_csv(os.path.join(folder[0], 'cluster_info.tsv'), '\t')
-        spike_times = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_times.npy')))
-        spike_seconds = np.ndarray.flatten(spike_times/sampRate) #convert spike times to seconds from samples
+        # spike_times = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_secs.npy')))
+        # spike_seconds = np.ndarray.flatten(spike_times/sampRate) #convert spike times to seconds from samples
+        spike_seconds = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_secs.npy')))
         spike_clusters = np.ndarray.flatten(np.load(os.path.join(folder[0], 'spike_clusters.npy')))
     
         #Generate Unit Times Table

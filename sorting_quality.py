@@ -19,12 +19,12 @@ from scipy.cluster.vq import kmeans2
 #probe geometry, for the summary figure only
 option234_xpositions = np.zeros((192,2))
 option234_ypositions = np.zeros((192,2))
-option234_positions = np.zeros((384,2))
+option234_positions = np.zeros((383,2))
 option234_positions[:,0][::4] = 21
 option234_positions[:,0][1::4] = 53
 option234_positions[:,0][2::4] = 5
 option234_positions[:,0][3::4] = 37
-option234_positions[:,1] = np.floor(np.linspace(383,0,384)/2) * 20
+option234_positions[:,1] = np.floor(np.linspace(383,0,383)/2) * 20
 ##===============================================================================
 
 ##helper functions===============================================================================
@@ -128,10 +128,10 @@ def load_phy_template(path,site_positions = option234_positions,**kwargs):
     cluster_id = [];
     #[cluster_id.append(row) for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))];
     if os.path.isfile(os.path.join(path,'cluster_group.tsv')):
-        cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))][1:];
+        cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_group.tsv')))];
     else:
         if os.path.isfile(os.path.join(path,'cluster_groups.csv')):
-            cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_groups.csv')))][1:];
+            cluster_id = [row for row in csv.reader(open(os.path.join(path,'cluster_groups.csv')))];
         else:
             print('could not find cluster groups csv or tsv')
             return None
