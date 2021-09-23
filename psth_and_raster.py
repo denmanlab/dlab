@@ -62,7 +62,7 @@ def psth_line(times,triggers,pre=0.5,timeDomain=True,post=1,binsize=0.05,ymax=75
                     axes.tick_params(axis='both',labelsize=labelsize)
             axes.spines['top'].set_visible(False);axes.yaxis.set_ticks_position('left')
             axes.spines['right'].set_visible(False);axes.xaxis.set_ticks_position('bottom')   
-            axes.set_title(name,y=0.5)
+            axes.set_title(name,y=1)
             return axes 
         else:
             if axes == None:
