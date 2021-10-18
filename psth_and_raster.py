@@ -187,11 +187,11 @@ def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig'
         if len(np.where(times >= t - pre - post)[0]) > 0 and len(np.where(times >= t + post+ pre)[0]) > 0:
             start = np.where(times >= t - pre)[0][0]
             end = np.where(times >= t + post)[0][0]
-            bytrial.append(np.array(times[start:end-1])-t-pre)
+            bytrial.append(np.array(times[start:end])-t-pre)
             if output!='data':
             #		print np.ones(len(np.array(times[start:end-1])-t))*i+1
-                axes.plot(np.array(times[start:end-1])-t-pre,
-                          np.ones(len(np.array(times[start:end-1])-t))*i+1,
+                axes.plot(np.array(times[start:end])-t-pre,
+                          np.ones(len(np.array(times[start:end])-t))*i+1,
                           "|",mew=linewidth,ms=ms,color=color)
         else: bytrial.append([])
                 
