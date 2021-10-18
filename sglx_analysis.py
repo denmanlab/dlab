@@ -57,7 +57,7 @@ def sglx_nidaq(bin_path, seconds=True):
     digital_words = mm[8::9]
     
     #Extract the number of digital channels from the meta file
-    meta = readNIMeta(bin_path)
+    #meta = readNIMeta(bin_path)
     nchans = meta['niXDChans1']
     ncs = nchans.split(":")
     nChans = int(ncs[1])-int(ncs[0])+1

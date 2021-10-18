@@ -327,4 +327,94 @@ def psth_area(data,bins,pre=None,binsize=None, sd = 3,time=0.2):
         except: return None 
         print('response did not exceed threshold: '+str(threshold)+', no area returned')
         return None
+
+def psth_arr(spike_data, unit, stim_data, condition, pre=0.5, post=2.5,binsize=0.05,variance=True):
+    times = np.array(spike_data[spike_data.unit_id==unit].times.values[0])
+    numbins = int((post+pre)/binsize)
+    conds = np.unique(stim_data[condition])
+    num_conds = len(conds)
+    x = np.arange(-pre,post,binsize)
+    colors = plt.cm.viridis(np.linspace(0,1,num_conds))
     
+    psth_all=[]
+    bytrial_all=[]
+    var_all = []
+    
+    for i,cond in enumerate(np.unique(stim_data[condition])):
+        triggers = np.array(stim_data['times'][stim_data[condition] == cond])
+#         print(triggers.shape)
+        bytrial = np.zeros((len(triggers),numbins-1))
+        for j, trigger in enumerate(triggers):
+            trial = triggers[j]
+            start = trial-pre
+            end = trial+post
+            bins_ = np.arange(start,end,binsize)
+            trial_spikes = times[np.logical_and(times>=start, times<=end)]
+            hist,edges = np.histogram(trial_spikes,bins=bins_)
+            if len(hist)==numbins-1:
+                bytrial[j]=hist
+            elif len(hist)==numbins:
+                bytrial[j]=hist[:-1]
+        if variance == True:
+            var = np.std(bytrial,axis=0)/binsize/np.sqrt((len(triggers)))
+            psth = np.nanmean(bytrial,axis=0)/binsize
+            var_all.append(var)
+        psth_all.append(psth)
+        bytrial_all.append(bytrial)
+    bytrial_all = dict(zip(np.unique(stim_data[condition]),bytrial_all))
+    psth_all = dict(zip(np.unique(stim_data[condition]),psth_all))
+    var_all = dict(zip(np.unique(stim_data[condition]),var_all))
+
+    return(psth_all,bytrial_all,var_all)
+
+def psth_line_overlay_(spike_data, unit, stim_data, condition, title='', 
+                       pre=0.5, post=2.5,binsize=0.05,variance=True,axis=None,legend=True):
+#     times = np.array(np.array(spike_data.times[spike_data.unit_id==unit])[0])
+    times = np.array(spike_data[spike_data.unit_id==unit].times.values[0])
+    numbins = int((post+pre)/binsize)
+    conds = np.unique(stim_data[condition])
+    num_conds = len(conds)
+    x = np.arange(-pre,post,binsize)
+    colors = plt.cm.viridis(np.linspace(0,1,num_conds))
+
+    psth_all=[]
+
+    if axis == None:
+        fig,ax = plt.subplots()
+    else:
+        ax = axis; fig = plt.gcf()
+
+    for i,cond in enumerate(np.unique(stim_data[condition])):
+        triggers = np.array(stim_data['times'][stim_data[condition] == cond])
+        bytrial = np.zeros((len(triggers),numbins-1))
+        for j, trigger in enumerate(triggers):
+            trial = triggers[j]
+            start = trial-pre
+            end = trial+post
+            bins_ = np.arange(start,end,binsize)
+            trial_spikes = times[np.logical_and(times>=start, times<=end)]
+            hist,edges = np.histogram(trial_spikes,bins=bins_)
+            if len(hist)==numbins-1:
+                bytrial[j]=hist
+            elif len(hist)==numbins:
+                bytrial[j]=hist[:-1]
+        psth = np.mean(bytrial,axis=0)/binsize
+        if isinstance(conds[i],float)==True:
+            ax.plot(x[:-1],psth, color=colors[i], label=str(round(conds[i],2)))
+#         if isinstance(conds[i],tuple)==True:
+#             ax.plot(x[:-1],psth, color=colors[i], label=str(round(conds[i],2)))
+        else:
+            ax.plot(x[:-1],psth, color=colors[i], label=str(conds[i]))
+        if variance == True:
+            var = np.std(bytrial,axis=0)/binsize/np.sqrt((len(triggers)))
+            upper = psth+var
+            lower = psth-var
+            ax.fill_between(x[:-1],upper,psth,alpha=0.1,color=colors[i])
+            ax.fill_between(x[:-1],lower,psth,alpha=0.1,color=colors[i])
+    ax.axvline(0,linestyle='dashed')
+    if legend==True:
+        plt.legend(loc=(1.05,0.48))
+    plt.title(title)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+#     return(ax)
