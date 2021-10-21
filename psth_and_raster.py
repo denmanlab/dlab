@@ -418,4 +418,3 @@ def psth_line_overlay_(spike_data, unit, stim_data, condition, title='',
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
 #     return(ax)
-    
