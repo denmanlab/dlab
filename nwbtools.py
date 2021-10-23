@@ -506,4 +506,4 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
 
 def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],aligned=True):
     folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
-    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
+    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],aligned=aligned,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
