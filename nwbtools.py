@@ -462,7 +462,7 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     weights = np.zeros(site_positions.shape)
 
     #Generate Unit Times Table
-    for index, unitID in enumerate(cluster_info['id'].values):
+    for index, unitID in enumerate(cluster_info['cluster_id'].values):
         #get mean template used for each unit
         all_templates = spike_templates[np.where(spike_clusters==unitID)].flatten()
         n_templates_to_subsample = 100
