@@ -448,9 +448,9 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
 #             sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
 #         else:
 	    if 'sampling_rate' in kwargs.keys():
-		sampRate  = float(kwargs['sampling_rate'])
+		    sampRate  = float(kwargs['sampling_rate'])
 	    else:
-		sampRate=30000
+		    sampRate=30000
 	    spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
     else:
         spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_secs.npy')))
