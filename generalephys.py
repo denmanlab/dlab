@@ -18,7 +18,7 @@ import pandas as pd
 #from skimage import transform
 
 import matplotlib.gridspec as gridspec
-from mpl_toolkits.mplot3d import Axes3D
+# from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.tri as mtri
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation

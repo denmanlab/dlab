@@ -443,15 +443,15 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     #Get individual folders for each probe
     unit_times=[]
     if aligned == False:
-        if not sampling_rate:
-            imec_meta = readAPMeta(recording_path+'\\') #extract meta file
-            sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
-        else:
-            if 'sampling_rate' in kwargs.keys():
-                sampRate  = float(kwargs['sampling_rate'])
-            else:
-                sampRate=30000
-            spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
+#         if not sampling_rate:
+#             imec_meta = readAPMeta(recording_path+'\\') #extract meta file
+#             sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
+#         else:
+	    if 'sampling_rate' in kwargs.keys():
+		    sampRate  = float(kwargs['sampling_rate'])
+	    else:
+		    sampRate=30000
+	    spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
     else:
         spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, spikes_filename)))
 
@@ -462,7 +462,7 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     weights = np.zeros(site_positions.shape)
 
     #Generate Unit Times Table
-    for index, unitID in enumerate(cluster_info['id'].values):
+    for index, unitID in enumerate(cluster_info['cluster_id'].values):
         #get mean template used for each unit
         all_templates = spike_templates[np.where(spike_clusters==unitID)].flatten()
         n_templates_to_subsample = 100
@@ -506,4 +506,4 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
 
 def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],aligned=True):
     folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
-    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
+    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],aligned=aligned,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
