@@ -50,14 +50,14 @@ def readNIMeta(bin_path):
 
 #Takes the .bin file output from your SpikeGLX recording and outputs a plot of the individual 
 # digital lines over time 
-def sglx_nidaq(bin_path, seconds=True):
+def parse_ni_digital(bin_path, seconds=True):
     print('Sit back. This is going to take a while!')
     #Memory map the bin file and parse into binary lines
-    mm = np.memmap(glob.glob(bin_path+'*bin')[0],dtype=np.uint16)
+    mm = np.memmap(glob.glob(bin_path+'*bin')[0],dtype=np.int16)
     digital_words = mm[8::9]
     
     #Extract the number of digital channels from the meta file
-    #meta = readNIMeta(bin_path)
+    meta = readNIMeta(bin_path)
     nchans = meta['niXDChans1']
     ncs = nchans.split(":")
     nChans = int(ncs[1])-int(ncs[0])+1
@@ -99,9 +99,9 @@ def sglx_nidaq(bin_path, seconds=True):
     #Convert from sample times to seconds
     if seconds==True:
         for line in digital_lines_rising.keys():
-            digital_lines_rising[line] = np.array(digital_lines_rising[line])/1e7
+            digital_lines_rising[line] = np.array(digital_lines_rising[line])/meta['niSampRate']
         for line in digital_lines_falling.keys():
-            digital_lines_falling[line] = np.array(digital_lines_falling[line])/1e7
+            digital_lines_falling[line] = np.array(digital_lines_falling[line])/meta['niSampRate']
         return(digital_lines_rising, digital_lines_falling) 
 
 #plot the output of `sglx_nidaq`

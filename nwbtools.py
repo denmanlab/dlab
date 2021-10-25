@@ -305,7 +305,7 @@ except:
 #     def add_to_general(self,data,name='general'):
 #         self.set_metadata(name,data)
         
-def load_phy_template(path,cluster_file='KS2',site_positions = option234_positions,**kwargs):
+def load_phy_template(path,cluster_file='KS2',site_positions = option234_positions, **kwargs):
 # load spike data that has been manually sorted with the phy-template GUI
 # the site_positions should contain coordinates of the channels in probe space. for example, in um on the face of the probe
 # returns a dictionary of 'good' units, each of which includes:
@@ -436,7 +436,7 @@ def df_from_phy(path,site_positions = option234_positions,**kwargs):
     return df
 
 def load_unit_data(recording_path, probe_depth = 3840, site_positions = option234_positions, 
-                   probe_name=None, aligned=True, df=True, **kwargs):
+                   probe_name=None, spikes_filename = 'spike_secs.npy', aligned=True, df=True, **kwargs):
 # Inputs:
 # Outputs:
     if probe_name == None: probe_name = recording_path
@@ -453,7 +453,7 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
                 sampRate=30000
             spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
     else:
-        spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_secs.npy')))
+        spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, spikes_filename)))
 
     cluster_info = pd.read_csv(os.path.join(recording_path, 'cluster_info.tsv'), '\t')
     spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
