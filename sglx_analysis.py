@@ -99,9 +99,9 @@ def parse_ni_digital(bin_path, seconds=True):
     #Convert from sample times to seconds
     if seconds==True:
         for line in digital_lines_rising.keys():
-            digital_lines_rising[line] = np.array(digital_lines_rising[line])/meta['niSampRate']
+            digital_lines_rising[line] = np.array(digital_lines_rising[line])/float(meta['niSampRate'])
         for line in digital_lines_falling.keys():
-            digital_lines_falling[line] = np.array(digital_lines_falling[line])/meta['niSampRate']
+            digital_lines_falling[line] = np.array(digital_lines_falling[line])/float(meta['niSampRate'])
         return(digital_lines_rising, digital_lines_falling) 
 
 #plot the output of `sglx_nidaq`
