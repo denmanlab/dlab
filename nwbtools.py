@@ -458,7 +458,7 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
 
     cluster_info = pd.read_csv(os.path.join(recording_path, 'cluster_info.tsv'), '\t')
     if cluster_info.keys()[0]=='cluster_id':
-        cluster_info.rename('cluster_id':'id')
+        cluster_info.rename(columns={'cluster_id':'id'})
     spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
     spike_templates = np.load(open(os.path.join(recording_path,'spike_templates.npy'),'rb'))
     templates = np.load(open(os.path.join(recording_path,'templates.npy'),'rb'))
