@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import warnings
 import glob, os, h5py, csv
 from dlab.generalephys import option234_positions
 from dlab.sglx_analysis import readAPMeta
@@ -17,7 +18,7 @@ except:
     except:
         print('no OpenEphys.py get this from https://github.com/open-ephys/analysis-tools')
 
-
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 # def remap_data(data,electrodemap):
 #     if type(data) - dict:
@@ -459,10 +460,11 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
     spike_templates = np.load(open(os.path.join(recording_path,'spike_templates.npy'),'rb'))
     templates = np.load(open(os.path.join(recording_path,'templates.npy'),'rb'))
+    amplitudes = np.load(open(os.path.join(recording_path,'amplitudes.npy'),'rb'))
     weights = np.zeros(site_positions.shape)
 
     #Generate Unit Times Table
-    for index, unitID in enumerate(cluster_info['cluster_id'].values):
+    for index, unitID in enumerate(cluster_info['id'].values):
         #get mean template used for each unit
         all_templates = spike_templates[np.where(spike_clusters==unitID)].flatten()
         n_templates_to_subsample = 100
@@ -491,6 +493,7 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
                            'KScontamination': cluster_info.ContamPct[index],
                            'template': mean_template,
                            'waveform_weights': weights,
+                           'amplitudes': amplitudes[:,0][spike_clusters==unitID],
                            'times': spike_times[spike_clusters == unitID],
                             })
     if df == True:        
@@ -504,6 +507,6 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     else:
         return(unit_times)
 
-def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],aligned=True):
+def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],spikes_filename = 'spike_secs.npy', aligned=True):
     folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
-    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],aligned=aligned,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
+    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],spikes_filename = spikes_filename, aligned=True,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
