@@ -502,3 +502,13 @@ def check_rfs_in_df(df_rf,sds=4):
     df_rf['rf_color']=rf_color
     
     return df_rf
+
+show_impulse(a,center):
+	center=(41,32)
+	i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
+	plt.plot(i[0],i[1])
+	plt.ylim(108,148)
+	plt.gca().axhline(128,ls='--')
+	plt.figure()
+	plt.imshow(a['80'])
+	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
