@@ -10,12 +10,14 @@ plt.style.use('dark_background')
 import seaborn as sns
 import csv 
 import time, datetime
+
 from pynwb import NWBFile
 from pynwb import NWBFile, NWBHDF5IO, TimeSeries, ProcessingModule
 from pynwb.device import Device
 from pynwb.epoch import TimeIntervals
 from pynwb.ecephys import ElectrodeGroup
 from pynwb.behavior import BehavioralEvents, BehavioralEpochs, BehavioralTimeSeries, PupilTracking, IntervalSeries
+   
 from dateutil.tz import tzlocal
 sns.set_palette(sns.color_palette('Set2')[3:])
 
@@ -462,7 +464,7 @@ def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= '
                     experimenter=experimenter,
                     lab='Denman Lab',
                     institution='University of Colorado',
-                    experiment_description=experiment_description+' phase:'+str(phase),
+                    experiment_description=experiment_description+' | phase:'+str(phase),
                     session_id=os.path.basename(recording_folder))
         except:
             print('FAILED: '+recording_folder+' at file creation')
@@ -1172,3 +1174,40 @@ def placeAxesOnGrid(fig,dim=[1,1],xspan=[0,1],yspan=[0,1],wspace=None,hspace=Non
             idx += 1
     inner_ax = np.array(inner_ax).squeeze().tolist() #remove redundant dimension
     return inner_ax
+
+
+def generate_session_figure(nwb_path):
+    io = NWBHDF5IO(nwb_path, mode='r')
+    nwb_ = io.read()
+
+    #get task and phase information from the nwb
+    if task == 'cheetah_or_elephant':
+        pass
+    if task == 'bonsai_levertask':
+        generate_session(path)
+    
+    #choose which generate_  function to call
+        
+    # def generate_session(mouse,date,return_=None,session='combine'):
+    #     # paths = glob.glob('/root/work/nwbs_lever/'+mouse+'_'+date+'*_lever.nwb')
+    #     paths
+    #     if len(paths)> 1:
+    #         if session == 'combine':
+    #             paths = sort_day_sessions(paths)
+    #             df = combine_nwb_sessions(paths)
+    #         else:
+    #             nwb_path = paths[session]
+    #             io = NWBHDF5IO(nwb_path, mode='r')
+    #             nwb_ = io.read()
+    #             df = nwb_.trials.to_dataframe()
+    #     else: 
+    #         nwb_path = paths[0]
+    #         io = NWBHDF5IO(nwb_path, mode='r')
+    #         nwb_ = io.read()
+    #         df = nwb_.trials.to_dataframe()
+
+
+    #     if return_ == 'df':
+    #         return df
+
+    #     if return_ == 'fig':
