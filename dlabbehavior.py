@@ -755,7 +755,6 @@ def generate_session_lever(mouse,date,return_=None,session='combine', nwb=None):
         if len(paths)> 1:
             if session == 'combine':
                 paths = sort_day_sessions(paths)
-                print(paths)
                 df = combine_nwb_sessions(paths)
                 io = NWBHDF5IO(paths[-1], mode='r')
                 nwb_ = io.read()
@@ -770,7 +769,6 @@ def generate_session_lever(mouse,date,return_=None,session='combine', nwb=None):
             nwb_ = io.read()
             df = nwb_.trials.to_dataframe()
 
-    print(df.shape)
     if return_ == 'df':
         df['mouse_id']   = [mouse]*df.shape[0]
         df['session_id'] = [date]*df.shape[0]
@@ -894,7 +892,8 @@ def generate_session_lever(mouse,date,return_=None,session='combine', nwb=None):
 
 
 def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=True):
-    paths = glob.glob('/root/work/nwbs/'+mouse+'_'+date+'*_ce.nwb')
+    nwb_folder_paths = glob.glob(os.path.join(r'C:\Users\denma\Desktop\cheetah_or_elephant\data',mouse,mouse+'_'+date+'*'))
+    paths = [glob.glob(os.path.join(p,'*.nwb'))[0] for p in nwb_folder_paths]
     if session == 'combine':
         paths = sort_day_sessions(paths);path=paths[0]
         io = NWBHDF5IO(path, mode='r')
@@ -916,6 +915,10 @@ def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=Tr
     df['reaction_time']=df.response_time.values.astype(float) - df.start_time.values.astype(float)
     df['target_image'] = ['A' if row.imageApercent > row.imageBpercent else 'B' for i,row in df.iterrows()]
 
+    df['mouse_id']   = [mouse]*df.shape[0]
+    df['session_id'] = [date]*df.shape[0]
+    # df['phase'] = [int(nwb_.experiment_description.split('phase')[1][1:])]*df.shape[0]
+   
     if return_ == 'df':
         return df
 
@@ -1249,3 +1252,21 @@ def generate_session_figure(nwb_path):
     #         return df
 
     #     if return_ == 'fig':
+
+def get_history_sessions(today,tomonth,toyear,number_of_days=10):
+    days = []
+    mdays = [31,31,28,31,30,31,30,31,31,30,31,30]
+    mmonths = [12,1,2,3,4,5,6,7,8,9,10,11]
+    for day_minus in range(number_of_days):
+        day_ = int(today)-day_minus
+        if day_ < 1:
+            last_month = int(tomonth)-1
+            day_ = mdays[last_month]+day_
+            if mmonths[last_month] > int(tomonth):
+                lastyear = str(int(toyear) - 1)
+                y_m_d = lastyear+'_'+str(mmonths[last_month])+'_'+str(day_)
+            else: y_m_d = toyear+'_'+str(mmonths[last_month])+'_'+str(day_)
+        else:
+            y_m_d = toyear+'_'+tomonth+'_'+str(day_)
+        days.extend([y_m_d])
+    return days
