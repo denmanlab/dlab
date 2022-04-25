@@ -9,7 +9,7 @@ from tqdm import tqdm
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
 def readAPMeta(bin_path):
-    metaPath = glob.glob(bin_path+'\*ap.meta')[0]
+    metaPath = glob.glob(os.path.join(bin_path,'*ap.meta'))[0]
     metaName = os.path.basename(metaPath)
     metaDict = {}
     if os.path.isfile(metaPath):
@@ -29,7 +29,8 @@ def readAPMeta(bin_path):
     return(metaDict)
 
 def readNIMeta(bin_path):
-    metaPath = glob.glob(bin_path+'\*nidq.meta')[0]
+    print(bin_path)
+    metaPath = glob.glob(os.path.join(bin_path,'*nidq.meta'))[0] #glob.glob(bin_path+'*nidq.meta')[0]
     metaName = os.path.basename(metaPath)
     metaDict = {}
     if os.path.isfile(metaPath):
@@ -53,7 +54,7 @@ def readNIMeta(bin_path):
 def parse_ni_digital(bin_path, seconds=True):
     print('Sit back. This is going to take a while!')
     #Memory map the bin file and parse into binary lines
-    mm = np.memmap(glob.glob(bin_path+'*bin')[0],dtype=np.int16)
+    mm = np.memmap(glob.glob(os.path.join(bin_path, '*bin'))[0],dtype=np.int16) #glob.glob(bin_path+'*bin')[0],dtype=np.int16)
     digital_words = mm[8::9]
     
     #Extract the number of digital channels from the meta file
