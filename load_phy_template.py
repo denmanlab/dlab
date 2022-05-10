@@ -16,7 +16,7 @@ def load_phy_template(path,site_positions = option234_positions,**kwargs):
 		samplingrate = kwargs['sampling_rate']
 	else:
 		samplingrate =30000.
-		print 'no sampling rate specified, using default of 30kHz'
+		print('no sampling rate specified, using default of 30kHz')
 		
 	units = {}
 	for i in np.arange(1,np.shape(cluster_id)[0]):
