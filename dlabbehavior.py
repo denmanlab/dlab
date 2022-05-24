@@ -325,9 +325,9 @@ def import_timestamps(filename):
 
 def make_df(path,rew_amt=-1):
     #Reads all timestamps from each csv from a session
-    filename = os.path.join(path,"trial_starts.csv")                  #should be when images came on
-    df_trial_starts = pd.read_csv(filename,index_col=False) 
-    trial_starts = np.array(df_trial_starts.Timestamp)
+    # filename = os.path.join(path,"trial_starts.csv")                  #should be when images came on
+    # df_trial_starts = pd.read_csv(filename,index_col=False) 
+    # trial_starts = np.array(df_trial_starts.Timestamp)
     
     filename = os.path.join(path,"lever_pulls.csv")
     df_lever_pulls = pd.read_csv(filename,index_col=False) 
@@ -366,7 +366,7 @@ def make_df(path,rew_amt=-1):
     lever_pullsZero = lever_pulls - session_start
     lever_releasesZero = lever_releases - session_start
     trial_endsZero = trial_ends - session_start
-    trial_startsZero = trial_starts - session_start
+    # trial_startsZero = trial_starts - session_start
 
     filename = os.path.join(path, "target_times.csv")
     if os.path.exists(filename):
@@ -375,7 +375,7 @@ def make_df(path,rew_amt=-1):
         a.insert(0,1.0)
         target_times = a
     else:
-        target_timestamp = [np.nan]*np.shape(trial_starts)[0]
+        target_timestamp = [np.nan]*np.shape(lever_pulls)[0]
         target_times = target_timestamp
  
     if len(manual_rewards):
@@ -442,7 +442,7 @@ def make_df(path,rew_amt=-1):
 
 
 def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= 'Denman Lab lever visual engagement task',reward_vol=-1):
-    nwb_path = os.path.join('/root/work/nwbs_lever',os.path.basename(recording_folder))+'_lever.nwb'
+    nwb_path = os.path.join(recording_folder,os.path.basename(recording_folder))+'_lever.nwb'
     
     if os.path.exists(os.path.join(recording_folder,'image_ends.csv')):
         df_target = pd.read_csv(os.path.join(recording_folder,'target_times.csv'))
@@ -453,7 +453,7 @@ def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= '
 
     if not os.path.exists(nwb_path):
         try:
-            df = make_df(recording_folder,reward_vol)
+            df = make_df(recording_folder)
         except:
             print('FAILED: '+recording_folder+' at df creation')
             return np.nan
@@ -493,29 +493,29 @@ def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= '
         except:
             print('FAILED: '+recording_folder+' at adding trials')
             return np.nan
-        # try:
-        l = pd.read_csv(os.path.join(recording_folder,'lever.csv'),skiprows=1,header=None,index_col=False)
-        start = pd.read_csv(os.path.join(recording_folder,'session_start.csv'),header=None,index_col=False)
-        start_time = start.iloc[0].values[0].split('T')[-1].split('-')[0]
-        l['counter'] = np.array([int(count[-13:-2]) if type(count)==str else np.nan for count in l[6]])/1e7
-        l['time'] = [str(int(l[3].iloc[i]))+':'+str(int(l[4].iloc[i]))+':'+str(int(l[5].iloc[i]))+'.'+str(l[2].iloc[i])[2:] if not np.isnan(l[5].iloc[i]) else np.nan for i in range(l.shape[0])]
-        lever_start = float(l.time.iloc[0].split(':')[-1]) - float(start_time.split(':')[-1])
-        lever_offset = l['counter'].iloc[0] - lever_start
-        l['Timestamp'] = l['counter'].values - lever_offset
-        
-        val_ = [int(vala[1:]) if  type(vala)==str else np.nan for vala in l[0]]
-        l['Value'] = val_
+        try:
+            l = pd.read_csv(os.path.join(recording_folder,'lever.csv'),skiprows=1,header=None,index_col=False)
+            start = pd.read_csv(os.path.join(recording_folder,'session_start.csv'),header=None,index_col=False)
+            start_time = start.iloc[0].values[0].split('T')[-1].split('-')[0]
+            l['counter'] = np.array([int(count[-13:-2]) if type(count)==str else np.nan for count in l[6]])/1e7
+            l['time'] = [str(int(l[3].iloc[i]))+':'+str(int(l[4].iloc[i]))+':'+str(int(l[5].iloc[i]))+'.'+str(l[2].iloc[i])[2:] if not np.isnan(l[5].iloc[i]) else np.nan for i in range(l.shape[0])]
+            lever_start = float(l.time.iloc[0].split(':')[-1]) - float(start_time.split(':')[-1])
+            lever_offset = l['counter'].iloc[0] - lever_start
+            l['Timestamp'] = l['counter'].values - lever_offset
+            
+            val_ = [int(vala[1:]) if  type(vala)==str else np.nan for vala in l[0]]
+            l['Value'] = val_
 
-        lever_ts = TimeSeries(
-            name='lever_position',
-            timestamps=l['counter'].values - lever_offset,
-            data=val_,
-            unit='arbitrary',
-            description='The position reading of the 4 way encoder attached to the lever the mouse pushes forward, backward, left and right with his forelimbs.',
-            comments='Lever movement. 512 is centered.'
-        )
-        nwb_file.add_acquisition(lever_ts)
-        # except: print('FAILED: '+recording_folder+' at lever data');return np.nan
+            lever_ts = TimeSeries(
+                name='lever_position',
+                timestamps=l['counter'].values - lever_offset,
+                data=val_,
+                unit='arbitrary',
+                description='The position reading of the 4 way encoder attached to the lever the mouse pushes forward, backward, left and right with his forelimbs.',
+                comments='Lever movement. 512 is centered.'
+            )
+            nwb_file.add_acquisition(lever_ts)
+        except: print('FAILED: '+recording_folder+' at lever data')
         try:
             with NWBHDF5IO(nwb_path, 'w') as io:
                 io.write(nwb_file)
@@ -717,26 +717,62 @@ def combine_nwb_sessions(paths):
         df = pd.concat([df,df_toadd],ignore_index=True)
     return df
 
+def across_session_plots_lever(df):
+    fig = plt.figure(figsize=(8.5,11))
+    ax_num_trials = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.05,.03),yspan=(0.1,0.34))
+    ax_rewards = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.37,0.62),yspan=(0.1,0.34))
+    ax_hold_times_hist = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.05,0.95),yspan=(0.4,0.95))
+    ax_percent_correct = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.67,0.92),yspan=(0.1,0.34))
 
-def generate_session(mouse,date,return_=None,session='combine'):
-    paths = glob.glob('/root/work/nwbs_lever/'+mouse+'_'+date+'*_lever.nwb')
-    if len(paths)> 1:
-        if session == 'combine':
-            paths = sort_day_sessions(paths)
-            df = combine_nwb_sessions(paths)
-        else:
-            nwb_path = paths[session]
+    num_trials,rewards, reward_vol,percent_correct = [],[],[],[]
+    for session_ in df.session_id.unique():
+        df_sess = df[df.session_id==session_]
+        num_trials.extend([df_sess.shape[0]])
+        rewards.extend([sum(df_sess.rewarded)])
+        reward_vol.extend([sum(df_sess.reward_amount)])
+        percent_correct.extend([sum(df_sess.rewarded) / float(df_sess.shape[0])])
+
+        ax=sns.histplot(data=df_sess, x="hold_time",hue='rewarded',binrange=(0,12),bins=60,
+                    ax=ax_hold_times_hist)
+
+    ax_num_trials.plot(df.session_id.unique(),num_trials)  
+    ax_rewards.plot(df.session_id.unique(),rewards,label='rewards',color=sns.color_palette[3])  
+    ax_rewards.twinx().plot(df.session_id.unique(),reward_vol,label='reward volume',color=sns.color_palette[3])   
+    ax_rewards.legend(bbox_to_anchor= (0.2, -0.2) )
+    ax_percent_correct.plot(df.session_id.unique(),percent_correct)  
+    
+    return fig,ax
+
+def generate_session_lever(mouse,date,return_=None,session='combine', nwb=None):
+    if nwb!=None:
+        paths=[nwb]
+        io = NWBHDF5IO(nwb, mode='r')
+        nwb_ = io.read()
+        df = nwb_.trials.to_dataframe()
+    else:
+        nwb_folder_paths = glob.glob(os.path.join(r'C:\Users\denma\Desktop\bonsai_levertask\data',mouse,mouse+'_'+date+'*'))
+        paths = [glob.glob(os.path.join(p,'*.nwb'))[0] for p in nwb_folder_paths]
+        if len(paths)> 1:
+            if session == 'combine':
+                paths = sort_day_sessions(paths)
+                df = combine_nwb_sessions(paths)
+                io = NWBHDF5IO(paths[-1], mode='r')
+                nwb_ = io.read()
+            else:
+                nwb_path = paths[session]
+                io = NWBHDF5IO(nwb_path, mode='r')
+                nwb_ = io.read()
+                df = nwb_.trials.to_dataframe()
+        else: 
+            nwb_path = paths[0]
             io = NWBHDF5IO(nwb_path, mode='r')
             nwb_ = io.read()
             df = nwb_.trials.to_dataframe()
-    else: 
-        nwb_path = paths[0]
-        io = NWBHDF5IO(nwb_path, mode='r')
-        nwb_ = io.read()
-        df = nwb_.trials.to_dataframe()
-
 
     if return_ == 'df':
+        df['mouse_id']   = [mouse]*df.shape[0]
+        df['session_id'] = [date]*df.shape[0]
+        df['phase'] = [int(nwb_.experiment_description.split('phase')[1][1:])]*df.shape[0]
         return df
 
     if return_ == 'fig':
@@ -856,7 +892,8 @@ def generate_session(mouse,date,return_=None,session='combine'):
 
 
 def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=True):
-    paths = glob.glob('/root/work/nwbs/'+mouse+'_'+date+'*_ce.nwb')
+    nwb_folder_paths = glob.glob(os.path.join(r'C:\Users\denma\Desktop\cheetah_or_elephant\data',mouse,mouse+'_'+date+'*'))
+    paths = [glob.glob(os.path.join(p,'*.nwb'))[0] for p in nwb_folder_paths]
     if session == 'combine':
         paths = sort_day_sessions(paths);path=paths[0]
         io = NWBHDF5IO(path, mode='r')
@@ -878,6 +915,10 @@ def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=Tr
     df['reaction_time']=df.response_time.values.astype(float) - df.start_time.values.astype(float)
     df['target_image'] = ['A' if row.imageApercent > row.imageBpercent else 'B' for i,row in df.iterrows()]
 
+    df['mouse_id']   = [mouse]*df.shape[0]
+    df['session_id'] = [date]*df.shape[0]
+    # df['phase'] = [int(nwb_.experiment_description.split('phase')[1][1:])]*df.shape[0]
+   
     if return_ == 'df':
         return df
 
@@ -1211,3 +1252,21 @@ def generate_session_figure(nwb_path):
     #         return df
 
     #     if return_ == 'fig':
+
+def get_history_sessions(today,tomonth,toyear,number_of_days=10):
+    days = []
+    mdays = [31,31,28,31,30,31,30,31,31,30,31,30]
+    mmonths = [12,1,2,3,4,5,6,7,8,9,10,11]
+    for day_minus in range(number_of_days):
+        day_ = int(today)-day_minus
+        if day_ < 1:
+            last_month = int(tomonth)-1
+            day_ = mdays[last_month]+day_
+            if mmonths[last_month] > int(tomonth):
+                lastyear = str(int(toyear) - 1)
+                y_m_d = lastyear+'_'+str(mmonths[last_month])+'_'+str(day_)
+            else: y_m_d = toyear+'_'+str(mmonths[last_month])+'_'+str(day_)
+        else:
+            y_m_d = toyear+'_'+tomonth+'_'+str(day_)
+        days.extend([y_m_d])
+    return days
