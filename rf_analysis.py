@@ -106,53 +106,62 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
 #   a 2D gaussian fit of that spatial RF
 #   the impulse response at the center of the fit
 #   TODO: a fit of that impulse response with: ?? currently not defined.
-    if np.isnan(RF[RF.keys()[0]][0][0]):#check to make sure there is any data in the STRF to try to fit. if not, return the correct data structure filled with None
+    if False:#if np.isnan(RF[RF.keys()[0]][0][0]):#check to make sure there is any data in the STRF to try to fit. if not, return the correct data structure filled with None
         fit={};fit['avg_space_fit']=None;fit['params'] = None;fit['cov']=None ;fit['amplitude']=None ;fit['x']=None ;fit['y']=None ;fit['s_x']=None ;fit['s_y']=None ;fit['theta']=None ;fit['offset']=None;fit['center']=None;fit['peakTau']=None;fit['impulse']=None;fit['roughquality']=None
         return fit
     else:
-        if 'fit' in RF.keys():
-            trash = RF.pop('fit') # get rid of the dictionary entry 'fit'; we only want sta tau frames in this dictionary
-        taus = [int(i) for i in RF.keys()]
-        taus.sort()
-        fit={}
+
         
-        #========================================================================
-        #find the taus to average over for the spatial RF
-        #first, define the threshold; above this means there is a non-noise pixel somwhere in the space-space
-        if threshold == None:
-            #set to z sd above mean
-            blank = (RF['-10']+RF['0']+RF['10'])/3. # define a blank, noise-only image
-            threshold = np.mean(blank)+np.std(blank)*3.
+        if type(RF)==dict:
+            if 'fit' in RF.keys():
+                trash = RF.pop('fit') # get rid of the dictionary entry 'fit'; we only want sta tau frames in this dictionary
+                taus = [int(i) for i in RF.keys()]
+                taus.sort()
+                fit={}
+            #========================================================================
+            #find the taus to average over for the spatial RF
+            #first, define the threshold; above this means there is a non-noise pixel somwhere in the space-space
+            if threshold == None:
+                #set to z sd above mean
+                blank = (RF['-10']+RF['0']+RF['10'])/3. # define a blank, noise-only image
+                threshold = np.mean(blank)+np.std(blank)*3.
+                if verbose:
+                    print('threshold: '+str(threshold))
+                
+            #find the average space-space over only the range of non-noise good 
+            avgRF = np.zeros(np.shape(RF[str(int(taus[0]))]))#initialize the average to blank.
+            goodTaus = [40,50,60,70,80,90,100]#
+            for tau in goodTaus:
+                avgRF += RF[str(int(tau))]
+            avgRF = avgRF / float(len(goodTaus))
+            fit['avg_space']=avgRF
+
+            maximum_deviation = 0;best_center = (0,0)
+            for i in np.linspace(24,63,40):
+                for j in np.linspace(10,49,40):
+                    imp_temp = impulse(RF,(i,j))
+                    if np.max(np.abs(imp_temp[1])) > maximum_deviation:
+                        best_center = (int(i),int(j))
+                        maximum_deviation = np.max(np.abs(imp_temp[1]))
+            center = best_center
+            imp_temp = impulse(RF,center)
             if verbose:
-                print('threshold: '+str(threshold))
+                print('peak frame tau: '+str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]])))
+                print('peak center   : '+str(center))
+                print('peak value    : '+str(RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))][center[0],center[1]]))
+            peak_frame = RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))]
+            peak = peak_frame[int(center[0]),int(center[1])]
+            #center = (np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[0][0],np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[1][0])
             
-        #find the average space-space over only the range of non-noise good 
-        avgRF = np.zeros(np.shape(RF[str(int(taus[0]))]))#initialize the average to blank.
-        goodTaus = [40,50,60,70,80,90,100]#
-        for tau in goodTaus:
-            avgRF += RF[str(int(tau))]
-        avgRF = avgRF / float(len(goodTaus))
-        fit['avg_space']=avgRF
-        #========================================================================   
-        
+            #========================================================================   
+        if type(RF)==np.ndarray:
+            fit={}
+            fit['avg_space']=RF
+            peak_frame = RF
+            center = backup_center
+            peak = np.max(peak_frame)
         #====fit==================================================================
-        maximum_deviation = 0;best_center = (0,0)
-        for i in np.linspace(24,63,40):
-            for j in np.linspace(10,49,40):
-                imp_temp = impulse(RF,(i,j))
-                if np.max(np.abs(imp_temp[1])) > maximum_deviation:
-                    best_center = (int(i),int(j))
-                    maximum_deviation = np.max(np.abs(imp_temp[1]))
-        center = best_center
-        imp_temp = impulse(RF,center)
-        if verbose:
-            print('peak frame tau: '+str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]])))
-            print('peak center   : '+str(center))
-            print('peak value    : '+str(RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))][center[0],center[1]]))
-        peak_frame = RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))]
-        peak = peak_frame[int(center[0]),int(center[1])]
-        #center = (np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[0][0],np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[1][0])
-        
+
         if verbose:
             print('peak amp: '+str(peak)+'  threshold: '+str(threshold))
         if np.abs(peak) > threshold * 1.0:
@@ -234,8 +243,8 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
                     impuls= impuls_l
                     center= center_l
         except:
-            impuls = np.zeros(len(taus))
-        
+            impuls = np.array([0,0,0,0,0,0]) #impuls = np.zeros(len(taus))
+            taus = impuls
         if fit_type == 'gaussian_2D':
             #get impulse at the 'center'
             if verbose:
@@ -503,7 +512,7 @@ def check_rfs_in_df(df_rf,sds=4):
     
     return df_rf
 
-show_impulse(a,center):
+def show_impulse(a,center):
 	center=(41,32)
 	i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
 	plt.plot(i[0],i[1])
