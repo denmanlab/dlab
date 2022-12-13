@@ -153,152 +153,161 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
 #   a 2D gaussian fit of that spatial RF
 #   the impulse response at the center of the fit
 #   TODO: a fit of that impulse response with: ?? currently not defined.
-	if np.isnan(RF[RF.keys()[0]][0][0]):#check to make sure there is any data in the STRF to try to fit. if not, return the correct data structure filled with None
-		fit={};fit['avg_space_fit']=None;fit['params'] = None;fit['cov']=None ;fit['amplitude']=None ;fit['x']=None ;fit['y']=None ;fit['s_x']=None ;fit['s_y']=None ;fit['theta']=None ;fit['offset']=None;fit['center']=None;fit['peakTau']=None;fit['impulse']=None;fit['roughquality']=None
-		return fit
-	else:
-		if 'fit' in RF.keys():
-			trash = RF.pop('fit') # get rid of the dictionary entry 'fit'; we only want sta tau frames in this dictionary
-		taus = [int(i) for i in RF.keys()]
-		taus.sort()
-		fit={}
-		
-		#========================================================================
-		#find the taus to average over for the spatial RF
-		#first, define the threshold; above this means there is a non-noise pixel somwhere in the space-space
-		if threshold == None:
-			#set to z sd above mean
-			blank = (RF['-10']+RF['0']+RF['10'])/3. # define a blank, noise-only image
-			threshold = np.mean(blank)+np.std(blank)*3.
-			if verbose:
-				print('threshold: '+str(threshold))
-			
-		#find the average space-space over only the range of non-noise good 
-		avgRF = np.zeros(np.shape(RF[str(int(taus[0]))]))#initialize the average to blank.
-		goodTaus = [40,50,60,70,80,90,100]#
-		for tau in goodTaus:
-			avgRF += RF[str(int(tau))]
-		avgRF = avgRF / float(len(goodTaus))
-		fit['avg_space']=avgRF
-		#========================================================================   
-		
-		#====fit==================================================================
-		maximum_deviation = 0;best_center = (0,0)
-		for i in np.linspace(24,63,40):
-			for j in np.linspace(10,49,40):
-				imp_temp = impulse(RF,(i,j))
-				if np.max(np.abs(imp_temp[1])) > maximum_deviation:
-					best_center = (int(i),int(j))
-					maximum_deviation = np.max(np.abs(imp_temp[1]))
-		center = best_center
-		imp_temp = impulse(RF,center)
-		if verbose:
-			print('peak frame tau: '+str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]])))
-			print('peak center   : '+str(center))
-			print('peak value    : '+str(RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))][center[0],center[1]]))
-		peak_frame = RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))]
-		peak = peak_frame[int(center[0]),int(center[1])]
-		#center = (np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[0][0],np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[1][0])
-		
-		if verbose:
-			print('peak amp: '+str(peak)+'  threshold: '+str(threshold))
-		if np.abs(peak) > threshold * 1.0:
-			peak_frame = smoothRF(ndimage.zoom(peak_frame,zoom_int,order=zoom_order),0)
-			fit['roughquality']='good'
-		else:
-			center = backup_center
-			imp_temp = impulse(RF,center)
-			peak_frame = RF[str(int(100))]
-			peak = peak_frame[center[0],center[1]]
-			peak_frame = smoothRF(zoom(peak_frame,zoom_int,order=zoom_order),0)
-			print('could not find a peak in the RF, using center: '+str(center))
-			print('peak amplitude: '+str(peak)+', threshold: '+str(threshold))
-			fit['roughquality']='bad'
-		fit['center']=center
-		fit['center_guess']=center
-		fit['fit_image']=peak_frame
-		if verbose:
-			print('center guess: '+str(center))
-		
-		#initialize some empty parameters
-		fitsuccess=False;retry_fit = False
-		best_fit = 10000000#initialize impossibly high
-		fit['avg_space_fit']=None;fit['params']=None
-		best_fit_output = ((None,None,None,None,None,None,None),600,None)
-		try:
-			if centerfixed:
-				popt,pcov,space_fit = fit_rf_2Dgauss_centerFixed(peak_frame,(center[0]*zoom_int,center[1]*zoom_int),width_guess=rfsizeguess*zoom_int,height_guess=rfsizeguess*zoom_int)
-			else:
-				popt,pcov,space_fit = fit_rf_2Dgauss(peak_frame,(center[0]*zoom_int,center[1]*zoom_int),width_guess=rfsizeguess*zoom_int,height_guess=rfsizeguess*zoom_int)
-		except:
-			popt,pcov,space_fit=((None,0,0,0,0,0,0),600,np.zeros((64,64)));print('2D fit failed')
-		
-		fit['avg_space_fit']=np.array(space_fit)/float(zoom_int)
-		fit['params'] = popt    
-		fit['cov']=pcov
-		fit['amplitude']=popt[0]
-		if centerfixed:
-			fit['x']=center[1]
-			fit['y']=center[0]
-			fit['s_x']=popt[1] / float(zoom_int)
-			fit['s_y']=popt[2] / float(zoom_int)
-			fit['theta']=popt[3]
-			fit['offset']=popt[4] / float(zoom_int)
-		else:
-			fit['x']=popt[1] / float(zoom_int)
-			fit['y']=popt[2] / float(zoom_int)
-			fit['s_x']=popt[3] / float(zoom_int)
-			fit['s_y']=popt[4] / float(zoom_int)
-			fit['theta']=popt[5]
-			fit['offset']=popt[6] / float(zoom_int)
-		#======================================================================== 
-	
-	#        
-		#============get impulse======================================================================== 
-		if verbose:
-			print('center: '+str(center[0])+' '+str(center[1]))
-			
-		if fit['avg_space_fit'] is not None:
-			center_h = (np.ceil(fit['y']),np.ceil(fit['x']))
-			center_r = (np.round(fit['y']),np.round(fit['x']))
-			center_l = (np.floor(fit['y']),np.floor(fit['x']))
-		try:
-			impuls_h = impulse(RF,center_h,taus)[1]
-			impuls_r = impulse(RF,center_r,taus)[1]
-			impuls_l = impulse(RF,center_l,taus)[1]
-			if np.max(np.abs(impuls_h)) > np.max(np.abs(impuls_r)):
-				if np.max(np.abs(impuls_h)) > np.max(np.abs(impuls_l)):
-					impuls = impuls_h
-					center = center_h
-				else:
-					impuls = impuls_l
-					center= center_l
-			else:
-				if np.max(np.abs(impuls_r)) > np.max(np.abs(impuls_l)):
-					impuls= impuls_r
-					center= center_r
-				else:
-					impuls= impuls_l
-					center= center_l
-		except:
-			impuls = np.zeros(len(taus))
-		
-		if fit_type == 'gaussian_2D':
-			#get impulse at the 'center'
-			if verbose:
-				print('center from fit: '+str(center[0])+' '+str(center[1]))
-			#impuls = [RF[str(tau)][center[0]][center[1]] for tau in taus]
-			fit['impulse']=(np.array(taus),np.array(impuls))
-			peakTau = taus[np.abs(np.array(impuls)).argmax()]
-			peakTau = 80
-			fit['peakTau']=peakTau
-		
-		fit['center_usedforfit'] = fit['center']
-		fit['center_usedforimp'] = center
-		fit['impulse']=(np.array(taus),np.array(impuls))
-		#======================================================================== 
-		
-		return fit 
+    if False:#if np.isnan(RF[RF.keys()[0]][0][0]):#check to make sure there is any data in the STRF to try to fit. if not, return the correct data structure filled with None
+        fit={};fit['avg_space_fit']=None;fit['params'] = None;fit['cov']=None ;fit['amplitude']=None ;fit['x']=None ;fit['y']=None ;fit['s_x']=None ;fit['s_y']=None ;fit['theta']=None ;fit['offset']=None;fit['center']=None;fit['peakTau']=None;fit['impulse']=None;fit['roughquality']=None
+        return fit
+    else:
+
+        
+        if type(RF)==dict:
+            if 'fit' in RF.keys():
+                trash = RF.pop('fit') # get rid of the dictionary entry 'fit'; we only want sta tau frames in this dictionary
+                taus = [int(i) for i in RF.keys()]
+                taus.sort()
+                fit={}
+            #========================================================================
+            #find the taus to average over for the spatial RF
+            #first, define the threshold; above this means there is a non-noise pixel somwhere in the space-space
+            if threshold == None:
+                #set to z sd above mean
+                blank = (RF['-10']+RF['0']+RF['10'])/3. # define a blank, noise-only image
+                threshold = np.mean(blank)+np.std(blank)*3.
+                if verbose:
+                    print('threshold: '+str(threshold))
+                
+            #find the average space-space over only the range of non-noise good 
+            avgRF = np.zeros(np.shape(RF[str(int(taus[0]))]))#initialize the average to blank.
+            goodTaus = [40,50,60,70,80,90,100]#
+            for tau in goodTaus:
+                avgRF += RF[str(int(tau))]
+            avgRF = avgRF / float(len(goodTaus))
+            fit['avg_space']=avgRF
+
+            maximum_deviation = 0;best_center = (0,0)
+            for i in np.linspace(24,63,40):
+                for j in np.linspace(10,49,40):
+                    imp_temp = impulse(RF,(i,j))
+                    if np.max(np.abs(imp_temp[1])) > maximum_deviation:
+                        best_center = (int(i),int(j))
+                        maximum_deviation = np.max(np.abs(imp_temp[1]))
+            center = best_center
+            imp_temp = impulse(RF,center)
+            if verbose:
+                print('peak frame tau: '+str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]])))
+                print('peak center   : '+str(center))
+                print('peak value    : '+str(RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))][center[0],center[1]]))
+            peak_frame = RF[str(int(imp_temp[0][np.where(np.array(np.abs(imp_temp[1]))==np.max(np.abs(imp_temp[1])))[0][0]]))]
+            peak = peak_frame[int(center[0]),int(center[1])]
+            #center = (np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[0][0],np.where(np.abs(smoothRF(peak_frame,1)) == np.max(np.abs(smoothRF(peak_frame,1))))[1][0])
+            
+            #========================================================================   
+        if type(RF)==np.ndarray:
+            fit={}
+            fit['avg_space']=RF
+            peak_frame = RF
+            center = backup_center
+            peak = np.max(peak_frame)
+        #====fit==================================================================
+
+        if verbose:
+            print('peak amp: '+str(peak)+'  threshold: '+str(threshold))
+        if np.abs(peak) > threshold * 1.0:
+            peak_frame = smoothRF(ndimage.zoom(peak_frame,zoom_int,order=zoom_order),0)
+            fit['roughquality']='good'
+        else:
+            center = backup_center
+            imp_temp = impulse(RF,center)
+            peak_frame = RF[str(int(100))]
+            peak = peak_frame[center[0],center[1]]
+            peak_frame = smoothRF(zoom(peak_frame,zoom_int,order=zoom_order),0)
+            print('could not find a peak in the RF, using center: '+str(center))
+            print('peak amplitude: '+str(peak)+', threshold: '+str(threshold))
+            fit['roughquality']='bad'
+        fit['center']=center
+        fit['center_guess']=center
+        fit['fit_image']=peak_frame
+        if verbose:
+            print('center guess: '+str(center))
+        
+        #initialize some empty parameters
+        fitsuccess=False;retry_fit = False
+        best_fit = 10000000#initialize impossibly high
+        fit['avg_space_fit']=None;fit['params']=None
+        best_fit_output = ((None,None,None,None,None,None,None),600,None)
+        try:
+            if centerfixed:
+                popt,pcov,space_fit = fit_rf_2Dgauss_centerFixed(peak_frame,(center[0]*zoom_int,center[1]*zoom_int),width_guess=rfsizeguess*zoom_int,height_guess=rfsizeguess*zoom_int)
+            else:
+                popt,pcov,space_fit = fit_rf_2Dgauss(peak_frame,(center[0]*zoom_int,center[1]*zoom_int),width_guess=rfsizeguess*zoom_int,height_guess=rfsizeguess*zoom_int)
+        except:
+            popt,pcov,space_fit=((None,0,0,0,0,0,0),600,np.zeros((64,64)));print('2D fit failed')
+        
+        fit['avg_space_fit']=np.array(space_fit)/float(zoom_int)
+        fit['params'] = popt    
+        fit['cov']=pcov
+        fit['amplitude']=popt[0]
+        if centerfixed:
+            fit['x']=center[1]
+            fit['y']=center[0]
+            fit['s_x']=popt[1] / float(zoom_int)
+            fit['s_y']=popt[2] / float(zoom_int)
+            fit['theta']=popt[3]
+            fit['offset']=popt[4] / float(zoom_int)
+        else:
+            fit['x']=popt[1] / float(zoom_int)
+            fit['y']=popt[2] / float(zoom_int)
+            fit['s_x']=popt[3] / float(zoom_int)
+            fit['s_y']=popt[4] / float(zoom_int)
+            fit['theta']=popt[5]
+            fit['offset']=popt[6] / float(zoom_int)
+        #======================================================================== 
+    
+    #        
+        #============get impulse======================================================================== 
+        if verbose:
+            print('center: '+str(center[0])+' '+str(center[1]))
+            
+        if fit['avg_space_fit'] is not None:
+            center_h = (np.ceil(fit['y']),np.ceil(fit['x']))
+            center_r = (np.round(fit['y']),np.round(fit['x']))
+            center_l = (np.floor(fit['y']),np.floor(fit['x']))
+        try:
+            impuls_h = impulse(RF,center_h,taus)[1]
+            impuls_r = impulse(RF,center_r,taus)[1]
+            impuls_l = impulse(RF,center_l,taus)[1]
+            if np.max(np.abs(impuls_h)) > np.max(np.abs(impuls_r)):
+                if np.max(np.abs(impuls_h)) > np.max(np.abs(impuls_l)):
+                    impuls = impuls_h
+                    center = center_h
+                else:
+                    impuls = impuls_l
+                    center= center_l
+            else:
+                if np.max(np.abs(impuls_r)) > np.max(np.abs(impuls_l)):
+                    impuls= impuls_r
+                    center= center_r
+                else:
+                    impuls= impuls_l
+                    center= center_l
+        except:
+            impuls = np.array([0,0,0,0,0,0]) #impuls = np.zeros(len(taus))
+            taus = impuls
+        if fit_type == 'gaussian_2D':
+            #get impulse at the 'center'
+            if verbose:
+                print('center from fit: '+str(center[0])+' '+str(center[1]))
+            #impuls = [RF[str(tau)][center[0]][center[1]] for tau in taus]
+            fit['impulse']=(np.array(taus),np.array(impuls))
+            peakTau = taus[np.abs(np.array(impuls)).argmax()]
+            peakTau = 80
+            fit['peakTau']=peakTau
+        
+        fit['center_usedforfit'] = fit['center']
+        fit['center_usedforimp'] = center
+        fit['impulse']=(np.array(taus),np.array(impuls))
+        #======================================================================== 
+        
+        return fit 
 
 
 #convenience plotting method for showing spatial and temporal filters pulled from fitting an already computed STRF
@@ -595,6 +604,17 @@ def check_rfs_in_df(df_rf,sds=4):
 # 	plt.imshow(a['80'])
 # 	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
 
+def show_impulse(a,center):
+	center=(41,32)
+	i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
+	plt.plot(i[0],i[1])
+	plt.ylim(108,148)
+	plt.gca().axhline(128,ls='--')
+	plt.figure()
+	plt.imshow(a['80'])
+	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
+
+
 def segRF(array, kernel=1,flip=False,colormap='PiYG',color_adjust = False):
 	'''
 	Uses thresholding to approximate RF location and fit an ellipse to it. Requires manual selection of tau/index
@@ -641,120 +661,4 @@ def segRF(array, kernel=1,flip=False,colormap='PiYG',color_adjust = False):
 	mean_val = np.mean(array)
 	std_dev  = np.std(array)
     
-	fig,ax = plt.subplots()
-	if color_adjust == True:
-		ax.imshow(np.flipud(im),cmap=colormap,vmin=(mean_val-(3*std_dev)),
-                  vmax=(mean_val+(3*std_dev))
-                 )
-	else:
-		ax.imshow(np.flipud(im),cmap=colormap)
-	ax.add_patch(ellipse)
-	ax.set_axis_off()
-	plt.tight_layout()
-	plt.show()
-	return fig, data
-
-def sweep_rf(unit_data, unit_id, stim_data, pre=0, post=7,binsize=0.05):
-	Nbins = int((post+pre)/binsize)-1
-	spiketimes = np.array(unit_data.spike_times[unit_data.unit_id==unit_id].values[0])
-	features = np.unique(stim_data.ori)
-	features.sort()
-	Ntrials = int(stim_data.shape[0]/len(features))
-
-	psth_all=np.zeros((len(features),Nbins))
-	bytrial_all=np.zeros((len(features),Ntrials,Nbins))
-	var_all = np.zeros((len(features),Nbins))
-
-	for i,feat in enumerate(features):
-		stmtimes = stim_data.start_time[stim_data.ori == feat].values
-		psth_,bytrial,var = psth(spiketimes,stmtimes,pre=pre,post=post,binsize=binsize,variance=True)
-		psth_all[i,:] = psth_
-		bytrial_all[i,:,:] = bytrial
-		var_all[i,:] = var
-    
-	return(psth_all,bytrial_all,var_all)
-
-def sweep_proj(data,directions,method):
-	'''
-	Generates back-projection map of receptive field estimation based on sweep psth data
-
-	DATA: directions x mean psth
-        NOT by trial
-        Must be numpy array
-	DIRECTIONS: 1D list or array of angles of presentation
-	METHOD:
-        0 = Arithmetic
-        1 = Geometric
-	'''
-    
-	sz =  data.shape[1]
-
-	pad = int(np.ceil(np.sqrt(2)*sz-sz)/2)
-	pad_dat = np.zeros(int(sz+2*pad))
-	pad_dat[:] = np.nan
-
-	cj = np.asmatrix(np.tile(np.arange(-(sz)/2,(sz)/2,1),(sz,1)))
-	ci=cj.H
-
-	map_ = np.ones((sz,sz))
-	map_[:,:] = method
-
-	for i in range(len(directions)):
-		t = directions[i]*np.pi/180
-		pad_dat[pad:pad+sz] = data[i]
-		rcj = np.asmatrix(np.round(cj*np.cos(t)-ci*np.sin(t)+np.ceil(pad+sz/2)),dtype='int16')
-		dat_array = pad_dat[rcj] 
-
-		if method != 0:
-			map_ = map_*dat_array
-			map_ = map_/(i+1)
-		else:
-			map_ = map_ + dat_array
-
-	return map_
-
-def mask_grating(spiketimes, stim_data, xpos, ypos, pre, post, binsize):
-	'''
-    This function is dependent on column titles I created for my NWB files. The column of x coordinates is named "PosX" and the column of Y coordinates is named "PosY". Start time for the stimulus is named 'start_time'
-
-    INPUTS
-    spiketimes: 1D array of spike times for a single unit
-    stim_data: A pandas dataframe of experiment data requiring specific column names. See above
-    xpos, ypos: list of *unique* x and y positions for stimulus presentation. 
-    pre, post: time before and after stim presentation for raster/psth
-    binsize: desired binsize for analysis
-
-    OUTPUTS
-    labels: list of xy coordinate combinations in order of iteration
-    psth_all: mean psth for the unit at a given xy coordinate
-    bytrial_all: psth for each trial at a given xy 
-    var_all: variance (relative to mean psth) for each unit at a given xy
-
-    Juan Santiago 12/07/2022
-	'''
-	if 'start_time' and 'PosX' and 'PosY' not in stim_data.columns:
-		raise Exception('stim_data requires columns named "start_time", "PosX", and "PosY"')
-
-	Nbins = int((pre+post)/binsize-1)
-
-	Ntrial = int(stim_data.shape[0]/(len(ypos)*len(xpos)))
-
-	psth_all    = np.zeros(((len(ypos)*len(xpos),Nbins)))
-	var_all     = np.zeros(((len(ypos)*len(xpos),Nbins)))
-	bytrial_all = np.zeros((len(ypos)*len(xpos),Ntrial,Nbins))
-	labels      = []
-
-	k = 0
-	k=0
-	for i, y in enumerate(ypos):
-		for j, x in enumerate(xpos):
-			# Dependent on column titles
-			stim_times = stim_data.start_time[stim_data.PosY == y][stim_data.PosX == x].values
-			psth_,bytrial_,var_ = psth(spiketimes,stim_times,pre=pre,post=post,binsize = binsize, variance=True)
-			psth_all[k,:] = psth_
-			var_all[k,:]  = var_
-			bytrial_all[k,:,:] = bytrial_
-			labels.append((x,y))
-			k += 1
-
-	return labels, psth_all, bytrial_all, var_all
+    return df_rf
