@@ -9,7 +9,7 @@ from tqdm import tqdm
 #Convert meta file into dictionary 
 #Adapted from readSGLX.py package from SpikeGLX
 def readAPMeta(bin_path):
-    metaPath = glob.glob(bin_path+'\*ap.meta')[0]
+    metaPath = glob.glob(os.path.join(bin_path,'*ap.meta'))[0]
     metaName = os.path.basename(metaPath)
     metaDict = {}
     if os.path.isfile(metaPath):
@@ -29,7 +29,8 @@ def readAPMeta(bin_path):
     return(metaDict)
 
 def readNIMeta(bin_path):
-    metaPath = glob.glob(bin_path+'\*nidq.meta')[0]
+    print(bin_path)
+    metaPath = glob.glob(os.path.join(bin_path,'*nidq.meta'))[0] #glob.glob(bin_path+'*nidq.meta')[0]
     metaName = os.path.basename(metaPath)
     metaDict = {}
     if os.path.isfile(metaPath):
@@ -53,7 +54,7 @@ def readNIMeta(bin_path):
 def parse_ni_digital(bin_path, seconds=True):
     print('Sit back. This is going to take a while!')
     #Memory map the bin file and parse into binary lines
-    mm = np.memmap(glob.glob(bin_path+'*bin')[0],dtype=np.int16)
+    mm = np.memmap(glob.glob(os.path.join(bin_path, '*bin'))[0],dtype=np.int16) #glob.glob(bin_path+'*bin')[0],dtype=np.int16)
     digital_words = mm[8::9]
     
     #Extract the number of digital channels from the meta file
@@ -105,7 +106,7 @@ def parse_ni_digital(bin_path, seconds=True):
         return(digital_lines_rising, digital_lines_falling) 
 
 #plot the output of `sglx_nidaq`
-def sglx_nidaq_plot(digital_lines_rising):
+def nidq_plot(digital_lines_rising):
         for i,line in enumerate(digital_lines_rising.keys()):
             plt.plot(np.array(digital_lines_rising[line]),np.ones(len(digital_lines_rising[line]))*(7-i),'-o',label=line)
             plt.legend(loc='lower right')

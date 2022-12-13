@@ -27,7 +27,7 @@ def psth_line(times,triggers,pre=0.5,timeDomain=True,post=1,binsize=0.05,ymax=75
                 if float(trial_spike-t)/float(binsize) < float(numbins):
                     bytrial[i][int((trial_spike-t)/binsize-1)] +=1   
         else:
-        	 pass
+            pass
              #bytrial[i][:]=0
         #print 'start: ' + str(start)+'   end: ' + str(end)
 
@@ -261,9 +261,6 @@ def raster_singletrial(nwb_data,trigger,pre=0.5,timeDomain=True,post=.1,insertio
 	if output=='data':
 		return bycell
         
-        
-
-
 #compute the tuning over a given parameter from a PSTH
 def psth_tuning(data,unit,param,params,paramtimesdict,window=1.33,binsize=0.02,savepsth=False,path=r'C:\Users\danield\Desktop\data'):
     tun_y = np.zeros(len(params))
@@ -328,44 +325,30 @@ def psth_area(data,bins,pre=None,binsize=None, sd = 3,time=0.2):
         print('response did not exceed threshold: '+str(threshold)+', no area returned')
         return None
 
-def psth_arr(spike_data, unit, stim_data, condition, pre=0.5, post=2.5,binsize=0.05,variance=True):
-    times = np.array(spike_data[spike_data.unit_id==unit].times.values[0])
+def psth_arr(spiketimes, stimtimes, pre=0.5, post=2.5,binsize=0.05,variance=True):
+    '''
+    Generates avg psth, psth for each trial, and variance
+    '''
     numbins = int((post+pre)/binsize)
-    conds = np.unique(stim_data[condition])
-    num_conds = len(conds)
     x = np.arange(-pre,post,binsize)
-    colors = plt.cm.viridis(np.linspace(0,1,num_conds))
-    
-    psth_all=[]
-    bytrial_all=[]
-    var_all = []
-    
-    for i,cond in enumerate(np.unique(stim_data[condition])):
-        triggers = np.array(stim_data['times'][stim_data[condition] == cond])
-#         print(triggers.shape)
-        bytrial = np.zeros((len(triggers),numbins-1))
-        for j, trigger in enumerate(triggers):
-            trial = triggers[j]
-            start = trial-pre
-            end = trial+post
-            bins_ = np.arange(start,end,binsize)
-            trial_spikes = times[np.logical_and(times>=start, times<=end)]
-            hist,edges = np.histogram(trial_spikes,bins=bins_)
-            if len(hist)==numbins-1:
-                bytrial[j]=hist
-            elif len(hist)==numbins:
-                bytrial[j]=hist[:-1]
-        if variance == True:
-            var = np.std(bytrial,axis=0)/binsize/np.sqrt((len(triggers)))
-            psth = np.nanmean(bytrial,axis=0)/binsize
-            var_all.append(var)
-        psth_all.append(psth)
-        bytrial_all.append(bytrial)
-    bytrial_all = dict(zip(np.unique(stim_data[condition]),bytrial_all))
-    psth_all = dict(zip(np.unique(stim_data[condition]),psth_all))
-    var_all = dict(zip(np.unique(stim_data[condition]),var_all))
 
-    return(psth_all,bytrial_all,var_all)
+    bytrial = np.zeros((len(stimtimes),numbins-1))
+    for j, trigger in enumerate(stimtimes):
+        trial = stimtimes[j]
+        start = trial-pre
+        end = trial+post
+        bins_ = np.arange(start,end,binsize)
+        trial_spikes = spiketimes[np.logical_and(spiketimes>=start, spiketimes<=end)]
+        hist,edges = np.histogram(trial_spikes,bins=bins_)
+        if len(hist)==numbins-1:
+            bytrial[j]=hist
+        elif len(hist)==numbins:
+            bytrial[j]=hist[:-1]
+        if variance == True:
+            var = np.std(bytrial,axis=0)/binsize/np.sqrt((len(stimtimes)))
+            
+    psth = np.nanmean(bytrial,axis=0)/binsize
+    return(psth,bytrial,var)
 
 def psth_line_overlay_(spike_data, unit, stim_data, condition, title='', 
                        pre=0.5, post=2.5,binsize=0.05,variance=True,axis=None,legend=True):

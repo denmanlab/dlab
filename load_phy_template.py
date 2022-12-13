@@ -1,3 +1,6 @@
+from dlab.generalephys import option234_positions
+import numpy as np
+import os
 def load_phy_template(path,site_positions = option234_positions,**kwargs):
 # load spike data that has been manually sorted with the phy-template GUI
 # the site_positions should contain coordinates of the channels in probe space. for example, in um on the face of the probe
@@ -16,7 +19,7 @@ def load_phy_template(path,site_positions = option234_positions,**kwargs):
 		samplingrate = kwargs['sampling_rate']
 	else:
 		samplingrate =30000.
-		print 'no sampling rate specified, using default of 30kHz'
+		print('no sampling rate specified, using default of 30kHz')
 		
 	units = {}
 	for i in np.arange(1,np.shape(cluster_id)[0]):
