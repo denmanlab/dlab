@@ -13,17 +13,10 @@ except:
 try:
 	from djd.OpenEphys import loadContinuous, loadFolder, load_kwik_klusters
 except:
-<<<<<<< Updated upstream
 	try:
 		from OpenEphys import loadContinuous, loadFolder, load_kwik_klusters
 	except:
 		print('no OpenEphys.py get this from https://github.com/open-ephys/analysis-tools')
-=======
-    try:
-        from OpenEphys import loadContinuous, loadFolder, load_kwik_klusters
-    except:
-        print('no OpenEphys.py get this from https://github.com/open-ephys/analysis-tools')
->>>>>>> Stashed changes
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -444,44 +437,28 @@ def df_from_phy(path,site_positions = option234_positions,**kwargs):
 	return df
 
 def load_unit_data(recording_path, probe_depth = 3840, site_positions = option234_positions, 
-				   probe_name=None, spikes_filename = 'spike_secs.npy', aligned=True, df=True, **kwargs):
+                   probe_name=None, spikes_filename = 'spike_secs.npy', aligned=True, df=True, **kwargs):
 # Inputs:
 # Outputs:
-	if probe_name == None: probe_name = recording_path
-	#Get individual folders for each probe
-	unit_times=[]
-	if aligned == False:
+    if probe_name == None: probe_name = recording_path
+    #Get individual folders for each probe
+    unit_times=[]
+    if aligned == False:
 #         if not sampling_rate:
 #             imec_meta = readAPMeta(recording_path+'\\') #extract meta file
 #             sampRate = float(imec_meta['imSampRate']) #get sampling rate (Hz)
 #         else:
-		if 'sampling_rate' in kwargs.keys():
-			sampRate  = float(kwargs['sampling_rate'])
-		else:
-			sampRate=30000
-		spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
-	else:
-		spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, spikes_filename)))
+	    if 'sampling_rate' in kwargs.keys():
+		    sampRate  = float(kwargs['sampling_rate'])
+	    else:
+		    sampRate=30000
+	    spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_times.npy')))/sampRate
+    else:
+        spike_times = np.ndarray.flatten(np.load(os.path.join(recording_path, spikes_filename)))
 
-<<<<<<< Updated upstream
-	cluster_info = pd.read_csv(os.path.join(recording_path, 'cluster_info.tsv'), '\t')
-	if cluster_info.keys()[0]=='cluster_id':
-		cluster_info = cluster_info.rename(columns={'cluster_id':'id'})
-	spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
-	spike_templates = np.load(open(os.path.join(recording_path,'spike_templates.npy'),'rb'))
-	templates = np.load(open(os.path.join(recording_path,'templates.npy'),'rb'))
-	amplitudes = np.load(open(os.path.join(recording_path,'amplitudes.npy'),'rb'))
-	weights = np.zeros(site_positions.shape)
-
-	#Generate Unit Times Table
-	for index, unitID in enumerate(cluster_info['id'].values):
-		#get mean template used for each unit
-		all_templates = spike_templates[np.where(spike_clusters==unitID)].flatten()
-		n_templates_to_subsample = 100
-		random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
-		mean_template = np.mean(random_subsample_of_templates,axis=0)
-=======
     cluster_info = pd.read_csv(os.path.join(recording_path, 'cluster_info.tsv'), '\t')
+    if cluster_info.keys()[0]=='cluster_id':
+        cluster_info = cluster_info.rename(columns={'cluster_id':'id'})
     spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
     spike_templates = np.load(open(os.path.join(recording_path,'spike_templates.npy'),'rb'))
     templates = np.load(open(os.path.join(recording_path,'templates.npy'),'rb'))
@@ -495,49 +472,20 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
         n_templates_to_subsample = 100
         random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
         mean_template = np.mean(random_subsample_of_templates,axis=0)
->>>>>>> Stashed changes
 
-		#take a weighted average of the site_positions, where the weights is the absolute value of the template for that channel
-		#this gets us the x and y positions of the unit on the probe.
-		for channel in range(mean_template.T.shape[0]):
-			weights[channel,:]=np.trapz(np.abs(mean_template.T[channel,:]))
-		weights = weights/np.max(weights)
-		low_values_indices = weights < 0.25  # Where values are low,
-		weights[low_values_indices] = 0      # make the weight 0
-		(xpos,zpos)=np.average(site_positions,axis=0,weights=weights)
+        #take a weighted average of the site_positions, where the weights is the absolute value of the template for that channel
+        #this gets us the x and y positions of the unit on the probe.
+        for channel in range(mean_template.T.shape[0]):
+            weights[channel,:]=np.trapz(np.abs(mean_template.T[channel,:]))
+        weights = weights/np.max(weights)
+        low_values_indices = weights < 0.25  # Where values are low,
+        weights[low_values_indices] = 0      # make the weight 0
+        (xpos,zpos)=np.average(site_positions,axis=0,weights=weights)
 
-		unit_times.append({'probe':probe_name,
-						   'unit_id': unitID,
-						   'group': cluster_info.group[index],
+        unit_times.append({'probe':probe_name,
+                           'unit_id': unitID,
+                           'group': cluster_info.group[index],
 #                                'depth':cluster_info.depth[index],
-<<<<<<< Updated upstream
-						   'depth': (zpos-3840)+probe_depth,
-						   'xpos': xpos,
-						   'zpos': zpos,
-						   'no_spikes': cluster_info.n_spikes[index], 
-						   'KSlabel': cluster_info['KSLabel'][index],
-						   'KSamplitude':cluster_info.Amplitude[index],
-						   'KScontamination': cluster_info.ContamPct[index],
-						   'template': mean_template,
-						   'waveform_weights': weights,
-						   'amplitudes': amplitudes[:,0][spike_clusters==unitID],
-						   'times': spike_times[spike_clusters == unitID],
-							})
-	if df == True:        
-		unit_data = pd.DataFrame(unit_times)
-		#Remove clusters with no associated spike times left over from Phy
-		for i,j in enumerate(unit_data.times):
-			if len(unit_data.times[i])==0:
-				unit_data.times[i]='empty'
-		unit_times = unit_data[unit_data.times!='empty']
-		return(unit_times)
-	else:
-		return(unit_times)
-
-def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],spikes_filename = 'spike_secs.npy', aligned=True):
-	folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
-	return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],spikes_filename = spikes_filename, aligned=True,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
-=======
                            'depth': (zpos-3840)+probe_depth,
                            'xpos': xpos,
                            'zpos': zpos,
@@ -561,7 +509,31 @@ def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_de
     else:
         return(unit_times)
 
+def make_spike_secs(probe_folder):
+    c = np.load(os.path.join(probe_folder,'spike_times.npy'))
+    try:
+        a = np.load(os.path.join(probe_folder,'timestamps.npy'))
+    except:
+        try:
+            a = np.load(os.path.join(probe_folder,'new_timestamps','timestamps.npy'))
+        except: 
+            try:
+                print('could not find timestamps.npy, trying to recreate from the sync TTLs for '+probe_folder)
+                recreate_probe_timestamps_from_TTL(probe_folder)
+                a = np.load(os.path.join(probe_folder,'new_timestamps','timestamps.npy'))
+            except: print('could not find timestamps.npy')
+    spike_secs = a[c.flatten()]
+    np.save(open(os.path.join(probe_folder,'spike_secs.npy'),'wb'),spike_secs)
+
 def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],spikes_filename = 'spike_secs.npy', aligned=True):
     folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
+    if len(folder_paths) > 0: spikes_filename = 'spike_secs.npy'
+    else:
+        folder_paths = glob.glob(os.path.join(recording_folder,'*AP*'))
+        if len(folder_paths) > 0: 
+            for probe_folder in folder_paths: make_spike_secs(probe_folder)
+        else:
+            print('did not find any recordings in '+recording_folder+'')
+            return
     return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],spikes_filename = spikes_filename, aligned=True,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
->>>>>>> Stashed changes
+    
