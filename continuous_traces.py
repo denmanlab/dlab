@@ -1,5 +1,5 @@
 import numpy as np
-import scipy, os
+import scipy, os, glob
 from scipy.signal import butter,lfilter
 from scipy.ndimage.filters import gaussian_filter1d
 import matplotlib.pyplot as plt
@@ -527,3 +527,39 @@ def make_range_slider(data,start,window,num_channels=384,channels = [10],samplin
         if CAR: chunkch = chunkch - chunk_CAR
         ax.plot(x,chunkch-offset+i*y_spacing,'k',lw=.5)
 #=================================================================================================
+
+
+def recreate_probe_timestamps_from_TTL(directory):
+    probe = directory.split('-AP')[0][-1]
+    recording_base = os.path.dirname(os.path.dirname(os.path.dirname(directory)))
+
+    with open(os.path.join(recording_base,'sync_messages.txt')) as f:
+        lines = f.readlines()
+        for line in lines:
+            if 'Probe'+probe+'-AP' in line:
+                cont_start_sample = int(line.split(':')[1][1:].split('\n')[0])
+    f.close()
+
+    TTL_samples = np.load(os.path.join(glob.glob(os.path.join(recording_base,'events')+'/*Probe'+probe+'*AP*')[0],'TTL','sample_numbers.npy'))[::2]
+    TTL_timestamps = np.load(os.path.join(glob.glob(os.path.join(recording_base,'events')+'/*Probe'+probe+'*AP*')[0],'TTL','timestamps.npy'))[::2]
+
+    cont_raw = np.memmap(directory+'continuous.dat',dtype=np.int16)
+    cont_samples = np.arange(cont_start_sample, cont_start_sample+(int(cont_raw.shape[0]/384)))
+    cont_timestamps = np.zeros(int(cont_raw.shape[0]/384))
+
+    for i,sample in enumerate(TTL_samples):
+        ind = sample-cont_start_sample
+        cont_samples[ind] = sample
+        cont_timestamps[ind] = TTL_timestamps[i]
+        if i==0:
+            cont_timestamps[:ind]=np.linspace(TTL_timestamps[i]-(1/30000. * len(cont_timestamps[:ind-1]))+1/30000.,TTL_timestamps[i],len(cont_timestamps[:ind]))
+            prev_ind =ind
+        else:
+            cont_timestamps[prev_ind:ind] = np.linspace(cont_timestamps[prev_ind]+1/30000.,TTL_timestamps[i],len(cont_timestamps[prev_ind:ind]))
+            prev_ind =ind
+    cont_timestamps[ind:]=np.linspace(TTL_timestamps[i]+1/30000.,TTL_timestamps[i]+len(cont_timestamps[ind:])*1/30000.,len(cont_timestamps[ind:]))
+
+    if not os.path.exists(os.path.join(directory,'new_timestamps')):
+        os.mkdir(os.path.join(directory,'new_timestamps'))
+    np.save(open(os.path.join(directory,'new_timestamps','sample_numbers.npy'),'wb'),cont_samples.astype(np.int64))
+    np.save(open(os.path.join(directory,'new_timestamps','timestamps.npy'),'wb'),cont_timestamps.astype(np.float64))
