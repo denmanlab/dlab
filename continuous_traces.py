@@ -543,7 +543,7 @@ def recreate_probe_timestamps_from_TTL(directory):
     TTL_samples = np.load(os.path.join(glob.glob(os.path.join(recording_base,'events')+'/*Probe'+probe+'*AP*')[0],'TTL','sample_numbers.npy'))[::2]
     TTL_timestamps = np.load(os.path.join(glob.glob(os.path.join(recording_base,'events')+'/*Probe'+probe+'*AP*')[0],'TTL','timestamps.npy'))[::2]
 
-    cont_raw = np.memmap(directory+'continuous.dat',dtype=np.int16)
+    cont_raw = np.memmap(os.path.join(directory,'continuous.dat'),dtype=np.int16)
     cont_samples = np.arange(cont_start_sample, cont_start_sample+(int(cont_raw.shape[0]/384)))
     cont_timestamps = np.zeros(int(cont_raw.shape[0]/384))
 
