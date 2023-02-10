@@ -531,7 +531,7 @@ def make_range_slider(data,start,window,num_channels=384,channels = [10],samplin
 
 def recreate_probe_timestamps_from_TTL(directory):
     probe = directory.split('-AP')[0][-1]
-    recording_base = os.path.dirname(os.path.dirname(os.path.dirname(directory)))
+    recording_base = os.path.dirname(os.path.dirname(directory))
 
     with open(os.path.join(recording_base,'sync_messages.txt')) as f:
         lines = f.readlines()
