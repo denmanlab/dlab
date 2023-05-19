@@ -1,141 +1,99 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.ndimage as ndimage
+import dlab.psth_and_raster as par
 from dlab.generalephys import placeAxesOnGrid, smoothRF
 from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
 import scipy.optimize as opt
-import matplotlib.patches as mpatches
 from skimage.measure import label, regionprops
+from skimage.morphology import closing
+from tqdm import tqdm
+import matplotlib.patches as mpatches
 
 #smooth a 2D image, meant to be space-space of a receptive field
 #size = number of pixels to smooth over
 def smoothRF(img,size=3):
-	smooth = ndimage.gaussian_filter(img,(size,size))
-	return smooth
+    smooth = ndimage.gaussian_filter(img,(size,size))
+    return smooth
 
 from scipy.signal import boxcar,convolve
 def smooth_boxcar(data,boxcar_size):
-	smoothed = convolve(data,boxcar(boxcar_size))/boxcar_size
-	smoothed = smoothed[boxcar_size/2:len(data)+(boxcar_size/2)]
-	return smoothed
+    smoothed = convolve(data,boxcar(boxcar_size))/boxcar_size
+    smoothed = smoothed[boxcar_size/2:len(data)+(boxcar_size/2)]
+    return smoothed
 
 #show the space-space plots of an already computed STRF for a range of taus.
 def plotsta(sta,taus=(np.linspace(-10,280,30).astype(int)),colorrange=(-0.15,0.15),title='',taulabels=False,nrows=3,cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
-	ncols = np.ceil(len(taus) / nrows ).astype(int)#+1
-	fig,ax = plt.subplots(nrows,ncols,figsize=(10,6))
-	titleset=False
-	m=np.mean(sta[str(taus[3])])
-	for i,tau in enumerate(taus):
-		axis = ax[int(np.floor(i/ncols))][i%ncols]
-		if smooth is None:
-			img = sta[str(tau)].T 
-		else:
-			img = smoothRF(sta[str(tau)].T,smooth)
+    ncols = np.ceil(len(taus) / nrows ).astype(int)#+1
+    fig,ax = plt.subplots(nrows,ncols,figsize=(10,6))
+    titleset=False
+    m=np.mean(sta[str(taus[3])])
+    for i,tau in enumerate(taus):
+        axis = ax[int(np.floor(i/ncols))][i%ncols]
+        if smooth is None:
+            img = sta[str(tau)].T 
+        else:
+            img = smoothRF(sta[str(tau)].T,smooth)
 
-		axis.imshow(img,cmap=cmap,vmin=colorrange[0],vmax=colorrange[1],interpolation='none')
-		axis.set_frame_on(False);
-		axis.set_xticklabels('',visible=False);
-		axis.set_xticks([]);
-		axis.set_yticklabels('',visible=False);
-		axis.set_yticks([])
-		axis.set_aspect(1.0)
-		axis.set_xlim(window[0][0],window[0][1])
-		axis.set_ylim(window[1][0],window[1][1])
-		if taulabels:
-			axis.set_title('tau = '+str(tau),fontsize=8)
-		if titleset is not True:
-			axis.set_title(title,fontsize=12)
-			titleset=True
-		else:
-			if tau == 0:
-				axis.set_title('tau = '+str(tau),fontsize=12)
-	plt.tight_layout()
-	fig.show()
+        axis.imshow(img,cmap=cmap,vmin=colorrange[0],vmax=colorrange[1],interpolation='none')
+        axis.set_frame_on(False);
+        axis.set_xticklabels('',visible=False);
+        axis.set_xticks([]);
+        axis.set_yticklabels('',visible=False);
+        axis.set_yticks([])
+        axis.set_aspect(1.0)
+        axis.set_xlim(window[0][0],window[0][1])
+        axis.set_ylim(window[1][0],window[1][1])
+        if taulabels:
+            axis.set_title('tau = '+str(tau),fontsize=8)
+        if titleset is not True:
+            axis.set_title(title,fontsize=12)
+            titleset=True
+        else:
+            if tau == 0:
+                axis.set_title('tau = '+str(tau),fontsize=12)
+    plt.tight_layout()
+    fig.show()
 
-def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='',zscore=True, taulabels=False,nrows=3, map=plt.cm.seismic,
-				  smooth=None,window = [[0,64],[0,64]]):
-	'''
-	Juan's plotting function for STAs. Requires the STAs be in array format rather than dictionary
-	'''
-	ncols    = np.ceil(len(taus) / nrows ).astype(int)#+1
-#     ncols = len(taus)
-	fig,ax   = plt.subplots(nrows,ncols,figsize=(10,6),facecolor='white')
-#     fig,ax   = plt.subplots(1,ncols,figsize=(10,6),facecolor='white')
-	titleset = False
-    
-	if smooth is not None:
-		for i,tau in enumerate(taus):
-			sta[i,:,:] = rf.smoothRF(sta[i,:,:],smooth)
-           
-	max_val  = np.max(sta)
-	min_val  = np.min(sta)
-	mean_val = np.mean(sta)
-	std_dev  = np.std(sta)
-    
-	for i,tau in enumerate(taus):
-		axis = ax[int(np.floor(i/ncols))][i%ncols]
-#         axis = ax[i]
-		img = np.fliplr(sta[i,:,:])
 
-		axis.imshow(img,cmap=cmap,vmin=(mean_val-(3*std_dev)),vmax=(mean_val+(3*std_dev)),interpolation='none')
-#         axis.imshow(img,cmap=cmap,interpolation='none')
-		axis.set_frame_on(False)
-		axis.set_xticklabels('',visible=False)
-		axis.set_xticks([])
-		axis.set_yticklabels('',visible=False)
-		axis.set_yticks([])
-		axis.set_aspect(1.0)
-#         axis.set_xlim(window[0][0],window[0][1])
-#         axis.set_ylim(window[1][0],window[1][1])
-		if taulabels:
-			axis.set_title('tau = '+str(tau),fontsize=8,color='white')
-		if titleset is not True:
-			axis.set_title(title,fontsize=8,color='white')
-			titleset=True
-		else:
-			if tau == 0:
-				axis.set_title('tau = '+str(tau),fontsize=8,color='white')
-	plt.tight_layout()
-	fig.show()
-    
 #function for fitting with a 2-dimensional gaussian.
 def twoD_Gaussian(p, amplitude, xo, yo, sigma_x, sigma_y, theta, offset):
-	x=p[0];y=p[1]
-	xo = float(xo)
-	yo = float(yo)    
-	a = (np.cos(theta)**2)/(2*sigma_x**2) + (np.sin(theta)**2)/(2*sigma_y**2)
-	b = -(np.sin(2*theta))/(4*sigma_x**2) + (np.sin(2*theta))/(4*sigma_y**2)
-	c = (np.sin(theta)**2)/(2*sigma_x**2) + (np.cos(theta)**2)/(2*sigma_y**2)
-	g = offset + amplitude*np.exp( - (a*((x-xo)**2) + 2*b*(x-xo)*(y-yo) 
-							+ c*((y-yo)**2)))
-	return g.ravel()
+    x=p[0];y=p[1]
+    xo = float(xo)
+    yo = float(yo)    
+    a = (np.cos(theta)**2)/(2*sigma_x**2) + (np.sin(theta)**2)/(2*sigma_y**2)
+    b = -(np.sin(2*theta))/(4*sigma_x**2) + (np.sin(2*theta))/(4*sigma_y**2)
+    c = (np.sin(theta)**2)/(2*sigma_x**2) + (np.cos(theta)**2)/(2*sigma_y**2)
+    g = offset + amplitude*np.exp( - (a*((x-xo)**2) + 2*b*(x-xo)*(y-yo) 
+                            + c*((y-yo)**2)))
+    return g.ravel()
 def fit_rf_2Dgauss(data,center_guess,width_guess=2,height_guess=2):
-	dataToFit = data.ravel()
-	x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
-	y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
-	x, y = np.meshgrid(x, y)
-	popt,pcov = opt.curve_fit(twoD_Gaussian,(x,y),dataToFit,p0=(data[center_guess[1]][center_guess[0]], center_guess[1], center_guess[0], width_guess, height_guess, 0, 0))
-	reshaped_to_space=(x,y,twoD_Gaussian((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
-	return popt,pcov,reshaped_to_space
+    dataToFit = data.ravel()
+    x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
+    y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
+    x, y = np.meshgrid(x, y)
+    popt,pcov = opt.curve_fit(twoD_Gaussian,(x,y),dataToFit,p0=(data[center_guess[1]][center_guess[0]], center_guess[1], center_guess[0], width_guess, height_guess, 0, 0))
+    reshaped_to_space=(x,y,twoD_Gaussian((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
+    return popt,pcov,reshaped_to_space
 
 def fit_rf_2Dgauss_centerFixed(data,center_guess,width_guess=2,height_guess=2):
-	dataToFit = data.ravel()
-	x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
-	y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
-	x, y = np.meshgrid(x, y)
-	
-	def twoD_Gaussian_fixed(p, amplitude,sigma_x, sigma_y, theta, offset):
-		x=p[0];y=p[1]
-		a = (np.cos(theta)**2)/(2*sigma_x**2) + (np.sin(theta)**2)/(2*sigma_y**2)
-		b = -(np.sin(2*theta))/(4*sigma_x**2) + (np.sin(2*theta))/(4*sigma_y**2)
-		c = (np.sin(theta)**2)/(2*sigma_x**2) + (np.cos(theta)**2)/(2*sigma_y**2)
-		g = offset + amplitude*np.exp( - (a*((x-center_guess[1])**2) + 2*b*(x-center_guess[1])*(y-center_guess[0]) 
-								+ c*((y-center_guess[0])**2)))
-		return g.ravel()
-	popt,pcov = opt.curve_fit(twoD_Gaussian_fixed,(x,y),dataToFit,p0=(data[int(center_guess[0]),int(center_guess[1])], width_guess, height_guess, 0, 0))
-	reshaped_to_space=(x,y,twoD_Gaussian_fixed((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
-	return popt,pcov,reshaped_to_space
+    dataToFit = data.ravel()
+    x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
+    y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
+    x, y = np.meshgrid(x, y)
+    
+    def twoD_Gaussian_fixed(p, amplitude,sigma_x, sigma_y, theta, offset):
+        x=p[0];y=p[1]
+        a = (np.cos(theta)**2)/(2*sigma_x**2) + (np.sin(theta)**2)/(2*sigma_y**2)
+        b = -(np.sin(2*theta))/(4*sigma_x**2) + (np.sin(2*theta))/(4*sigma_y**2)
+        c = (np.sin(theta)**2)/(2*sigma_x**2) + (np.cos(theta)**2)/(2*sigma_y**2)
+        g = offset + amplitude*np.exp( - (a*((x-center_guess[1])**2) + 2*b*(x-center_guess[1])*(y-center_guess[0]) 
+                                + c*((y-center_guess[0])**2)))
+        return g.ravel()
+    popt,pcov = opt.curve_fit(twoD_Gaussian_fixed,(x,y),dataToFit,p0=(data[int(center_guess[0])][int(center_guess[1])], width_guess, height_guess, 0, 0))
+    reshaped_to_space=(x,y,twoD_Gaussian_fixed((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
+    return popt,pcov,reshaped_to_space
 
 def impulse(sta,center,taus = np.arange(-10,290,10).astype(int)):
 	impulse = [sta[str(tau)][int(center[0])][int(center[1])] for tau in taus]
@@ -312,297 +270,324 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
 
 #convenience plotting method for showing spatial and temporal filters pulled from fitting an already computed STRF
 def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour_levels=3):
-	
-	if fit is not None:
-		fig = plt.figure(figsize=(6,2.75))
-		ax_full_space = placeAxesOnGrid(fig,dim=(1,1),xspan=(0,0.32),yspan=(0,0.5))
-		ax_zoom_space = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.33,0.63),yspan=(0,0.5))
-		ax_zoom_space_filtered = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.56,0.86),yspan=(0,0.5))
-		ax_impulse = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.1,0.7),yspan=(0.54,1.0))
-		
-		ax_impulse.plot(fit['impulse'][0],np.zeros(len(fit['impulse'][0]))+0.5,'r-')
-		ax_impulse.plot(fit['impulse'][0],fit['impulse'][1]);
-		ax_impulse.set_ylim(colorrange[0],colorrange[1]) 
-		ax_impulse.set_xlabel('time (msec)') 
-		ax_impulse.set_ylabel('spike probability')
-		#ax_impulse.text(1,1,str(np.mean(fit['cov'])))
-		
-		ax_full_space.plot([fit['y']],[fit['x']],'k+',markersize=6.0)#([fit['center'][0]],[fit['center'][1]],'k+',markersize=6.0)
-		ax_full_space.imshow(fit['avg_space'].T,
-		   cmap=cmap,
-		   vmin=colorrange[0],vmax=colorrange[1],
-			interpolation='none');
-		plt.setp(ax_full_space.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
-		plt.setp(ax_full_space.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
-		ax_full_space.set_title(title)
-		ax_full_space.set_ylim(20,40)
-		ax_full_space.set_xlim(12,52)
-		ax_full_space.axvline(x=32,linewidth=1,color='r',ls='--')
-		
-		zoom_size = 5 #number of pixels in each direction from peak center to keep in zooms
-		ax_zoom_space.imshow(fit['avg_space'],
-				   cmap=cmap,
-				   vmin=colorrange[0],vmax=colorrange[1],
-					interpolation='none');
-		#ax_zoom_space.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
-		ax_zoom_space.set_xlim(fit['center'][1]-zoom_size,fit['center'][1]+zoom_size)
-		ax_zoom_space.set_ylim(fit['center'][0]-zoom_size,fit['center'][0]+zoom_size) 
-		plt.setp(ax_zoom_space.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
-		plt.setp(ax_zoom_space.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
-		
+    
+    if fit is not None:
+        fig = plt.figure(figsize=(6,2.75))
+        ax_full_space = placeAxesOnGrid(fig,dim=(1,1),xspan=(0,0.32),yspan=(0,0.5))
+        ax_zoom_space = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.33,0.63),yspan=(0,0.5))
+        ax_zoom_space_filtered = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.56,0.86),yspan=(0,0.5))
+        ax_impulse = placeAxesOnGrid(fig,dim=(1,1),xspan=(0.1,0.7),yspan=(0.54,1.0))
+        
+        ax_impulse.plot(fit['impulse'][0],np.zeros(len(fit['impulse'][0]))+0.5,'r-')
+        ax_impulse.plot(fit['impulse'][0],fit['impulse'][1]);
+        ax_impulse.set_ylim(colorrange[0],colorrange[1]) 
+        ax_impulse.set_xlabel('time (msec)') 
+        ax_impulse.set_ylabel('spike probability')
+        #ax_impulse.text(1,1,str(np.mean(fit['cov'])))
+        
+        ax_full_space.plot([fit['y']],[fit['x']],'k+',markersize=6.0)#([fit['center'][0]],[fit['center'][1]],'k+',markersize=6.0)
+        ax_full_space.imshow(fit['avg_space'].T,
+           cmap=cmap,
+           vmin=colorrange[0],vmax=colorrange[1],
+            interpolation='none');
+        plt.setp(ax_full_space.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
+        plt.setp(ax_full_space.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
+        ax_full_space.set_title(title)
+        ax_full_space.set_ylim(20,40)
+        ax_full_space.set_xlim(12,52)
+        ax_full_space.axvline(x=32,linewidth=1,color='r',ls='--')
+        
+        zoom_size = 5 #number of pixels in each direction from peak center to keep in zooms
+        ax_zoom_space.imshow(fit['avg_space'],
+                   cmap=cmap,
+                   vmin=colorrange[0],vmax=colorrange[1],
+                    interpolation='none');
+        #ax_zoom_space.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
+        ax_zoom_space.set_xlim(fit['center'][1]-zoom_size,fit['center'][1]+zoom_size)
+        ax_zoom_space.set_ylim(fit['center'][0]-zoom_size,fit['center'][0]+zoom_size) 
+        plt.setp(ax_zoom_space.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
+        plt.setp(ax_zoom_space.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
+        
 
-		ax_zoom_space_filtered.imshow(smoothRF(fit['avg_space'],1),
-				   cmap=cmap,
-				   vmin=colorrange[0]/3.,vmax=colorrange[1]/3.,
-					interpolation='none');
-		
-		#ax_zoom_space_filtered.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
-		ax_zoom_space_filtered.set_xlim(fit['center'][1]-zoom_size,fit['center'][1]+zoom_size)
-		ax_zoom_space_filtered.set_ylim(fit['center'][0]-zoom_size,fit['center'][0]+zoom_size)
-		plt.setp(ax_zoom_space_filtered.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
-		plt.setp(ax_zoom_space_filtered.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
-		
-		if 'avg_space_fit' in fit.keys():
-			if fit['avg_space_fit'] is not None:
-				if np.max(np.abs(fit['impulse'][1])) > np.std(fit['impulse'][1])*2.:
-					ax_full_space.add_patch(Rectangle((fit['y']-zoom_size,fit['x']-zoom_size),zoom_size*2,zoom_size*2,fill=None,ls='dotted'))
-					ax_zoom_space.contour(fit['avg_space_fit'][0],
-								fit['avg_space_fit'][1],
-								fit['avg_space_fit'][2],
-								contour_levels)
-					ax_zoom_space_filtered.contour(fit['avg_space_fit'][0],
-								fit['avg_space_fit'][1],
-								fit['avg_space_fit'][2],
-								contour_levels)
-					ax_full_space.contour(fit['avg_space_fit'][1],
-								fit['avg_space_fit'][0],
-								fit['avg_space_fit'][2],
-								contour_levels)
-					ax_full_space.set_aspect('equal')   
+        ax_zoom_space_filtered.imshow(smoothRF(fit['avg_space'],1),
+                   cmap=cmap,
+                   vmin=colorrange[0]/3.,vmax=colorrange[1]/3.,
+                    interpolation='none');
+        
+        #ax_zoom_space_filtered.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
+        ax_zoom_space_filtered.set_xlim(fit['center'][1]-zoom_size,fit['center'][1]+zoom_size)
+        ax_zoom_space_filtered.set_ylim(fit['center'][0]-zoom_size,fit['center'][0]+zoom_size)
+        plt.setp(ax_zoom_space_filtered.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
+        plt.setp(ax_zoom_space_filtered.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
+        
+    
+        
+
+        
+        if 'avg_space_fit' in fit.keys():
+            if fit['avg_space_fit'] is not None:
+                if np.max(np.abs(fit['impulse'][1])) > np.std(fit['impulse'][1])*2.:
+                    ax_full_space.add_patch(Rectangle((fit['y']-zoom_size,fit['x']-zoom_size),zoom_size*2,zoom_size*2,fill=None,ls='dotted'))
+                    ax_zoom_space.contour(fit['avg_space_fit'][0],
+                                fit['avg_space_fit'][1],
+                                fit['avg_space_fit'][2],
+                                contour_levels)
+                    ax_zoom_space_filtered.contour(fit['avg_space_fit'][0],
+                                fit['avg_space_fit'][1],
+                                fit['avg_space_fit'][2],
+                                contour_levels)
+                    ax_full_space.contour(fit['avg_space_fit'][1],
+                                fit['avg_space_fit'][0],
+                                fit['avg_space_fit'][2],
+                                contour_levels)
+                    ax_full_space.set_aspect('equal')   
 
 		#                   vmin=-0.08,vmax=0.08);
-		#plt.tight_layout()
-		return fig
-	
+        #plt.tight_layout()
+        return fig
+    
 
 #compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus
 #TODO: should be modified to take data of any shape (for example, an LFP trace) to average.
 def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
-	output = {}
-	for tau in taus:
-		avg = np.zeros(np.shape(data[:,:,0]))
-		count = 0
-		for spiketime in spiketimes:
-			if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-				if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-					if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-						index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-						avg += data[:,:,index]
-				else:
-					index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-					avg += data[:,:,index]
-				count+=1
-		output[str(int(tau))]=avg/count
-	return output
+    output = {}
+    for tau in taus:
+        avg = np.zeros(np.shape(data[:,:,0]))
+        count = 0
+        for spiketime in spiketimes:
+            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
+                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                        index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                        avg += data[:,:,index]
+                else:
+                    index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                    avg += data[:,:,index]
+                count+=1
+        output[str(int(tau))]=avg/count
+    return output
 
 #should compute a spike-triggered average on n-dimensional data.
 #this is typically a movie of the stimulus of shape [frames,x,y], but could be any shape, such as a 1-d noise stimulus or continuous trace.
 #as of now, limited to computation of the average along the first axis of 'data'. 
 def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=30,time_domain=False):
-	output = {}
-	if time_domain:
-		taus = taus / 1000.
-	else:
-		taus = (taus * samplingRateInkHz)/1000.
+    output = {}
+    if time_domain:
+        taus = taus / 1000.
+    else:
+        taus = (taus * samplingRateInkHz)/1000.
 		
-	for tau in taus:
-		avg = np.zeros(np.shape(data[0]))
-		count = 0
-		for spiketime in spiketimes:
-			if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
-				if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-					if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
-						index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
-						avg += data[index]
-				else:
-					index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
-					avg += data[index]
-				count+=1
-		output[str(tau)]=avg/count
-	return output
+    for tau in taus:
+        avg = np.zeros(np.shape(data[0]))
+        count = 0
+        for spiketime in spiketimes:
+            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
+                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
+                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
+                        index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
+                        avg += data[index]
+                else:
+                    index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
+                    avg += data[index]
+                count+=1
+        output[str(tau)]=avg/count
+    return output
 
 def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None,zscore=True):
-	'''
-	Output
-	------
-	output : numpy array spike triggered average (STA) which is easier to work with for analysis. Additionally has built in zscore function. the 0th axis is each tau value
+    output = np.zeros(((len(taus),) + data[0].shape))
+    output[:] = np.nan
+    
+    stimavg = np.nanmean(data,axis=0)
+    stimstd = np.nanstd(data,axis=0)
+    
+    for i,tau in enumerate(taus):
+        avg = np.zeros(data[0].shape)
+        count = 0
+        for spiketime in spiketimes:
+            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
+                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                        index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
+                        avg += data[index]
+                else:
+                    index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
+                    avg += data[index]
+                count+=1
+        output[i,:,:] = avg/count
+    if zscore == True:
+        output2 = np.zeros(output.shape)
+        for i in range(output2.shape[0]):
+            output2[i,:,:] = (output[i,:,:]-stimavg)/stimstd
+#             output[i,:,:] = (output[i,:,:]-np.mean(output,axis=0))/np.std(output,axis=0)
+        return output, output2, taus
+    return output,taus
 
-	taus : A list of tau values (identical to input) so you know which order the output array is in
-	'''
-	output = np.zeros(((len(taus),) + data[0].shape))
+def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zscore=False, taulabels=False,nrows=3,
+                  cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
+    ncols    = np.ceil(len(taus) / nrows ).astype(int)#+1
+    fig,ax   = plt.subplots(nrows,ncols,figsize=(10,6),facecolor='white')
+    
+    maxval = sta.max()
+    minval = sta.min()
+    
+    if smooth is not None:
+        for i,tau in enumerate(taus):
+            sta[i,:,:] = smoothRF(sta[i,:,:],smooth)
+           
+    mean_val = np.nanmean(sta)
+    std_dev  = np.nanstd(sta)
+    
+    for i,tau in enumerate(taus):
+        axis = ax[int(np.floor(i/ncols))][i%ncols]
+        img = np.fliplr(sta[i,:,:])
+        axis.imshow(img,cmap=cmap,vmin = (sta.min()+(np.std(sta))),
+              vmax=(sta.max()-np.std(sta)))
+        # if zscore == True: #test for significance?
+        #     axis.imshow(img,cmap=cmap,vmin=-1.96,vmax=1.96,interpolation='none')
+        # else:
+        #     axis.imshow(img,cmap=cmap,vmin=(mean_val-(3*std_dev)),vmax=(mean_val+(3*std_dev)),interpolation='none')
+        axis.set_frame_on(False)
+        axis.set_xticklabels('',visible=False)
+        axis.set_xticks([])
+        axis.set_yticklabels('',visible=False)
+        axis.set_yticks([])
+        axis.set_aspect(1.0)
+        if taulabels == True:
+            axis.set_title('tau = '+str(tau),fontsize=8,color='k')
+        else:
+            if tau == 0:
+                axis.set_title('tau = '+str(tau),fontsize=8,color='k')
+    if title is not None:
+        title_mm = title + '\n min='+str(round(minval,3))+'  max='+str(round(maxval,3))
+        plt.suptitle(title_mm,fontsize=10,color='k',y=0.85,weight='semibold')
+    plt.subplots_adjust(wspace=.1,hspace=-.6)
+#     plt.tight_layout()
 
-	for i,tau in tqdm.notebook.tqdm(enumerate(taus)):
-		avg = np.zeros(data[0].shape)
-		count = 0
-		for spiketime in spiketimes:
-			if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-				if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-					if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-						index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-						avg += data[index]
-#                         avg += get_frame_as_array_(stim_df.frame.values[index])
 
-				else:
-					index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-					avg += data[index]
-				count+=1
-		output[i,:,:] = avg/count
-
-	if zscore == True:
-		frame_array = np.zeros((data.shape[0],data[0].shape[0],data[0].shape[1]))
-		for i, mat in enumerate(data):
-			frame_array[i,:,:] = mat
-		
-		stimavg = np.mean(frame_array,axis=0)
-		stimstd = np.std(frame_array,axis=0)
-		for i in range(output.shape[0]):
-			output[i,:,:] = ((output[i,:,:]-stimavg)/stimstd)
-
-	return output,taus
 
 def sta_with_subfields(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
-	output = {}
-	output_ON = {}
-	output_OFF = {}
-	for tau in taus:
-		avg = np.zeros(np.shape(data[:,:,0]))
-		avg_ON = np.zeros(np.shape(data[:,:,0]))
-		avg_OFF = np.zeros(np.shape(data[:,:,0]))
-		count = 0
-		for spiketime in spiketimes:
-			if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-				if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-					if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-						index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-						avg += data[:,:,index]
-						avg_ON += (data[:,:,index] + 1 ) / 2
-						avg_OFF += (data[:,:,index]- 1 ) / 2
-				else:
-					index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-					avg += data[:,:,index];avg_ON += (data[:,:,index] + 1 ) / 2;avg_OFF += (data[:,:,index] - 1 ) / 2
-				count+=1
-		output[str(int(tau))]=avg/count
-		output_ON[str(int(tau))]=avg_ON/count# - 0.5
-		output_OFF[str(int(tau))]=avg_OFF/count# + 0.5
-	return output,output_ON,output_OFF
+    output = {}
+    output_ON = {}
+    output_OFF = {}
+    for tau in taus:
+        avg = np.zeros(np.shape(data[:,:,0]))
+        avg_ON = np.zeros(np.shape(data[:,:,0]))
+        avg_OFF = np.zeros(np.shape(data[:,:,0]))
+        count = 0
+        for spiketime in spiketimes:
+            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
+                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
+                        index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                        avg += data[:,:,index]
+                        avg_ON += (data[:,:,index] + 1 ) / 2
+                        avg_OFF += (data[:,:,index]- 1 ) / 2
+                else:
+                    index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                    avg += data[:,:,index];avg_ON += (data[:,:,index] + 1 ) / 2;avg_OFF += (data[:,:,index] - 1 ) / 2
+                count+=1
+        output[str(int(tau))]=avg/count
+        output_ON[str(int(tau))]=avg_ON/count# - 0.5
+        output_OFF[str(int(tau))]=avg_OFF/count# + 0.5
+    return output,output_ON,output_OFF
 
 #from https://github.com/JesseLivezey/gabor_fit/blob/master/gabor_fit/fit.py
 def generate_gabor(p, pixels_x,pixels_y, theta, stdx, stdy, lamb, phase):
-	"""
-	Generate a gabor filter based on given parameters.
-	Parameters
-	----------
-	pixels : tuple of ints
-		Height and width of patch.
-	p : (x,y)
-		x : float
-			x Location of center of gabor in pixels.
-		y : float
-			y Location of center of gabor in pixels.
-	theta : float
-		Rotation of gabor in plane in degrees.
-	stdx : float
-		Width of gaussian window along rot(x) in pixels.
-	stdy : float
-		Width of gaussian window along rot(y) in pixels.
-	lamb : float
-		Wavelength of sine funtion in pixels along rot(x).
-	phase : float
-		Phase of sine function in degrees.
-	Returns
-	-------
-	gabor : ndarray
-		2d array of pixel values.
-	"""
-	#print (pixels_x,pixels_y)
-	x=p[0];y=p[1]
-	x_coords = np.arange(0, int(pixels_x))#pixels[0])
-	y_coords = np.arange(0, int(pixels_y))#pixels[1])
-	xx, yy = np.meshgrid(x_coords, y_coords)
-	unit2rad = 2. * np.pi 
-	deg2rad = 2. * np.pi / 360.
-	xp = (xx - x) * np.cos(deg2rad * theta) - (yy - y) * np.sin(deg2rad * theta)
-	yp = (xx - x) * np.sin(deg2rad * theta) - (yy - y) * np.cos(deg2rad * theta)
-	gabor = (np.exp(-xp**2 / (2. * stdx**2) - yp**2 / (2. * stdy**2)) *
-			 np.sin(unit2rad * (xp / lamb) - deg2rad * phase))
-	norm = np.sqrt((gabor**2).sum())
-	g = gabor/norm
-	return g.ravel()
+    """
+    Generate a gabor filter based on given parameters.
+    Parameters
+    ----------
+    pixels : tuple of ints
+        Height and width of patch.
+    p : (x,y)
+        x : float
+            x Location of center of gabor in pixels.
+        y : float
+            y Location of center of gabor in pixels.
+    theta : float
+        Rotation of gabor in plane in degrees.
+    stdx : float
+        Width of gaussian window along rot(x) in pixels.
+    stdy : float
+        Width of gaussian window along rot(y) in pixels.
+    lamb : float
+        Wavelength of sine funtion in pixels along rot(x).
+    phase : float
+        Phase of sine function in degrees.
+    Returns
+    -------
+    gabor : ndarray
+        2d array of pixel values.
+    """
+    #print (pixels_x,pixels_y)
+    x=p[0];y=p[1]
+    x_coords = np.arange(0, int(pixels_x))#pixels[0])
+    y_coords = np.arange(0, int(pixels_y))#pixels[1])
+    xx, yy = np.meshgrid(x_coords, y_coords)
+    unit2rad = 2. * np.pi 
+    deg2rad = 2. * np.pi / 360.
+    xp = (xx - x) * np.cos(deg2rad * theta) - (yy - y) * np.sin(deg2rad * theta)
+    yp = (xx - x) * np.sin(deg2rad * theta) - (yy - y) * np.cos(deg2rad * theta)
+    gabor = (np.exp(-xp**2 / (2. * stdx**2) - yp**2 / (2. * stdy**2)) *
+             np.sin(unit2rad * (xp / lamb) - deg2rad * phase))
+    norm = np.sqrt((gabor**2).sum())
+    g = gabor/norm
+    return g.ravel()
 
 
 def fitgabor_2(data,pixels=(10,10),x=32.,y=32.,theta=0.,stdx=3.,stdy=3.,lamb=1.5,phase=0.):
 
-	popt,pcov = opt.curve_fit(generate_gabor,(x,y),data.ravel(),p0=(int(pixels[0]),int(pixels[1]),theta,stdx,stdy,lamb,phase))
-	reshaped_to_space=(x,y,generate_gabor((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
-	return popt,reshaped_to_space,pcov
+    popt,pcov = opt.curve_fit(generate_gabor,(x,y),data.ravel(),p0=(int(pixels[0]),int(pixels[1]),theta,stdx,stdy,lamb,phase))
+    reshaped_to_space=(x,y,generate_gabor((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
+    return popt,reshaped_to_space,pcov
 
 def check_rfs_in_df(df_rf,sds=4):
-	# this function will check if the RFs computed and stored in this dataframe have signal in them, adding three rows to the input df:
-	#      rf_computed: if any RF STA was calculated at all
-	#      good: if there was a non-noise RF
-	#      rf_color: the color of the noise used to generate the "good" RF, if there was a good one
-	#df_rf: a pandas DataFrame with some receptive fields computed from uv and green noise to check. 
-	#sds: number of SDs a pixels has to be above in order to be considered a real RF pixel
-	x=sds
-	rf_computed = []
-	good_rf = []
-	rf_color = []
-	for ind in df_rf.index:
-		if type(df_rf.g_avg_space[ind]) != str:
-			# measure some things about the computed rf
-			rf_computed.extend([True])
-			
-			gr = df_rf.g_fit_image[ind]
-			im = smoothRF(gr,.5);
-			thresh = np.mean(im)+x*np.std(im)
-			im[np.abs(smoothRF(gr,.6))<thresh]=0
-			gr_pixels = np.nansum(np.abs(im))
-			
-			uv = df_rf.u_fit_image[ind]
-			im = smoothRF(uv,.5);
-			thresh = np.mean(im)+x*np.std(im)
-			im[np.abs(smoothRF(uv,.6))<thresh]=0
-			uv_pixels = np.nansum(np.abs(im))
-	
-			if gr_pixels>0 or uv_pixels>0:
-				good_rf.extend([True])
-				if uv_pixels>gr_pixels:
-					im = smoothRF(uv,.5)
-					rf_color.extend(['uv'])
-				else:
-					im = smoothRF(gr,.5)
-					rf_color.extend(['green'])
-			else: 
-				rf_color.extend([np.nan]);good_rf.extend([False])
-		else:
-			rf_computed.extend([False])
-			good_rf.extend([False])
-			rf_color.extend([np.nan])
-	df_rf['rf_computed']=rf_computed
-	df_rf['good_rf']=good_rf
-	df_rf['rf_color']=rf_color
-	
-	return df_rf
-
-# show_impulse(a,center):
-# 	center=(41,32)
-# 	i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
-# 	plt.plot(i[0],i[1])
-# 	plt.ylim(108,148)
-# 	plt.gca().axhline(128,ls='--')
-# 	plt.figure()
-# 	plt.imshow(a['80'])
-# 	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
+    # this function will check if the RFs computed and stored in this dataframe have signal in them, adding three rows to the input df:
+    #      rf_computed: if any RF STA was calculated at all
+    #      good: if there was a non-noise RF
+    #      rf_color: the color of the noise used to generate the "good" RF, if there was a good one
+    #df_rf: a pandas DataFrame with some receptive fields computed from uv and green noise to check. 
+    #sds: number of SDs a pixels has to be above in order to be considered a real RF pixel
+    x=sds
+    rf_computed = []
+    good_rf = []
+    rf_color = []
+    for ind in df_rf.index:
+        if type(df_rf.g_avg_space[ind]) != str:
+            # measure some things about the computed rf
+            rf_computed.extend([True])
+            
+            gr = df_rf.g_fit_image[ind]
+            im = smoothRF(gr,.5);
+            thresh = np.mean(im)+x*np.std(im)
+            im[np.abs(smoothRF(gr,.6))<thresh]=0
+            gr_pixels = np.nansum(np.abs(im))
+            
+            uv = df_rf.u_fit_image[ind]
+            im = smoothRF(uv,.5);
+            thresh = np.mean(im)+x*np.std(im)
+            im[np.abs(smoothRF(uv,.6))<thresh]=0
+            uv_pixels = np.nansum(np.abs(im))
+    
+            if gr_pixels>0 or uv_pixels>0:
+                good_rf.extend([True])
+                if uv_pixels>gr_pixels:
+                    im = smoothRF(uv,.5)
+                    rf_color.extend(['uv'])
+                else:
+                    im = smoothRF(gr,.5)
+                    rf_color.extend(['green'])
+            else: 
+                rf_color.extend([np.nan]);good_rf.extend([False])
+        else:
+            rf_computed.extend([False])
+            good_rf.extend([False])
+            rf_color.extend([np.nan])
+    df_rf['rf_computed']=rf_computed
+    df_rf['good_rf']=good_rf
+    df_rf['rf_color']=rf_color
+    
+    return df_rf
 
 def show_impulse(a,center):
 	center=(41,32)
@@ -615,39 +600,36 @@ def show_impulse(a,center):
 	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
 
 
-def segRF(array, kernel=1,flip=False,colormap='PiYG',color_adjust = False):
-	'''
-	Uses thresholding to approximate RF location and fit an ellipse to it. Requires manual selection of tau/index
-	TODO: automate tau selection
-	'''
-	im = array
-	if flip:
-		im = np.flip(im)
-	img_gauss = smoothRF(im,1)
+def segRF(array, flip=False, kernel=1,colormap='PiYG'):
+    '''
+    Highlights RF using thresholding and image segmentation. Requires manual selection of the index (tau value) of interest in the series of RFs
+    '''
+    im = array
+    img_gauss = smoothRF(im,kernel)
 
-	bn_img = np.zeros([img_gauss.shape[0],img_gauss.shape[1]])
-	gauss_max = np.amax(abs(img_gauss))
-	gauss_std = np.std(img_gauss)
-	bn_img = np.abs(img_gauss) >= (gauss_max-gauss_std)
+    bn_img = np.zeros([img_gauss.shape[0],img_gauss.shape[1]])
+    bn_img = abs(img_gauss) >= (abs(img_gauss).max()-np.std(img_gauss))
 
-	sklabels = label(bn_img)
+    sklabels = label(closing(bn_img))
 
-	sizes = []
-	for region in regionprops(sklabels):
-		sizes.append(region.area)
+    sizes = []
+    for region in regionprops(sklabels):
+        sizes.append(region.area)
 
-	max_roi = np.asarray(sizes).argmax()
+    max_roi = np.asarray(sizes).argmax()
 
 
-	centroid = regionprops(sklabels)[max_roi].centroid
-	centroid = (centroid[1],im.shape[0]-centroid[0])
-	major_length = regionprops(sklabels)[max_roi].major_axis_length
-	minor_length = regionprops(sklabels)[max_roi].minor_axis_length
-	eccentricity = regionprops(sklabels)[max_roi].eccentricity
-	orientation = regionprops(sklabels)[max_roi].orientation*180/np.pi
-	perimeter = regionprops(sklabels)[max_roi].perimeter
+    centroid = regionprops(sklabels)[max_roi].centroid
+    centroid = (centroid[1],centroid[0])
+    major_length = regionprops(sklabels)[max_roi].major_axis_length
+    minor_length = regionprops(sklabels)[max_roi].minor_axis_length
+    eccentricity = regionprops(sklabels)[max_roi].eccentricity
+    orientation = regionprops(sklabels)[max_roi].orientation*180/np.pi
+    if flip == True:
+        orientation = -orientation
+    perimeter = regionprops(sklabels)[max_roi].perimeter
     
-	data = {'centroid':centroid,
+    data = {'centroid':centroid,
             'major_length':major_length,
             'minor_length':minor_length,
             'eccentricity': eccentricity,
@@ -655,10 +637,117 @@ def segRF(array, kernel=1,flip=False,colormap='PiYG',color_adjust = False):
             'perimeter':perimeter
            }
 
-	ellipse = mpatches.Ellipse(centroid,minor_length,major_length,orientation,
+    ellipse = mpatches.Ellipse(centroid,minor_length,major_length,orientation,
                               fill=False, edgecolor='r', linewidth=2)
-
-	mean_val = np.mean(array)
-	std_dev  = np.std(array)
     
-    return df_rf
+    fig,ax = plt.subplots()
+    ax.imshow(img_gauss,cmap=colormap,vmin=img_gauss.min(),
+            vmax=(abs(img_gauss).max()-np.std(img_gauss)))
+    ax.add_patch(ellipse)
+    ax.set_axis_off()
+    plt.tight_layout()
+    plt.show()
+    return fig, data
+
+def sweep_rf(spiketimes, stim_data, pre=0, post=7,binsize=0.05):
+    Nbins = int((post+pre)/binsize)-1
+    features = np.unique(stim_data.ori)
+    features.sort()
+    Ntrials = int(stim_data.shape[0]/len(features))
+
+    psth_all=np.zeros((len(features),Nbins))
+    bytrial_all=np.zeros((len(features),Ntrials,Nbins))
+    var_all = np.zeros((len(features),Nbins))
+
+    for i,feat in enumerate(features):
+        stmtimes = stim_data.start_time[stim_data.ori == feat].values
+        psth_,bytrial,var = par.psth_arr(spiketimes,stmtimes,pre=pre,post=post,binsize=binsize,variance=True)
+        psth_all[i,:] = psth_
+        bytrial_all[i,:,:] = bytrial
+        var_all[i,:] = var
+    
+    return(psth_all,bytrial_all,var_all)
+
+def sweep_proj(data,directions,method):
+    '''
+    Generates back-projection map of receptive field estimation based on sweep psth data
+
+    DATA: directions x mean psth
+        NOT by trial
+        Must be numpy array
+    DIRECTIONS: 1D list or array of angles of presentation
+    METHOD:
+        0 = Arithmetic
+        1 = Geometric
+    '''
+    
+    sz =  data.shape[1]
+
+    pad = int(np.ceil(np.sqrt(2)*sz-sz)/2)
+    pad_dat = np.zeros(int(sz+2*pad))
+    pad_dat[:] = np.nan
+
+    cj = np.asmatrix(np.tile(np.arange(-(sz)/2,(sz)/2,1),(sz,1)))
+    ci=cj.H
+
+    map_ = np.ones((sz,sz))
+    map_[:,:] = method
+
+    for i in range(len(directions)):
+        t = directions[i]*np.pi/180
+        pad_dat[pad:pad+sz] = data[i]
+        rcj = np.asmatrix(np.round(cj*np.cos(t)-ci*np.sin(t)+np.ceil(pad+sz/2)),dtype='int16')
+        dat_array = pad_dat[rcj] 
+
+        if method != 0:
+            map_ = map_*dat_array
+            map_ = map_/(i+1)
+        else:
+            map_ = map_ + dat_array
+
+    return map_
+
+def mask_grating(spiketimes, stim_data, xpos, ypos, pre, post, binsize):
+    '''
+    This function is dependent on column titles I created for my NWB files. The column of x coordinates is named "PosX" and the column of Y coordinates is named "PosY". Start time for the stimulus is named 'start_time'
+
+    INPUTS
+    spiketimes: 1D array of spike times for a single unit
+    stim_data: A pandas dataframe of experiment data requiring specific column names. See above
+    xpos, ypos: list of *unique* x and y positions for stimulus presentation. 
+    pre, post: time before and after stim presentation for raster/psth
+    binsize: desired binsize for analysis
+
+    OUTPUTS
+    labels: list of xy coordinate combinations in order of iteration
+    psth_all: mean psth for the unit at a given xy coordinate
+    bytrial_all: psth for each trial at a given xy 
+    var_all: variance (relative to mean psth) for each unit at a given xy
+
+    Juan Santiago 12/07/2022
+    '''
+    if 'start_time' and 'PosX' and 'PosY' not in stim_data.columns:
+        raise Exception('stim_data requires columns named "start_time", "PosX", and "PosY"')
+
+    Nbins = int((pre+post)/binsize-1)
+
+    Ntrial = int(stim_data.shape[0]/(len(ypos)*len(xpos)))
+
+    psth_all    = np.zeros(((len(ypos)*len(xpos),Nbins)))
+    var_all     = np.zeros(((len(ypos)*len(xpos),Nbins)))
+    bytrial_all = np.zeros((len(ypos)*len(xpos),Ntrial,Nbins))
+    labels      = []
+
+    k=0
+    for i, y in enumerate(ypos):
+        for j, x in enumerate(xpos):
+            # Dependent on column titles
+            stim_times = stim_data.start_time[stim_data.PosY == y][stim_data.PosX == x].values
+            psth_,bytrial_,var_ = par.psth_arr(spiketimes,stim_times,pre=pre,post=post,binsize = binsize, variance=True)
+            psth_all[k,:] = psth_
+            var_all[k,:]  = var_
+            bytrial_all[k,:,:] = bytrial_
+            labels.append((x,y))
+            k += 1
+
+    return labels, psth_all, bytrial_all, var_all

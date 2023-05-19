@@ -4,6 +4,7 @@ import warnings
 import glob, os, h5py, csv
 from dlab.generalephys import option234_positions
 from dlab.sglx_analysis import readAPMeta
+import dlab.continuous_traces as ct
 
 try:
 	from nwb.nwb import NWB
@@ -519,7 +520,7 @@ def make_spike_secs(probe_folder):
         except: 
             try:
                 print('could not find timestamps.npy, trying to recreate from the sync TTLs for '+probe_folder)
-                recreate_probe_timestamps_from_TTL(probe_folder)
+                ct.recreate_probe_timestamps_from_TTL(probe_folder)
                 a = np.load(os.path.join(probe_folder,'new_timestamps','timestamps.npy'))
             except: print('could not find timestamps.npy')
     spike_secs = a[c.flatten()]
