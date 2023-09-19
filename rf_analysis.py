@@ -393,12 +393,9 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
         output[str(tau)]=avg/count
     return output
 
-def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None,zscore=True):
+def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None):
     output = np.zeros(((len(taus),) + data[0].shape))
     output[:] = np.nan
-    
-    stimavg = np.nanmean(data,axis=0)
-    stimstd = np.nanstd(data,axis=0)
     
     for i,tau in enumerate(taus):
         avg = np.zeros(data[0].shape)
@@ -414,12 +411,6 @@ def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusio
                     avg += data[index]
                 count+=1
         output[i,:,:] = avg/count
-    if zscore == True:
-        output2 = np.zeros(output.shape)
-        for i in range(output2.shape[0]):
-            output2[i,:,:] = (output[i,:,:]-stimavg)/stimstd
-#             output[i,:,:] = (output[i,:,:]-np.mean(output,axis=0))/np.std(output,axis=0)
-        return output, output2, taus
     return output,taus
 
 def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zscore=False, taulabels=False,nrows=3,
