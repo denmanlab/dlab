@@ -152,6 +152,21 @@ def load_dat(filename,
     # buf = rotate(buf,axes=(1,2),angle=-90)
     return buf
 
+def beer_lambert(stack,blFrames):
+    bl        = np.mean(stack[:blFrames,:,:],axis=0)
+    corrected = np.log(stack[blFrames:,:,:]/bl[np.newaxis,:,:])
+    
+    return corrected
+
+def normalize(stack,blFrames):
+    '''
+    Z-transforms the stack.
+    '''
+    bl        = np.mean(stack[:blFrames,:,:],axis=0)
+    corrected = stack[blFrames:,:,:]-bl[np.newaxis,:,:]
+    
+    return corrected
+
 def zhuang(stack):
     smooth_data    = gaussian_filter(stack, sigma=(5), axes=(0))
     spectrum_movie = fftn(smooth_data, axes=(0))
@@ -225,20 +240,7 @@ class SignMap:
         plt.tight_layout()
         plt.show()
         
-    def beer_lambert(self,stack):
-        bl        = np.mean(stack[:self.blFrames,:,:],axis=0)
-        corrected = np.log(stack[self.blFrames:,:,:]/bl[np.newaxis,:,:])
-        
-        return corrected
-    
-    def normalize(self,stack):
-        '''
-        Z-transforms the stack.
-        '''
-        bl        = np.mean(stack[:self.blFrames,:,:],axis=0)
-        corrected = stack[self.blFrames:,:,:]-bl[np.newaxis,:,:]
-        
-        return corrected
+
     
     def avg_phase(self,correction='beer lambert'):
         
@@ -262,9 +264,9 @@ class SignMap:
             stack = load_dat(path).astype('float')
             
             if correction == 'beer lambert':
-                stack = self.beer_lambert(stack)
+                stack = beer_lambert(stack,self.blFrames)
             else:
-                stack = self.normalize(stack)
+                stack = normalize(stack,self.blFrames)
                 
             power_map, phase_map = zhuang(stack)
             

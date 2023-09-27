@@ -39,10 +39,12 @@ class UnitData:
         site_positions = self.option234_positions
         
         for i,PROBE in enumerate(probes):
+            print(PROBE)
             probe_name = PROBE
             for folder in self.ap_folders:
                 if 'Probe'+PROBE in folder:
                     probe_path = folder
+            
             os.chdir(probe_path)
             
             if os.path.isfile('spike_seconds.npy'):
@@ -80,16 +82,18 @@ class UnitData:
             
             for unit_id in cluster_info.cluster_id.values:
                 #get mean template for each unit
-                all_templates    = spike_templates[spike_clusters==unit_id].flatten()
-                random_subsample = templates[all_templates[np.random.randint(0,len(all_templates),100)]] #sample 100 templates
-                mean_template    = np.mean(random_subsample,axis=0)
+                all_templates    = spike_templates[np.where(spike_clusters==150)].flatten()
+                template_idx     = np.unique(all_templates)
+                mean_template    = np.mean(templates[template_idx],axis=0)
+                
                 mean_templates.append(mean_template)
                 
                 #Take weighted average of site positions where hweights is abs value of template for that channel
                 #This gets us the x and y positions of the unit on the probe
+
                 for channel in range(len(mean_template.T)):
                     weights[channel,:] = np.trapz(np.abs(mean_template.T[channel]))
-                    
+            
                 weights                /= weights.max()
                 weights[weights < 0.25] = 0 #Where weights are low, set to 0
                 x,y                     = np.average(site_positions,weights=weights,axis=0)
@@ -115,13 +119,14 @@ class UnitData:
             
             if 'unit_data' not in locals():
                 unit_data = probe_data
+                
             else:
-                unit_data.append(probe_data)
+                unit_data = pd.concat([unit_data,probe_data],ignore_index=True)
+                unit_data.reset_index(inplace=True,drop=True)
                 
             os.chdir(self.old_cwd)
-            
-        # unit_data[len(unit_data.times) > 0]
-        return(unit_data)
+        
+        return unit_data
     
     def get_qMetrics(self,path):
         metrics_path = os.path.join(path,'qMetrics')
@@ -142,10 +147,11 @@ class UnitData:
             for folder in self.ap_folders:
                 if 'Probe'+PROBE in folder:
                     probe_path = folder
+            
             os.chdir(probe_path)
             
             param, qMetric = self.get_qMetrics(probe_path)
-            unit_type      = np.full((len(qMetric),len(probes)),np.nan)
+            unit_type      = np.full((len(qMetric)),np.nan)
             
             # Noise Cluster Condtions
             b1  = qMetric.nPeaks > param.maxNPeaks[0]
@@ -247,9 +253,6 @@ class StimData:
         for dl in self.dlines:
             self.digital_output[str(dl-1)] = self.stim_rising[self.stim_rising.line == dl].timestamp.values
     
-    def get_dlines(self):
-        return self.digital_output
-    
     def plot(self):
         fig,ax = plt.subplots()
         for dline in self.digital_output:
@@ -260,3 +263,23 @@ class StimData:
         plt.legend(loc='lower right')
         plt.tight_layout()
         plt.show()
+        
+def frames2list(frames, dim=[64,64]):
+    flat_dim = np.prod(dim)
+    flat = frames.ravel()
+    rows = []
+    
+    for i in range(len(frames)):
+        rows.append(list(flat[flat_dim*i:flat_dim*(i+1)]))
+        
+    return rows
+
+def df2frames(df, column):
+    values = df[column].values
+    dim    = int(np.sqrt(len(values[0])))
+    frames = np.zeros((len(values),dim,dim))
+    for i,fr in enumerate(values):
+        frame_    = np.asarray(fr).reshape(dim,dim)
+        frames[i,:,:] = frame_
+            
+    return frames
