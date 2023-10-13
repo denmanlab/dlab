@@ -15,18 +15,23 @@ def smoothRF(img,size=3):
 
 def plot_sta(sta,taus=np.linspace(-0.01,0.28,30),nrows=3,smooth=None,taulabels=False,**kwargs):
     img = sta
+    
     if smooth is not None:
         for i,rf in enumerate(img):
-            sta[i] = smoothRF(rf,size=smooth)
+            img[i] = smoothRF(rf,size=smooth)
             
-    gmin = img.mean()-(img.std()*3)
-    gmax = img.mean()+(img.std()*3)
+    img = (img - img.mean())/img.std()
+
+    # gmin = img.mean()-(img.std()*3)
+    # gmax = img.mean()+(img.std()*3)
+    gmin = -4
+    gmax = 4
     
     ncols  = np.ceil(len(taus)/nrows).astype(int)
     
     if 'cmap' in kwargs:
         colormap = kwargs['cmap']
-    else: colormap='seismic'
+    else: colormap='bwr'
     
     with mpl.rc_context({'xtick.bottom':False,
                           'xtick.labelbottom':False,

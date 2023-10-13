@@ -82,7 +82,7 @@ class UnitData:
             
             for unit_id in cluster_info.cluster_id.values:
                 #get mean template for each unit
-                all_templates    = spike_templates[np.where(spike_clusters==150)].flatten()
+                all_templates    = spike_templates[np.where(spike_clusters==unit_id)].flatten()
                 template_idx     = np.unique(all_templates)
                 mean_template    = np.mean(templates[template_idx],axis=0)
                 
