@@ -188,11 +188,11 @@ def entropy(spike_times,stimulus_times,wordlength,binsize=0.001,pre=0.,post=15.)
         #from http://stackoverflow.com/questions/16970982/find-unique-rows-in-numpy-array
         # and http://stackoverflow.com/questions/33235135/count-occurrences-of-arrays-in-multidimensional-arrays-in-python
         words = np.array(words)
-        b = np.ascontiguousarray(words).view(np.dtype((np.void, words.dtype.itemsize * words.shape[1])))
+        b = np.ascontiguousarray(words).view(np.dtype((np.void, words.dtype.itemsize * wordlength)))
         _, idx,counts = np.unique(b, return_index=True,return_counts=True)
         possible_words = words[idx]
         p = dict(zip([str(word) for word in possible_words],counts/float(np.shape(np.array(words))[0])))
-        print('all the words that occured:'+str(np.shape(np.array(words))[0]))
+        print('all the words that occured:'+str(np.shape(np.array(possible_words))[0]),end="\r")
 
         # calculate entropy as in reinagel and reid 2000; kumbhani et al., 2007
         sum = 0
