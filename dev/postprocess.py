@@ -151,6 +151,7 @@ class UnitData:
             os.chdir(probe_path)
             
             param, qMetric = self.get_qMetrics(probe_path)
+            cluster_id     = qMetric.clusterID.values.astype('int') - 1
             unit_type      = np.full((len(qMetric)),np.nan)
             
             # Noise Cluster Condtions
@@ -226,8 +227,11 @@ class UnitData:
                     labels.append('mua')
                 if i == 3:
                     labels.append('non-somatic')
+                    
+        out_df = pd.DataFrame({'cluster_id':cluster_id, 'qm_labels':labels})
+        out_df.to_csv('qm_labels.tsv', sep='\t', index=False, header=True)
            
-        return labels
+        return {'cluster_id':cluster_id, 'qm_labels':labels}
     
 class StimData:
     def __init__(self,recording_path, recording_no = 0) -> None:
