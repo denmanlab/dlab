@@ -510,6 +510,49 @@ def load_unit_data(recording_path, probe_depth = 3840, site_positions = option23
     else:
         return(unit_times)
 
+#requires that phy has been run to generate cluster_info.tsv
+#searches the folder for the chanmap the KS used, or searches one folder up for it
+def load_unit_data_from_phy(recording_path,chanmap=None,insertion_depth = 3840,insertion_angle = 0):
+    cluster_info = pd.read_csv(os.path.join(recording_path, 'cluster_info.tsv'), '\t')
+    if cluster_info.keys()[0]=='cluster_id':
+        cluster_info = cluster_info.rename(columns={'cluster_id':'id'})
+    spike_clusters = np.ndarray.flatten(np.load(os.path.join(recording_path, 'spike_clusters.npy')))
+    spike_templates = np.load(open(os.path.join(recording_path,'spike_templates.npy'),'rb'))
+    templates = np.load(open(os.path.join(recording_path,'templates.npy'),'rb'))
+    spike_times = np.load(open(os.path.join(recording_path,'spike_times.npy'),'rb'))
+    timestamps = np.load(open(os.path.join(recording_path,'timestamps.npy'),'rb'))
+    spike_secs = timestamps[spike_times.flatten()]
+
+    #parse spike times for each unit. also get the template so we can use it for waveform shape clustering
+    times = []
+    mean_templates = []
+    for unitID in cluster_info.id.values:
+        times.append(spike_secs[spike_clusters == unitID])
+
+        all_templates = spike_templates[np.where(spike_clusters==unitID)].flatten()
+        if len(all_templates) > 100:
+            n_templates_to_subsample = 100
+        else: n_templates_to_subsample = len(all_templates)
+        random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
+        mean_template = np.mean(random_subsample_of_templates,axis=0)
+        mean_templates.append(mean_template)
+    cluster_info['times'] = times
+    cluster_info['template'] = mean_templates
+    cluster_info['depth_from_pia']=cluster_info.depth.values * -1 + insertion_depth*np.cos(np.deg2rad(insertion_angle))
+
+    if chanmap == None:
+        try:
+            chanmap = loadmat(glob.glob(os.path.join(recording_path,'*hanMap.mat'))[0])
+        except:
+            chanmap = loadmat(glob.glob(os.path.join(os.path.dirname(recording_path),'*hanMap.mat'))[0])
+
+    cluster_info['ycoords'] = chanmap['ycoords'].flatten()[cluster_info.ch.values]
+    cluster_info['xcoords'] = chanmap['xcoords'].flatten()[cluster_info.ch.values]
+    cluster_info['shank'] = np.floor(cluster_info['xcoords'].values / 205.).astype(int)
+
+    return cluster_info
+
+    
 def make_spike_secs(probe_folder):
     c = np.load(os.path.join(probe_folder,'spike_times.npy'))
     try:
