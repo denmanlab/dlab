@@ -566,7 +566,13 @@ def make_spike_secs(probe_folder):
                 ct.recreate_probe_timestamps_from_TTL(probe_folder)
                 a = np.load(os.path.join(probe_folder,'new_timestamps','timestamps.npy'))
             except: print('could not find timestamps.npy')
-    spike_secs = a[c.flatten()]
+    try:
+        spike_secs = a[c.flatten()[np.where(c.flatten()<a.shape[0])]]
+    except: 
+        print(np.shape(a))
+        print(np.shape(c.flatten()))
+        print(np.shape(c))
+	print('shape of spike times annd timestamps not compatible, check above and investigate.')
     np.save(open(os.path.join(probe_folder,'spike_secs.npy'),'wb'),spike_secs)
 
 def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],spikes_filename = 'spike_secs.npy', aligned=True):
