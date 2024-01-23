@@ -177,7 +177,7 @@ def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig'
         
     times = np.array(times).astype(float) / samplingRate + pre
     triggers = np.array(triggers).astype(float) / samplingRate
-    bytrial = [];
+    bytrial = []
     
     if axes == None and output!='data':
         plt.figure()

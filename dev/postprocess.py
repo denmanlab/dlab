@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import warnings
 import os
 from glob import glob
+from scipy.io import loadmat
 try:
     from OpenEphys.analysis import Session
 except ImportError:
@@ -36,7 +37,7 @@ class UnitData:
         self.ap_folders     = glob(os.path.join(self.recording_path,'continuous','*AP'))
         
     def load(self,probe_depths=[],probes=[],acq='OpenEphys'):
-        site_positions = self.option234_positions
+        # site_positions = self.option234_positions
         
         for i,PROBE in enumerate(probes):
             print(PROBE)
@@ -65,6 +66,12 @@ class UnitData:
                 cluster_info = pd.read_csv('cluster_info.tsv', delimiter='\t')
             except: 
                 print('Unable to load cluster_info.tsv. Have you opened this data in Phy?')
+                
+            chanmap = loadmat(glob('*hanMap.mat')[0])
+            cluster_info['ycoords'] = chanmap['ycoords'].flatten()[cluster_info.ch.values]
+            cluster_info['xcoords'] = chanmap['xcoords'].flatten()[cluster_info.ch.values]
+            
+            site_positions = np.concatenate((chanmap['xcoords'],chanmap['ycoords']),axis=1)
                         
             spike_clusters  = np.load('spike_clusters.npy').flatten()
             spike_templates = np.load('spike_templates.npy')
@@ -83,9 +90,15 @@ class UnitData:
             for unit_id in cluster_info.cluster_id.values:
                 #get mean template for each unit
                 all_templates    = spike_templates[np.where(spike_clusters==unit_id)].flatten()
-                template_idx     = np.unique(all_templates)
-                mean_template    = np.mean(templates[template_idx],axis=0)
                 
+                if len(all_templates) > 100:
+                    n_templates_to_subsample = 100
+                else: n_templates_to_subsample = len(all_templates)
+                
+                random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
+                # template_idx     = np.unique(all_templates)
+                # mean_template    = np.mean(templates[template_idx],axis=0)
+                mean_template = np.mean(random_subsample_of_templates,axis=0)
                 mean_templates.append(mean_template)
                 
                 #Take weighted average of site positions where hweights is abs value of template for that channel
@@ -104,17 +117,20 @@ class UnitData:
                 amps.append(amplitudes[:,0][spike_clusters==unit_id])
                 times.append(spike_times[spike_clusters==unit_id])
             
-            
             probe_data = cluster_info.copy()
             
             probe_data.insert(1,'times',times)
             probe_data.insert(1,'amplitudes',amps)
             probe_data.insert(1,'weights',all_weights)
             probe_data.insert(1,'template',mean_templates)
-            probe_data.insert(1,'ypos',ypos)
-            probe_data.insert(1,'xpos',xpos)
             probe_data.insert(0,'probe',[probe_name]*len(probe_data))
-            probe_data['depth'] = np.array(ypos)-3840+probe_depths[i]
+            # probe_data['ycoords'] = ypos
+            # probe_data['xcoords'] = xpos
+            # probe_data['depth']   = np.array(ypos)-3840+probe_depths[i]
+            probe_data['depth']   = np.array(ypos)*-1 + probe_depths[i]
+            # probe_data['depth']   = np.array(probe_data['ycoords'])-3840+probe_depths[i]
+            
+            cluster_info['shank'] = np.floor(cluster_info['xcoords'].values / 205.).astype(int)
             
             
             if 'unit_data' not in locals():

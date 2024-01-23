@@ -4,13 +4,60 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import seaborn as sns
 from scipy import ndimage,stats
+from scipy.signal import savgol_filter
 
 def find_nearest(array, value):
     idx = (np.abs(array-value)).argmin()
     return idx
 
-def trial_by_trial(spike_times, event_times, pre, post, bin_size):
+def cross_from_below(data,threshold,startbin=1):
+    crosses = []
+    for i in range(len(data[startbin:])):
+        if data[i-1] < threshold and data[i] >= threshold:
+            crosses.append(i)
+            
+    return(crosses)
+
+def psth_latency(data,binsize=0.01,pre=0, sd = 2,smooth=False,offset=0):
+    if smooth:
+        data = savgol_filter(data,5,3)
+
+    startbin  = int(pre/binsize)
+    baseline  = np.mean(data[:startbin])
+    threshold = baseline + np.std(data[:startbin])*sd
+    crossings = cross_from_below(data[startbin:],threshold)
+    
+    if len(crossings)>0:
+        crossing  = crossings[0]#the first bin above the threshold
+        chunk     = np.linspace(data[crossing+startbin-1],data[crossing+startbin],100)
+        bin_crossing = np.array(cross_from_below(chunk,threshold))
+        latency   = (crossing-1)*(1000*binsize)+bin_crossing/100.0 * (1000*binsize)
+        
+        if len(latency) > 0:
+            return latency[0] - offset
+    
+    else:
+        #print 'response did not exceed threshold: '+str(threshold)+', no latency returned'
+        return None
+
+def raster(spike_times, event_times, pre, post):
     spike_times = np.array(spike_times)
+    event_times = np.array(event_times)   
+    raster      = []
+    
+    for t in range(len(event_times)):
+        event = event_times[t]
+        start = event - pre
+        end   = event + post
+        
+        trial_spikes = spike_times[(spike_times >= start) & (spike_times <= end)]
+        trial_spikes = trial_spikes-start
+        raster.append(trial_spikes)
+    
+    return raster
+
+def trial_by_trial(spike_times, event_times, pre, post, bin_size):
+    spike_times = np.array(spike_times)+pre
     event_times = np.array(event_times)
     numbins     = np.ceil((pre+post)/bin_size).astype(int)
     bytrial     = np.zeros((len(event_times),numbins))
@@ -20,15 +67,19 @@ def trial_by_trial(spike_times, event_times, pre, post, bin_size):
         start = event-pre
         end   = event+post
         
-        trial_spikes = spike_times[(spike_times > start) & (spike_times < end)]
-        hist         = np.histogram(trial_spikes,bins=numbins)[0]
-        bytrial[j,:] = hist
-            
-    var  = np.var(bytrial,axis=0)/bin_size
-    psth = np.mean(bytrial,axis=0)/bin_size
+        trial_spikes = spike_times[(spike_times >= start) & (spike_times <= end)]
+        
+        for spike in trial_spikes:
+            if float(spike-event_times[j])/float(bin_size) < float(numbins):
+                bytrial[j,:][int((spike-event_times[j])/bin_size-1)] +=1
+                
+    var  = np.std(bytrial,axis=0)/bin_size/np.sqrt((len(event_times)))
+    psth = np.mean(bytrial,axis=0)
     
     return psth, bytrial, var
 
+def psth_latency(data,bins,pre=None,binsize=None, sd = 2.5,smooth=False,offset=0):
+    return latency[0]-offset
 class SweepMap():
     def __init__(self, spike_times, stim_data, bin_size):
         self.spike_times  = np.array(spike_times)

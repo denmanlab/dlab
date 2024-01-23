@@ -11,6 +11,8 @@ import matplotlib.patches as mpatches
 import matplotlib.gridspec as gridspec
 from scipy.optimize import curve_fit
 
+from dlab.dev import singleCell as sc
+
 import numpy as np
 import pandas as pd
 
@@ -50,7 +52,7 @@ def plot_sta(sta,taus=np.linspace(-0.01,0.28,30),nrows=3,smooth=None,taulabels=F
         
         for i,tau in enumerate(taus):
             axis = ax[int(np.floor(i/ncols))][i%ncols]
-            axis.imshow(img[i],vmin=gmin,vmax=gmax,cmap=colormap)
+            axis.imshow(np.fliplr(img[i]),vmin=gmin,vmax=gmax,cmap=colormap)
             axis.set_frame_on(False)
             axis.set_aspect(1.0)
             if taulabels==True:
@@ -278,3 +280,20 @@ def segRF(array, flip=False, kernel=1,colormap='PiYG'):
     plt.tight_layout()
     plt.show()
     return fig, data
+
+def waterfall_plot(spike_times, event_times,pre,post, binsize):
+    psth_length = int((pre+post)/binsize)
+    waterfall   = np.zeros((len(spike_times),psth_length))
+    
+    fig,ax = plt.subplots(figsize = (5,5))
+    
+    for i in range(len(spike_times)):
+        psth,bytrial,var = sc.trial_by_trial(spike_times[i],event_times,pre=pre,post=post,bin_size=binsize)
+        waterfall[i,:] = psth
+        
+    ax.imshow(waterfall)
+    ax.set_xticks(np.linspace(0,psth_length,6),np.round(np.linspace(-pre,post,6),2))
+    ax.set_aspect('auto')
+    ax.axvline((0+pre)/binsize,c='r',linestyle='dashed')
+    
+    return fig,ax
