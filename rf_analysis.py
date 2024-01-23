@@ -14,11 +14,41 @@ import matplotlib.patches as mpatches
 #smooth a 2D image, meant to be space-space of a receptive field
 #size = number of pixels to smooth over
 def smoothRF(img,size=3):
+    """Spatially smooths a computed spatial receptive fields of an already computed receptive field. uses a 2D Gaussian to smooth.
+
+    Parameters
+    ----------
+    img : np.array
+        the 2d spatial receptive field to smooth
+    size : int, optional
+        the width of the Gaussian used to smooth (default is
+        3)
+
+    Returns
+    -------
+    np.array
+        the smoothed input image
+    """
     smooth = ndimage.gaussian_filter(img,(size,size))
     return smooth
 
 from scipy.signal import boxcar,convolve
-def smooth_boxcar(data,boxcar_size):
+def smooth_boxcar(data,boxcar_size=3):
+    """smooths an impulse respone of an already computed receptive field. uses a boxcar to smooth.
+
+    Parameters
+    ----------
+    data : np.array
+        the 1d temporal kernel to smooth
+    size : int, optional
+        the width of the boxcar used to smooth (default is
+        3)
+
+    Returns
+    -------
+    np.array
+        the smoothed input kernel
+    """
     smoothed = convolve(data,boxcar(boxcar_size))/boxcar_size
     smoothed = smoothed[boxcar_size/2:len(data)+(boxcar_size/2)]
     return smoothed
