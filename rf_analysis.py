@@ -53,8 +53,22 @@ def smooth_boxcar(data,boxcar_size=3):
     smoothed = smoothed[boxcar_size/2:len(data)+(boxcar_size/2)]
     return smoothed
 
-#show the space-space plots of an already computed STRF for a range of taus.
 def plotsta(sta,taus=(np.linspace(-10,280,30).astype(int)),colorrange=(-0.15,0.15),title='',taulabels=False,nrows=3,cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
+    """show the space-space plots of an already computed receptive field for a range of taus.
+
+    Parameters
+    ----------
+    data : np.array
+        the 1d temporal kernel to smooth
+    size : int, optional
+        the width of the boxcar used to smooth (default is
+        3)
+
+    Returns
+    -------
+    np.array
+        the smoothed input kernel
+    """    
     ncols = np.ceil(len(taus) / nrows ).astype(int)#+1
     fig,ax = plt.subplots(nrows,ncols,figsize=(10,6))
     titleset=False
@@ -86,9 +100,33 @@ def plotsta(sta,taus=(np.linspace(-10,280,30).astype(int)),colorrange=(-0.15,0.1
     plt.tight_layout()
     fig.show()
 
-
-#function for fitting with a 2-dimensional gaussian.
 def twoD_Gaussian(p, amplitude, xo, yo, sigma_x, sigma_y, theta, offset):
+    """function for fitting a spatial receptive with a 2-dimensional gaussian.
+
+    Parameters
+    ----------
+    p : tuple
+        the center of the fit
+    amplitude : float
+        the scaling of the gaussian
+    xo : float
+        starting x position of fit
+    yo : float
+        starting y position of fit
+    sigma_x : float
+        the width of the gaussian in the x dimension
+    sigma_y : float
+        the width of the gaussian in the y dimension
+    theta : float
+        the angle between the major and minor axes of the gaussian
+    offset : float
+        a fixed offset from baseline 
+
+    Returns
+    -------
+    np.array
+        fit 
+    """
     x=p[0];y=p[1]
     xo = float(xo)
     yo = float(yo)    
@@ -98,7 +136,26 @@ def twoD_Gaussian(p, amplitude, xo, yo, sigma_x, sigma_y, theta, offset):
     g = offset + amplitude*np.exp( - (a*((x-xo)**2) + 2*b*(x-xo)*(y-yo) 
                             + c*((y-yo)**2)))
     return g.ravel()
+
 def fit_rf_2Dgauss(data,center_guess,width_guess=2,height_guess=2):
+    """function for fitting a spatial receptive with a 2-dimensional gaussian.
+
+    Parameters
+    ----------
+    data : tuple
+        the data to be fit
+    center_guess : tuple, ints
+        the center of the fit
+    width_guess : int, optional
+        the x width position of fit
+    height_guess : int, optional 
+        the y height  of fit
+
+    Returns
+    -------
+    np.array,np.array,np.array
+        fit parameters (popt from opt.curve_fit), covariance of parameter (pcov from opt.curve_fit), the fit reshaped to the dimensions of the input array 
+    """
     dataToFit = data.ravel()
     x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
     y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
@@ -108,6 +165,24 @@ def fit_rf_2Dgauss(data,center_guess,width_guess=2,height_guess=2):
     return popt,pcov,reshaped_to_space
 
 def fit_rf_2Dgauss_centerFixed(data,center_guess,width_guess=2,height_guess=2):
+    """function for fitting a spatial receptive with a 2-dimensional gaussian. similar to fit_rf_2DGauss, but the position of the Gaussian cannot change with the fit, only the other parameters
+
+    Parameters
+    ----------
+    data : tuple
+        the data to be fit
+    center_guess : tuple, ints
+        the center of the fit. this will not change during fitting
+    width_guess : int, optional
+        the x width position of fit
+    height_guess : int, optional 
+        the y height  of fit
+
+    Returns
+    -------
+    np.array,np.array,np.array
+         fit parameters (popt from opt.curve_fit), covariance of parameter (pcov from opt.curve_fit), the fit reshaped to the dimensions of the input array 
+    """
     dataToFit = data.ravel()
     x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
     y=np.linspace(0,np.shape(data)[1]-1,np.shape(data)[1])
@@ -126,8 +201,26 @@ def fit_rf_2Dgauss_centerFixed(data,center_guess,width_guess=2,height_guess=2):
     return popt,pcov,reshaped_to_space
 
 def impulse(sta,center,taus = np.arange(-10,290,10).astype(int)):
-	impulse = [sta[str(tau)][int(center[0])][int(center[1])] for tau in taus]
-	return (taus,impulse)
+    """find the impulse response at a certain position across a range of taus for an already computed receptive field
+
+    Parameters
+    ----------
+    sta : tuple
+        the data to be fit
+    center : tuple, ints
+        the x,y position to meausure the impulse response
+    taus : np.array, optional
+        the interval (ints) at which the measure the impulse response. should match the taus of the linear receptive field 
+
+    Returns
+    -------
+    taus: np.array
+        the interval (times) of the impulse response
+    impulse: np.array
+        the impulse response
+    """
+    impulse = [sta[str(tau)][int(center[0])][int(center[1])] for tau in taus]
+    return (taus,impulse)
 
 
 #try to fit an already computed STRF by finding the maximum in space-time, fitting with a 2D gaussian in space-space, and pulling out the temporal kernel at the maximum space-space pixel.
