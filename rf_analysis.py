@@ -223,16 +223,41 @@ def impulse(sta,center,taus = np.arange(-10,290,10).astype(int)):
     return (taus,impulse)
 
 
-#try to fit an already computed STRF by finding the maximum in space-time, fitting with a 2D gaussian in space-space, and pulling out the temporal kernel at the maximum space-space pixel.
 #is very, very finicky right now, requires lots of manual tweaking. 
 def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2,flipSpace=False,backup_center=None,zoom_int=10,zoom_order=5,centerfixed=False):
-#takes a dictinary containing:
-#   
-# returns a dictionary containing:
-#   the averaged spatial RF, 
-#   the centroid of the fit [max fit]
-#   a 2D gaussian fit of that spatial RF
-#   the impulse response at the center of the fit
+    """find the impulse response at a certain position across a range of taus for an already computed receptive field
+
+        Parameters
+        ----------
+        RF : tuple
+            the data to be fit
+        threshold : tuple, optional
+            the x,y position to meausure the impulse response
+        fit_type :string, optional
+            the type of fit to try. options are 'gaussian_2D', . default = 'gaussian_2D'
+        verbose : bool, optional
+            print extra statements during the fit process. default = False
+        rfsizeguess : float, optional
+            default = 1.2
+        flipSpace : bool, optional
+            whether or not to transpose the axes. default = False
+        backup_center : tuple, optional
+            a backup center to use to zoom around if the fit doesn't work. default = None
+        zoom_int : int, optional
+            the zoom factor of the zoomed in receptive field around the center. default = 10. 
+        zoom_order : int, optional
+            the order of the filter to smooth a zoomed in receptive field. default = 5
+        centerfixed : bool, optional
+            whether or not to use a fixed center for the fit. default = False
+            
+        Returns
+        -------
+        fit: dictionary
+            the averaged spatial RF, 
+            the centroid of the fit [max fit]
+            a 2D gaussian fit of that spatial RF
+            the impulse response at the center of the fit
+        """
 #   TODO: a fit of that impulse response with: ?? currently not defined.
     if False:#if np.isnan(RF[RF.keys()[0]][0][0]):#check to make sure there is any data in the STRF to try to fit. if not, return the correct data structure filled with None
         fit={};fit['avg_space_fit']=None;fit['params'] = None;fit['cov']=None ;fit['amplitude']=None ;fit['x']=None ;fit['y']=None ;fit['s_x']=None ;fit['s_y']=None ;fit['theta']=None ;fit['offset']=None;fit['center']=None;fit['peakTau']=None;fit['impulse']=None;fit['roughquality']=None
@@ -391,9 +416,28 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
         return fit 
 
 
-#convenience plotting method for showing spatial and temporal filters pulled from fitting an already computed STRF
 def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour_levels=3):
-    
+    """convenience plotting method for showing spatial and temporal filters pulled from fitting an already computed STRF
+
+        Parameters
+        ----------
+        fit : dictionary
+            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
+        colorrange : tuple, optional
+            the limits of the colormap. default=(0.35,0.65)
+        cmap :string, optional
+            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        title : string, optional
+            title of the plot. default = ''
+        contour_levels : int, optional
+            default = 3
+        
+            
+        Returns
+        -------
+        fig: matplotlib figure handle
+            matplotlib figure handle
+        """
     if fit is not None:
         fig = plt.figure(figsize=(6,2.75))
         ax_full_space = placeAxesOnGrid(fig,dim=(1,1),xspan=(0,0.32),yspan=(0,0.5))
@@ -470,9 +514,31 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
         return fig
     
 
-#compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus
 #TODO: should be modified to take data of any shape (for example, an LFP trace) to average.
 def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
+    """compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus
+
+        Parameters
+        ----------
+        spiketimes : dictionary
+            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
+        data : tuple, optional
+            the limits of the colormap. default=(0.35,0.65)
+        datatimes :string, optional
+            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        taus : tuple of np.array, optional
+            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
+        exclusion : int, optional
+            default = 3
+        samplingRateInkHz: float, optional
+            multiply the taus by this number.  default=25
+        
+            
+        Returns
+        -------
+        output: dict
+            the average of the input at each tau, where the tau is the key and the computed average is the value. 
+        """
     output = {}
     for tau in taus:
         avg = np.zeros(np.shape(data[:,:,0]))
@@ -494,6 +560,30 @@ def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,
 #this is typically a movie of the stimulus of shape [frames,x,y], but could be any shape, such as a 1-d noise stimulus or continuous trace.
 #as of now, limited to computation of the average along the first axis of 'data'. 
 def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=30,time_domain=False):
+    """#should compute a spike-triggered average on n-dimensional data. this is typically a movie of the stimulus of shape [frames,x,y], but could be any shape, such as a 1-d noise stimulus or continuous trace. as of now, limited to computation of the average along the first axis of 'data'. 
+
+        Parameters
+        ----------
+        spiketimes : dictionary
+            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
+        data : tuple, optional
+            the limits of the colormap. default=(0.35,0.65)
+        datatimes :string, optional
+            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        taus : tuple of np.array, optional
+            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
+        exclusion : int, optional
+            default = 3
+        samplingRateInkHz: float, optional
+            multiply the taus by this number.  default=30
+        time_domain: bool, optional
+              default=False
+
+        Returns
+        -------
+        output: dict
+            the average of the input at each tau, where the tau is the key and the computed average is the value. 
+        """
     output = {}
     if time_domain:
         taus = taus / 1000.
