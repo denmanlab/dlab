@@ -58,11 +58,25 @@ def plotsta(sta,taus=(np.linspace(-10,280,30).astype(int)),colorrange=(-0.15,0.1
 
     Parameters
     ----------
-    data : np.array
+    sta : np.array
         the 1d temporal kernel to smooth
-    size : int, optional
+    taus : int, optional
         the width of the boxcar used to smooth (default is
         3)
+    colorrange : tuple, optional
+        the limits of the colormap. default=(0.35,0.65)
+    cmap :string, optional
+        the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+    title : string, optional
+        title of the plot. default = ''
+    taulabels : bool, optional
+            whether or not to label each subplot with the tau. default = False
+    nrows : int, optional
+        the number of rows of taus to plot. figures out how many columns to plot based on this. default = 3 
+    smooth : int, optional
+        the width of a Gaussian kernel for spatial smoothing. uses smoothRF function.  default = None
+    window : tuple or tuple-like
+        the subarea of the receptive field to plot. default = [[0,64],[0,64]]
 
     Returns
     -------
@@ -221,7 +235,6 @@ def impulse(sta,center,taus = np.arange(-10,290,10).astype(int)):
     """
     impulse = [sta[str(tau)][int(center[0])][int(center[1])] for tau in taus]
     return (taus,impulse)
-
 
 #is very, very finicky right now, requires lots of manual tweaking. 
 def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2,flipSpace=False,backup_center=None,zoom_int=10,zoom_order=5,centerfixed=False):
@@ -415,7 +428,6 @@ def fitRF(RF,threshold=None,fit_type='gaussian_2D',verbose=False,rfsizeguess=1.2
         
         return fit 
 
-
 def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour_levels=3):
     """convenience plotting method for showing spatial and temporal filters pulled from fitting an already computed STRF
 
@@ -513,7 +525,6 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
         #plt.tight_layout()
         return fig
     
-
 #TODO: should be modified to take data of any shape (for example, an LFP trace) to average.
 def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
     """compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus
@@ -607,6 +618,28 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
     return output
 
 def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None):
+    """same as sta(), except the output is in the form of a 3D array (tau, space, space)
+
+        Parameters
+        ----------
+        spiketimes : dictionary
+            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
+        data : tuple, optional
+            the limits of the colormap. default=(0.35,0.65)
+        datatimes :string, optional
+            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        taus : tuple of np.array, optional
+            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
+        exclusion : int, optional
+            default = 3
+        samplingRateInkHz: float, optional
+            multiply the taus by this number.  default=30
+
+        Returns
+        -------
+        output: np.array
+            the average of the input (data) at each tau, 3D array (tau, space, space)
+        """    
     output = np.zeros(((len(taus),) + data[0].shape))
     output[:] = np.nan
     
@@ -628,6 +661,37 @@ def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusio
 
 def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zscore=False, taulabels=False,nrows=3,
                   cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
+    """show the space-space plots of an already computed receptive field for a range of taus. for use with array sta inputs instead of dict stas. for dict, use plotsta()
+
+        Parameters
+        ----------
+        sta : np.array
+            the 1d temporal kernel to smooth
+        taus : int, optional
+            the width of the boxcar used to smooth (default is
+            3)
+        colorrange : tuple, optional
+            the limits of the colormap. default=(0.35,0.65)
+        cmap :string, optional
+            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        title : string, optional
+            title of the plot. default = ''
+        zcore : bool, optional
+            whether or not to zscore the receptive field. default = False
+        taulabels : bool, optional
+                whether or not to label each subplot with the tau. default = False
+        nrows : int, optional
+            the number of rows of taus to plot. figures out how many columns to plot based on this. default = 3 
+        smooth : int, optional
+            the width of a Gaussian kernel for spatial smoothing. uses smoothRF function.  default = None
+        window : tuple or tuple-like
+            the subarea of the receptive field to plot. default = [[0,64],[0,64]]
+
+        Returns
+        -------
+        np.array
+            the smoothed input kernel
+        """    
     ncols    = np.ceil(len(taus) / nrows ).astype(int)#+1
     fig,ax   = plt.subplots(nrows,ncols,figsize=(10,6),facecolor='white')
     
@@ -666,8 +730,6 @@ def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zsco
         plt.suptitle(title_mm,fontsize=10,color='k',y=0.85,weight='semibold')
     plt.subplots_adjust(wspace=.1,hspace=-.6)
 #     plt.tight_layout()
-
-
 
 def sta_with_subfields(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
     output = {}
@@ -738,7 +800,6 @@ def generate_gabor(p, pixels_x,pixels_y, theta, stdx, stdy, lamb, phase):
     g = gabor/norm
     return g.ravel()
 
-
 def fitgabor_2(data,pixels=(10,10),x=32.,y=32.,theta=0.,stdx=3.,stdy=3.,lamb=1.5,phase=0.):
 
     popt,pcov = opt.curve_fit(generate_gabor,(x,y),data.ravel(),p0=(int(pixels[0]),int(pixels[1]),theta,stdx,stdy,lamb,phase))
@@ -802,7 +863,6 @@ def show_impulse(a,center):
 	plt.figure()
 	plt.imshow(a['80'])
 	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
-
 
 def segRF(array, flip=False, kernel=1,colormap='PiYG'):
     '''
