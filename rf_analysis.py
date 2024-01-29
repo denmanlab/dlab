@@ -167,8 +167,12 @@ def fit_rf_2Dgauss(data,center_guess,width_guess=2,height_guess=2):
 
     Returns
     -------
-    np.array,np.array,np.array
-        fit parameters (popt from opt.curve_fit), covariance of parameter (pcov from opt.curve_fit), the fit reshaped to the dimensions of the input array 
+    popt:  np.array
+        fit parameters (popt from opt.curve_fit)
+    pcov: np.array
+        covariance of parameter (pcov from opt.curve_fit)
+    reshaped_to_space: np.array
+        the fit reshaped to the dimensions of the input array 
     """
     dataToFit = data.ravel()
     x=np.linspace(0,np.shape(data)[0]-1,np.shape(data)[0])
@@ -531,12 +535,12 @@ def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,
 
         Parameters
         ----------
-        spiketimes : dictionary
-            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
-        data : tuple, optional
-            the limits of the colormap. default=(0.35,0.65)
-        datatimes :string, optional
-            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
+        spiketimes : np.array
+            the times of spikes
+        data : tuple-like or np.array
+            the stimulus data, with one dimension matching datatimes
+        datatimes np.array
+            the times of each stimulus in data, should match one of the axes of data
         taus : tuple of np.array, optional
             the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
         exclusion : int, optional
@@ -732,6 +736,33 @@ def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zsco
 #     plt.tight_layout()
 
 def sta_with_subfields(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
+    """compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus, similar to sta(). the difference is that this calculates bright and dark separately as well.
+
+        Parameters
+        ----------
+        spiketimes : np.array
+            the times of spikes
+        data : tuple-like or np.array
+            the stimulus data, with one dimension matching datatimes
+        datatimes np.array
+            the times of each stimulus in data, should match one of the axes of data
+        taus : tuple of np.array, optional
+            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
+        exclusion : int, optional
+            default = 3
+        samplingRateInkHz: float, optional
+            multiply the taus by this number.  default=25
+        
+            
+        Returns
+        -------
+        output: dict
+            the average of the input at each tau, where the tau is the key and the computed average is the value. 
+        output:_ON dict
+            the average of the input bright pixels of the input only at each tau, where the tau is the key and the computed average is the value. 
+        output_OFF: dict
+            the average of the input dark pizxels of the input only at each tau, where the tau is the key and the computed average is the value. 
+        """    
     output = {}
     output_ON = {}
     output_OFF = {}
@@ -770,6 +801,10 @@ def generate_gabor(p, pixels_x,pixels_y, theta, stdx, stdy, lamb, phase):
             x Location of center of gabor in pixels.
         y : float
             y Location of center of gabor in pixels.
+    pixels_x: float
+        number of pixels in x dimension of the fit
+    pixels_y: float
+        number of pixels in y dimension of the fit
     theta : float
         Rotation of gabor in plane in degrees.
     stdx : float
@@ -783,7 +818,7 @@ def generate_gabor(p, pixels_x,pixels_y, theta, stdx, stdy, lamb, phase):
     Returns
     -------
     gabor : ndarray
-        2d array of pixel values.
+        normalized fit parameters
     """
     #print (pixels_x,pixels_y)
     x=p[0];y=p[1]
@@ -801,18 +836,64 @@ def generate_gabor(p, pixels_x,pixels_y, theta, stdx, stdy, lamb, phase):
     return g.ravel()
 
 def fitgabor_2(data,pixels=(10,10),x=32.,y=32.,theta=0.,stdx=3.,stdy=3.,lamb=1.5,phase=0.):
+    """function for fitting a spatial receptive with a 2-dimensional Gabor.
 
+    
+    Parameters
+    ----------
+    data : tuple
+        the data to be fit
+    pixels : tuple, ints
+        the number of pixels in the fit
+    x: float
+        starting x position of fit
+    y : float
+        starting y position of fit
+    height_guess : int, optional 
+        the y height  of fit
+    theta : float
+        the angle between the major and minor axes of the gaussian
+    stdx : float
+        the width of the gaussian in the x dimension
+    stdy : float
+        the width of the gaussian in the y dimension
+    lamb : float
+        Wavelength of sine funtion in pixels along rot(x).
+    phase : float
+        Phase of sine function in degrees.
+
+    Returns
+    -------
+    popt:  np.array
+        fit parameters (popt from opt.curve_fit)
+    pcov: np.array
+        covariance of parameter (pcov from opt.curve_fit)
+    reshaped_to_space: np.array
+        the fit reshaped to the dimensions of the input array 
+    """
     popt,pcov = opt.curve_fit(generate_gabor,(x,y),data.ravel(),p0=(int(pixels[0]),int(pixels[1]),theta,stdx,stdy,lamb,phase))
     reshaped_to_space=(x,y,generate_gabor((x,y),*popt).reshape(np.shape(data)[1],np.shape(data)[0]))
     return popt,reshaped_to_space,pcov
 
 def check_rfs_in_df(df_rf,sds=4):
-    # this function will check if the RFs computed and stored in this dataframe have signal in them, adding three rows to the input df:
-    #      rf_computed: if any RF STA was calculated at all
-    #      good: if there was a non-noise RF
-    #      rf_color: the color of the noise used to generate the "good" RF, if there was a good one
-    #df_rf: a pandas DataFrame with some receptive fields computed from uv and green noise to check. 
-    #sds: number of SDs a pixels has to be above in order to be considered a real RF pixel
+    """this function will check if the RFs computed and stored in this dataframe have signal in them, adding three rows to the input df:
+          rf_computed: if any RF STA was calculated at all
+          good: if there was a non-noise RF
+          rf_color: the color of the noise used to generate the "good" RF, if there was a good one
+
+    
+    Parameters
+    ----------
+    df_rf:  pandas.DataFrame
+        a pandas DataFrame with some receptive fields computed from uv and green noise to check. must have a 'g_avg_space' column, and 'g_fit_image' and 'u_fit_image' columns
+    sds : int, optional
+        the number of SDs a pixels has to be above in order to be considered a real RF pixel
+
+    Returns
+    -------
+    df_rf:  pandas.DataFrame
+        the input DataFrame 
+    """
     x=sds
     rf_computed = []
     good_rf = []
@@ -855,14 +936,29 @@ def check_rfs_in_df(df_rf,sds=4):
     return df_rf
 
 def show_impulse(a,center):
-	center=(41,32)
-	i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
-	plt.plot(i[0],i[1])
-	plt.ylim(108,148)
-	plt.gca().axhline(128,ls='--')
-	plt.figure()
-	plt.imshow(a['80'])
-	plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
+    """this function compute an impulse response from a receptive field and plot it. both the impulse and the spatial receptive field at 80 msec tau are plotted.  
+
+    
+    Parameters
+    ----------
+    a:  dict
+        a dictionary containing a computed receptive field, where the keys of the dict are the tau and the values are the spatial RF at that tau
+    center : tuple, ints
+        the pixels in each receptive field at which to measure the impulse response
+
+    Returns
+    -------
+    None
+    """
+
+    center=(41,32)
+    i = impulse(a,center,taus=np.linspace(-10,280,30).astype(int))
+    plt.plot(i[0],i[1])
+    plt.ylim(108,148)
+    plt.gca().axhline(128,ls='--')
+    plt.figure()
+    plt.imshow(a['80'])
+    plt.gca().scatter(center[1],center[0],color='w',alpha=0.3)
 
 def segRF(array, flip=False, kernel=1,colormap='PiYG'):
     '''
