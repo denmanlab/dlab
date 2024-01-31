@@ -28,6 +28,28 @@ option234_positions[:,1] = np.floor(np.linspace(383,0,383)/2) * 20
 ##===============================================================================
 
 ##helper functions===============================================================================
+def get_peak_waveform_from_template(template):
+    """find the row index of the largest signal in two dimensional array. typically of templates where input shape is channels x time. 
+
+    Parameters
+    ----------
+    template : np.array
+        the 2d templates where input shape is channels x time. 
+
+    Returns
+    -------
+    int
+        row index of the largest signal in two dimensional array
+    """    
+    max = 0
+    ind=0
+    peak = np.zeros(np.shape(template.T)[0])
+    for i,wv in enumerate(template.T):
+        if np.max(np.abs(wv)) > max:
+            max = np.max(np.abs(wv))
+            ind = i
+            peak = wv
+            
 def read_kilosort_params(filename):
     f=open(filename)
     params = {}

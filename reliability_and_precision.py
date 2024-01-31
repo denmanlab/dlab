@@ -8,28 +8,77 @@ from dlab import cleanAxes
 from dlab import psth_and_raster as psth_
 
 def smooth_boxcar(data,boxcar_size):
+    """smooths an impulse respone of an already computed receptive field. uses a boxcar to smooth.
+
+    Parameters
+    ----------
+    data : np.array
+        the 1d temporal kernel to smooth
+    size : int, optional
+        the width of the boxcar used to smooth (default is
+        3)
+
+    Returns
+    -------
+    np.array
+        the smoothed input kernel
+    """    
     smoothed = convolve(data,boxcar(int(boxcar_size)))/boxcar_size
     smoothed = smoothed[int(boxcar_size/2):len(data)+int(boxcar_size/2)]
     return smoothed
 
 def moving_average(a, n=3) :
+    """calculates a moving average of the input data with widnow 
+
+    Parameters
+    ----------
+    a : np.array
+        the 1d temporal input to average
+    size : int, optional
+        the width of window to average within (default is 3)
+
+    Returns
+    -------
+    np.array
+        average, same shape as input a
+    """    
     ret = np.cumsum(a, dtype=float)
     ret[n:] = ret[n:] - ret[:-n]
     return ret[n - 1:] / n
 
-def get_peak_waveform_from_template(template):
-    max = 0
-    ind=0
-    peak = np.zeros(np.shape(template.T)[0])
-    for i,wv in enumerate(template.T):
-        if np.max(np.abs(wv)) > max:
-            max = np.max(np.abs(wv))
-            ind = i
-            peak = wv
+
     return peak
 
 def precision(spike_times,stimulus_times,boxcar_size = 5,precision_type='first',pre=0.,post=15.,binsize=0.01,threshold=0.05,find_events=True):
-# precision - jitter of first spike, jitter of total spikes
+    """precision - calculate the temporal jitter of first spike, or jitter of total spikes, depending on type flag
+
+    Parameters
+    ----------
+    spike_times : np.array
+        the 1d temporal kernel to smooth
+    stimulus_times
+        asf
+    boxcar_size : int, optional
+        the width of the boxcar used to smooth (default is 5). passed to smooth_boxcar
+    precision_type: str, optional
+        default : 'first'. options : 'first', anything else uses all spikes
+    pre=0.
+        the time before each entry in stimulus_times to use
+    post=15.
+        the time after each entry in stimulus_times to use
+    binsize=0.01
+        the binsize to use when finding events
+    threshold : float, default = 0.05
+        the threshold for finding events
+    find_events : bool, default = True
+        whether or not to find events
+    
+    Returns
+    -------
+    tuple
+        (np.mean(event_precision),np.std(event_precision),event_precision)    
+    """        
+ 
     if find_events:
         smoothed,all_events,events = get_events(spike_times,stimulus_times,boxcar_size = boxcar_size,threshold=threshold,pre=pre,post=post,binsize=binsize)
     else:
