@@ -55,9 +55,9 @@ def precision(spike_times,stimulus_times,boxcar_size = 5,precision_type='first',
     Parameters
     ----------
     spike_times : np.array
-        the 1d temporal kernel to smooth
-    stimulus_times
-        asf
+        the times of events (usually action potentials from one neuron) to measure the precision of
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated to measure precision around
     boxcar_size : int, optional
         the width of the boxcar used to smooth (default is 5). passed to smooth_boxcar
     precision_type: str, optional
@@ -127,6 +127,27 @@ def precision(spike_times,stimulus_times,boxcar_size = 5,precision_type='first',
     return (np.mean(event_precision),np.std(event_precision),event_precision)
 
 def get_binarized(spike_times,stimulus_times,pre=0.,post=15.,convolve=0.):
+    """create a 2D array, trials (rows) x time (column), where a 1 indicates an event (spike) on that trial in that time. uses 1 msec time bins. 
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+    convolve : int, default = boxcar 
+        the binsize to use when finding events
+
+    Returns
+    ----------
+    binarized : np.array
+        trials (rows) x time (column), where a 1 indicates an event (spike) on that trial in that time
+    '"""    
+
     bytrial = psth_.raster(spike_times,stimulus_times,pre=pre,post=post,timeDomain=True,output='data')
     binarized = []
     for trial in bytrial:
@@ -140,6 +161,26 @@ def get_binarized(spike_times,stimulus_times,pre=0.,post=15.,convolve=0.):
     return binarized
 
 def get_binned(spike_times,stimulus_times,binsize,pre=0.,post=15.,convolve=0.):
+    """create a 2D array, trials (rows) x time (column), where the number of events in spike times that occur in each bin are counted. 
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+    convolve : int, default = boxcar 
+        the binsize to use when finding events
+
+    Returns
+    ----------
+    binarized : np.array [note that this is poorly named. TODO: name it better]
+        trials (rows) x time (column), where the value indicates the total events on that trial in that time
+    '"""   
     bytrial = psth_.raster(spike_times,stimulus_times,pre=pre,post=post,timeDomain=True,output='data')
     # print(np.array(bytrial).shape())
     binarized = []
@@ -154,7 +195,25 @@ def get_binned(spike_times,stimulus_times,binsize,pre=0.,post=15.,convolve=0.):
     return binarized
 
 def reliability(spike_times,stimulus_times,binsize,pre=0.,post=15.):
-#reliability - how reproducible a spike train is over trials, at the msec level
+    """# how reproducible a spike train is over trials, at the msec level. equivalent to cosine similarity. 
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+
+    Returns
+    ----------
+     : float
+        reliability. bounded 0 to 1, where 1 is repeated exactly in the same bin and only those bins across all trials; 0 is no repeated bins across trials.  
+    '"""      
+
     binarized=get_binned(spike_times,stimulus_times,binsize,pre=pre,post=post)
     sum = 0
     for c,i in enumerate(binarized):
@@ -169,6 +228,34 @@ def reliability(spike_times,stimulus_times,binsize,pre=0.,post=15.):
     return sum / (np.shape(binarized)[0]/2.)#,binarized
 
 def fano(spike_times,stimulus_times,pre=0.,post=15.,binsize=0.01,boxcar_size = 5,counting_window=0.3,threshold=0.2,by_event=False):
+    """measure the fano factor of an input (spike_times) relative to repeats (stimulus times)
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+    binsize=0.01
+        the binsize to use when finding events        
+    boxcar_size : int, optional
+        the width of the boxcar used to smooth (default is 5). passed to smooth_boxcar
+    counting_window : float, optional
+        the size of the window (bin) to count spikes in for calculating fano factor
+    threshold : float, optional 
+        the threshold for finding events. default = 0.2
+    by_event : bool, optional
+        whether or not to find the fano for all (False) or separately for events that repeat within each trial (True). default = False
+
+    Returns
+    ----------
+    tuple
+        (median fano factor, all spike counts, all fano factors)
+    '"""  
     if by_event:
         smoothed,all_events,events = get_events(spike_times,stimulus_times,boxcar_size = boxcar_size,threshold=threshold,pre=pre,post=post,binsize=binsize)
     else:
@@ -187,6 +274,30 @@ def fano(spike_times,stimulus_times,pre=0.,post=15.,binsize=0.01,boxcar_size = 5
     return np.median(fanos),counts, fanos
 
 def get_events(spike_times,stimulus_times,threshold=.05,boxcar_size = 15,pre=0.,post=15.,binsize=0.001):
+    """find the events within the response; can find multiple at arbitrary times, based on local minima and maxima in the averaged (around stimulus_times) response
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    threshold : float, optional 
+        the threshold for finding events. default = 0.05        
+    boxcar_size : int, optional
+        the width of the boxcar used to smooth (default is 5). passed to smooth_boxcar        
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+    binsize=0.01
+        the binsize to use when finding events        
+
+    Returns
+    ----------
+    tuple
+        (smoothed, event times relative to zero, ? ) TODO: anotate outputs better
+    '"""      
     (edges,psth,variance) =  psth_.psth_line(spike_times,
                                              stimulus_times,
                                              pre=pre,post=post,binsize=binsize,output='p',timeDomain=True)
@@ -220,6 +331,29 @@ def get_events(spike_times,stimulus_times,threshold=.05,boxcar_size = 15,pre=0.,
     return smoothed,minima*binsize,np.array(good_minima)*binsize - (boxcar_size/2.)*binsize
 
 def entropy(spike_times,stimulus_times,wordlength,binsize=0.001,pre=0.,post=15.):
+    """measure the entropy in spike_times relative to stimulus_times
+    
+    Parameters
+    ----------
+    spike_times : np.array
+        the times of events (usually action potentials from one neuron) to measure
+    stimulus_times : np.array
+        the times of events (often stimuli) that are repeated (i.e., trial times)
+    word_length : int, 
+        how many bins are in the words in the entropy dictionary
+    binsize=0.01
+        the binsize to use when finding events     
+    pre : float, default = 0.
+        the time before each entry in stimulus_times to use
+    post : float, default = 15.
+        the time after each entry in stimulus_times to use
+   
+
+    Returns
+    ----------
+    entropy: float
+        the entropy of spike_times relative to stimulus_times
+    '"""      
     binarized=get_binarized(spike_times,stimulus_times,pre=pre,post=post)
 
     # create words of length wordlength 
