@@ -73,8 +73,8 @@ def trial_by_trial(spike_times, event_times, pre, post, bin_size):
             if float(spike-event_times[j])/float(bin_size) < float(numbins):
                 bytrial[j,:][int((spike-event_times[j])/bin_size-1)] +=1
                 
-    var  = np.std(bytrial,axis=0)/bin_size/np.sqrt((len(event_times)))
-    psth = np.mean(bytrial,axis=0)
+    var  = np.nanstd(bytrial,axis=0)/np.sqrt((len(event_times)))/bin_size
+    psth = np.nanmean(bytrial,axis=0)/bin_size
     
     return psth, bytrial, var
 

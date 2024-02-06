@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import warnings
+from random import sample
 import os
 from glob import glob
 from scipy.io import loadmat
@@ -34,9 +35,11 @@ class UnitData:
             print('Please provide a path to a recording folder (e.g. /path/to/recording1)')
             
         self.recording_path = recording_path
-        self.ap_folders     = glob(os.path.join(self.recording_path,'continuous','*AP'))
+        self.all_folders    = glob(os.path.join(self.recording_path,'continuous','*'))
+        self.ap_folders     = [folder for folder in self.all_folders if 'LFP' not in os.path.basename(folder)]
+        self.ap_folders     = [folder for folder in self.ap_folders if 'NI-DAQmx' not in os.path.basename(folder)]
         
-    def load(self,probe_depths=[],probes=[],acq='OpenEphys'):
+    def load(self,probe_depths=[],probes=[],acq='OpenEphys',ignore_phy=False):
         # site_positions = self.option234_positions
         
         for i,PROBE in enumerate(probes):
@@ -62,76 +65,98 @@ class UnitData:
                         
                     else: print('SpikeGLX currently not supported')
                     
-            try:
-                cluster_info = pd.read_csv('cluster_info.tsv', delimiter='\t')
-            except: 
-                print('Unable to load cluster_info.tsv. Have you opened this data in Phy?')
-                
-            chanmap = loadmat(glob('*hanMap.mat')[0])
-            cluster_info['ycoords'] = chanmap['ycoords'].flatten()[cluster_info.ch.values]
-            cluster_info['xcoords'] = chanmap['xcoords'].flatten()[cluster_info.ch.values]
-            
-            site_positions = np.concatenate((chanmap['xcoords'],chanmap['ycoords']),axis=1)
-                        
+                    
+            site_positions  = np.load('channel_positions.npy')               
             spike_clusters  = np.load('spike_clusters.npy').flatten()
             spike_templates = np.load('spike_templates.npy')
             templates       = np.load('templates.npy')
             amplitudes      = np.load('amplitudes.npy')
-            weights         = np.zeros(site_positions.shape)
             
+            cluster_info = None        
+            try:
+                cluster_info = pd.read_csv('cluster_info.tsv', delimiter='\t')
+                if ignore_phy == True:
+                    cluster_info    = None
+                    cluster_Amps    = pd.read_csv('cluster_Amplitude.tsv', delimiter='\t')
+                    ContamPct       = pd.read_csv('cluster_ContamPct.tsv', delimiter='\t')
+                    KSLabel         = pd.read_csv('cluster_KSLabel.tsv', delimiter='\t')
+            except: 
+                print('Unable to load cluster_info.tsv. Have you opened this data in Phy?')
+                cluster_Amps    = pd.read_csv('cluster_Amplitude.tsv', delimiter='\t')
+                ContamPct       = pd.read_csv('cluster_ContamPct.tsv', delimiter='\t')
+                KSLabel         = pd.read_csv('cluster_KSLabel.tsv', delimiter='\t')
+
+            
+            weights        = np.zeros(site_positions.shape)
             mean_templates = []
-            xpos           = []
-            ypos           = []
+            peak_templates = []
+            xpos           = site_positions[:,0]
+            ypos           = site_positions[:,1]
             all_weights    = []
             amps           = []
             times          = []
+            ch             = []
             
             
-            for unit_id in cluster_info.cluster_id.values:
+            for unit_id in np.unique(spike_clusters):
                 #get mean template for each unit
-                all_templates    = spike_templates[np.where(spike_clusters==unit_id)].flatten()
+                all_templates,count    = np.unique(spike_templates[np.where(spike_clusters==unit_id)],return_counts=True)
                 
                 if len(all_templates) > 100:
                     n_templates_to_subsample = 100
-                else: n_templates_to_subsample = len(all_templates)
+                else: 
+                    n_templates_to_subsample = len(all_templates)
                 
-                random_subsample_of_templates = templates[all_templates[np.array(np.random.rand(n_templates_to_subsample)*all_templates.shape[0]).astype(int)]]
-                # template_idx     = np.unique(all_templates)
-                # mean_template    = np.mean(templates[template_idx],axis=0)
+                random_subsample_of_templates = templates[sample(list(all_templates),n_templates_to_subsample)]
+                
                 mean_template = np.mean(random_subsample_of_templates,axis=0)
+                
                 mean_templates.append(mean_template)
+                
+                if cluster_info is not None:
+                    best_ch = cluster_info[cluster_info.cluster_id == unit_id].ch.values[0].astype(int)
+                else:
+                    best_ch = np.argmax((np.max(mean_template,axis=0) - np.min(mean_template,axis=0)))
+                
+                ch.append(best_ch)
+                
+                peak_wv = mean_template[:,best_ch-1]
+                peak_templates.append(peak_wv)
                 
                 #Take weighted average of site positions where hweights is abs value of template for that channel
                 #This gets us the x and y positions of the unit on the probe
 
-                for channel in range(len(mean_template.T)):
-                    weights[channel,:] = np.trapz(np.abs(mean_template.T[channel]))
+                # for channel in range(len(mean_template.T)):
+                #     weights[channel,:] = np.trapz(np.abs(mean_template.T[channel]))
             
-                weights                /= weights.max()
-                weights[weights < 0.25] = 0 #Where weights are low, set to 0
-                x,y                     = np.average(site_positions,weights=weights,axis=0)
-                all_weights.append(weights)
-                xpos.append(x)
-                ypos.append(y)
+                # # weights                /= weights.max()
+                # weights[weights < 0.25] = 0 #Where weights are low, set to 0
+                # x,y                     = np.average(site_positions,weights=weights,axis=0)
+                # all_weights.append(weights)
+                # xpos.append(x)
+                # ypos.append(y)
                 
                 amps.append(amplitudes[:,0][spike_clusters==unit_id])
                 times.append(spike_times[spike_clusters==unit_id])
-            
-            probe_data = cluster_info.copy()
-            
-            probe_data.insert(1,'times',times)
-            probe_data.insert(1,'amplitudes',amps)
-            probe_data.insert(1,'weights',all_weights)
-            probe_data.insert(1,'template',mean_templates)
-            probe_data.insert(0,'probe',[probe_name]*len(probe_data))
-            # probe_data['ycoords'] = ypos
-            # probe_data['xcoords'] = xpos
-            # probe_data['depth']   = np.array(ypos)-3840+probe_depths[i]
-            probe_data['depth']   = np.array(ypos)*-1 + probe_depths[i]
-            # probe_data['depth']   = np.array(probe_data['ycoords'])-3840+probe_depths[i]
-            
-            cluster_info['shank'] = np.floor(cluster_info['xcoords'].values / 205.).astype(int)
-            
+
+            if cluster_info is not None:
+                probe_data = cluster_info.copy()
+            else:
+                probe_data = pd.DataFrame()
+                probe_data['cluster_id'] = np.unique(spike_clusters)
+                probe_data['Amplitude']  = cluster_Amps[np.in1d(cluster_Amps.cluster_id.values,np.unique(spike_clusters))]['Amplitude'].values 
+                probe_data['ContamPct']  = ContamPct[np.in1d(ContamPct.cluster_id.values,np.unique(spike_clusters))]['ContamPct'].values 
+                probe_data['KSLabel']    = KSLabel[np.in1d(KSLabel.cluster_id.values,np.unique(spike_clusters))]['KSLabel'].values 
+                probe_data['ch']         = ch
+                
+            probe_data['probe']      = [probe_name]*len(probe_data)
+            # probe_data['shank']    = np.floor(cluster_info['xcoords'].values / 205.).astype(int)
+            probe_data['depth']      = np.array(ypos[ch])*-1 + probe_depths[i]
+            probe_data['times']      = times
+            probe_data['amplitudes'] = amps
+            probe_data['template']   = mean_templates
+            # probe_data['weights']  = all_weights
+            probe_data['peak_wv']    = peak_templates
             
             if 'unit_data' not in locals():
                 unit_data = probe_data
@@ -155,11 +180,11 @@ class UnitData:
             
         return params, qMetrics
     
-    def qMetrics_labels(self, probes=[]):
-        
-        labels = []
-                    
+    def qMetrics_labels(self, probes=[],param_changes = {}):
+        ids = []
+        all_labels = []            
         for i,PROBE in enumerate(probes):
+            labels = []
             for folder in self.ap_folders:
                 if 'Probe'+PROBE in folder:
                     probe_path = folder
@@ -167,87 +192,90 @@ class UnitData:
             os.chdir(probe_path)
             
             param, qMetric = self.get_qMetrics(probe_path)
-            cluster_id     = qMetric.clusterID.values.astype('int') - 1
+            cluster_id     = qMetric.phy_clusterID.values.astype(int)
             unit_type      = np.full((len(qMetric)),np.nan)
             
+            if param_changes:
+                for key in param_changes.keys():
+                    param[key] = param_changes[key]
+            
             # Noise Cluster Condtions
-            b1  = qMetric.nPeaks > param.maxNPeaks[0]
-            b2  = qMetric.nTroughs > param.maxNTroughs[0]
-            b3  = qMetric.spatialDecaySlope >= param.minSpatialDecaySlope[0]
-            b4  = qMetric.waveformDuration_peakTrough < param.minWvDuration[0]
-            b5  = qMetric.waveformDuration_peakTrough > param.maxWvDuration[0]
-            b6  = qMetric.waveformBaselineFlatness >= param.maxWvBaselineFraction[0]
+            noise0  = pd.isnull(qMetric.nPeaks)
+            noise1  = qMetric.nPeaks                      > param.maxNPeaks[0]
+            noise2  = qMetric.nTroughs                    > param.maxNTroughs[0]
+            noise3  = qMetric.spatialDecaySlope           > param.minSpatialDecaySlope[0]
+            noise4  = qMetric.waveformDuration_peakTrough < param.minWvDuration[0]
+            noise5  = qMetric.waveformDuration_peakTrough > param.maxWvDuration[0]
+            noise6  = qMetric.waveformBaselineFlatness    > param.maxWvBaselineFraction[0]
             
-            unit_type[b1 | b2 | b3 | b4 | b5 | b6] = 0 #NOISE
+            unit_type[noise0 | noise1 | noise2 | noise3 | noise4 | noise5 | noise6] = 0 #NOISE
             
+            #MUA Conditions
+            mua0 = qMetric.percentageSpikesMissing_gaussian > param.maxPercSpikesMissing[0]
+            mua1 = qMetric.nSpikes                          < param.minNumSpikes[0]
+            mua2 = qMetric.fractionRPVs_estimatedTauR       > param.maxRPVviolations[0]
+            mua3 = qMetric.presenceRatio                    < param.minPresenceRatio[0]
+            
+            unit_type[(mua0| mua1 | mua2 | mua3)&np.isnan(unit_type)] = 2 #MUA
+            
+            #Optional MUA metrics
+            if param.computeDistanceMetrics[0] == 1 & ~param.isoDmin.isna()[0]:
+                mua4 = qMetric.isoD   < param.isoDmin[0]
+                mua5 = qMetric.Lratio > param.lratioMax[0]
+                
+                unit_type[(mua4 | mua5)&np.isnan(unit_type)] = 2 #MUA
+
+            else:
+                print('No distance metrics calculated')
+                
+            if param.extractRaw[0] == 1:
+                mua6 = qMetric.rawAmplitude       < param.minAmplitude[0]
+                mua7 = qMetric.signalToNoiseRatio < param.minSNR[0]
+                unit_type[(mua6 | mua7)&np.isnan(unit_type)] = 2 #MUA
+
+            else:
+                print('Raw waveforms not extracted')
+                                    
             # Somatic Cluster Conditions
-            b7  = qMetric.isSomatic != param.somatic[0]
+            if param.splitGoodAndMua_NonSomatic[0]:
+                nsom0 = qMetric.isSomatic != param.somatic[0]
+                unit_type[(unit_type==1) & (nsom0)] = 3 #Good Non-Somatic
+                unit_type[(unit_type==2) & (nsom0)] = 4 #MUA Non-Somatic
             
-            unit_type[b7 & np.isnan(unit_type).T]    = 3 #NON-SOMATIC
-            
-            b8  = qMetric.percentageSpikesMissing_gaussian <= param.maxPercSpikesMissing[0]
-            b9  = qMetric.nSpikes > param.minNumSpikes[0]
-            b10 = qMetric.fractionRPVs_estimatedTauR <= param.maxRPVviolations[0]
-            b11 = qMetric.presenceRatio >= param.minPresenceRatio[0] 
-            
-            unit_type[b8 & b9 & b10 & b11 & np.isnan(unit_type).T] = 1 #GOOD
-        
-            if param.computeDistanceMetrics[0] > 0 :
-                b12 = qMetric.Lratio <= param.lratioMax[0]
-                b13 = unit_type == 1
-                b13 = np.squeeze(b13)
-                
-                unit_type[b12 & b13] = 10 
-                unit_type[unit_type == 1]      = np.nan
-                unit_type[unit_type == 10]     = 1 #GOOD
-                
-            if param.computeDrift[0] > 0:
-                b13 = unit_type == 1
-                b13 = np.squeeze(b13)
-                b14 = qMetric.rawAmplitude > param.minAmplitude[0]
-                b15 = qMetric.maxDriftEstimate <= param.maxDrift[0]
-                
-                unit_type[b13 & b14 & b15] = 10
-                unit_type[unit_type == 1]  = np.nan
-                unit_type[unit_type == 10] = 1 #GOOD
-            
-            if param.extractRaw[0] > 0:
-                b13 = unit_type == 1
-                b13 = np.squeeze(b13)
-                b14 = qMetric.rawAmplitude > param.minAmplitude[0]
-                b16 = qMetric.signalToNoiseRatio >= param.minSNR[0]
-                
-                unit_type[b13 & b14 & b16] = 10
-                unit_type[unit_type == 1]      = np.nan
-                unit_type[unit_type == 10]     = 1 #GOOD
-                
-            if pd.notna(param.isoDmin[0]):
-                if 'isoD' in qMetric:
-                    b13 = unit_type == 1
-                    b13 = np.squeeze(b13)
-                    b17 = qMetric.isoD >= param.isoDmin[0]
-                    
-                    unit_type[b13 & b17] = 10
-                    unit_type[unit_type == 1]      = np.nan
-                    unit_type[unit_type == 10]     = 1 #GOOD
-                                
-            unit_type[np.isnan(unit_type)] = 2 #MUA
-            
+            #GOOD Conditions
+            unit_type[np.isnan(unit_type)] = 1 #Good
 
             for i in unit_type:
                 if i == 0:
-                    labels.append('noise')
+                    labels.append('NOISE')
+                    all_labels.append('NOISE')
                 if i == 1:
-                    labels.append('good')
+                    labels.append('GOOD')
+                    all_labels.append('GOOD')
                 if i == 2:
-                    labels.append('mua')
+                    labels.append('MUA')
+                    all_labels.append('MUA')
                 if i == 3:
-                    labels.append('non-somatic')
+                    labels.append('NON-SOMA GOOD')
+                    all_labels.append('NON-SOMA GOOD')
+                if i == 4:
+                    labels.append('NON-SOMA MUA')
+                    all_labels.append('NON-SOMA MUA')
                     
-        out_df = pd.DataFrame({'cluster_id':cluster_id, 'qm_labels':labels})
-        out_df.to_csv('qm_labels.tsv', sep='\t', index=False, header=True)
-           
-        return {'cluster_id':cluster_id, 'qm_labels':labels}
+            ids += list(cluster_id)
+          
+            out_df = pd.DataFrame({'cluster_id':cluster_id, 'bc_unitType':labels})
+        # if os.path.isfile('cluster_bc_unitType.tsv'):
+        #     q = input('Would you like to overwrite cluster_bc_unitType.tsv? (Y/N)')
+        #     if q == 'Y':
+        #         print('Overwriting  cluster_bc_unitType.tsv')
+        #         out_df.to_csv('cluster_bc_unitType.tsv', sep='\t', index=False, header=True)
+        #     if q == 'N':
+        #         print('No output saved')
+            print('Saving output....')
+            out_df.to_csv('cluster_bc_unitType.tsv', sep='\t', index=False, header=True)
+                
+        return {'cluster_id':ids, 'qm_labels':all_labels}
     
 class StimData:
     def __init__(self,recording_path, recording_no = 0) -> None:

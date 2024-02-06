@@ -1,3 +1,5 @@
+#I love clean axes
+
 def cleanAxes(ax,bottomLabels=False,leftLabels=False,rightLabels=False,topLabels=False,total=False):
     ax.tick_params(axis='both',labelsize=10)
     ax.spines['top'].set_visible(False);
