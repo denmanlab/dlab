@@ -21,10 +21,12 @@ from pynwb.behavior import BehavioralEvents, BehavioralEpochs, BehavioralTimeSer
 from dateutil.tz import tzlocal
 sns.set_palette(sns.color_palette('Set2')[3:])
 
-#class data object made by dan for our task. 
-#input when making a new instance is a path (string) to the data in the Deepnote file tree
-#e.g., s = session('/data/thisisafolder/thisisthefolderthecsvfilesarein')
+
 class Session:
+    """#class data object made by dan for our task. 
+        #input when making a new instance is a path (string) to the data in the Deepnote file tree
+        #e.g., s = session('/data/thisisafolder/thisisthefolderthecsvfilesarein')
+    """
     def __init__(self,path):
         self.path = path.lower()
         print(self.path)
@@ -248,8 +250,7 @@ def gather_events_by_trial(df,start_frame,end_frame):
             frames.extend([row_.Frame])
             times.extend([row_.Timestamp])
     return moved, frames, times
-
-        
+    
 def gather_events_by_time(df,start_time,end_time):
 #this function takes a DataFrame as input, and searches this DataFrame 
 #for any events in the Frame column that falls between the input start_frame and end_frame 
@@ -271,7 +272,6 @@ def check_session_phase(s):
             #TODO: differentiate between 2a and 2b and 3
             return 2
     else: return 0
-
 
 def combine_Sessions(sessions):
 #input: sessions is a list of Session objects created by dlabbehavior cheetah_elephant Session
@@ -313,7 +313,6 @@ def sort_day_sessions(paths):
 #os.path.basename(path).split('-')[0]+'-'+
         new_names.extend([hour+'_'+minute+'_'+second])
     return np.array(paths)[np.argsort(new_names).astype(int)]
-
 
 def import_timestamps(filename):
     #returns all timestamp columns as numpy arrays
@@ -437,10 +436,6 @@ def make_df(path,rew_amt=-1):
 
     return all_data_df.iloc[1:]#throw out the first trial
 
-        
-
-
-
 def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= 'Denman Lab lever visual engagement task',reward_vol=-1):
     nwb_path = os.path.join(recording_folder,os.path.basename(recording_folder))+'_lever.nwb'
     
@@ -523,8 +518,6 @@ def make_lever_NWB(recording_folder,experimenter='djd',experiment_description= '
 
         except:print('FAILED: '+recording_folder+' at writing')
     else: print('EXISTS: '+os.path.join('/root/work/nwbs_lever',os.path.basename(recording_folder))+'_lever.nwb')
-
-
 
 def make_lever_NWB_verbose(recording_folder,experimenter='djd',experiment_description= 'Denman Lab lever visual engagement task',reward_vol=-1):
     if not os.path.exists(os.path.join(recording_folder,os.path.basename(recording_folder))+'_lever.nwb'):
@@ -889,8 +882,6 @@ def generate_session_lever(mouse,date,return_=None,session='combine', nwb=None):
 
         return fig,ax
 
-
-
 def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=True):
     nwb_folder_paths = glob.glob(os.path.join(r'C:\Users\denma\Desktop\cheetah_or_elephant\data',mouse,mouse+'_'+date+'*'))
     paths = [glob.glob(os.path.join(p,'*.nwb'))[0] for p in nwb_folder_paths]
@@ -1044,7 +1035,6 @@ def generate_session_plaid(mouse,date,return_=None,session='combine',log_hist=Tr
         # fig.text(0.02,0.90, 'mean rewarded time: '+str(np.nanmean(df[df.rewarded==True].hold_time)), fontsize=14)
     return fig
 
-
 def generate_session_cheetah(mouse,date,return_=None,session='combine',log_hist=True):
     paths = glob.glob('/root/work/nwbs/'+mouse+'_'+date+'*_ce.nwb')
     if session == 'combine':
@@ -1182,7 +1172,6 @@ def generate_session_cheetah(mouse,date,return_=None,session='combine',log_hist=
     # fig.text(0.02,0.90, 'mean rewarded time: '+str(np.nanmean(df[df.rewarded==True].hold_time)), fontsize=14)
     return fig
 
-
 def placeAxesOnGrid(fig,dim=[1,1],xspan=[0,1],yspan=[0,1],wspace=None,hspace=None):
     '''
     Takes a figure with a gridspec defined and places an array of sub-axes on a portion of the gridspec
@@ -1215,7 +1204,6 @@ def placeAxesOnGrid(fig,dim=[1,1],xspan=[0,1],yspan=[0,1],wspace=None,hspace=Non
             idx += 1
     inner_ax = np.array(inner_ax).squeeze().tolist() #remove redundant dimension
     return inner_ax
-
 
 def generate_session_figure(nwb_path):
     io = NWBHDF5IO(nwb_path, mode='r')
