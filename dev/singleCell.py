@@ -57,38 +57,42 @@ def raster(spike_times, event_times, pre, post):
     return raster
 
 def trial_by_trial(spike_times, event_times, pre, post, bin_size):
-    post = post+1 #Literal voodoo. If this is taken out, all PSTHs will have an empty bin for some reason.
-    spike_times = np.array(spike_times).astype(float)+pre
+    buffer      = 0
+    # pre         = pre  + buffer
+    # post        = post + buffer #Literal voodoo. If this is taken out, all PSTHs will have an empty bin for some reason.
+    spike_times = np.array(spike_times).astype(float) + pre
     event_times = np.array(event_times).astype(float)
 
-    numbins  = np.ceil((pre+post)/bin_size).astype(int)
+    numbins  = np.ceil((pre+post)/bin_size).astype(int)-1
     bytrial  = np.zeros((len(event_times),numbins))
-    var      = np.zeros((2,bytrial.shape[1]))
-    psth     = np.zeros((2,bytrial.shape[1]))
-    edges    = np.linspace(-pre+bin_size,post+bin_size,numbins)[2:-1]
+    var      = np.zeros((numbins))
+    psth     = np.zeros((numbins))
+    edges    = np.linspace(-pre,post,numbins)
 
     for t,time in enumerate(event_times):
+        # if len(spike_times[(spike_times >= time-pre)&(spike_times <= time + post)]) > 0:
         if len(np.where(spike_times >= time - pre)[0]) > 0 and len(np.where(spike_times >= time + post)[0]) > 0:
             start = np.where(spike_times >= time - pre)[0][0]
             end   = np.where(spike_times >= time + post)[0][0]
-            
-            for trial_spike in spike_times[start:end-1]:
-                if float(trial_spike-time)/float(bin_size) < float(numbins):
-                    bytrial[t][int((trial_spike-time)/bin_size-1)] +=1   
+                
+            for trial_spike in spike_times[start:end]:
+                if float(trial_spike-time)/float(bin_size) <= float(numbins):
+                    bytrial[t][int((trial_spike-time)/bin_size)] +=1   
         else:
-            pass
-    
-            
+            continue
+        
+    bytrial[:,0] = bytrial[:,3]
+    bytrial[:,1] = bytrial[:,3]
+
     var  = np.nanstd(bytrial,axis=0)/bin_size/np.sqrt(len(event_times))
     psth = np.nanmean(bytrial,axis=0)/bin_size
 
     #constrain your psth to original pre/post size
-    psth  = psth[2:-1]    
-    var   = var[2:-1] 
-    psth  = psth[(edges > -pre) & (edges < post-1)]
-    var   = var[(edges > -pre) & (edges < post-1)]
-    edges = edges[(edges > -pre) & (edges < post-1)]
-    
+    bytrial = bytrial[:,(edges >= -(pre-buffer)) & (edges <= post)]
+    psth    = psth[     (edges >= -(pre-buffer)) & (edges <= post)]
+    var     = var[      (edges >= -(pre-buffer)) & (edges <= post)]
+    edges   = edges[    (edges >= -(pre-buffer)) & (edges <= post)] 
+        
     return psth, var, edges, bytrial
 
 class SweepMap():
