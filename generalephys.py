@@ -2027,8 +2027,12 @@ def get_waveform_PTratio(waveform, sampling_rate=30000.):
     ratio = w[peak]/abs(w[trough])
     if ratio > 1.:
         return 1.
-    else:
-        return w[peak]/abs(w[trough])
+    else: 
+        if not np.isnan(ratio) or ratio==np.inf:
+            return ratio
+        else:
+            print('PT ratio problem: '+str(ratio))
+            return 0.
 
 def get_waveform_repolarizationslope(waveform, sampling_rate=30000.,window=30):
     w = resample(waveform,200)#upsample to smooth the data
