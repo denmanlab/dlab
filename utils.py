@@ -182,6 +182,10 @@ def classify_waveform_shape(df,plots=False,save_plots=False,basepath='',kmeans=0
 	df['waveform_duration'] = durations
 	df['waveform_PTratio'] = PTratio
 	df['waveform_repolarizationslope'] = repolarizationslope
+      
+	print(durations)
+	print(PTratio)
+	print(repolarizationslope)
 
 	waveform_k = kmeans2(np.vstack(((durations-np.min(durations))/np.max((durations-np.min(durations))),
 									(PTratio-np.min(PTratio))/np.max((PTratio-np.min(PTratio))),
