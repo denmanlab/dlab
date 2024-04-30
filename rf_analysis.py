@@ -1,15 +1,20 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy.ndimage as ndimage
-import dlab.psth_and_raster as par
-from dlab.generalephys import placeAxesOnGrid, smoothRF
+import scipy.optimize as opt
+from scipy.signal import boxcar,convolve
+
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import matplotlib.patches as mpatches
 from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
-import scipy.optimize as opt
+
 from skimage.measure import label, regionprops
 from skimage.morphology import closing
 from tqdm import tqdm
-import matplotlib.patches as mpatches
+
+import dlab.psth_and_raster as par
+from dlab.generalephys import placeAxesOnGrid, smoothRF
 
 #smooth a 2D image, meant to be space-space of a receptive field
 #size = number of pixels to smooth over
@@ -32,7 +37,6 @@ def smoothRF(img,size=3):
     smooth = ndimage.gaussian_filter(img,(size,size))
     return smooth
 
-from scipy.signal import boxcar,convolve
 def smooth_boxcar(data,boxcar_size=3):
     """smooths an impulse respone of an already computed receptive field. uses a boxcar to smooth.
 
@@ -95,10 +99,10 @@ def plotsta(sta,taus=(np.linspace(-10,280,30).astype(int)),colorrange=(-0.15,0.1
             img = smoothRF(sta[str(tau)].T,smooth)
 
         axis.imshow(img,cmap=cmap,vmin=colorrange[0],vmax=colorrange[1],interpolation='none')
-        axis.set_frame_on(False);
-        axis.set_xticklabels('',visible=False);
-        axis.set_xticks([]);
-        axis.set_yticklabels('',visible=False);
+        axis.set_frame_on(False)
+        axis.set_xticklabels('',visible=False)
+        axis.set_xticks([])
+        axis.set_yticklabels('',visible=False)
         axis.set_yticks([])
         axis.set_aspect(1.0)
         axis.set_xlim(window[0][0],window[0][1])
@@ -621,119 +625,101 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
         output[str(tau)]=avg/count
     return output
 
-def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None):
-    """same as sta(), except the output is in the form of a 3D array (tau, space, space)
-
-        Parameters
-        ----------
-        spiketimes : dictionary
-            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
-        data : tuple, optional
-            the limits of the colormap. default=(0.35,0.65)
-        datatimes :string, optional
-            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
-        taus : tuple of np.array, optional
-            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
-        exclusion : int, optional
-            default = 3
-        samplingRateInkHz: float, optional
-            multiply the taus by this number.  default=30
-
-        Returns
-        -------
-        output: np.array
-            the average of the input (data) at each tau, 3D array (tau, space, space)
-        """    
-    output = np.zeros(((len(taus),) + data[0].shape))
-    output[:] = np.nan
+class rCorr():
+    """
+    Class for reverse-correlation analyses such as STA, STC, etc. All analyses take spike times, stimulus times, signal, and tau values. Would like to accommodate functions for 1D and 2D signals. 
+    """
+    def __init__(self,spike_times,stim_times,signal,taus=np.linspace(-0.01,0.28,30),exclusion=None):
+        self.signal      = np.array(signal)
+        self.stim_times  = np.array(stim_times)
+        self.spike_times = np.array(spike_times)
+        self.taus        = np.array(taus)
+        
+        self.start       = stim_times[0]
+        self.end         = stim_times[-1]-0.06
+        
+        self.stim_spikes = self.spike_times[(self.spike_times >= self.start) & (self.spike_times < self.end)]
+        self.spikes_adj  = self.stim_spikes[:,np.newaxis] - self.taus
+        
+        self.spikes_adj  = self.spikes_adj.T
+        
+        def find_nearest(array, value):
+            idx = (np.abs(array-value)).argmin()
+            return idx
+        
+        if exclusion is not None: 
+            # Check if there are time periods we should ignore (eye closing, stim issues, etc.)
+            for i in exclusion:
+                ex1 = find_nearest(self.stim_spikes,i[0])
+                ex2 = find_nearest(self.stim_spikes,i[1])
+                self.stim_spikes = np.delete(self.stim_spikes,np.arange(ex1,ex2))
     
-    for i,tau in enumerate(taus):
-        avg = np.zeros(data[0].shape)
-        count = 0
-        for spiketime in spiketimes:
-            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-                        index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-                        avg += data[index]
-                else:
-                    index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-                    avg += data[index]
+    def sta(self):
+        output = np.zeros(((len(self.taus),) + self.signal[0].shape))
+        output[:] = np.nan
+        
+        for i,tau in enumerate(self.taus):
+            avg = np.zeros(self.signal[0].shape)
+            count = 0
+            for spike in self.stim_spikes:
+                index = (np.where(self.stim_times > (spike - tau))[0][0]-1)
+                avg += self.signal[index]
                 count+=1
-        output[i,:,:] = avg/count
-    return output,taus
+                    
+            output[i,:,:] = avg/count
+            
+        return output,self.taus
+        
+    def stc(self):
+        return 
 
-def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zscore=False, taulabels=False,nrows=3,
-                  cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
-    """show the space-space plots of an already computed receptive field for a range of taus. for use with array sta inputs instead of dict stas. for dict, use plotsta()
-
-        Parameters
-        ----------
-        sta : np.array
-            the 1d temporal kernel to smooth
-        taus : int, optional
-            the width of the boxcar used to smooth (default is
-            3)
-        colorrange : tuple, optional
-            the limits of the colormap. default=(0.35,0.65)
-        cmap :string, optional
-            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
-        title : string, optional
-            title of the plot. default = ''
-        zcore : bool, optional
-            whether or not to zscore the receptive field. default = False
-        taulabels : bool, optional
-                whether or not to label each subplot with the tau. default = False
-        nrows : int, optional
-            the number of rows of taus to plot. figures out how many columns to plot based on this. default = 3 
-        smooth : int, optional
-            the width of a Gaussian kernel for spatial smoothing. uses smoothRF function.  default = None
-        window : tuple or tuple-like
-            the subarea of the receptive field to plot. default = [[0,64],[0,64]]
-
-        Returns
-        -------
-        np.array
-            the smoothed input kernel
-        """    
-    ncols    = np.ceil(len(taus) / nrows ).astype(int)#+1
-    fig,ax   = plt.subplots(nrows,ncols,figsize=(10,6),facecolor='white')
-    
-    maxval = sta.max()
-    minval = sta.min()
+def plot_sta(sta,taus=np.linspace(-0.01,0.28,30),nrows=3,smooth=None,taulabels=False,**kwargs):
+    img = sta
     
     if smooth is not None:
-        for i,tau in enumerate(taus):
-            sta[i,:,:] = smoothRF(sta[i,:,:],smooth)
-           
-    mean_val = np.nanmean(sta)
-    std_dev  = np.nanstd(sta)
+        for i,rf in enumerate(img):
+            img[i] = smoothRF(rf,size=smooth)
+            
+    img = (img - img.mean())/img.std()
+
+    # gmin = img.mean()-(img.std()*3)
+    # gmax = img.mean()+(img.std()*3)
+    gmin = -4.5
+    gmax = 4.5
     
-    for i,tau in enumerate(taus):
-        axis = ax[int(np.floor(i/ncols))][i%ncols]
-        img = np.fliplr(sta[i,:,:])
-        axis.imshow(img,cmap=cmap,vmin = (sta.min()+(np.std(sta))),
-              vmax=(sta.max()-np.std(sta)))
-        # if zscore == True: #test for significance?
-        #     axis.imshow(img,cmap=cmap,vmin=-1.96,vmax=1.96,interpolation='none')
-        # else:
-        #     axis.imshow(img,cmap=cmap,vmin=(mean_val-(3*std_dev)),vmax=(mean_val+(3*std_dev)),interpolation='none')
-        axis.set_frame_on(False)
-        axis.set_xticklabels('',visible=False)
-        axis.set_xticks([])
-        axis.set_yticklabels('',visible=False)
-        axis.set_yticks([])
-        axis.set_aspect(1.0)
-        if taulabels == True:
-            axis.set_title('tau = '+str(tau),fontsize=8,color='k')
-        else:
-            if tau == 0:
-                axis.set_title('tau = '+str(tau),fontsize=8,color='k')
-    if title is not None:
-        title_mm = title + '\n min='+str(round(minval,3))+'  max='+str(round(maxval,3))
-        plt.suptitle(title_mm,fontsize=10,color='k',y=0.85,weight='semibold')
-    plt.subplots_adjust(wspace=.1,hspace=-.6)
-#     plt.tight_layout()
+    ncols  = np.ceil(len(taus)/nrows).astype(int)
+    
+    if 'cmap' in kwargs:
+        colormap = kwargs['cmap']
+    else: colormap='bwr'
+    
+    with mpl.rc_context({'xtick.bottom':False,
+                          'xtick.labelbottom':False,
+                          'ytick.left':False,
+                          'ytick.labelleft':False
+                          }):
+        fig,ax = plt.subplots(nrows,ncols,figsize=(10,6))
+        
+        for i,tau in enumerate(taus):
+            axis = ax[int(np.floor(i/ncols))][i%ncols]
+            axis.imshow(np.fliplr(img[i]),vmin=gmin,vmax=gmax,cmap=colormap)
+            axis.set_frame_on(False)
+            axis.set_aspect(1.0)
+            if taulabels==True:
+                axis.set_title(f'{int(tau*1000)}ms',fontsize=8,color='k')
+            else:
+                if tau==0:
+                    axis.set_title('0ms',fontsize=8,color='k')
+                
+    if 'title' in kwargs:
+        fig.suptitle(kwargs['title'] +f' min={img.min():.3f} max={img.max():.3f}',
+                     fontsize=10,color='k',y=0.85,fontweight='semibold')
+        
+    plt.subplots_adjust(wspace=0.1,hspace=-0.6)
+    
+    if 'facecolor' in kwargs:
+        fig.set_facecolor(kwargs['facecolor'])
+        
 
 def sta_with_subfields(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
     """compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus, similar to sta(). the difference is that this calculates bright and dark separately as well.
@@ -904,13 +890,13 @@ def check_rfs_in_df(df_rf,sds=4):
             rf_computed.extend([True])
             
             gr = df_rf.g_fit_image[ind]
-            im = smoothRF(gr,.5);
+            im = smoothRF(gr,.5)
             thresh = np.mean(im)+x*np.std(im)
             im[np.abs(smoothRF(gr,.6))<thresh]=0
             gr_pixels = np.nansum(np.abs(im))
             
             uv = df_rf.u_fit_image[ind]
-            im = smoothRF(uv,.5);
+            im = smoothRF(uv,.5)
             thresh = np.mean(im)+x*np.std(im)
             im[np.abs(smoothRF(uv,.6))<thresh]=0
             uv_pixels = np.nansum(np.abs(im))
@@ -1111,3 +1097,89 @@ def mask_grating(spiketimes, stim_data, xpos, ypos, pre, post, binsize):
             k += 1
 
     return labels, psth_all, bytrial_all, var_all
+
+class SweepMap():
+    def __init__(self, spike_times, stim_data, bin_size):
+        self.spike_times  = np.array(spike_times)
+        self.bin_size     = bin_size
+        self.pre          = 0
+        
+        self.orientations = stim_data.ori.unique()
+        self.sweeps       = stim_data.sweep.unique()
+        self.raw_output   = {}
+        
+        lengths = []
+        for t in self.sweeps:
+            samp = stim_data[stim_data.sweep == t]
+            for o in samp.ori.unique():
+                start = samp[samp.ori == o].start.values[0]
+                end   = samp[samp.ori == o].start.values[-1]
+                lengths.append(end-start)
+                
+        self.post = np.ceil(np.array(lengths).max())
+                
+        nbins       = np.ceil((self.pre+self.post)/self.bin_size).astype(int)
+        psth_all    = np.zeros((len(self.orientations),nbins))
+        bytrial_all = np.zeros((len(self.orientations),len(self.sweeps),nbins))
+        var_all     = np.zeros((len(self.orientations),nbins))
+        
+        for i,ori in enumerate(self.orientations):
+            ori_sweeps   = stim_data[stim_data.ori == ori]
+            
+            sweep_starts = []
+            sweep_ends   = []
+            for t,trial in enumerate(self.sweeps):
+                start = ori_sweeps[ori_sweeps.sweep == trial].start.values[0]
+                end   = ori_sweeps[ori_sweeps.sweep == trial].start.values[-1]
+                sweep_starts.append(start)
+                sweep_ends.append(end)
+                
+            post_ = np.ceil(np.subtract(sweep_ends,sweep_starts)).max()
+            nbins = round((self.pre+post_)/self.bin_size)
+            
+            psth,bt,var             = trial_by_trial(self.spike_times,sweep_starts,self.pre,post_,self.bin_size)
+            psth_all[i,:nbins]      = psth
+            bytrial_all[i,:,:nbins] = bt
+            var_all[i,:nbins]       = var
+            
+        self.raw_output = {'psth':psth_all,'bytrial':bytrial_all,'var':var_all}
+            
+    def back_project(self,method=0):
+        data = self.raw_output['psth']
+        if data.shape[0] != len(self.orientations):
+            raise ValueError('Dimension mismatch')
+        
+        sz   = data.shape[1]
+
+        pad        = int(np.ceil(np.sqrt(2)*sz-sz)/2)
+        pad_dat    = np.zeros(int(sz+2*pad))
+        pad_dat[:] = np.nan
+
+        cj = np.asmatrix(np.tile(np.arange(-(sz - 1) / 2, (sz + 1) / 2), (sz, 1)))
+        ci=cj.H
+
+        map_ = np.ones((sz,sz))
+        map_[:,:] = method
+
+        for i in range(len(self.orientations)):
+            t = self.orientations[i]*np.pi/180
+            pad_dat[pad:pad+sz] = data[i]
+            rcj = np.asmatrix(np.round(cj*np.cos(t)-ci*np.sin(t)+np.ceil(pad+sz/2))-1,dtype='int16')
+            dat_array = pad_dat[rcj] 
+
+            if method:
+                map_ *= dat_array
+            else:
+                map_ += dat_array
+                
+        if method == 1:
+            map_ /= len(self.orientations)
+        elif method == 2:
+            s           = np.sign(map_)
+            isnan       = np.isnan(map_)
+            map_[isnan] = 1
+            map_        = np.abs(map_) ** (1 / len(self.orientations)) * s
+            map_[isnan] = np.nan
+
+        return map_
+    

@@ -34,8 +34,8 @@ def plot_sta(sta,taus=np.linspace(-0.01,0.28,30),nrows=3,smooth=None,taulabels=F
 
     # gmin = img.mean()-(img.std()*3)
     # gmax = img.mean()+(img.std()*3)
-    gmin = -4
-    gmax = 4
+    gmin = -4.5
+    gmax = 4.5
     
     ncols  = np.ceil(len(taus)/nrows).astype(int)
     

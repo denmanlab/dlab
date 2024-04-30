@@ -10,28 +10,35 @@ def find_nearest(array, value):
     idx = (np.abs(array-value)).argmin()
     return idx
 
-def cross_from_below(data,threshold,startbin=1):
-    crosses = []
-    for i in range(len(data[startbin:])):
-        if data[i-1] < threshold and data[i] >= threshold:
-            crosses.append(i)
+def cross_from_below(data,threshold,startbin=0):
+    window  = data[startbin:]
+    crosses = list()
+    for i in range(len(window)):
+        if window[i-1] < threshold and window[i] >= threshold:
+            crosses.append(i+startbin)
             
-    return(crosses)
+    return np.array(crosses)
 
-def psth_latency(data,binsize=0.01,pre=0, sd = 2,smooth=False,offset=0):
+def psth_latency(data,binsize=0.01,pre=0, thresh = 0.5,smooth=False,offset=0):
+    if thresh > 1:
+        print(f'Cannot use threshold {thresh*100 :.1f}% of max response' )
+        return None
+    
     if smooth:
         data = savgol_filter(data,5,3)
+        
+    window_length = len(data)*binsize+binsize
+    edges         = np.linspace(-pre,(window_length-pre),len(data))
 
     startbin  = int(pre/binsize)
-    baseline  = np.mean(data[:startbin])
-    threshold = baseline + np.std(data[:startbin])*sd
-    crossings = cross_from_below(data[startbin:],threshold)
-    
-    if len(crossings)>0:
-        crossing  = crossings[0]#the first bin above the threshold
-        chunk     = np.linspace(data[crossing+startbin-1],data[crossing+startbin],100)
+    threshold = thresh*data[startbin:].max()
+    crossings = cross_from_below(data,threshold,startbin)
+
+    if len(crossings) > 0:
+        crossing     = crossings[0] #the first bin above the threshold
+        chunk           = np.linspace(data[crossing-1],data[crossing],100)
         bin_crossing = np.array(cross_from_below(chunk,threshold))
-        latency   = (crossing-1)*(1000*binsize)+bin_crossing/100.0 * (1000*binsize)
+        latency      = edges[crossing-1] + (100 - bin_crossing)*(binsize/1000)
         
         if len(latency) > 0:
             return latency[0] - offset

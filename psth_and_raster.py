@@ -134,39 +134,44 @@ def psth(times,triggers,timeDomain=False,pre=0.5,post=1,binsize=0.05,ymax=75,out
     if output == 'p':
         return peris
 
-#compute and optionally show peri-stimulus time histograms for a list of arrays of times
-def psthlist(timesdict,timeslist,onsets,pre=0.5,post=1,binsize=0.05,ymax=50,output='fig'):
-    fig,(ax1,ax2,ax3,ax4)=plt.subplots(1,np.shape(timeslist)[0],sharey=True) 
-    axes=(ax1,ax2,ax3,ax4)
-    for j,s in enumerate(timeslist):
-        peris=[]#np.zeros(len(onsets),len(times))
-        times = timesdict[s]
-        times = np.array(times).astype(float) / samplingRate
-        onsets = np.array(onsets).astype(float) / samplingRate
+def trial_by_trial(spike_times, event_times, pre, post, bin_size):
+    buffer      = 0
+    # pre         = pre  + buffer
+    # post        = post + buffer #Literal voodoo. If this is taken out, all PSTHs will have an empty bin for some reason.
+    spike_times = np.array(spike_times).astype(float) + pre
+    event_times = np.array(event_times).astype(float)
+
+    numbins  = np.ceil((pre+post)/bin_size).astype(int)-1
+    bytrial  = np.zeros((len(event_times),numbins))
+    var      = np.zeros((numbins))
+    psth     = np.zeros((numbins))
+    edges    = np.linspace(-pre,post,numbins)
+
+    for t,time in enumerate(event_times):
+        # if len(spike_times[(spike_times >= time-pre)&(spike_times <= time + post)]) > 0:
+        if len(np.where(spike_times >= time - pre)[0]) > 0 and len(np.where(spike_times >= time + post)[0]) > 0:
+            start = np.where(spike_times >= time - pre)[0][0]
+            end   = np.where(spike_times >= time + post)[0][0]
+                
+            for trial_spike in spike_times[start:end]:
+                if float(trial_spike-time)/float(bin_size) <= float(numbins):
+                    bytrial[t][int((trial_spike-time)/bin_size)] +=1   
+        else:
+            continue
         
-        for i,t in enumerate(onsets):
-            peris.append(np.array(times).astype(float)-float(t))
-        peris = np.array(peris) 
-        peris=peris.flatten()
-    
-        numbins = (post+pre) / binsize 
-        (hist,edges) = np.histogram(peris,int(numbins),(-pre,post))
+    bytrial[:,0] = bytrial[:,3]
+    bytrial[:,1] = bytrial[:,3]
+
+    var  = np.nanstd(bytrial,axis=0)/bin_size/np.sqrt(len(event_times))
+    psth = np.nanmean(bytrial,axis=0)/bin_size
+
+    #constrain your psth to original pre/post size
+    bytrial = bytrial[:,(edges >= -(pre-buffer)) & (edges <= post)]
+    psth    = psth[     (edges >= -(pre-buffer)) & (edges <= post)]
+    var     = var[      (edges >= -(pre-buffer)) & (edges <= post)]
+    edges   = edges[    (edges >= -(pre-buffer)) & (edges <= post)] 
         
-        hist /= float(len(onsets)*binsize)
-    
-        print(j)
-        axis = axes[j]
-        print(axis)
-        axis.hist(peris,int(numbins),(-pre,post),color=[1,1,1])
-        axis.set_xlim(-pre,post)
-        axis.set_ylim(0,ymax)
-        if j==0:
-            axis.set_xlabel(r'$time \/ [s]$',fontsize=14)
-            axis.set_ylabel(r'$firing \/ rate \/ [Hz]$',fontsize=14)
-        axis.set_title(s)
-    
-    plt.show()    
-    return fig
+    return psth, var, edges, bytrial
 
 def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='',alpha=0.5,ms=2,**kwargs):
     #post = post + 1
