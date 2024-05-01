@@ -621,119 +621,101 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
         output[str(tau)]=avg/count
     return output
 
-def sta_array(spiketimes,data,datatimes,taus=(np.linspace(-.01,.28,30)),exclusion=None):
-    """same as sta(), except the output is in the form of a 3D array (tau, space, space)
-
-        Parameters
-        ----------
-        spiketimes : dictionary
-            the fit data to plot. requires 'impulse' and 'avg_space' keys. 
-        data : tuple, optional
-            the limits of the colormap. default=(0.35,0.65)
-        datatimes :string, optional
-            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
-        taus : tuple of np.array, optional
-            the taus to calculate. usually provided in milliseconds. default = (np.linspace(-10,280,30))
-        exclusion : int, optional
-            default = 3
-        samplingRateInkHz: float, optional
-            multiply the taus by this number.  default=30
-
-        Returns
-        -------
-        output: np.array
-            the average of the input (data) at each tau, 3D array (tau, space, space)
-        """    
-    output = np.zeros(((len(taus),) + data[0].shape))
-    output[:] = np.nan
+class rCorr():
+    """
+    Class for reverse-correlation analyses such as STA, STC, etc. All analyses take spike times, stimulus times, signal, and tau values. Would like to accommodate functions for 1D and 2D signals. 
+    """
+    def __init__(self,spike_times,stim_times,signal,taus=np.linspace(-0.01,0.28,30),exclusion=None):
+        self.signal      = np.array(signal)
+        self.stim_times  = np.array(stim_times)
+        self.spike_times = np.array(spike_times)
+        self.taus        = np.array(taus)
+        
+        self.start       = stim_times[0]
+        self.end         = stim_times[-1]-0.06
+        
+        self.stim_spikes = self.spike_times[(self.spike_times >= self.start) & (self.spike_times < self.end)]
+        self.spikes_adj  = self.stim_spikes[:,np.newaxis] - self.taus
+        
+        self.spikes_adj  = self.spikes_adj.T
+        
+        def find_nearest(array, value):
+            idx = (np.abs(array-value)).argmin()
+            return idx
+        
+        if exclusion is not None: 
+            # Check if there are time periods we should ignore (eye closing, stim issues, etc.)
+            for i in exclusion:
+                ex1 = find_nearest(self.stim_spikes,i[0])
+                ex2 = find_nearest(self.stim_spikes,i[1])
+                self.stim_spikes = np.delete(self.stim_spikes,np.arange(ex1,ex2))
     
-    for i,tau in enumerate(taus):
-        avg = np.zeros(data[0].shape)
-        count = 0
-        for spiketime in spiketimes:
-            if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-                if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
-                    if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-                        index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-                        avg += data[index]
-                else:
-                    index = (np.where(datatimes > (spiketime - tau))[0][0]-1) #% np.shape(data)[2]
-                    avg += data[index]
+    def sta(self):
+        output = np.zeros(((len(self.taus),) + self.signal[0].shape))
+        output[:] = np.nan
+        
+        for i,tau in enumerate(self.taus):
+            avg = np.zeros(self.signal[0].shape)
+            count = 0
+            for spike in self.stim_spikes:
+                index = (np.where(self.stim_times > (spike - tau))[0][0]-1)
+                avg += self.signal[index]
                 count+=1
-        output[i,:,:] = avg/count
-    return output,taus
+                    
+            output[i,:,:] = avg/count
+            
+        return output,self.taus
+        
+    def stc(self):
+        return 
 
-def plotsta_array(sta, taus=(np.linspace(-10,280,30).astype(int)),title='', zscore=False, taulabels=False,nrows=3,
-                  cmap=plt.cm.seismic,smooth=None,window = [[0,64],[0,64]]):
-    """show the space-space plots of an already computed receptive field for a range of taus. for use with array sta inputs instead of dict stas. for dict, use plotsta()
-
-        Parameters
-        ----------
-        sta : np.array
-            the 1d temporal kernel to smooth
-        taus : int, optional
-            the width of the boxcar used to smooth (default is
-            3)
-        colorrange : tuple, optional
-            the limits of the colormap. default=(0.35,0.65)
-        cmap :string, optional
-            the color map to use to plot the receptive field. use any matplotlib colrmap. https://matplotlib.org/stable/gallery/color/colormap_reference.html   default = 'gaussian_2D'
-        title : string, optional
-            title of the plot. default = ''
-        zcore : bool, optional
-            whether or not to zscore the receptive field. default = False
-        taulabels : bool, optional
-                whether or not to label each subplot with the tau. default = False
-        nrows : int, optional
-            the number of rows of taus to plot. figures out how many columns to plot based on this. default = 3 
-        smooth : int, optional
-            the width of a Gaussian kernel for spatial smoothing. uses smoothRF function.  default = None
-        window : tuple or tuple-like
-            the subarea of the receptive field to plot. default = [[0,64],[0,64]]
-
-        Returns
-        -------
-        np.array
-            the smoothed input kernel
-        """    
-    ncols    = np.ceil(len(taus) / nrows ).astype(int)#+1
-    fig,ax   = plt.subplots(nrows,ncols,figsize=(10,6),facecolor='white')
-    
-    maxval = sta.max()
-    minval = sta.min()
+def plot_sta(sta,taus=np.linspace(-0.01,0.28,30),nrows=3,smooth=None,taulabels=False,**kwargs):
+    img = sta
     
     if smooth is not None:
-        for i,tau in enumerate(taus):
-            sta[i,:,:] = smoothRF(sta[i,:,:],smooth)
-           
-    mean_val = np.nanmean(sta)
-    std_dev  = np.nanstd(sta)
+        for i,rf in enumerate(img):
+            img[i] = smoothRF(rf,size=smooth)
+            
+    img = (img - img.mean())/img.std()
+
+    # gmin = img.mean()-(img.std()*3)
+    # gmax = img.mean()+(img.std()*3)
+    gmin = -4.5
+    gmax = 4.5
     
-    for i,tau in enumerate(taus):
-        axis = ax[int(np.floor(i/ncols))][i%ncols]
-        img = np.fliplr(sta[i,:,:])
-        axis.imshow(img,cmap=cmap,vmin = (sta.min()+(np.std(sta))),
-              vmax=(sta.max()-np.std(sta)))
-        # if zscore == True: #test for significance?
-        #     axis.imshow(img,cmap=cmap,vmin=-1.96,vmax=1.96,interpolation='none')
-        # else:
-        #     axis.imshow(img,cmap=cmap,vmin=(mean_val-(3*std_dev)),vmax=(mean_val+(3*std_dev)),interpolation='none')
-        axis.set_frame_on(False)
-        axis.set_xticklabels('',visible=False)
-        axis.set_xticks([])
-        axis.set_yticklabels('',visible=False)
-        axis.set_yticks([])
-        axis.set_aspect(1.0)
-        if taulabels == True:
-            axis.set_title('tau = '+str(tau),fontsize=8,color='k')
-        else:
-            if tau == 0:
-                axis.set_title('tau = '+str(tau),fontsize=8,color='k')
-    if title is not None:
-        title_mm = title + '\n min='+str(round(minval,3))+'  max='+str(round(maxval,3))
-        plt.suptitle(title_mm,fontsize=10,color='k',y=0.85,weight='semibold')
-    plt.subplots_adjust(wspace=.1,hspace=-.6)
-#     plt.tight_layout()
+    ncols  = np.ceil(len(taus)/nrows).astype(int)
+    
+    if 'cmap' in kwargs:
+        colormap = kwargs['cmap']
+    else: colormap='bwr'
+    
+    with mpl.rc_context({'xtick.bottom':False,
+                          'xtick.labelbottom':False,
+                          'ytick.left':False,
+                          'ytick.labelleft':False
+                          }):
+        fig,ax = plt.subplots(nrows,ncols,figsize=(10,6))
+        
+        for i,tau in enumerate(taus):
+            axis = ax[int(np.floor(i/ncols))][i%ncols]
+            axis.imshow(np.fliplr(img[i]),vmin=gmin,vmax=gmax,cmap=colormap)
+            axis.set_frame_on(False)
+            axis.set_aspect(1.0)
+            if taulabels==True:
+                axis.set_title(f'{int(tau*1000)}ms',fontsize=8,color='k')
+            else:
+                if tau==0:
+                    axis.set_title('0ms',fontsize=8,color='k')
+                
+    if 'title' in kwargs:
+        fig.suptitle(kwargs['title'] +f' min={img.min():.3f} max={img.max():.3f}',
+                     fontsize=10,color='k',y=0.85,fontweight='semibold')
+        
+    plt.subplots_adjust(wspace=0.1,hspace=-0.6)
+    
+    if 'facecolor' in kwargs:
+        fig.set_facecolor(kwargs['facecolor'])
+        
 
 def sta_with_subfields(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,samplingRateInkHz=25):
     """compute a spike-triggered average on three dimensional data. this is typically a movie of the stimulus, similar to sta(). the difference is that this calculates bright and dark separately as well.
