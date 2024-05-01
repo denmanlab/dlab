@@ -682,6 +682,9 @@ def make_discrimination_NWB(recording_folder,experimenter='djd',experiment_descr
         nwb_file.add_acquisition(lever_ts)
         # except: 
         #     print('FAILED: '+recording_folder+' at lever data')
+        if os.path.exists(os.path.join(recording_folder,'spike_clusters.npy')): #if there is sorted ephys data
+            nwb_file = add_ephys_data(nwb_file,recording_folder)
+        
         try:
             nwb_path = os.path.join('/root/work/nwbs',os.path.basename(recording_folder))+'_ce.nwb'
             with NWBHDF5IO(nwb_path, 'w') as io:
