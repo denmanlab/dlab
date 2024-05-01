@@ -22,15 +22,6 @@ class UnitData:
         self.old_cwd       = os.getcwd()
         self.sampling_rate = 30000.0
         
-        self.option234_xpositions           = np.zeros((192,2))
-        self.option234_ypositions           = np.zeros((192,2))
-        self.option234_positions            = np.zeros((384,2))
-        self.option234_positions[:,0][::4]  = 21
-        self.option234_positions[:,0][1::4] = 53
-        self.option234_positions[:,0][2::4] = 5
-        self.option234_positions[:,0][3::4] = 37
-        self.option234_positions[:,1]       = np.floor(np.linspace(383,0,384)/2) * 20
-        
         if 'recording' not in os.path.basename(recording_path):
             print('Please provide a path to a recording folder (e.g. /path/to/recording1)')
             
@@ -59,10 +50,15 @@ class UnitData:
                     if acq == 'OpenEphys':
                         try:
                             ts = np.load('timestamps.npy')
-                        except: print('could not load timestamps.npy')
-                        spike_times = ts[spike_times]
-                        np.save('spike_seconds.npy',spike_times)
+                            spike_times = ts[spike_times]
+                            np.save('spike_seconds.npy',spike_times)
                         
+                        except: 
+                            print('could not load timestamps.npy')
+                            spike_times = spike_times/self.sampling_rate
+                            np.save('spike_seconds.npy',spike_times)
+                            
+
                     else: print('SpikeGLX currently not supported')
                     
                     
@@ -90,8 +86,7 @@ class UnitData:
             weights        = np.zeros(site_positions.shape)
             mean_templates = []
             peak_templates = []
-            xpos           = site_positions[:,0]
-            ypos           = site_positions[:,1]
+
             all_weights    = []
             amps           = []
             times          = []
@@ -151,12 +146,15 @@ class UnitData:
                 
             probe_data['probe']      = [probe_name]*len(probe_data)
             # probe_data['shank']    = np.floor(cluster_info['xcoords'].values / 205.).astype(int)
-            probe_data['depth']      = np.array(ypos[ch])*-1 + probe_depths[i]
+            probe_data['depth']      = np.array(site_positions[:,1][ch])*-1 + probe_depths[i]
             probe_data['times']      = times
             probe_data['amplitudes'] = amps
             probe_data['template']   = mean_templates
             # probe_data['weights']  = all_weights
             probe_data['peak_wv']    = peak_templates
+            probe_data['xpos']       = site_positions[:,0][probe_data['ch']]
+            probe_data['ypos']       = site_positions[:,1][probe_data['ch']]
+            probe_data['n_spikes']   = [len(i) for i in times]
             
             if 'unit_data' not in locals():
                 unit_data = probe_data
@@ -312,22 +310,3 @@ class StimData:
         plt.tight_layout()
         plt.show()
         
-def frames2list(frames, dim=[64,64]):
-    flat_dim = np.prod(dim)
-    flat = frames.ravel()
-    rows = []
-    
-    for i in range(len(frames)):
-        rows.append(list(flat[flat_dim*i:flat_dim*(i+1)]))
-        
-    return rows
-
-def df2frames(df, column):
-    values = df[column].values
-    dim    = int(np.sqrt(len(values[0])))
-    frames = np.zeros((len(values),dim,dim))
-    for i,fr in enumerate(values):
-        frame_    = np.asarray(fr).reshape(dim,dim)
-        frames[i,:,:] = frame_
-            
-    return frames

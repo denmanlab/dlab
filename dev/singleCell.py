@@ -10,28 +10,35 @@ def find_nearest(array, value):
     idx = (np.abs(array-value)).argmin()
     return idx
 
-def cross_from_below(data,threshold,startbin=1):
-    crosses = []
-    for i in range(len(data[startbin:])):
-        if data[i-1] < threshold and data[i] >= threshold:
-            crosses.append(i)
+def cross_from_below(data,threshold,startbin=0):
+    window  = data[startbin:]
+    crosses = list()
+    for i in range(len(window)):
+        if window[i-1] < threshold and window[i] >= threshold:
+            crosses.append(i+startbin)
             
-    return(crosses)
+    return np.array(crosses)
 
-def psth_latency(data,binsize=0.01,pre=0, sd = 2,smooth=False,offset=0):
+def psth_latency(data,binsize=0.01,pre=0, thresh = 0.5,smooth=False,offset=0):
+    if thresh > 1:
+        print(f'Cannot use threshold {thresh*100 :.1f}% of max response' )
+        return None
+    
     if smooth:
         data = savgol_filter(data,5,3)
+        
+    window_length = len(data)*binsize+binsize
+    edges         = np.linspace(-pre,(window_length-pre),len(data))
 
     startbin  = int(pre/binsize)
-    baseline  = np.mean(data[:startbin])
-    threshold = baseline + np.std(data[:startbin])*sd
-    crossings = cross_from_below(data[startbin:],threshold)
-    
-    if len(crossings)>0:
-        crossing  = crossings[0]#the first bin above the threshold
-        chunk     = np.linspace(data[crossing+startbin-1],data[crossing+startbin],100)
+    threshold = thresh*data[startbin:].max()
+    crossings = cross_from_below(data,threshold,startbin)
+
+    if len(crossings) > 0:
+        crossing     = crossings[0] #the first bin above the threshold
+        chunk           = np.linspace(data[crossing-1],data[crossing],100)
         bin_crossing = np.array(cross_from_below(chunk,threshold))
-        latency   = (crossing-1)*(1000*binsize)+bin_crossing/100.0 * (1000*binsize)
+        latency      = edges[crossing-1] + (100 - bin_crossing)*(binsize/1000)
         
         if len(latency) > 0:
             return latency[0] - offset
@@ -57,29 +64,44 @@ def raster(spike_times, event_times, pre, post):
     return raster
 
 def trial_by_trial(spike_times, event_times, pre, post, bin_size):
-    spike_times = np.array(spike_times)+pre
-    event_times = np.array(event_times)
-    numbins     = np.ceil((pre+post)/bin_size).astype(int)
-    bytrial     = np.zeros((len(event_times),numbins))
-    
-    for j in range(len(event_times)):
-        event = event_times[j]
-        start = event-pre
-        end   = event+post
-        
-        trial_spikes = spike_times[(spike_times >= start) & (spike_times <= end)]
-        
-        for spike in trial_spikes:
-            if float(spike-event_times[j])/float(bin_size) < float(numbins):
-                bytrial[j,:][int((spike-event_times[j])/bin_size-1)] +=1
-                
-    var  = np.std(bytrial,axis=0)/bin_size/np.sqrt((len(event_times)))
-    psth = np.mean(bytrial,axis=0)
-    
-    return psth, bytrial, var
+    buffer      = 0
+    # pre         = pre  + buffer
+    # post        = post + buffer #Literal voodoo. If this is taken out, all PSTHs will have an empty bin for some reason.
+    spike_times = np.array(spike_times).astype(float) + pre
+    event_times = np.array(event_times).astype(float)
 
-def psth_latency(data,bins,pre=None,binsize=None, sd = 2.5,smooth=False,offset=0):
-    return latency[0]-offset
+    numbins  = np.ceil((pre+post)/bin_size).astype(int)-1
+    bytrial  = np.zeros((len(event_times),numbins))
+    var      = np.zeros((numbins))
+    psth     = np.zeros((numbins))
+    edges    = np.linspace(-pre,post,numbins)
+
+    for t,time in enumerate(event_times):
+        # if len(spike_times[(spike_times >= time-pre)&(spike_times <= time + post)]) > 0:
+        if len(np.where(spike_times >= time - pre)[0]) > 0 and len(np.where(spike_times >= time + post)[0]) > 0:
+            start = np.where(spike_times >= time - pre)[0][0]
+            end   = np.where(spike_times >= time + post)[0][0]
+                
+            for trial_spike in spike_times[start:end]:
+                if float(trial_spike-time)/float(bin_size) <= float(numbins):
+                    bytrial[t][int((trial_spike-time)/bin_size)] +=1   
+        else:
+            continue
+        
+    bytrial[:,0] = bytrial[:,3]
+    bytrial[:,1] = bytrial[:,3]
+
+    var  = np.nanstd(bytrial,axis=0)/bin_size/np.sqrt(len(event_times))
+    psth = np.nanmean(bytrial,axis=0)/bin_size
+
+    #constrain your psth to original pre/post size
+    bytrial = bytrial[:,(edges >= -(pre-buffer)) & (edges <= post)]
+    psth    = psth[     (edges >= -(pre-buffer)) & (edges <= post)]
+    var     = var[      (edges >= -(pre-buffer)) & (edges <= post)]
+    edges   = edges[    (edges >= -(pre-buffer)) & (edges <= post)] 
+        
+    return psth, var, edges, bytrial
+
 class SweepMap():
     def __init__(self, spike_times, stim_data, bin_size):
         self.spike_times  = np.array(spike_times)
