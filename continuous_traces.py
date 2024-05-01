@@ -597,7 +597,7 @@ def load_datastream(path, probe, band='ap'):
     print('No matching bands or probes')
     return None
 
-def get_chunk(path,
+def get_chunk_OE(path,
               probe, 
             stim_times,
             band = 'ap',
@@ -662,7 +662,8 @@ def subtract_offset(data, subtraction_window = None, pre = None, post = None):
 
 
 def median_subtraction(data, channels):
-    """Subtract the median of a window from the data.
+    """median subtraction (not an offset). Like CAR.
+    TODO: add ability to select which channels to subtract from
 
     Args:
         data (np.array): The data to subtract from, shape = (trials, samples, channels).
