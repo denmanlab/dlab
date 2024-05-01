@@ -265,8 +265,8 @@ def plot_waveform_classification(durations, PTratio, repolarizationslope, df,sav
 	panelname = 'waveforms_clusters'
 	plt.tight_layout()
 	if save_plots:
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'),fmt='png',dpi=300)
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'),fmt='eps')
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'))
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'))
 		
 	nbins = 36
 	plt.hist(durations[np.where(df.waveform_class=='rs')[0]],range=(0,0.0015),bins=nbins)
@@ -280,8 +280,8 @@ def plot_waveform_classification(durations, PTratio, repolarizationslope, df,sav
 	panelname = 'waveforms_durationhistogram'
 	plt.tight_layout()
 	if save_plots:
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'),fmt='png',dpi=300)
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'),fmt='eps')
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'))
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'))
 	
 	plt.figure(figsize=(4,3))
 	
@@ -290,26 +290,27 @@ def plot_waveform_classification(durations, PTratio, repolarizationslope, df,sav
 	for i,waveform in enumerate(df.waveform):
 		#waveform_time = np.linspace(0,len(waveform)/30000.,len(waveform))*1000
 		if df.waveform_class[i]=='rs':
-			plt.plot(waveform_time,waveform/np.max(np.abs(waveform)),color=sns.color_palette()[0],alpha=0.01)
+			plt.plot(waveform_time,waveform/np.max(np.abs(waveform)),color=sns.color_palette()[0],alpha=0.01,ms=0.5)
 		if df.waveform_class[i]=='axon':#df.waveform_class.unique()[np.where(df.waveform_class=='axon')[0]]:
-			plt.plot(waveform_time,waveform/np.max(np.abs(waveform)),color=sns.color_palette()[2],alpha=0.01)
+			plt.plot(waveform_time,waveform/np.max(np.abs(waveform)),color=sns.color_palette()[2],alpha=0.01,ms=0.5)
 		if df.waveform_class[i]=='fs':#df.waveform_class.unique()[np.where(df.waveform_class=='fs')[0]]:
-			plt.plot(waveform_time,waveform/np.max(np.abs(waveform)),color=sns.color_palette()[1],alpha=0.01)
+				plt.plot(waveform_time,waveform[:len(waveform_time)]/np.max(np.abs(waveform[:len(waveform_time)])),color=sns.color_palette()[1],alpha=0.01,ms=0.5)
 	# plot means, normalized
 	for waveform_class in ['rs','fs','axon']:#df.waveform_class.unique():
-		if waveform_class != 'up' and waveform_class!='axon':
-			plt.plot(waveform_time,np.mean(df.waveform[df.waveform_class==waveform_class])/(np.max(np.abs(np.mean(df.waveform[df.waveform_class==waveform_class])))),lw=4)
+		if waveform_class != 'up':# and waveform_class!='axon':
+			a = np.mean(df.waveform[df.waveform_class==waveform_class])
+			plt.plot(waveform_time,a[:len(waveform_time)]\
+							/(np.max(np.abs(np.mean(df.waveform[df.waveform_class==waveform_class])))),lw=4)
 		#plt.plot(waveform_time,np.mean(df.waveform[df.waveform_class==waveform_class])/(np.max(np.abs(np.mean(df.waveform[df.waveform_class==waveform_class])))),lw=2)
 	# plt.plot(waveform_time,np.mean(df.waveform[df.waveform_class=='rs'])/(np.min(np.mean(df.waveform[df.waveform_class=='rs']))*-1),lw=2)
 	# plt.plot(waveform_time,np.mean(df.waveform[df.waveform_class=='up'])/(np.max(np.mean(df.waveform[df.waveform_class=='up']))),lw=2)
-	
 	plt.title('RS: '+str(len(df.waveform_class[df.waveform_class=='rs']))+
 				'   FS: '+str(len(df.waveform_class[df.waveform_class=='fs']))+
 			  '   axon: '+str(len(df.waveform_class[df.waveform_class=='axon'])))#+
 	#            '   up:'+str(len(df.waveform_class[df.waveform_class=='up'])))
 	
 	
-	plt.gca().set_xlim(-1.,1.4)
+	plt.gca().set_xlim(0.,2.0)
 	plt.gca().legend(loc='upper left')
 	#ephys.cleanAxes(plt.gca(),leftLabels=True,bottomLabels=True)
 	plt.gca().set_ylabel('normalized amplitude',size=10)
@@ -317,8 +318,8 @@ def plot_waveform_classification(durations, PTratio, repolarizationslope, df,sav
 	panelname = 'waveforms_mean_peak'
 	plt.tight_layout()
 	if save_plots:
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'),fmt='png',dpi=300)
-		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'),fmt='eps')
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.png'))
+		plt.gcf().savefig(os.path.join(basepath,'figures','panels',panelname+'.eps'))
 
 def drawPhaseIIIProbe(colors,ax=-1,highlight=-1,clim=None, cmap='viridis', drawLines=False):
 	'''
