@@ -1340,7 +1340,11 @@ def ccg(train1,train2,binrange,binsize):
                     count+=1
         diffs = np.array(diffs)*-1
         hist,edges = np.histogram(diffs,bins=int((binrange[1]-binrange[0])/binsize),range=binrange)
+<<<<<<< Updated upstream
         return (hist / float(len(train1))),edges
+=======
+        return (hist / float(len(train1)))*100,edges
+>>>>>>> Stashed changes
         #return (hist / float(len(train1)*len(train2) / 2.)  ,edges)
         #return ((hist / (len(train1) * len(train2)) / 2.)*100 * binsize,edges)
     else:
@@ -2027,8 +2031,12 @@ def get_waveform_PTratio(waveform, sampling_rate=30000.):
     ratio = w[peak]/abs(w[trough])
     if ratio > 1.:
         return 1.
-    else:
-        return w[peak]/abs(w[trough])
+    else: 
+        if not np.isnan(ratio) or ratio==np.inf:
+            return ratio
+        else:
+            print('PT ratio problem: '+str(ratio))
+            return 0.
 
 def get_waveform_repolarizationslope(waveform, sampling_rate=30000.,window=30):
     w = resample(waveform,200)#upsample to smooth the data
@@ -2113,28 +2121,6 @@ def plotExchangeFromPSTH_2(data,unit,setcolor,UV='#4B0082',Green='#6B8E23',datao
                 axis.axhline(y=0,color='k',linestyle='--')
                 #axis.set_title(expt_names[i]+' unit: '+unit)
             
-
-            
-def cleanAxes(ax,bottomLabels=False,leftLabels=False,rightLabels=False,topLabels=False,total=False):
-    ax.tick_params(axis='both',labelsize=10)
-    ax.spines['top'].set_visible(False);
-    ax.yaxis.set_ticks_position('left');
-    ax.spines['right'].set_visible(False);
-    ax.xaxis.set_ticks_position('bottom')
-    if not bottomLabels or topLabels:
-        ax.set_xticklabels([])
-    if not leftLabels or rightLabels:
-        ax.set_yticklabels([])
-    if rightLabels:
-        ax.spines['right'].set_visible(True);
-        ax.spines['left'].set_visible(False);
-        ax.yaxis.set_ticks_position('right');
-    if total:
-        ax.set_frame_on(False);
-        ax.set_xticklabels('',visible=False);
-        ax.set_xticks([]);
-        ax.set_yticklabels('',visible=False);
-        ax.set_yticks([])
 
 def summarize_color(data,unit,color_folder=''):
     fig = plt.figure(figsize=(8.5,11))

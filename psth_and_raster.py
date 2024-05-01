@@ -330,31 +330,6 @@ def psth_area(data,bins,pre=None,binsize=None, sd = 3,time=0.2):
         print('response did not exceed threshold: '+str(threshold)+', no area returned')
         return None
 
-def psth_arr(spiketimes, stimtimes, pre=0.5, post=2.5,binsize=0.05,variance=True):
-    '''
-    Generates avg psth, psth for each trial, and variance
-    '''
-    numbins = int((post+pre)/binsize)
-    x = np.arange(-pre,post,binsize)
-
-    bytrial = np.zeros((len(stimtimes),numbins-1))
-    for j, trigger in enumerate(stimtimes):
-        trial = stimtimes[j]
-        start = trial-pre
-        end = trial+post
-        bins_ = np.arange(start,end,binsize)
-        trial_spikes = spiketimes[np.logical_and(spiketimes>=start, spiketimes<=end)]
-        hist,edges = np.histogram(trial_spikes,bins=bins_)
-        if len(hist)==numbins-1:
-            bytrial[j]=hist
-        elif len(hist)==numbins:
-            bytrial[j]=hist[:-1]
-        if variance == True:
-            var = np.std(bytrial,axis=0)/binsize/np.sqrt((len(stimtimes)))
-            
-    psth = np.nanmean(bytrial,axis=0)/binsize
-    return(psth,bytrial,var)
-
 def psth_line_overlay_(spike_data, unit, stim_data, condition, title='', 
                        pre=0.5, post=2.5,binsize=0.05,variance=True,axis=None,legend=True):
 #     times = np.array(np.array(spike_data.times[spike_data.unit_id==unit])[0])

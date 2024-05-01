@@ -310,3 +310,22 @@ class StimData:
         plt.tight_layout()
         plt.show()
         
+def frames2list(frames, dim=[64,64]):
+    flat_dim = np.prod(dim)
+    flat = frames.ravel()
+    rows = []
+    
+    for i in range(len(frames)):
+        rows.append(list(flat[flat_dim*i:flat_dim*(i+1)]))
+        
+    return rows
+
+def df2frames(df, column):
+    values = df[column].values
+    dim    = int(np.sqrt(len(values[0])))
+    frames = np.zeros((len(values),dim,dim))
+    for i,fr in enumerate(values):
+        frame_    = np.asarray(fr).reshape(dim,dim)
+        frames[i,:,:] = frame_
+            
+    return frames
