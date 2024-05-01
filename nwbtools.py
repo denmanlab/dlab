@@ -4,6 +4,7 @@ import warnings
 import glob, os, h5py, csv
 from dlab.generalephys import option234_positions
 from dlab.sglx_analysis import readAPMeta
+from dlab.utils import get_peak_waveform_from_template
 import dlab.continuous_traces as ct
 
 try:
@@ -99,6 +100,86 @@ def load_phy_template(path,cluster_file='KS2',site_positions = option234_positio
 		units[str(unit)]['KSamplitude'] =  KSamplitude[i][0].split('\t')[1]
 		units[str(unit)]['KScontamination'] =  KScontamination[i][0].split('\t')[1]
 	return units
+
+def df_from_phy(path,site_positions = option234_positions,**kwargs):
+	"""load spike data that has been manually sorted with the phy-template GUI
+
+    Parameters
+    ----------
+    path : string
+        the path to the sorted data
+    cluster_file : string, optional
+        the format of the cluter_info file. options, KS2, KS3
+    site_positions : np.array, optional
+        the geometry of the sites on the array. n x 2, where n is the number of channels. the site_positions should contain coordinates of the channels in probe space. for example, in um on the face of the probe
+
+    Returns
+    -------
+    pandas DataFrame
+		returns a DataFrame of 'good' units, each of which includes:
+	"""
+	nwb_data = load_phy_template(path,site_positions)
+	#structures is a dictionary that defines the bounds of the structure e.g.:{'v1':(0,850), 'hpc':(850,2000)}
+	mouse = [];experiment=[];cell = [];ypos = [];xpos = [];waveform=[];template=[];structure=[];times=[]
+	index = []; count = 1
+	nwb_id = [];probe_id=[]
+	depth=[];#print(list(nwb_data.keys()));print(list(nwb_data['processing'].keys()));
+	if 'probe' in kwargs.keys():
+		for probe in list(nwb_data['processing'].keys()):
+			if 'UnitTimes' in list(nwb_data['processing'][probe].keys()): 
+				for i,u in enumerate(list(nwb_data['processing'][probe]['UnitTimes'].keys())):
+					if u != 'unit_list':
+						nwb_id.append(nwbid)
+						probe_id.append(probe)
+						index.append(count);count+=1
+						mouse.append(str(np.array(nwb_data.get('identifier'))))
+						experiment.append(1)
+						cell.append(u)
+						times.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['times']));# print(list(nwb_data['processing'][probe]['UnitTimes'][u].keys()))
+						if 'ypos' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+							ypos.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['ypos']))
+							has_ypos = True
+						else:
+							ypos.append(None)
+							has_ypos = False				
+						if 'depth' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+							depth.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['depth']))
+						else:
+							if has_ypos:
+								depth.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['ypos']))
+							else:
+								depth.append(None)
+						if 'xpos' in list(nwb_data['processing'][probe]['UnitTimes'][u].keys()):
+							xpos.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['xpos']))
+							has_xpos = True
+						else:
+							xpos.append(None)
+							has_xpos = False
+						template.append(np.array(nwb_data['processing'][probe]['UnitTimes'][u]['template']))
+						waveform.append(get_peak_waveform_from_template(template[-1]))
+						if not structures == None:
+							structur = None
+							for struct, bounds in structures.iteritems():
+								if ypos[-1] > bounds[0] and ypos[-1]< bounds[1] :
+									structur=struct
+						else:
+							structur = None
+						structure.append(structur)
+	df = pd.DataFrame(index=index)
+	df = df.fillna(np.nan)
+	df['nwb_id'] = nwb_id
+	df['mouse'] = mouse
+	df['experiment'] = experiment
+	df['probe'] = probe_id
+	df['structure'] = structure
+	df['cell'] = cell
+	df['times'] = times
+	df['ypos'] = ypos
+	df['xpos'] = xpos
+	df['depth'] = depth
+	df['waveform'] = waveform
+	df['template'] = template
+	return df
 
 class UnitData:
     def __init__(self,recording_path) -> None:
