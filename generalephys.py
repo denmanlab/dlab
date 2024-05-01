@@ -1340,7 +1340,11 @@ def ccg(train1,train2,binrange,binsize):
                     count+=1
         diffs = np.array(diffs)*-1
         hist,edges = np.histogram(diffs,bins=int((binrange[1]-binrange[0])/binsize),range=binrange)
+<<<<<<< Updated upstream
         return (hist / float(len(train1))),edges
+=======
+        return (hist / float(len(train1)))*100,edges
+>>>>>>> Stashed changes
         #return (hist / float(len(train1)*len(train2) / 2.)  ,edges)
         #return ((hist / (len(train1) * len(train2)) / 2.)*100 * binsize,edges)
     else:

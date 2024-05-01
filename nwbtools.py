@@ -345,6 +345,7 @@ def make_spike_secs(probe_folder):
 	np.save(open(os.path.join(probe_folder,'spike_secs.npy'),'wb'),spike_secs)
 
 def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_depths=[3840,3840,3840,3840],spikes_filename = 'spike_secs.npy', aligned=True):
+<<<<<<< Updated upstream
 	"""requires that phy has been run to generate cluster_info.tsv
 	   searches the folder for the chanmap the KS used, or searches one folder up for it
 
@@ -378,3 +379,14 @@ def multi_load_unit_data(recording_folder,probe_names=['A','B','C','D'],probe_de
 			return
 	return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],spikes_filename = spikes_filename, aligned=True,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
     
+=======
+    folder_paths = glob.glob(os.path.join(recording_folder,'*imec*'))
+    if len(folder_paths) > 0: pass
+    else:
+        folder_paths = glob.glob(os.path.join(recording_folder,'AP*'))
+        if len(folder_paths) > 0: pass
+        else:
+            print('did not find any recordings in '+recording_folder+'')
+            return
+    return pd.concat([load_unit_data(folder,probe_name=probe_names[i],probe_depth=probe_depths[i],spikes_filename = spikes_filename, aligned=True,df=True) for i,folder in enumerate(folder_paths)],ignore_index=True)
+>>>>>>> Stashed changes
