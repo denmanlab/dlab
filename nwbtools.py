@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
 import warnings
-import glob, os, h5py, csv
+import os, h5py, csv
+from glob import glob
 from dlab.generalephys import option234_positions
 from dlab.sglx_analysis import readAPMeta
 from dlab.utils import get_peak_waveform_from_template
 import dlab.continuous_traces as ct
+from random import sample
 
 try:
 	from nwb.nwb import NWB
@@ -342,7 +344,7 @@ class UnitData:
             
         return params, qMetrics
     
-    def qMetrics_labels(self, probes=[],param_changes = {}):
+    def qMetrics_labels(self, probes=['A','B','C'],param_changes = {}):
         ids = []
         all_labels = []            
         for i,PROBE in enumerate(probes):

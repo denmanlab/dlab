@@ -124,27 +124,27 @@ def load_phy_kwik(filepath,**kwargs):
 #	session.store.MUA: list of MUA cluster IDs
 #	session.store.good: list of 'good' cluster IDs
 #	session.store.times: dictionary of spike time arrays, keyed by cluster ID
-	session = Session(filepath)
-	print('...parsing spike times...')
-	
-	times={}
-	good = []
-	MUA = []
-	
-	for i,cluster_group in enumerate(session.store.model.cluster_groups.values()):
-		if cluster_group == 1:
-			cluster_number = session.store.model.cluster_ids[i]
-			MUA.append(cluster_number)
-			times[cluster_number]=np.array([session.store.model.spike_samples[t] for t in np.where(session.store.model.spike_clusters==cluster_number)[0]])
-		if cluster_group ==2:
-			cluster_number = session.store.model.cluster_ids[i]
-			good.append(cluster_number)
-			times[cluster_number]=np.array([session.store.model.spike_samples[t] for t in np.where(session.store.model.spike_clusters==cluster_number)[0]])	
-	
-	session.store.MUA = MUA
-	session.store.good = good	
-	session.store.times = times
-	return session
+    session = Session(filepath)
+    print('...parsing spike times...')
+    
+    times={}
+    good = []
+    MUA = []
+    
+    for i,cluster_group in enumerate(session.store.model.cluster_groups.values()):
+        if cluster_group == 1:
+            cluster_number = session.store.model.cluster_ids[i]
+            MUA.append(cluster_number)
+            times[cluster_number]=np.array([session.store.model.spike_samples[t] for t in np.where(session.store.model.spike_clusters==cluster_number)[0]])
+        if cluster_group ==2:
+            cluster_number = session.store.model.cluster_ids[i]
+            good.append(cluster_number)
+            times[cluster_number]=np.array([session.store.model.spike_samples[t] for t in np.where(session.store.model.spike_clusters==cluster_number)[0]])	
+    
+    session.store.MUA = MUA
+    session.store.good = good	
+    session.store.times = times
+    return session
 
 # def load_phy_template(path,cluster_file='KS2',site_positions = option234_positions,**kwargs):
 # # load spike data that has been manually sorted with the phy-template GUI
@@ -277,35 +277,35 @@ def df_from_phy(path,site_positions = option234_positions,**kwargs):
     return df
 
 def kwik_to_csv(filepath,sampling_rate=20000.,name='units'):
-	import csv
-	try:
-		import phy
-		count=0
-		session = phy.session.Session(filepath)
-		units = open(os.path.join(os.path.dirname(filepath),name+'.csv'),'w')
-		a = csv.writer(units)
-		for i,u in enumerate(session.store.model.spikes_per_cluster.keys()):
-			if session.store.model.cluster_groups[u] == 2:
-				count+=1
-				max_channel = np.where(session.store.mean_waveforms(u) == np.min(session.store.mean_waveforms(u)))[1][0]+1
-				for spike_sample in session.store.model.spikes_per_cluster[u]:
-					a.writerow([u,spike_sample/float(sampling_rate),max_channel])
-		units.close()
-		print(str(count)+' good units, with times and max channel, written to: '+os.path.join(os.path.dirname(filepath),name+'.csv'))
+    import csv
+    try:
+        import phy
+        count=0
+        session = phy.session.Session(filepath)
+        units = open(os.path.join(os.path.dirname(filepath),name+'.csv'),'w')
+        a = csv.writer(units)
+        for i,u in enumerate(session.store.model.spikes_per_cluster.keys()):
+            if session.store.model.cluster_groups[u] == 2:
+                count+=1
+                max_channel = np.where(session.store.mean_waveforms(u) == np.min(session.store.mean_waveforms(u)))[1][0]+1
+                for spike_sample in session.store.model.spikes_per_cluster[u]:
+                    a.writerow([u,spike_sample/float(sampling_rate),max_channel])
+        units.close()
+        print(str(count)+' good units, with times and max channel, written to: '+os.path.join(os.path.dirname(filepath),name+'.csv'))
 
-	except:
-		print('doing it the old-fashioned way. no max channel data included.')
-		data = ephys.oe.load_kwik_klusters(filepath)
-		
-		units = open(os.path.join(os.path.dirname(filepath),'units.csv'),'w')
-		a = csv.writer(units) 
-		for u in data['units']:
-			for time in data[u]['times']:
-				a.writerow([u,time/20000.])
-		#a.writerows([[int(u)]+data[u]['times'] for u in data['units']])
-		units.close()
-		
-	
+    except:
+        print('doing it the old-fashioned way. no max channel data included.')
+        data = ephys.oe.load_kwik_klusters(filepath)
+        
+        units = open(os.path.join(os.path.dirname(filepath),'units.csv'),'w')
+        a = csv.writer(units) 
+        for u in data['units']:
+            for time in data[u]['times']:
+                a.writerow([u,time/20000.])
+        #a.writerows([[int(u)]+data[u]['times'] for u in data['units']])
+        units.close()
+        
+    
 #average the waveforms, by unit, in sorted data in a .kwik loaded in to a dictionary
 def averagewaveforms(data):
     units = data.keys()
@@ -349,7 +349,7 @@ def getwaveformspacetime(data,geometry,yrange=120):
                 matrix[row,column,timepoint] = float(waveform[timepoint])/float(yrange)
     return matrix[:,:,:]     
     
-     
+    
 #find the x and y position of an average waveform, given the probe geometry
 def getcentroid(waveform,geometry = np.array((np.linspace(1,128,128)[::2],np.linspace(1,128,128)[1::2]))):
     im = ()
@@ -385,7 +385,7 @@ def findcentroids(data,geometry,yrange=250,numpnts=37,numchannels=128):
                     data[unit]['centroid'] = findcentroid(data[unit]['waveform'],getwaveformspacetime(data[unit]['waveform'],geometry,yrange),numchannels=numchannels)
                 else:
                     data[unit]['centroid']=(0,0)
-					
+                    
 
 #read a .kwik and return a summary of the spikes within. 
 def spike_info_from_recording(folderpath,filename):
@@ -438,7 +438,7 @@ def spike_infolist(tupleofkwikfiles):
 #finds the number of channels that have an average waveform amplitude above 30uV
 #finds the peak-to-peak amplitude of the channel with the largest waveform
 def waveform_power(data,geometry=(np.linspace(1,128,128)[::2][::-1],np.linspace(1,128,128)[1::2][::-1])):
-   #set up the figure
+#set up the figure
     nrows = max(len(p) for p in geometry)
     ncols = np.shape(geometry)[0]
 #    fig = plt.figure(figsize = (2,12)) # set the figure size to be square
@@ -449,124 +449,124 @@ def waveform_power(data,geometry=(np.linspace(1,128,128)[::2][::-1],np.linspace(
     #add the data
     for column,c in enumerate(geometry):
         for row,channel in enumerate(c):
-           #plot
+        #plot
             #ax=plt.subplot(gs[nrows*column+row])
             p2p = np.abs(np.min(data[:,channel-1]) - np.max(data[:,channel-1]))
             if p2p > 30:
                 num_channels +=1
                 if p2p > amplitude:
                     amplitude = p2p
-     
+    
     return (num_channels,amplitude)
 
 #returns a list of tuples, containing unit IDs matched across two recordings
 #requires the data to have been sorted with phy
 def findMatchingUnits(pathToKwikOne,pathToKwikTwo):
-	#load the two recordings
-	data1 = physesssion(pathToKwikOne)
-	data2 = physesssion(pathToKwikTwo)
-	
-	#make ordered lists of the units from each recording that have been called 'good'
-	#the order is based on probe Y position, so that cells with similar positions on the probe can be compared.
-	ordered_list_data1 = [u for u in data1.store.model.cluster_ids[data1.store.mean_probe_position(data1.store.model.cluster_ids)[:,1].argsort()][::-1] if data1.store.model.cluster_groups[u] == 2][:data1.store.model.cluster_groups.values().count(2)]
-	ordered_list_data2 = [u for u in data2.store.model.cluster_ids[data2.store.mean_probe_position(data2.store.model.cluster_ids)[:,1].argsort()][::-1] if data2.store.model.cluster_groups[u] == 2][:data2.store.model.cluster_groups.values().count(2)]
-	
-	#find matches.
-	#developed in a notebook on 192079 binary noise; this simply subtracts the mean waveforms across recordings, and calls the smallest difference the closest match.
-	#if there is no close match [based on a heuristic], says there is no match. 
-	list_data1 = []
-	list_data2 = []
-	ds = []
-	for i,u in enumerate(ordered_list_data1):
-		#find the subsection of channels to look for the matching waveform
-		center = np.where(data1.store.mean_masks(u) == np.max(data1.store.mean_masks(u)))[0][0]
-		if center - 4 < 0 :
-			u_waveform = data1.store.mean_waveforms(u)[:,:center+4]
-	
-		else: 
-			if center + 4 > len(data1.store.mean_masks(u)):
-				u_waveform = data1.store.mean_waveforms(u)[:,center-4:]
-			else:
-				u_waveform = data1.store.mean_waveforms(u)[:,center-4:center+4]
-	
-		#select just the nearest [10] waveforms to test unless we're near the edges, in which case only 5 to test
-		start_testunit = 0 if i - 8 < 0 else i - 8
-		end_testunit = len(ordered_list_data2) if i + 8 > len(ordered_list_data2) else i + 8
-		testers = ordered_list_data2[start_testunit:end_testunit] # the closest 10 channels
-	
-		distances= []
-		for test_u in testers:
-			if center - 4 < 0 :
-				test_u_waveform = data2.store.mean_waveforms(test_u)[:,:center+4]
-			else:
-				try:
-					if center + 4 > len(data1.store.mean_masks(test_u)):
-						test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:]
-					else:
-						test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:center+4]
-				except:
-					test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:center+4]
-			if u_waveform.shape == test_u_waveform.shape:
-				d=np.mean(np.abs(u_waveform - test_u_waveform))
-			else:
-				d=10000#what? the shapes aren't the same. this doens't make sense. so just call it a very much not match.
-			distances.extend([d])
-		distance = np.min(distances)
-		match = testers[distances.index(distance)]
-	
-		#check to see if the best match is actually any good
-		#if not, add this unit with no match
-		if distance > 40.0:#match was no good; heuristic based on some examples and the distribution in the developmental dataset
-			match = -1
-			list_data1.extend([u]);list_data2.extend([None]);ds.extend([distance])
-	
-		else:#match was good
-			if match in list_data2:#we've already found a match within the set we're testing against
-				#find out which match is better, the one you just found or the one that is already found
-				previous_u = list_data1[list_data2.index(match)]
-				if center - 4 < 0 :
-					previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,4:center+4] - test_u_waveform)) 
-				else:
-					try:
-						if center + 4 > len(data1.store.mean_masks(test_u)):
-							previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:] - test_u_waveform)) 
-						else:
-							previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:center+4] - test_u_waveform)) 
-					except:
-							previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:center+4] - test_u_waveform)) 
-				if distance < previous_distance:#this match is better
-					#remove the old match
-					list_data1.remove(previous_u);list_data2.remove(match)
-	
-					#add this one
-					list_data1.extend([u]);list_data2.extend([match]);ds.extend([distance])
-	
-				else:#the old match is better
-					distances.remove(distance)#remove the best match
-					testers.remove(match)#remove the best match
-					if np.min(distances) < 40.0: # check if second best is any good
-						list_data1.extend([u]);list_data2.extend([testers[distances.index(np.min(distances))]]);ds.extend([distance])
-	
-					else:#there wasn't a good match, besides the one that matches someone else better.
-						list_data1.extend([u]);list_data2.extend([None]);ds.extend([distance])
-	
-			else: #this is the first match with the units we're testing against
-				list_data1.extend([u]);list_data2.extend([match]);ds.extend([distance])
+    #load the two recordings
+    data1 = physesssion(pathToKwikOne)
+    data2 = physesssion(pathToKwikTwo)
+    
+    #make ordered lists of the units from each recording that have been called 'good'
+    #the order is based on probe Y position, so that cells with similar positions on the probe can be compared.
+    ordered_list_data1 = [u for u in data1.store.model.cluster_ids[data1.store.mean_probe_position(data1.store.model.cluster_ids)[:,1].argsort()][::-1] if data1.store.model.cluster_groups[u] == 2][:data1.store.model.cluster_groups.values().count(2)]
+    ordered_list_data2 = [u for u in data2.store.model.cluster_ids[data2.store.mean_probe_position(data2.store.model.cluster_ids)[:,1].argsort()][::-1] if data2.store.model.cluster_groups[u] == 2][:data2.store.model.cluster_groups.values().count(2)]
+    
+    #find matches.
+    #developed in a notebook on 192079 binary noise; this simply subtracts the mean waveforms across recordings, and calls the smallest difference the closest match.
+    #if there is no close match [based on a heuristic], says there is no match. 
+    list_data1 = []
+    list_data2 = []
+    ds = []
+    for i,u in enumerate(ordered_list_data1):
+        #find the subsection of channels to look for the matching waveform
+        center = np.where(data1.store.mean_masks(u) == np.max(data1.store.mean_masks(u)))[0][0]
+        if center - 4 < 0 :
+            u_waveform = data1.store.mean_waveforms(u)[:,:center+4]
+    
+        else: 
+            if center + 4 > len(data1.store.mean_masks(u)):
+                u_waveform = data1.store.mean_waveforms(u)[:,center-4:]
+            else:
+                u_waveform = data1.store.mean_waveforms(u)[:,center-4:center+4]
+    
+        #select just the nearest [10] waveforms to test unless we're near the edges, in which case only 5 to test
+        start_testunit = 0 if i - 8 < 0 else i - 8
+        end_testunit = len(ordered_list_data2) if i + 8 > len(ordered_list_data2) else i + 8
+        testers = ordered_list_data2[start_testunit:end_testunit] # the closest 10 channels
+    
+        distances= []
+        for test_u in testers:
+            if center - 4 < 0 :
+                test_u_waveform = data2.store.mean_waveforms(test_u)[:,:center+4]
+            else:
+                try:
+                    if center + 4 > len(data1.store.mean_masks(test_u)):
+                        test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:]
+                    else:
+                        test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:center+4]
+                except:
+                    test_u_waveform = data2.store.mean_waveforms(test_u)[:,center-4:center+4]
+            if u_waveform.shape == test_u_waveform.shape:
+                d=np.mean(np.abs(u_waveform - test_u_waveform))
+            else:
+                d=10000#what? the shapes aren't the same. this doens't make sense. so just call it a very much not match.
+            distances.extend([d])
+        distance = np.min(distances)
+        match = testers[distances.index(distance)]
+    
+        #check to see if the best match is actually any good
+        #if not, add this unit with no match
+        if distance > 40.0:#match was no good; heuristic based on some examples and the distribution in the developmental dataset
+            match = -1
+            list_data1.extend([u]);list_data2.extend([None]);ds.extend([distance])
+    
+        else:#match was good
+            if match in list_data2:#we've already found a match within the set we're testing against
+                #find out which match is better, the one you just found or the one that is already found
+                previous_u = list_data1[list_data2.index(match)]
+                if center - 4 < 0 :
+                    previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,4:center+4] - test_u_waveform)) 
+                else:
+                    try:
+                        if center + 4 > len(data1.store.mean_masks(test_u)):
+                            previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:] - test_u_waveform)) 
+                        else:
+                            previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:center+4] - test_u_waveform)) 
+                    except:
+                            previous_distance = np.mean(np.abs(data1.store.mean_waveforms(previous_u)[:,center-4:center+4] - test_u_waveform)) 
+                if distance < previous_distance:#this match is better
+                    #remove the old match
+                    list_data1.remove(previous_u);list_data2.remove(match)
+    
+                    #add this one
+                    list_data1.extend([u]);list_data2.extend([match]);ds.extend([distance])
+    
+                else:#the old match is better
+                    distances.remove(distance)#remove the best match
+                    testers.remove(match)#remove the best match
+                    if np.min(distances) < 40.0: # check if second best is any good
+                        list_data1.extend([u]);list_data2.extend([testers[distances.index(np.min(distances))]]);ds.extend([distance])
+    
+                    else:#there wasn't a good match, besides the one that matches someone else better.
+                        list_data1.extend([u]);list_data2.extend([None]);ds.extend([distance])
+    
+            else: #this is the first match with the units we're testing against
+                list_data1.extend([u]);list_data2.extend([match]);ds.extend([distance])
 
-	#tack on the units from the recording tested against, with no match. 
-	for test_u in ordered_list_data2:
-		if test_u in list_data2:
-			pass
-		else:
-			list_data1.extend([None]);list_data2.extend([test_u])
-	data1.close();data2.close()		
-	return zip(list_data1,list_data2)
+    #tack on the units from the recording tested against, with no match. 
+    for test_u in ordered_list_data2:
+        if test_u in list_data2:
+            pass
+        else:
+            list_data1.extend([None]);list_data2.extend([test_u])
+    data1.close();data2.close()		
+    return zip(list_data1,list_data2)
 
 def temporal_to_nwb(exptpath,meta,output_filename='temporal_dataset.nwb'):
-	#requires sync .h5 in a subfolder called sync
-	#         stimulus pkls for contrast natural movies, repeated natural movie, and binary noise to be in a subfolder called stim
-	#         the kilosort .npy files in the base directory
-	
+    #requires sync .h5 in a subfolder called sync
+    #         stimulus pkls for contrast natural movies, repeated natural movie, and binary noise to be in a subfolder called stim
+    #         the kilosort .npy files in the base directory
+    
     syncdata = Dataset(glob.glob(exptpath+'/sync/*.h5')[0])
     #get the info from the events file (ephys)
     events = ephys.oe.loadEvents(os.path.join(exptpath,'experiment1_all_channels_0.events'))
@@ -601,11 +601,11 @@ def temporal_to_nwb(exptpath,meta,output_filename='temporal_dataset.nwb'):
     contrast_movies_starts[0]=movies_start_time
     contrast_movies_starts[1:]=bit1_rising[next_event_after_big_gap[1::2]] + sync_offset
     contrast_pkls = {'8': pkl.load(open(glob.glob(exptpath+'/stim/*_08-*.pkl')[0])),
-                   '16': pkl.load(open(glob.glob(exptpath+'/stim/*_16-*.pkl')[0])),
-                   '32': pkl.load(open(glob.glob(exptpath+'/stim/*_32-*.pkl')[0])),
-                   '64': pkl.load(open(glob.glob(exptpath+'/stim/*_64-*.pkl')[0])),
-                   '100': pkl.load(open(glob.glob(exptpath+'/stim/*_100-*.pkl')[0])),
-                   }
+                '16': pkl.load(open(glob.glob(exptpath+'/stim/*_16-*.pkl')[0])),
+                '32': pkl.load(open(glob.glob(exptpath+'/stim/*_32-*.pkl')[0])),
+                '64': pkl.load(open(glob.glob(exptpath+'/stim/*_64-*.pkl')[0])),
+                '100': pkl.load(open(glob.glob(exptpath+'/stim/*_100-*.pkl')[0])),
+                }
     contrast_times = {}
     for i,contrast in enumerate(['100','32','8','64','16']):
         contrast_times[contrast] = bit1_rising[np.where((bit1_rising + sync_offset > contrast_movies_starts[i]) & (bit1_rising + sync_offset < contrast_movies_starts[i+1]))[0]] + sync_offset
@@ -640,59 +640,59 @@ def temporal_to_nwb(exptpath,meta,output_filename='temporal_dataset.nwb'):
     # add stimulus stuff to nwb
     #spontaneous
     nwb_file.add_stimulus_information(np.array([spontaneous_start,spontaneous_end]),
-                                      data=np.array([1]),
-                                      start_time=0,
-                                      name='spontaneous epoch 1',
-                                      features=['none'],
-                                      features_units=['two timestamps, the beginning and end'])
+                                    data=np.array([1]),
+                                    start_time=0,
+                                    name='spontaneous epoch 1',
+                                    features=['none'],
+                                    features_units=['two timestamps, the beginning and end'])
     
     #flicker
     stimulus_movie = pkl.load(open('/Volumes/danmac1_data_local_1/M186117/17.17.1_M186117_2016-06-03_07-26-20_500_500_EXT_insertion2to3.2mm_frozen/2016-06-03-073856511000.pkl'))['flicker']
     nwb_file.add_stimulus_information(flicker_timestamps_s,
-                                      data=stimulus_movie,
-                                      start_time=0,
-                                      name='flicker',
-                                      features=['luminance'],
-                                      features_units=['luminance at 20Hz'])
+                                    data=stimulus_movie,
+                                    start_time=0,
+                                    name='flicker',
+                                    features=['luminance'],
+                                    features_units=['luminance at 20Hz'])
     #movie contrast
     toe2 = np.load('/Volumes/Public/Dan/ephys/TOE2.npy')
     for i,contrast in enumerate(contrast_pkls.keys()):
         movie_pkl = contrast_pkls[contrast]
         stimulus_movie = toe2
         nwb_file.add_stimulus_information(contrast_times[contrast] ,
-                                          data=np.array([1]),
-                                          start_time=0,
-                                          name='natural movie: TOE2 contrast: '+contrast,
-                                          features=['time-space-space'],
-                                          features_units=['luminance'])
+                                        data=np.array([1]),
+                                        start_time=0,
+                                        name='natural movie: TOE2 contrast: '+contrast,
+                                        features=['time-space-space'],
+                                        features_units=['luminance'])
     
     #binary
     stimulus_movie = pkl.load(open('/Volumes/Public/Dan/ephys/M227382/insertion2/stim/2016-08-08-120403155000.pkl')).T
     nwb_file.add_stimulus_information(binary_times,
-                                      data=stimulus_movie,
-                                      start_time=0,
-                                      name='binary',
-                                      features=['time-space-space'],
-                                      features_units=['luminance'])
+                                    data=stimulus_movie,
+                                    start_time=0,
+                                    name='binary',
+                                    features=['time-space-space'],
+                                    features_units=['luminance'])
     
     #movie x100
     movie_pkl = pkl.load(open(glob.glob(exptpath+'/stim/*_TOE2-*.pkl')[0]))
     #stimulus_movie = toe2
     nwb_file.add_stimulus_information(movie_times,
-                                      data=np.array([1]),
-                                      start_time=0,
-                                      name='natural movie: TOE2',
-                                      features=['time-space-space'],
-                                      features_units=['luminance'])
+                                    data=np.array([1]),
+                                    start_time=0,
+                                    name='natural movie: TOE2',
+                                    features=['time-space-space'],
+                                    features_units=['luminance'])
     
     #spontaneous
     spontaneous_start2 =movie_times[-1] #end of last stimulus
     nwb_file.add_stimulus_information(np.array([spontaneous_start2,spontaneous_start2+600.]),
-                                      data=np.array([0,1]),
-                                      start_time=0,
-                                      name='spontaneous epoch 2',
-                                      features=['none'],
-                                      features_units=['two timestamps, the beginning and end'])
+                                    data=np.array([0,1]),
+                                    start_time=0,
+                                    name='spontaneous epoch 2',
+                                    features=['none'],
+                                    features_units=['two timestamps, the beginning and end'])
 
     
     nwb_file.close()
@@ -790,17 +790,17 @@ def average_trials_array(data,timestamps,window,output='avg'):
     avgs = {}
     alltrials={}
     for i,key in enumerate(data.keys()):
-    	if 'data' in data[key].keys():
-	        avgs[key]={}
-	        alltrials[key]={}
-	        alltrials[key]['data'],avgs[key]['data'] = average_trials(data[key]['data'],timestamps,window)
+        if 'data' in data[key].keys():
+            avgs[key]={}
+            alltrials[key]={}
+            alltrials[key]['data'],avgs[key]['data'] = average_trials(data[key]['data'],timestamps,window)
     if output == 'trials':
         return alltrials
     if output == 'both':
         return (alltrials,avgs)
     if output=='avg':
         return avgs
-	
+    
 
 #note: this CSD code does not work! -dan
 def CSD_1D(data,channelmap=[],prefix='100_CH',point=1000):
@@ -872,32 +872,32 @@ def RMS(data,start=0,window=0,despike=False):
     return np.sqrt(sum(chunk*chunk)/float(len(chunk)))
 
 def despike_trace(trace,threshold_sd = 2.5,**kwargs):
-	if 'threshold' in kwargs.keys():
-		threshold = kwargs['threshold']
-	else:
-		threshold = np.mean(trace)+threshold_sd*np.std(trace)
-		
-	spike_times_a = plt.mlab.cross_from_below(trace,threshold)
-	spike_times_b = plt.mlab.cross_from_below(trace,-1*threshold)
-	for spike_time in np.concatenate((spike_times_b,spike_times_a)):
-		if spike_time > 30 and spike_time < len(trace)-30:
-			trace[spike_time - 20:spike_time + 20] = 0#np.random.uniform(-1*threshold,threshold,60)
-	return trace
+    if 'threshold' in kwargs.keys():
+        threshold = kwargs['threshold']
+    else:
+        threshold = np.mean(trace)+threshold_sd*np.std(trace)
+        
+    spike_times_a = plt.mlab.cross_from_below(trace,threshold)
+    spike_times_b = plt.mlab.cross_from_below(trace,-1*threshold)
+    for spike_time in np.concatenate((spike_times_b,spike_times_a)):
+        if spike_time > 30 and spike_time < len(trace)-30:
+            trace[spike_time - 20:spike_time + 20] = 0#np.random.uniform(-1*threshold,threshold,60)
+    return trace
 
 def spikeamplitudes_trace(trace,threshold_sd = 3.0,**kwargs):
-	if 'threshold' in kwargs.keys():
-		threshold = kwargs['threshold']
-	else:
-		threshold = np.mean(trace)+threshold_sd*np.std(trace)
-		
-	spike_times_a = plt.mlab.cross_from_below(trace,threshold)
-	amps=[]
-	for spike_time in spike_times_a:
-		if spike_time > 30 and spike_time < len(trace)-30:
-			amps.extend([np.max(np.abs(trace[spike_time-30:spike_time+30]))])
-	if not len(amps) > 0:
-		amps= [0]
-	return np.sort(amps)[len(amps)*0.9] / 5.0
+    if 'threshold' in kwargs.keys():
+        threshold = kwargs['threshold']
+    else:
+        threshold = np.mean(trace)+threshold_sd*np.std(trace)
+        
+    spike_times_a = plt.mlab.cross_from_below(trace,threshold)
+    amps=[]
+    for spike_time in spike_times_a:
+        if spike_time > 30 and spike_time < len(trace)-30:
+            amps.extend([np.max(np.abs(trace[spike_time-30:spike_time+30]))])
+    if not len(amps) > 0:
+        amps= [0]
+    return np.sort(amps)[len(amps)*0.9] / 5.0
 
 #returns the peak to peak range of the input data     
 def p2p(data,start=0,window=0):
@@ -1018,8 +1018,8 @@ def psth_line(times,triggers,pre=0.5,timeDomain=False,post=1,binsize=0.05,ymax=7
                 if float(trial_spike-t)/float(binsize) < float(numbins):
                     bytrial[i][(trial_spike-t)/binsize-1] +=1   
         else:
-        	 pass
-             #bytrial[i][:]=0
+            pass
+            #bytrial[i][:]=0
         #print('start: ' + str(start)+'   end: ' + str(end))
 
     variance = np.std(bytrial,axis=0)/binsize/np.sqrt((len(triggers)))
@@ -1078,7 +1078,7 @@ def psth_line(times,triggers,pre=0.5,timeDomain=False,post=1,binsize=0.05,ymax=7
         return (hist,edges)    
     if output == 'p':
         return (edges,hist,variance)
-	
+    
 #find the x and y position of an average waveform, given the probe geometry
 #plot is a bar plot
 def psth(times,triggers,timeDomain=False,pre=0.5,post=1,binsize=0.05,ymax=75,output='fig',name='',color=[1,1,1],axes=None,labels=True,sparse=False,labelsize=18):
@@ -1160,84 +1160,84 @@ def psthlist(timesdict,timeslist,onsets,pre=0.5,post=1,binsize=0.05,ymax=50,outp
     return fig
 
 def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='',alpha=0.5,ms=2,**kwargs):
-	post = post + 1
-	if timeDomain:
-		samplingRate = 1.0
-	else:
-		samplingRate = samplingRate
+    post = post + 1
+    if timeDomain:
+        samplingRate = 1.0
+    else:
+        samplingRate = samplingRate
         
-	times = np.array(times).astype(float) / samplingRate + pre
-	triggers = np.array(triggers).astype(float) / samplingRate
-	bytrial = [];
-	
-	if axes == None and output!='data':
-		plt.figure()
-		axes=plt.gca()
-		
-	for i,t in enumerate(triggers):
-		if len(np.where(times >= t - pre)[0]) > 0 and len(np.where(times >= t + post)[0]) > 0:
-			start = np.where(times >= t - pre)[0][0]
-			end = np.where(times >= t + post)[0][0]
-			bytrial.append(np.array(times[start:end-1])-t)
-			if output!='data':
-		#		print(np.ones(len(np.array(times[start:end-1])-t))*i+1)
-				axes.plot(np.array(times[start:end-1])-t,np.ones(len(np.array(times[start:end-1])-t))*i+1,"|",mew=0.5,ms=ms,color=color)
-	if output!='data':
-		#axes.set_xlim(-pre,post)
-		axes.set_title(name)
-	
-		if sparse:
-			cleanAxes(axes,total=True)
-		else:
-			if labels:
-				axes.set_xlabel(r'$time \/ [s]$',fontsize=16)
-				axes.set_ylabel(r'$trial \/ number$',fontsize=16)
-				axes.tick_params(axis='both',labelsize=labelsize)
-				axes.spines['top'].set_visible(False);axes.yaxis.set_ticks_position('left')
-				axes.spines['right'].set_visible(False);axes.xaxis.set_ticks_position('bottom')
-	if output == 'fig':
-		return (plt.gcf(),plt.gca())
-	if output=='data':
-		return bytrial
+    times = np.array(times).astype(float) / samplingRate + pre
+    triggers = np.array(triggers).astype(float) / samplingRate
+    bytrial = [];
+    
+    if axes == None and output!='data':
+        plt.figure()
+        axes=plt.gca()
+        
+    for i,t in enumerate(triggers):
+        if len(np.where(times >= t - pre)[0]) > 0 and len(np.where(times >= t + post)[0]) > 0:
+            start = np.where(times >= t - pre)[0][0]
+            end = np.where(times >= t + post)[0][0]
+            bytrial.append(np.array(times[start:end-1])-t)
+            if output!='data':
+        #		print(np.ones(len(np.array(times[start:end-1])-t))*i+1)
+                axes.plot(np.array(times[start:end-1])-t,np.ones(len(np.array(times[start:end-1])-t))*i+1,"|",mew=0.5,ms=ms,color=color)
+    if output!='data':
+        #axes.set_xlim(-pre,post)
+        axes.set_title(name)
+    
+        if sparse:
+            cleanAxes(axes,total=True)
+        else:
+            if labels:
+                axes.set_xlabel(r'$time \/ [s]$',fontsize=16)
+                axes.set_ylabel(r'$trial \/ number$',fontsize=16)
+                axes.tick_params(axis='both',labelsize=labelsize)
+                axes.spines['top'].set_visible(False);axes.yaxis.set_ticks_position('left')
+                axes.spines['right'].set_visible(False);axes.xaxis.set_ticks_position('bottom')
+    if output == 'fig':
+        return (plt.gcf(),plt.gca())
+    if output=='data':
+        return bytrial
 
 
 def raster_singletrial(cells,trigger,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='',alpha=0.5,**kwargs):
-	post = post + 1
-	if timeDomain:
-		samplingRate = 1.0
-	else:
-		samplingRate = samplingRate
+    post = post + 1
+    if timeDomain:
+        samplingRate = 1.0
+    else:
+        samplingRate = samplingRate
         
-	t = float(trigger) / samplingRate
-	bycell = [];
-	
-	if axes == None:
-		plt.figure()
-		axes=plt.gca()
-		
-	for i,cell in enumerate(cells.keys()):
-		times = cells[cell]['times']
-		if len(np.where(times >= t - pre)[0]) > 0 and len(np.where(times >= t + post)[0]) > 0:
-			start = np.where(times >= t - pre)[0][0]
-			end = np.where(times >= t + post)[0][0]
-			bycell.append(np.array(times[start:end-1])-t)
-			axes.plot(np.array(times[start:end-1])-t,np.ones(len(np.array(times[start:end-1])-t))*i+1,'|',linewidth=1,color=color50[i%50])
-	axes.set_xlim(-pre,post)
-	axes.set_title(name)
-	
-	if sparse:
-		cleanAxes(axes,total=True)
-	else:
-		if labels:
-			axes.set_xlabel(r'$time \/ [s]$',fontsize=16)
-			axes.set_ylabel(r'$cell \/ number$',fontsize=16)
-			axes.tick_params(axis='both',labelsize=labelsize)
-			axes.spines['top'].set_visible(False);axes.yaxis.set_ticks_position('left')
-			axes.spines['right'].set_visible(False);axes.xaxis.set_ticks_position('bottom')
-	if output == 'fig':
-		return (plt.gcf(),plt.gca())
-	if output=='data':
-		return bycell
+    t = float(trigger) / samplingRate
+    bycell = [];
+    
+    if axes == None:
+        plt.figure()
+        axes=plt.gca()
+        
+    for i,cell in enumerate(cells.keys()):
+        times = cells[cell]['times']
+        if len(np.where(times >= t - pre)[0]) > 0 and len(np.where(times >= t + post)[0]) > 0:
+            start = np.where(times >= t - pre)[0][0]
+            end = np.where(times >= t + post)[0][0]
+            bycell.append(np.array(times[start:end-1])-t)
+            axes.plot(np.array(times[start:end-1])-t,np.ones(len(np.array(times[start:end-1])-t))*i+1,'|',linewidth=1,color=color50[i%50])
+    axes.set_xlim(-pre,post)
+    axes.set_title(name)
+    
+    if sparse:
+        cleanAxes(axes,total=True)
+    else:
+        if labels:
+            axes.set_xlabel(r'$time \/ [s]$',fontsize=16)
+            axes.set_ylabel(r'$cell \/ number$',fontsize=16)
+            axes.tick_params(axis='both',labelsize=labelsize)
+            axes.spines['top'].set_visible(False);axes.yaxis.set_ticks_position('left')
+            axes.spines['right'].set_visible(False);axes.xaxis.set_ticks_position('bottom')
+    if output == 'fig':
+        return (plt.gcf(),plt.gca())
+    if output=='data':
+        return bycell
         
 
 
@@ -1340,11 +1340,7 @@ def ccg(train1,train2,binrange,binsize):
                     count+=1
         diffs = np.array(diffs)*-1
         hist,edges = np.histogram(diffs,bins=int((binrange[1]-binrange[0])/binsize),range=binrange)
-<<<<<<< Updated upstream
         return (hist / float(len(train1))),edges
-=======
-        return (hist / float(len(train1)))*100,edges
->>>>>>> Stashed changes
         #return (hist / float(len(train1)*len(train2) / 2.)  ,edges)
         #return ((hist / (len(train1) * len(train2)) / 2.)*100 * binsize,edges)
     else:
@@ -1364,11 +1360,11 @@ def sta(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None,
             if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
                 if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
                     if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.6:
-                         index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-                         avg += data[:,:,index]
+                        index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                        avg += data[:,:,index]
                 else:
-                	index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
-                	avg += data[:,:,index]
+                    index = (np.where(datatimes > (spiketime - tau*samplingRateInkHz))[0][0]-1) % np.shape(data)[2]
+                    avg += data[:,:,index]
                 count+=1
         output[str(int(tau))]=avg/count
     return output
@@ -1382,7 +1378,7 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
         taus = taus / 1000.
     else:
         taus = (taus * samplingRateInkHz)/1000.
-		
+        
     for tau in taus:
         avg = np.zeros(np.shape(data[0]))
         count = 0
@@ -1390,11 +1386,11 @@ def sta2(spiketimes,data,datatimes,taus=(np.linspace(-10,280,30)),exclusion=None
             if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
                 if exclusion is not None: #check to see if there is a period we are supposed to be ignoring, because of eye closing or otherwise
                     if spiketime > datatimes[0] and spiketime < datatimes[-1]-0.5:
-                         index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
-                         avg += data[index]
+                        index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
+                        avg += data[index]
                 else:
-                	index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
-                	avg += data[index]
+                    index = (np.where(datatimes > (spiketime - tau))[0][0]-1) % np.shape(data)[0]
+                    avg += data[index]
                 count+=1
         output[str(tau)]=avg/count
     return output
@@ -1432,24 +1428,24 @@ def sta_sparse(spiketimes,data,datatimes,datashape,sparseshape=(120,120),taus=(n
 #_____________
 #psth2 + psth2
 def ratio_responses(psth1,psth2,peak=None,window=5):
-	if peak is not None: # resample the input psths. if peak==None, don't resample
-		if peak == 'max':
-			if np.max(psth1) > np.max(psth2):
-				peak = int(np.where(psth1 == np.max(psth1))[0][0])
-			else:
-				peak = int(np.where(psth2 == np.max(psth2))[0][0])
-		if peak == 'rising':
-			peak = None
-			
-		if type(peak) == int: 	
-			pass
-		else:
-			print('error finding peak of response')
-			
-		psth1 = psth1[peak-window:peak+window]
-		psth2 = psth2[peak-window:peak+window]
-	
-	return (np.trapz(psth1) - np.trapz(psth2)) / (np.trapz(psth1) + np.trapz(psth2))
+    if peak is not None: # resample the input psths. if peak==None, don't resample
+        if peak == 'max':
+            if np.max(psth1) > np.max(psth2):
+                peak = int(np.where(psth1 == np.max(psth1))[0][0])
+            else:
+                peak = int(np.where(psth2 == np.max(psth2))[0][0])
+        if peak == 'rising':
+            peak = None
+            
+        if type(peak) == int: 	
+            pass
+        else:
+            print('error finding peak of response')
+            
+        psth1 = psth1[peak-window:peak+window]
+        psth2 = psth2[peak-window:peak+window]
+    
+    return (np.trapz(psth1) - np.trapz(psth2)) / (np.trapz(psth1) + np.trapz(psth2))
 
 def Welchs(a,b,equal_var=False,output=False):
     print('a: '+str(np.mean(a))+u' \u00B1 '+str(np.std(a)))
@@ -1484,8 +1480,8 @@ def getgratingparamtimes(param,value,times,stimpkl):
             print(''.join((param,' = ',str(value),' not found.')))
     else:
         print('number of times did not match number of gratings. ')
-		
-		
+        
+        
 #convenience function for checking the inter-stimulus times in a noise experiment
 #compares times in the stimulus pickle and those derived from a sync signal, usually in the ephys timebase.
 def checkTimes(ephys_times,pkl_times):
@@ -1531,8 +1527,8 @@ def placeAxesOnGrid(fig,dim=[1,1],xspan=[0,1],yspan=[0,1],wspace=None,hspace=Non
 
     outer_grid = gridspec.GridSpec(100,100)
     inner_grid = gridspec.GridSpecFromSubplotSpec(dim[0],dim[1],
-                                                  subplot_spec=outer_grid[int(100*yspan[0]):int(100*yspan[1]),int(100*xspan[0]):int(100*xspan[1])],
-                                                  wspace=wspace, hspace=hspace)
+                                                subplot_spec=outer_grid[int(100*yspan[0]):int(100*yspan[1]),int(100*xspan[0]):int(100*xspan[1])],
+                                                wspace=wspace, hspace=hspace)
     
 
     #NOTE: A cleaner way to do this is with list comprehension:
@@ -1562,7 +1558,7 @@ def showChunk(data,start,window,channelmap=[],prefix = '100_CH',filt=False,yrang
                 else:
                     response = data[prefix+str(channelmap[column][row]).replace(prefix,'')]['data'][start:start+window]  
                 if zero:
-                	response = response - response[0]
+                    response = response - response[0]
                 axes[row][column].plot(response)
                 axes[row][column].set_ylim(-yrange,yrange)
                 axes[row][column].text(10,100,'CH'+str(channelmap[column][row]))
@@ -1591,14 +1587,14 @@ def showChunk2(data,start,window,channelmap=[],prefix = '100_CH',filt=False,yran
         fig,axes = plt.subplots(1,ncols=np.shape(channelmap)[0])
         for row in range(np.shape(channelmap)[1]):
             for column in range(np.shape(channelmap)[0]):
-            	if vertline is not False:
-            		if row==0:
-            			if type(vertline) is tuple:
-            				for v in vertline:
-            					axes[column].axvline(x=v,axes=axes[column],color='r')
-            				axes[column].axvspan(vertline[0],vertline[1],axes=axes[column],facecolor='0.5',alpha=0.5)
-            			if type(vertline) is int:
-            				axes[column].axvline(x=vertline,axes=axes[column],color='r')
+                if vertline is not False:
+                    if row==0:
+                        if type(vertline) is tuple:
+                            for v in vertline:
+                                axes[column].axvline(x=v,axes=axes[column],color='r')
+                            axes[column].axvspan(vertline[0],vertline[1],axes=axes[column],facecolor='0.5',alpha=0.5)
+                        if type(vertline) is int:
+                            axes[column].axvline(x=vertline,axes=axes[column],color='r')
                 # if filt != False:
                 #     response = filterTrace(data[prefix+str(channelmap[column][row]).replace(prefix,'')]['data'],filt[0],filt[1],samplingRate,3)[start:start+window]
                 # else:
@@ -1613,7 +1609,7 @@ def showChunk2(data,start,window,channelmap=[],prefix = '100_CH',filt=False,yran
                 #     axes[column].set_xticks([])
                 #     axes[column].set_yticklabels('',visible=False)
                 #     axes[column].set_yticks([])
-				     
+                    
         fig.subplots_adjust(hspace=0)
         plt.tight_layout()
         plt.setp([a.get_xticklabels() for a in fig.axes[:-1]], visible=False)
@@ -1639,8 +1635,8 @@ def showData(data,channelmap=[],yrange=400,prefix = '100_CH',vertline=False, spa
         for column in range(cols):
             response = data[prefix+str(channelmap[column][row]).replace(prefix,'')]['data']
             if zero:
-            	response = response - response[0]
- #               2D[row,column,:]=response
+                response = response - response[0]
+#               2D[row,column,:]=response
             axes[row][column].plot(response,'-k')
             axes[row][column].set_ylim(-yrange,yrange)
             if vertline is not False:
@@ -1749,8 +1745,8 @@ def fit_rf_2Dgauss_centerFixed(data,center_guess,width_guess=2,height_guess=2):
     return popt,pcov,reshaped_to_space
 
 def impulse(sta,center,taus = np.arange(-10,580,10).astype(int)):
-	impulse = [sta[str(tau)][center[0]][center[1]] for tau in taus]
-	return (taus,impulse)
+    impulse = [sta[str(tau)][center[0]][center[1]] for tau in taus]
+    return (taus,impulse)
 
 
 #try to fit an already computed STRF by finding the maximum in space-time, fitting with a 2D gaussian in space-space, and pulling out the temporal kernel at the maximum space-space pixel.
@@ -1931,8 +1927,8 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
         
         ax_full_space.plot([fit['y']],[fit['x']],'k+',markersize=6.0)#([fit['center'][0]],[fit['center'][1]],'k+',markersize=6.0)
         ax_full_space.imshow(fit['avg_space'].T,
-           cmap=cmap,
-           vmin=colorrange[0],vmax=colorrange[1],
+        cmap=cmap,
+        vmin=colorrange[0],vmax=colorrange[1],
             interpolation='none');
         plt.setp(ax_full_space.get_xticklabels(),visible=False);ax_zoom_space_filtered.xaxis.set_major_locator(plt.NullLocator())
         plt.setp(ax_full_space.get_yticklabels(),visible=False);ax_zoom_space_filtered.yaxis.set_major_locator(plt.NullLocator())
@@ -1943,8 +1939,8 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
         
         zoom_size = 5 #number of pixels in each direction from peak center to keep in zooms
         ax_zoom_space.imshow(fit['avg_space'],
-                   cmap=cmap,
-                   vmin=colorrange[0],vmax=colorrange[1],
+                cmap=cmap,
+                vmin=colorrange[0],vmax=colorrange[1],
                     interpolation='none');
         #ax_zoom_space.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
         ax_zoom_space.set_xlim(fit['center'][1]-zoom_size,fit['center'][1]+zoom_size)
@@ -1954,8 +1950,8 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
         
 
         ax_zoom_space_filtered.imshow(smoothRF(fit['avg_space'],1),
-                   cmap=cmap,
-                   vmin=colorrange[0]/3.,vmax=colorrange[1]/3.,
+                cmap=cmap,
+                vmin=colorrange[0]/3.,vmax=colorrange[1]/3.,
                     interpolation='none');
         
         #ax_zoom_space_filtered.plot([fit['x']],[fit['y']],'k+',markersize=6.0)
@@ -1986,7 +1982,7 @@ def show_sta_fit(fit,colorrange=(0.35,0.65),cmap=plt.cm.seismic,title='',contour
                                 contour_levels)
                     ax_full_space.set_aspect('equal')   
 
-		#                   vmin=-0.08,vmax=0.08);
+        #                   vmin=-0.08,vmax=0.08);
         #plt.tight_layout()
         return fig
 
@@ -2137,12 +2133,12 @@ def summarize_color(data,unit,color_folder=''):
         data['all']['lgn'][unit]['isi'][1][np.where(np.logical_and(data['all']['lgn'][unit]['isi'][0]>-1.0,data['all']['lgn'][unit]['isi'][0]<1.0))]=0
     ax_isi.plot(data['all']['lgn'][unit]['isi'][1][1:],data['all']['lgn'][unit]['isi'][0],'k');cleanAxes(ax_isi,bottomLabels=True)
     dump = ephys.psth_line(np.array(data['all']['lgn'][unit]['times'])/25000.0,
-                             [0],
-                             pre=0,post=data['all']['lgn'][unit]['times'][-1]/25000.0 - 1,
-                             binsize=10,
-                             error='shaded',timeDomain=True,sparse=False,
-                             labelsize=8,axis_labelsize=10,
-                             axes=ax_time,color='k')
+                            [0],
+                            pre=0,post=data['all']['lgn'][unit]['times'][-1]/25000.0 - 1,
+                            binsize=10,
+                            error='shaded',timeDomain=True,sparse=False,
+                            labelsize=8,axis_labelsize=10,
+                            axes=ax_time,color='k')
     ax_time.set_ylim(0,np.max(plt.gca().get_lines()[0].get_ydata()))
     box_props = dict(boxstyle='round',fc='w',alpha=0.6)
     for i,start_time in enumerate(data['info']['start_times']):

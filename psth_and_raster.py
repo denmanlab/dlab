@@ -135,42 +135,32 @@ def psth(times,triggers,timeDomain=False,pre=0.5,post=1,binsize=0.05,ymax=75,out
         return peris
 
 def trial_by_trial(spike_times, event_times, pre, post, bin_size):
-    buffer      = 0
-    # pre         = pre  + buffer
-    # post        = post + buffer #Literal voodoo. If this is taken out, all PSTHs will have an empty bin for some reason.
     spike_times = np.array(spike_times).astype(float) + pre
     event_times = np.array(event_times).astype(float)
 
-    numbins  = np.ceil((pre+post)/bin_size).astype(int)-1
+    numbins  = np.round(np.ceil((pre+post)/bin_size)).astype(int)
+    edges    = np.linspace(-pre,post,numbins)
+    
     bytrial  = np.zeros((len(event_times),numbins))
     var      = np.zeros((numbins))
     psth     = np.zeros((numbins))
-    edges    = np.linspace(-pre,post,numbins)
+    
 
     for t,time in enumerate(event_times):
-        # if len(spike_times[(spike_times >= time-pre)&(spike_times <= time + post)]) > 0:
         if len(np.where(spike_times >= time - pre)[0]) > 0 and len(np.where(spike_times >= time + post)[0]) > 0:
-            start = np.where(spike_times >= time - pre)[0][0]
-            end   = np.where(spike_times >= time + post)[0][0]
+            start = np.where(spike_times >= (time - pre))[0][0]
+            end   = np.where(spike_times >= (time + post))[0][0]
                 
             for trial_spike in spike_times[start:end]:
-                if float(trial_spike-time)/float(bin_size) <= float(numbins):
-                    bytrial[t][int((trial_spike-time)/bin_size)] +=1   
+                b = np.round(np.ceil((trial_spike-time)/bin_size)).astype(int) - 1 #same way we calculate numbins
+                if b <= numbins:
+                    bytrial[t,:][b] +=1
         else:
             continue
-        
-    bytrial[:,0] = bytrial[:,3]
-    bytrial[:,1] = bytrial[:,3]
 
     var  = np.nanstd(bytrial,axis=0)/bin_size/np.sqrt(len(event_times))
     psth = np.nanmean(bytrial,axis=0)/bin_size
 
-    #constrain your psth to original pre/post size
-    bytrial = bytrial[:,(edges >= -(pre-buffer)) & (edges <= post)]
-    psth    = psth[     (edges >= -(pre-buffer)) & (edges <= post)]
-    var     = var[      (edges >= -(pre-buffer)) & (edges <= post)]
-    edges   = edges[    (edges >= -(pre-buffer)) & (edges <= post)] 
-        
     return psth, var, edges, bytrial
 
 def raster(times,triggers,pre=0.5,timeDomain=False,post=1,yoffset=0,output='fig',name='',color='#00cc00',linewidth=0.5,axes=None,labels=True,sparse=False,labelsize=18,axis_labelsize=20,error='',alpha=0.5,ms=2,**kwargs):
