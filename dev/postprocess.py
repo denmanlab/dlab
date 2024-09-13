@@ -54,8 +54,13 @@ class UnitData:
                             np.save('spike_seconds.npy',spike_times)
                         
                         except: 
-                            print('could not load timestamps.npy')
-                            spike_times = spike_times/self.sampling_rate
+                            print('could not load timestamps.npy, calculating from synch signals')
+                            events_path = os.path.join(glob(os.path.join(self.recording_path,'events','*Probe'+PROBE+'*'))[0],'TTL')
+                            spike_samples = np.load('spike_times.npy').flatten()
+                            samples = np.load(os.path.join(events_path,'sample_numbers.npy')).flatten()
+                            sample_times = np.load(os.path.join(events_path,'timestamps.npy')).flatten()
+                            start_sample = samples[0]
+                            spike_times = np.array([sample_times[np.where(samples < int(s + start_sample))[0][0]]  + ((int(s + start_sample)) - samples[np.where(samples < int(s + start_sample))[0][0]] )/30000. for s in spike_samples])
                             np.save('spike_seconds.npy',spike_times)
                             
 
