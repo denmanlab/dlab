@@ -1,13 +1,27 @@
 [project]
 name = "denmanlab"
-version = "0.4.6"
+version = "1.0.0"
 description = "library for neural data analysis in the Denman Lab, University of Colorado Anschutz Medical Campus"
 readme = "README.md"
 authors = [
     { name = "daniel denman", email = "daniel.denman@cuanschutz.edu" }
 ]
 requires-python = ">=3.10"
-dependencies = ['scipy', 'matplotlib', 'numpy','pandas','scikit-learn']
+dependencies = ['scipy', 
+                'matplotlib', 
+                'numpy',
+                'pandas',
+                'scikit-learn',
+                'seaborn',
+                'tqdm',
+                'h5py',
+                'scikit-image',
+                'opencv-python',
+                'pillow',
+                'pynwb',
+                'joblib',
+                'open-ephys-python-tools',
+                'spikeinterface']
 
 [build-system]
 requires = ["uv_build>=0.11.25,<0.12.0"]
