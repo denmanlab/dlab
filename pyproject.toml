@@ -1,0 +1,14 @@
+[project]
+name = "denmanlab"
+version = "0.4.5"
+description = "library for neural data analysis in the Denman Lab, University of Colorado Anschutz Medical Campus"
+readme = "README.md"
+authors = [
+    { name = "daniel denman", email = "daniel.denman@cuanschutz.edu" }
+]
+requires-python = ">=3.10"
+dependencies = ['scipy', 'matplotlib', 'numpy','pandas','scikit-learn']
+
+[build-system]
+requires = ["uv_build>=0.11.25,<0.12.0"]
+build-backend = "uv_build"
