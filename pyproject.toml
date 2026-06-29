@@ -1,6 +1,6 @@
 [project]
 name = "denmanlab"
-version = "0.4.5"
+version = "0.4.6"
 description = "library for neural data analysis in the Denman Lab, University of Colorado Anschutz Medical Campus"
 readme = "README.md"
 authors = [
