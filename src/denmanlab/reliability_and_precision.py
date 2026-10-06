@@ -4,8 +4,8 @@ from scipy import stats
 from scipy.signal import boxcar,convolve,correlate,resample,argrelextrema
 from scipy.cluster.vq import kmeans,kmeans2
 from scipy.stats import pearsonr
-from dlab import cleanAxes
-from dlab import psth_and_raster as psth_
+from denmanlab import cleanAxes
+from denmanlab import psth_and_raster as psth_
 
 def smooth_boxcar(data,boxcar_size):
     """smooths an impulse respone of an already computed receptive field. uses a boxcar to smooth.
