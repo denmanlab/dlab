@@ -1,4 +1,4 @@
-from dlab.generalephys import option234_positions
+from denmanlab.generalephys import option234_positions
 import numpy as np
 import os
 def load_phy_template(path,site_positions = option234_positions,**kwargs):
