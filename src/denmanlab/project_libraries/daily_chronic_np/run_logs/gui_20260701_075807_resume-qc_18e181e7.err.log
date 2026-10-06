@@ -1,0 +1,25 @@
+jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:   0%|          | 0/4 [00:00<?, ?phase/s]                                                                                           jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:   0%|          | 0/4 [00:00<?, ?phase/s]C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2504: UserWarning: Found no run_info file for spike_locations, extension should be re-computed.
+  warnings.warn(f"Found no run_info file for {self.extension_name}, extension should be re-computed.")
+C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2586: UserWarning: Found no data for spike_locations, extension should be re-computed.
+  warnings.warn(f"Found no data for {self.extension_name}, extension should be re-computed.")
+                                                                                           jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:   0%|          | 0/4 [00:01<?, ?phase/s]                                                                                           jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:   0%|          | 0/4 [00:01<?, ?phase/s]jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2504: UserWarning: Found no run_info file for spike_locations, extension should be re-computed.
+  warnings.warn(f"Found no run_info file for {self.extension_name}, extension should be re-computed.")
+C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2586: UserWarning: Found no data for spike_locations, extension should be re-computed.
+  warnings.warn(f"Found no data for {self.extension_name}, extension should be re-computed.")
+                                                                                                   jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.45s/phase]jlh60_2026-06-29_14-31-15_ProbeA:ProbeA:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.46s/phase]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 169, in <module>
+    main()
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 157, in main
+    completed = resume_qc_for_row(
+                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 65, in resume_qc_for_row
+    _compute_analyzer_extensions(
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 447, in _compute_analyzer_extensions
+    analyzer.delete_extension(extension)
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py", line 1961, in delete_extension
+    ext.delete()
+    ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'delete'

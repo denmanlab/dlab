@@ -1,0 +1,439 @@
+jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:   0%|          | 0/4 [00:00<?, ?phase/s]                                                                                           jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:   0%|          | 0/4 [00:00<?, ?phase/s]C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2504: UserWarning: Found no run_info file for spike_amplitudes, extension should be re-computed.
+  warnings.warn(f"Found no run_info file for {self.extension_name}, extension should be re-computed.")
+C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py:2586: UserWarning: Found no data for spike_amplitudes, extension should be re-computed.
+  warnings.warn(f"Found no data for {self.extension_name}, extension should be re-computed.")
+                                                                                           jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:   0%|          | 0/4 [00:01<?, ?phase/s]                                                                                           jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:   0%|          | 0/4 [00:01<?, ?phase/s]jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]                                                                                                   jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [00:01<00:04,  1.65s/phase]
+spike_amplitudes (workers: 4 processes spawn):   0%|          | 0/2501 [00:00<?, ?it/s][A
+spike_amplitudes (workers: 4 processes spawn):   0%|          | 10/2501 [00:04<17:02,  2.44it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|          | 14/2501 [00:08<25:46,  1.61it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|          | 18/2501 [00:12<31:12,  1.33it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|          | 22/2501 [00:16<34:54,  1.18it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 26/2501 [00:20<36:16,  1.14it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 27/2501 [00:20<33:24,  1.23it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 30/2501 [00:23<38:32,  1.07it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 31/2501 [00:24<35:06,  1.17it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 34/2501 [00:27<39:42,  1.04it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 35/2501 [00:27<35:33,  1.16it/s][A
+spike_amplitudes (workers: 4 processes spawn):   1%|1         | 37/2501 [00:28<27:11,  1.51it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 38/2501 [00:31<47:06,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 39/2501 [00:32<40:34,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 41/2501 [00:32<28:39,  1.43it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 42/2501 [00:35<50:13,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 43/2501 [00:36<41:48,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 45/2501 [00:36<28:22,  1.44it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 46/2501 [00:39<52:11,  1.28s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 47/2501 [00:40<42:48,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 49/2501 [00:40<28:00,  1.46it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|1         | 50/2501 [00:43<52:43,  1.29s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 51/2501 [00:44<44:35,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 53/2501 [00:44<27:40,  1.47it/s][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 54/2501 [00:47<52:48,  1.29s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 55/2501 [00:48<46:11,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 58/2501 [00:51<45:06,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 59/2501 [00:52<41:45,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):   2%|2         | 62/2501 [00:55<42:14,  1.04s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 63/2501 [00:56<39:48,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 66/2501 [00:59<41:16,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 67/2501 [01:00<39:14,  1.03it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 70/2501 [01:03<39:50,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 71/2501 [01:04<39:33,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 74/2501 [01:07<40:01,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|2         | 75/2501 [01:08<38:37,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 76/2501 [01:08<32:40,  1.24it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 78/2501 [01:11<43:28,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 79/2501 [01:12<41:17,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 80/2501 [01:12<33:28,  1.21it/s][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 82/2501 [01:15<43:58,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 83/2501 [01:16<42:32,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 86/2501 [01:19<42:04,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):   3%|3         | 87/2501 [01:19<39:13,  1.03it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 88/2501 [01:20<33:19,  1.21it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 90/2501 [01:23<42:41,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 91/2501 [01:23<39:48,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 92/2501 [01:24<33:30,  1.20it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 94/2501 [01:27<43:13,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 95/2501 [01:27<40:13,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 96/2501 [01:28<33:34,  1.19it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 98/2501 [01:31<44:05,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 99/2501 [01:31<40:24,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|3         | 100/2501 [01:32<33:06,  1.21it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 101/2501 [01:32<25:49,  1.55it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 102/2501 [01:35<51:49,  1.30s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 103/2501 [01:36<45:40,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 104/2501 [01:36<36:09,  1.10it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 106/2501 [01:39<51:26,  1.29s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 107/2501 [01:40<42:36,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 108/2501 [01:40<35:45,  1.12it/s][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 110/2501 [01:44<53:37,  1.35s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 111/2501 [01:44<42:32,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):   4%|4         | 112/2501 [01:45<36:46,  1.08it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 113/2501 [01:45<28:58,  1.37it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 114/2501 [01:49<1:01:23,  1.54s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 116/2501 [01:49<39:24,  1.01it/s]  [A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 117/2501 [01:49<31:00,  1.28it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 118/2501 [01:53<58:51,  1.48s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 120/2501 [01:53<38:53,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 121/2501 [01:54<31:07,  1.27it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 122/2501 [01:57<59:38,  1.50s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|4         | 124/2501 [01:58<40:08,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 126/2501 [02:02<52:29,  1.33s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 128/2501 [02:02<39:43,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 130/2501 [02:06<48:51,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 131/2501 [02:06<40:18,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 132/2501 [02:07<39:11,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 134/2501 [02:10<49:57,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 136/2501 [02:11<40:25,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):   5%|5         | 137/2501 [02:11<33:19,  1.18it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 138/2501 [02:15<57:53,  1.47s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 140/2501 [02:16<44:29,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 141/2501 [02:16<36:15,  1.08it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 142/2501 [02:20<57:52,  1.47s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 143/2501 [02:20<46:01,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 144/2501 [02:21<44:45,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 145/2501 [02:21<34:06,  1.15it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 146/2501 [02:24<57:23,  1.46s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 147/2501 [02:25<44:42,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 148/2501 [02:25<42:11,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 149/2501 [02:26<32:17,  1.21it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|5         | 150/2501 [02:29<1:00:25,  1.54s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 151/2501 [02:29<48:56,  1.25s/it]  [A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 152/2501 [02:30<45:37,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 153/2501 [02:31<35:56,  1.09it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 154/2501 [02:34<1:02:51,  1.61s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 155/2501 [02:35<50:07,  1.28s/it]  [A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 156/2501 [02:35<43:25,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 157/2501 [02:36<37:30,  1.04it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 158/2501 [02:39<59:26,  1.52s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 159/2501 [02:39<49:42,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 160/2501 [02:40<39:46,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 161/2501 [02:41<36:40,  1.06it/s][A
+spike_amplitudes (workers: 4 processes spawn):   6%|6         | 162/2501 [02:43<54:19,  1.39s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 163/2501 [02:44<47:22,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 164/2501 [02:44<36:25,  1.07it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 165/2501 [02:45<35:16,  1.10it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 166/2501 [02:47<53:19,  1.37s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 167/2501 [02:48<46:44,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 168/2501 [02:49<36:52,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 169/2501 [02:49<36:31,  1.06it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 170/2501 [02:52<52:32,  1.35s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 171/2501 [02:53<45:55,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 172/2501 [02:53<38:22,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 173/2501 [02:54<36:53,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 174/2501 [02:56<52:33,  1.36s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|6         | 175/2501 [02:57<47:02,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 176/2501 [02:58<40:24,  1.04s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 177/2501 [02:59<37:28,  1.03it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 178/2501 [03:01<54:50,  1.42s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 179/2501 [03:02<49:21,  1.28s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 180/2501 [03:03<42:16,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 181/2501 [03:03<38:30,  1.00it/s][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 182/2501 [03:06<52:39,  1.36s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 183/2501 [03:07<51:07,  1.32s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 184/2501 [03:08<44:43,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 185/2501 [03:08<38:49,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 186/2501 [03:10<50:45,  1.32s/it][A
+spike_amplitudes (workers: 4 processes spawn):   7%|7         | 187/2501 [03:11<46:59,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 188/2501 [03:12<43:04,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 189/2501 [03:13<38:52,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 190/2501 [03:15<50:04,  1.30s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 191/2501 [03:16<47:32,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 192/2501 [03:17<46:27,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 193/2501 [03:18<42:01,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 194/2501 [03:20<49:55,  1.30s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 195/2501 [03:21<48:25,  1.26s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 196/2501 [03:22<44:46,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 197/2501 [03:23<43:35,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 198/2501 [03:25<48:33,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 199/2501 [03:26<51:10,  1.33s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|7         | 200/2501 [03:27<47:01,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 201/2501 [03:28<46:34,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 202/2501 [03:29<46:57,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 203/2501 [03:31<46:28,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 204/2501 [03:32<42:58,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 205/2501 [03:33<42:18,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 206/2501 [03:34<44:44,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 207/2501 [03:35<48:27,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 208/2501 [03:36<43:25,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 209/2501 [03:37<42:51,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 210/2501 [03:39<45:38,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 211/2501 [03:40<46:51,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):   8%|8         | 212/2501 [03:41<42:54,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 213/2501 [03:42<43:34,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 214/2501 [03:43<44:54,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 215/2501 [03:45<45:54,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 216/2501 [03:45<41:49,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 217/2501 [03:47<42:22,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 218/2501 [03:48<45:13,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 219/2501 [03:49<45:26,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 220/2501 [03:50<40:53,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 221/2501 [03:51<42:58,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 222/2501 [03:53<46:12,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 223/2501 [03:54<45:27,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 224/2501 [03:55<40:53,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|8         | 225/2501 [03:56<42:31,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 226/2501 [03:57<42:59,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 227/2501 [03:58<43:38,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 228/2501 [03:59<40:29,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 229/2501 [04:00<40:09,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 230/2501 [04:01<44:05,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 231/2501 [04:02<42:09,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 232/2501 [04:03<39:44,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 233/2501 [04:05<40:29,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 234/2501 [04:06<45:30,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 235/2501 [04:07<44:37,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 236/2501 [04:08<42:14,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):   9%|9         | 237/2501 [04:09<40:24,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 238/2501 [04:10<43:37,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 239/2501 [04:12<43:27,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 240/2501 [04:13<42:26,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 241/2501 [04:14<41:46,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 242/2501 [04:15<45:14,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 243/2501 [04:16<45:10,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 244/2501 [04:17<43:10,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 245/2501 [04:18<40:37,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 246/2501 [04:20<46:57,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 247/2501 [04:21<46:09,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 248/2501 [04:22<44:06,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 249/2501 [04:23<40:37,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|9         | 250/2501 [04:24<43:39,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 251/2501 [04:26<45:02,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 252/2501 [04:27<44:25,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 253/2501 [04:28<41:40,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 254/2501 [04:29<44:25,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 255/2501 [04:30<46:13,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 256/2501 [04:32<44:30,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 257/2501 [04:33<42:59,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 258/2501 [04:34<43:23,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 259/2501 [04:35<44:14,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 260/2501 [04:36<42:12,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 261/2501 [04:37<41:52,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):  10%|#         | 262/2501 [04:38<41:01,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 263/2501 [04:39<42:38,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 264/2501 [04:40<40:50,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 265/2501 [04:41<39:23,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 266/2501 [04:43<40:11,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 267/2501 [04:44<44:23,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 268/2501 [04:45<40:59,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 269/2501 [04:46<39:02,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 270/2501 [04:47<36:52,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 271/2501 [04:48<38:58,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 272/2501 [04:49<38:10,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 273/2501 [04:50<36:47,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 274/2501 [04:50<32:33,  1.14it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#         | 275/2501 [04:52<38:15,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 276/2501 [04:53<40:34,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 277/2501 [04:54<38:04,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 278/2501 [04:54<32:33,  1.14it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 279/2501 [04:56<43:06,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 280/2501 [04:57<41:58,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 281/2501 [04:58<41:16,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 282/2501 [04:59<33:56,  1.09it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 283/2501 [05:01<43:35,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 284/2501 [05:02<42:09,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 285/2501 [05:03<40:49,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 286/2501 [05:03<33:44,  1.09it/s][A
+spike_amplitudes (workers: 4 processes spawn):  11%|#1        | 287/2501 [05:05<42:16,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 288/2501 [05:06<40:29,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 289/2501 [05:07<41:04,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 290/2501 [05:07<33:21,  1.10it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 291/2501 [05:09<41:30,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 292/2501 [05:10<40:26,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 293/2501 [05:11<41:30,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 294/2501 [05:12<33:43,  1.09it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 295/2501 [05:13<43:20,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 296/2501 [05:15<43:14,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 297/2501 [05:16<44:19,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 298/2501 [05:16<34:59,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 299/2501 [05:18<44:45,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#1        | 300/2501 [05:19<41:18,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 301/2501 [05:20<41:24,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 302/2501 [05:21<33:47,  1.08it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 303/2501 [05:22<42:55,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 304/2501 [05:23<40:42,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 305/2501 [05:24<40:16,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 306/2501 [05:25<33:15,  1.10it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 307/2501 [05:26<41:11,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 308/2501 [05:28<40:33,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 309/2501 [05:29<40:57,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 310/2501 [05:29<32:49,  1.11it/s][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 311/2501 [05:31<44:25,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  12%|#2        | 312/2501 [05:32<39:55,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 313/2501 [05:33<42:57,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 314/2501 [05:33<32:10,  1.13it/s][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 315/2501 [05:36<47:40,  1.31s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 316/2501 [05:37<43:07,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 317/2501 [05:38<44:22,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 318/2501 [05:38<33:46,  1.08it/s][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 319/2501 [05:40<44:21,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 320/2501 [05:41<38:00,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 321/2501 [05:42<43:16,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 322/2501 [05:42<32:18,  1.12it/s][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 323/2501 [05:45<51:32,  1.42s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 324/2501 [05:46<42:40,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#2        | 325/2501 [05:47<45:14,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 326/2501 [05:47<34:40,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 327/2501 [05:49<44:38,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 328/2501 [05:50<36:43,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 329/2501 [05:51<44:17,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 330/2501 [05:52<32:53,  1.10it/s][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 331/2501 [05:54<50:47,  1.40s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 332/2501 [05:55<42:28,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 333/2501 [05:56<47:34,  1.32s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 334/2501 [05:57<36:10,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 335/2501 [05:59<45:57,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 336/2501 [05:59<38:10,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):  13%|#3        | 337/2501 [06:02<51:45,  1.43s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 338/2501 [06:02<39:25,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 339/2501 [06:04<49:08,  1.36s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 340/2501 [06:04<40:36,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 341/2501 [06:06<44:48,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 342/2501 [06:06<33:50,  1.06it/s][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 343/2501 [06:08<46:09,  1.28s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 344/2501 [06:09<39:20,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 345/2501 [06:11<47:05,  1.31s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 346/2501 [06:11<36:19,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 347/2501 [06:13<44:29,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 348/2501 [06:13<38:54,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 349/2501 [06:15<44:18,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#3        | 350/2501 [06:15<33:56,  1.06it/s][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 351/2501 [06:17<42:22,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 352/2501 [06:18<37:32,  1.05s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 353/2501 [06:20<46:12,  1.29s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 354/2501 [06:20<36:18,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 355/2501 [06:22<43:44,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 356/2501 [06:23<39:44,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 357/2501 [06:24<43:45,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 358/2501 [06:25<35:18,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 359/2501 [06:26<43:18,  1.21s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 360/2501 [06:27<40:11,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 361/2501 [06:29<44:24,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  14%|#4        | 362/2501 [06:29<35:58,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 363/2501 [06:31<43:30,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 364/2501 [06:32<38:53,  1.09s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 365/2501 [06:33<44:44,  1.26s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 366/2501 [06:34<35:37,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 367/2501 [06:36<44:33,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 368/2501 [06:36<39:36,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 369/2501 [06:38<42:19,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 370/2501 [06:38<35:43,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 371/2501 [06:40<44:15,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 372/2501 [06:41<38:54,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 373/2501 [06:42<44:29,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 374/2501 [06:43<36:33,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#4        | 375/2501 [06:45<45:08,  1.27s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 376/2501 [06:46<39:37,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 377/2501 [06:47<44:23,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 378/2501 [06:48<35:36,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 379/2501 [06:49<43:55,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 380/2501 [06:50<39:42,  1.12s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 381/2501 [06:52<47:25,  1.34s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 382/2501 [06:53<37:50,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 383/2501 [06:54<43:21,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 384/2501 [06:55<40:31,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 385/2501 [06:56<42:18,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 386/2501 [06:57<34:06,  1.03it/s][A
+spike_amplitudes (workers: 4 processes spawn):  15%|#5        | 387/2501 [06:59<41:44,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 388/2501 [07:00<39:45,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 389/2501 [07:01<40:51,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 390/2501 [07:01<33:34,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 391/2501 [07:03<43:14,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 392/2501 [07:04<40:19,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 393/2501 [07:05<42:01,  1.20s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 394/2501 [07:06<34:34,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 395/2501 [07:08<46:09,  1.32s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 396/2501 [07:09<41:12,  1.17s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 397/2501 [07:10<41:26,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 398/2501 [07:11<34:40,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 399/2501 [07:12<44:01,  1.26s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#5        | 400/2501 [07:13<40:25,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 401/2501 [07:15<41:27,  1.18s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 402/2501 [07:15<34:20,  1.02it/s][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 403/2501 [07:17<42:29,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 404/2501 [07:18<38:40,  1.11s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 405/2501 [07:19<42:33,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 406/2501 [07:20<34:56,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 407/2501 [07:21<42:31,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 408/2501 [07:22<37:29,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 409/2501 [07:24<42:35,  1.22s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 410/2501 [07:24<34:20,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 411/2501 [07:26<39:30,  1.13s/it][A
+spike_amplitudes (workers: 4 processes spawn):  16%|#6        | 412/2501 [07:26<35:04,  1.01s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 413/2501 [07:28<41:18,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 414/2501 [07:28<33:08,  1.05it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 415/2501 [07:30<40:19,  1.16s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 416/2501 [07:31<35:48,  1.03s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 417/2501 [07:32<43:30,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 418/2501 [07:33<34:51,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 419/2501 [07:34<39:24,  1.14s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 420/2501 [07:35<34:10,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 421/2501 [07:36<38:17,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 422/2501 [07:37<30:32,  1.13it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 423/2501 [07:38<36:51,  1.06s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 424/2501 [07:39<32:42,  1.06it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#6        | 425/2501 [07:40<37:56,  1.10s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 426/2501 [07:41<29:00,  1.19it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 427/2501 [07:42<37:20,  1.08s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 428/2501 [07:43<33:25,  1.03it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 429/2501 [07:44<39:33,  1.15s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 430/2501 [07:45<29:38,  1.16it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 431/2501 [07:47<41:05,  1.19s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 432/2501 [07:47<34:07,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 433/2501 [07:49<43:10,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 435/2501 [07:51<42:39,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 436/2501 [07:52<35:41,  1.04s/it][A
+spike_amplitudes (workers: 4 processes spawn):  17%|#7        | 437/2501 [07:54<42:58,  1.25s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 438/2501 [07:54<34:05,  1.01it/s][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 439/2501 [07:56<42:14,  1.23s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 440/2501 [07:56<34:28,  1.00s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 441/2501 [07:58<45:22,  1.32s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 442/2501 [07:59<35:05,  1.02s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 443/2501 [08:01<45:29,  1.33s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 444/2501 [08:01<36:34,  1.07s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 445/2501 [08:03<42:22,  1.24s/it][A
+spike_amplitudes (workers: 4 processes spawn):  18%|#7        | 446/2501 [08:03<32:55,  1.04it/s][Aspike_amplitudes (workers: 4 processes spawn):  18%|#7        | 446/2501 [08:04<37:14,  1.09s/it]
+jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:resume_qc:  25%|##5       | 1/4 [08:46<26:19, 526.57s/phase]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 169, in <module>
+    main()
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 157, in main
+    completed = resume_qc_for_row(
+                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\resume_qc.py", line 65, in resume_qc_for_row
+    _compute_analyzer_extensions(
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 456, in _compute_analyzer_extensions
+    if skip_existing and _analyzer_has_extension(analyzer, extension):
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 513, in _compute_analyzer_extension
+    resolved_extension = extension_folder.resolve()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py", line 1644, in compute
+    return self.compute_one_extension(extension_name=input, save=save, verbose=verbose, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py", line 1731, in compute_one_extension
+    extension_instance.run(save=save, verbose=verbose, **job_kwargs)
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\sortinganalyzer.py", line 2642, in run
+    self._run(**kwargs)
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\analyzer_extension_core.py", line 1527, in _run
+    data = run_node_pipeline(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\node_pipeline.py", line 637, in run_node_pipeline
+    processor.run(recording_slices=recording_slices)
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\core\job_tools.py", line 546, in run
+    for res in results:
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\tqdm\std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\concurrent\futures\process.py", line 620, in _chain_from_iterable_of_lists
+    for element in iterable:
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\concurrent\futures\_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\concurrent\futures\_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\concurrent\futures\_base.py", line 451, in result
+    self._condition.wait(timeout)
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\threading.py", line 327, in wait
+    waiter.acquire()
+KeyboardInterrupt

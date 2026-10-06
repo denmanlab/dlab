@@ -1,0 +1,92 @@
+{"timestamp": "2026-09-17T05:36:03.426160+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "verify raw backup"}
+{"timestamp": "2026-09-17T05:36:03.426160+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START verify raw backup", "elapsed": "0.0s"}
+{"timestamp": "2026-09-17T05:36:03.484517+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "raw backup verified: \\\\denmanlab\\s2\\mouse_arena_recordings\\bp2_2026-09-15_10-26-21", "elapsed": "0.1s"}
+{"timestamp": "2026-09-17T05:36:03.556650+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "verify raw backup", "elapsed_seconds": 0.131}
+{"timestamp": "2026-09-17T05:36:03.556650+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE verify raw backup in 0.1s", "elapsed": "0.1s"}
+{"timestamp": "2026-09-17T05:36:03.557651+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "initialize output and registry"}
+{"timestamp": "2026-09-17T05:36:03.557651+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START initialize output and registry", "elapsed": "0.1s"}
+{"timestamp": "2026-09-17T05:36:03.592024+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "initialize output and registry", "elapsed_seconds": 0.036}
+{"timestamp": "2026-09-17T05:36:03.594532+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE initialize output and registry in 0.0s", "elapsed": "0.2s"}
+{"timestamp": "2026-09-17T05:36:03.594532+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "load Open Ephys recording and probe map"}
+{"timestamp": "2026-09-17T05:36:03.594532+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START load Open Ephys recording and probe map", "elapsed": "0.2s"}
+{"timestamp": "2026-09-17T05:36:04.702129+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "recording: 384 channels, 1908.2s, 30000.0 Hz", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.702129+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "load Open Ephys recording and probe map", "elapsed_seconds": 1.111}
+{"timestamp": "2026-09-17T05:36:04.702129+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE load Open Ephys recording and probe map in 1.1s", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.702129+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "validate geometry and compute hashes"}
+{"timestamp": "2026-09-17T05:36:04.707642+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START validate geometry and compute hashes", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.709651+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "validate geometry and compute hashes", "elapsed_seconds": 0.007}
+{"timestamp": "2026-09-17T05:36:04.709651+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE validate geometry and compute hashes in 0.0s", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.709651+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply Neuropixels phase shift"}
+{"timestamp": "2026-09-17T05:36:04.709651+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START apply Neuropixels phase shift", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.709651+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "phase_shift applied", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.717274+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply Neuropixels phase shift", "elapsed_seconds": 0.002}
+{"timestamp": "2026-09-17T05:36:04.717274+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE apply Neuropixels phase shift in 0.0s", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:04.717274+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply SpikeInterface CAR and plot traces"}
+{"timestamp": "2026-09-17T05:36:04.717274+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START apply SpikeInterface CAR and plot traces", "elapsed": "1.3s"}
+{"timestamp": "2026-09-17T05:36:06.717256+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "CAR operator=median; pre/post CAR plot: C:\\Users\\jordan\\Desktop\\mouse_arena_recordings\\bp2_2026-09-15_10-26-21\\Record Node 101\\experiment1\\recording1\\continuous\\Neuropix-PXI-100.ProbeA\\spikeinterface_output\\report\\figures\\pre_post_car_traces.png", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:06.719761+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply SpikeInterface CAR and plot traces", "elapsed_seconds": 2.001}
+{"timestamp": "2026-09-17T05:36:06.719761+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE apply SpikeInterface CAR and plot traces in 2.0s", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:06.720769+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply high-pass filter"}
+{"timestamp": "2026-09-17T05:36:06.720769+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START apply high-pass filter", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:06.723285+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "highpass_filter applied: freq_min=300 Hz", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:06.723285+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "apply high-pass filter", "elapsed_seconds": 0.004}
+{"timestamp": "2026-09-17T05:36:06.723285+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE apply high-pass filter in 0.0s", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:06.725292+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "detect bad channels"}
+{"timestamp": "2026-09-17T05:36:06.725292+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START detect bad channels", "elapsed": "3.3s"}
+{"timestamp": "2026-09-17T05:36:44.217417+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "bad channels detected: 382; excluded from sorting: 0", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.221306+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "detect bad channels", "elapsed_seconds": 37.495}
+{"timestamp": "2026-09-17T05:36:44.221306+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE detect bad channels in 37.5s", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.223315+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "optional SpikeInterface motion correction"}
+{"timestamp": "2026-09-17T05:36:44.223315+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START optional SpikeInterface motion correction", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.225825+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "using Kilosort4 drift correction", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.228347+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "optional SpikeInterface motion correction", "elapsed_seconds": 0.005}
+{"timestamp": "2026-09-17T05:36:44.230368+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE optional SpikeInterface motion correction in 0.0s", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.230368+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "prepare Kilosort4 parameters"}
+{"timestamp": "2026-09-17T05:36:44.230368+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START prepare Kilosort4 parameters", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.237091+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0", "elapsed": "40.8s"}
+{"timestamp": "2026-09-17T05:36:44.316243+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "prepare Kilosort4 parameters", "elapsed_seconds": 0.092}
+{"timestamp": "2026-09-17T05:36:44.316243+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE prepare Kilosort4 parameters in 0.1s", "elapsed": "40.9s"}
+{"timestamp": "2026-09-17T05:36:44.316243+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "run Kilosort4"}
+{"timestamp": "2026-09-17T05:36:44.316243+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START run Kilosort4", "elapsed": "40.9s"}
+{"timestamp": "2026-09-17T06:21:25.179687+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "Kilosort4 units: 100", "elapsed": "45m21s"}
+{"timestamp": "2026-09-17T06:21:25.179687+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "run Kilosort4", "elapsed_seconds": 2680.835}
+{"timestamp": "2026-09-17T06:21:25.179687+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE run Kilosort4 in 44m40s", "elapsed": "45m21s"}
+{"timestamp": "2026-09-17T06:21:25.179687+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "compute SortingAnalyzer extensions"}
+{"timestamp": "2026-09-17T06:21:25.179687+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START compute SortingAnalyzer extensions", "elapsed": "45m21s"}
+{"timestamp": "2026-09-17T06:55:42.462848+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2", "elapsed": "1h19m38s"}
+{"timestamp": "2026-09-17T06:55:42.464858+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: random_spikes", "elapsed": "1h19m38s"}
+{"timestamp": "2026-09-17T06:55:42.480079+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: waveforms", "elapsed": "1h19m39s"}
+{"timestamp": "2026-09-17T07:15:41.006810+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: templates", "elapsed": "1h39m37s"}
+{"timestamp": "2026-09-17T07:15:41.589284+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: noise_levels", "elapsed": "1h39m38s"}
+{"timestamp": "2026-09-17T07:16:17.918400+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: spike_amplitudes", "elapsed": "1h40m14s"}
+{"timestamp": "2026-09-17T07:49:23.505085+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: unit_locations", "elapsed": "2h13m19s"}
+{"timestamp": "2026-09-17T07:49:24.162125+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: spike_locations", "elapsed": "2h13m20s"}
+{"timestamp": "2026-09-17T08:21:14.024450+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: principal_components", "elapsed": "2h45m10s"}
+{"timestamp": "2026-09-17T08:35:58.530245+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: correlograms", "elapsed": "2h59m54s"}
+{"timestamp": "2026-09-17T08:35:59.675701+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: isi_histograms", "elapsed": "2h59m56s"}
+{"timestamp": "2026-09-17T08:35:59.828197+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: quality_metrics", "elapsed": "2h59m56s"}
+{"timestamp": "2026-09-17T09:15:05.386749+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "compute analyzer extension: template_metrics", "elapsed": "3h39m01s"}
+{"timestamp": "2026-09-17T09:15:06.183519+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "compute SortingAnalyzer extensions", "elapsed_seconds": 10420.823}
+{"timestamp": "2026-09-17T09:15:06.183519+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE compute SortingAnalyzer extensions in 2h53m40s", "elapsed": "3h39m02s"}
+{"timestamp": "2026-09-17T09:15:06.183519+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "export metrics and static report"}
+{"timestamp": "2026-09-17T09:15:06.183519+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START export metrics and static report", "elapsed": "3h39m02s"}
+{"timestamp": "2026-09-17T09:15:11.998945+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "export metrics and static report", "elapsed_seconds": 5.809}
+{"timestamp": "2026-09-17T09:15:11.998945+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE export metrics and static report in 5.8s", "elapsed": "3h39m08s"}
+{"timestamp": "2026-09-17T09:15:12.000954+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "export Phy"}
+{"timestamp": "2026-09-17T09:15:12.000954+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START export Phy", "elapsed": "3h39m08s"}
+{"timestamp": "2026-09-17T09:15:12.000954+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "Phy export will reuse existing analyzer extension: spike_amplitudes", "elapsed": "3h39m08s"}
+{"timestamp": "2026-09-17T09:15:12.000954+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "Phy export will skip pc_features.npy because qc.phy_compute_pc_features=false", "elapsed": "3h39m08s"}
+{"timestamp": "2026-09-17T09:15:21.979825+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "Phy dat_path patched to original recording: C:\\Users\\jordan\\Desktop\\mouse_arena_recordings\\bp2_2026-09-15_10-26-21\\Record Node 101\\experiment1\\recording1\\continuous\\Neuropix-PXI-100.ProbeA\\continuous.dat", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:21.993806+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "wrote Phy UnitRefine TSVs: cluster_unitrefine_label.tsv, cluster_unitrefine_probability.tsv", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:21.993806+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "export Phy", "elapsed_seconds": 9.999}
+{"timestamp": "2026-09-17T09:15:21.993806+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE export Phy in 10.0s", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:21.993806+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "finalize manifest and registry"}
+{"timestamp": "2026-09-17T09:15:21.993806+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START finalize manifest and registry", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "finalize manifest and registry", "elapsed_seconds": 0.493}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE finalize manifest and registry in 0.5s", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "phase_started", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "backup completed outputs"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "START backup completed outputs", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "generated-output backup disabled", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "full local recording archive disabled", "elapsed": "3h39m18s"}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "phase_completed", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "name": "backup completed outputs", "elapsed_seconds": 0.003}
+{"timestamp": "2026-09-17T09:15:22.493583+00:00", "event": "message", "label": "bp2_2026-09-15_10-26-21_ProbeA:ProbeA", "message": "DONE backup completed outputs in 0.0s", "elapsed": "3h39m18s"}

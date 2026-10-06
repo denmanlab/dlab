@@ -1,0 +1,5 @@
+jlh60_2026-06-29_14-31-15_ProbeA | ProbeA | skipped | raw=incomplete | missing recording_complete.txt
+jlh60_2026-06-29_14-31-15_ProbeB | ProbeB | skipped | raw=incomplete | missing recording_complete.txt
+jlh60_2026-07-01_13-49-41_ProbeA | ProbeA | registered | raw=complete | ready for preprocessing; accepted by inactive fallback (60 min); ProbeInterface JSON generated from Open Ephys metadata
+jlh60_2026-07-01_13-49-41_ProbeB | ProbeB | registered | raw=complete | ready for preprocessing; accepted by inactive fallback (60 min); ProbeInterface JSON generated from Open Ephys metadata
+updated C:\Users\jordan\daily_chronic_np\registry\sessions.csv (4 row(s))

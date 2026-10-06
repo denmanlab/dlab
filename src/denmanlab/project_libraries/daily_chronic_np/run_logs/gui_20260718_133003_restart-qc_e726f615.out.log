@@ -1,0 +1,13 @@
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: START validate existing Kilosort output
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: Kilosort output: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_14-11-02_visualstim\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeA\spikeinterface_output\kilosort4
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: DONE validate existing Kilosort output in 0.0s
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: START archive existing QC outputs
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: archive report
+[0.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: archived previous QC outputs: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_14-11-02_visualstim\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeA\spikeinterface_output\qc_archive\20260718_133009
+[0.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: DONE archive existing QC outputs in 0.1s
+[0.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: START rebuild preprocessed recording view
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: recording: 384 channels, 486.2s, 30000.0 Hz
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: DONE rebuild preprocessed recording view in 0.6s
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: START load Kilosort sorting and compute analyzer
+[1.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: Kilosort units: 193
+[1.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeA:ProbeA:restart_qc: FAILED load Kilosort sorting and compute analyzer after 0.4s

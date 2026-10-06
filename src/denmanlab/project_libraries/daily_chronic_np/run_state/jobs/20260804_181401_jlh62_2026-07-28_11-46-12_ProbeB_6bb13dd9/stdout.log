@@ -1,0 +1,68 @@
+[0.0s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START verify raw backup
+[0.1s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh62_2026-07-28_11-46-12
+[0.2s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE verify raw backup in 0.2s
+[0.2s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START initialize output and registry
+[0.2s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE initialize output and registry in 0.0s
+[0.2s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START load Open Ephys recording and probe map
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: recording: 384 channels, 2145.5s, 30000.0 Hz
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE load Open Ephys recording and probe map in 1.5s
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START validate geometry and compute hashes
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE validate geometry and compute hashes in 0.0s
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START apply Neuropixels phase shift
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: phase_shift applied
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE apply Neuropixels phase shift in 0.0s
+[1.7s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START apply SpikeInterface CAR and plot traces
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-28_11-46-12\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\report\figures\pre_post_car_traces.png
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE apply SpikeInterface CAR and plot traces in 2.7s
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START apply high-pass filter
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: highpass_filter applied: freq_min=300 Hz
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE apply high-pass filter in 0.0s
+[4.4s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START detect bad channels
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: bad channels detected: 379; excluded from sorting: 0
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE detect bad channels in 41.0s
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START optional SpikeInterface motion correction
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: using Kilosort4 drift correction
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE optional SpikeInterface motion correction in 0.0s
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START prepare Kilosort4 parameters
+[45.5s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[45.6s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE prepare Kilosort4 parameters in 0.1s
+[45.6s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START run Kilosort4
+Skipping common average reference.
+kilosort4 run time 1189.23s
+[56m52s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: Kilosort4 units: 237
+[56m52s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE run Kilosort4 in 56m06s
+[56m52s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START compute SortingAnalyzer extensions
+[1h47m05s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2
+[1h47m05s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: random_spikes
+[1h47m05s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: waveforms
+[2h11m25s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: templates
+[2h11m26s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: noise_levels
+[2h12m11s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: spike_amplitudes
+[2h12m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: spike_amplitudes failed with multiprocessing error ([Errno 22] Invalid argument); retrying with chunk_duration=1s, n_jobs=2, progress_bar=True
+[2h12m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: SpikeInterface could not delete partial spike_amplitudes; removing extension folder
+[2h34m12s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: using fallback SortingAnalyzer job kwargs for remaining extensions: chunk_duration=1s, n_jobs=2, progress_bar=True
+[2h34m12s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: unit_locations
+[2h34m20s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: spike_locations
+[3h24m35s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: principal_components
+[4h01m16s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: correlograms
+[4h01m19s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: isi_histograms
+[4h01m19s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: quality_metrics
+[8h58m28s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: compute analyzer extension: template_metrics
+[8h58m30s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE compute SortingAnalyzer extensions in 8h01m38s
+[8h58m30s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START export metrics and static report
+[8h58m39s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE export metrics and static report in 9.0s
+[8h58m39s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START export Phy
+[8h58m39s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: Phy export will reuse existing analyzer extension: spike_amplitudes
+[8h58m39s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: Phy export will skip pc_features.npy because qc.phy_compute_pc_features=false
+Run:
+phy template-gui  C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-28_11-46-12\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\phy\params.py
+[8h58m50s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: Phy dat_path patched to original recording: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-28_11-46-12\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\continuous.dat
+[8h58m50s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: wrote Phy UnitRefine TSVs: cluster_unitrefine_label.tsv, cluster_unitrefine_probability.tsv
+[8h58m50s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE export Phy in 11.3s
+[8h58m50s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START finalize manifest and registry
+[8h58m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE finalize manifest and registry in 0.1s
+[8h58m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: START backup completed outputs
+[8h58m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: generated-output backup disabled
+[8h58m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: full local recording archive disabled
+[8h58m51s] jlh62_2026-07-28_11-46-12_ProbeB:ProbeB: DONE backup completed outputs in 0.0s
+jlh62_2026-07-28_11-46-12_ProbeB | ProbeB | complete

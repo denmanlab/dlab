@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 520, in <module>
+    main()
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 516, in main
+    worker.run(once=args.once)
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 70, in run
+    self._process_recording(item)
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 138, in _process_recording
+    success = self._process_probe(item, row)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 277, in _process_probe
+    self._update_registry_runtime(row, current_step=str(latest.get("name") or action))
+  File "C:\Users\jordan\daily_chronic_np\pipeline\queue_worker.py", line 380, in _update_registry_runtime
+    update_row(load_config(self.config_path)["project"]["registry_csv"], updated)
+  File "C:\Users\jordan\daily_chronic_np\pipeline\registry.py", line 165, in update_row
+    upsert_rows(path, [row])
+  File "C:\Users\jordan\daily_chronic_np\pipeline\registry.py", line 158, in upsert_rows
+    os.replace(temp_name, registry_path)
+PermissionError: [WinError 5] Access is denied: '\\\\denmanlab\\s2\\mouse_arena_recordings\\_pipeline_registry\\.sessions.csv.t5fnglxp.tmp' -> '\\\\denmanlab\\s2\\mouse_arena_recordings\\_pipeline_registry\\sessions.csv'

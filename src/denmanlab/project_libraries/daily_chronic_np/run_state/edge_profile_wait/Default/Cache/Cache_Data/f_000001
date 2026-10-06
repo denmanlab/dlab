@@ -1,0 +1,381 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SpikeInterface Pipeline</title>
+    <link rel="stylesheet" href="/static/styles.css?v=20260717a" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Mouse Arena Processing</h1>
+        <p id="subtitle">Recording queue and probe workflows</p>
+      </div>
+      <div class="top-actions">
+        <button id="refresh" type="button" title="Refresh">Refresh View</button>
+        <button type="button" data-job="discover">Scan Recordings</button>
+        <label class="compact-select">Profile <select id="queue-profile-select"></select></label>
+        <button id="queue-all" type="button" class="primary">Queue All Eligible</button>
+        <button id="pause-queue" type="button">Pause After Probe</button>
+        <button id="resume-queue" type="button">Resume Queue</button>
+      </div>
+    </header>
+    <div id="worker-strip" class="worker-strip">Queue worker loading...</div>
+
+    <nav class="tabs" aria-label="Main views">
+      <button class="tab active" type="button" data-tab="overview">Queue</button>
+      <button class="tab" type="button" data-tab="workflow">Probe Detail</button>
+      <button class="tab" type="button" data-tab="nwb">NWB</button>
+      <button class="tab" type="button" data-tab="logs">Activity</button>
+      <button class="tab" type="button" data-tab="config">Settings</button>
+      <button class="tab" type="button" data-tab="reports">Reports</button>
+    </nav>
+
+    <main class="workspace">
+      <section id="overview" class="tab-panel active">
+        <div class="panel">
+          <div class="section-header">
+            <div>
+              <h2>Recording Queue</h2>
+              <p class="muted">Each Open Ephys experiment/recording block is one item. Expand it to inspect ProbeA and ProbeB.</p>
+            </div>
+            <span id="running-badge" class="badge">checking</span>
+          </div>
+          <div class="registry-filters">
+            <label>
+              Mouse
+              <select id="mouse-filter"></select>
+            </label>
+            <label>
+              Recording date
+              <select id="date-filter"></select>
+            </label>
+          </div>
+          <div id="undiscovered-banner" class="warning-box"></div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mouse</th>
+                  <th>Date / time</th>
+                  <th>Block</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                  <th>Probes</th>
+                  <th>Profile / queue</th>
+                  <th>Outputs</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="recording-body"></tbody>
+            </table>
+          </div>
+          <div class="queue-footer">
+            <button id="reconcile-interrupted" type="button">Reconcile Interrupted Jobs</button>
+            <span class="muted">Short survey blocks stay visible but are excluded from Queue All Eligible.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="tab-panel">
+        <div class="workflow-layout">
+          <aside class="panel selector-panel">
+            <h2>Probe</h2>
+            <select id="session-select"></select>
+            <div id="probe-summary" class="summary-box"></div>
+          </aside>
+
+          <section class="panel workflow-panel">
+            <div class="section-header">
+              <h2>Workflow</h2>
+              <span id="selected-status" class="badge">n/a</span>
+            </div>
+            <div id="workflow-steps" class="workflow-steps"></div>
+            <div class="step-actions">
+              <button id="run-one" type="button" class="primary">Queue This Probe</button>
+              <button id="resume-qc" type="button">Continue From Failure</button>
+              <button id="restart-qc" type="button" class="danger">Restart QC From Kilosort</button>
+              <button id="unitrefine" type="button">Run UnitRefine</button>
+              <button id="export-phy" type="button">Export Phy</button>
+              <button id="export-nwb" type="button">Export NWB</button>
+              <button type="button" data-job="backup-derived">Backup Generated Outputs</button>
+              <button type="button" data-job="write-summary-png">Backfill Reports</button>
+            </div>
+            <details class="advanced">
+              <summary>Run QC variant</summary>
+              <label>
+                Variant name
+                <input id="variant-name" type="text" value="fast_phy_no_pc" />
+              </label>
+              <label>
+                n_jobs
+                <input id="variant-n-jobs" type="number" min="1" step="1" value="8" />
+              </label>
+              <label>
+                Quality metric names
+                <input id="variant-metrics" type="text" value="firing_rate,presence_ratio,snr,isi_violations_ratio,rp_contamination,sliding_rp_violation,amplitude_cutoff,amplitude_median" />
+              </label>
+              <label class="checkbox">
+                <input id="variant-spike-locations" type="checkbox" checked />
+                Compute spike_locations
+              </label>
+              <label class="checkbox">
+                <input id="variant-principal-components" type="checkbox" checked />
+                Compute principal_components
+              </label>
+              <label class="checkbox">
+                <input id="variant-phy-pc-features" type="checkbox" />
+                Export Phy pc_features.npy
+              </label>
+              <label class="checkbox">
+                <input id="variant-skip-phy" type="checkbox" />
+                Skip Phy export
+              </label>
+              <button id="run-qc-variant" type="button">Run QC Variant</button>
+            </details>
+          </section>
+
+          <section class="panel outputs-panel">
+            <h2>Outputs And Files</h2>
+            <div id="probe-files" class="file-grid"></div>
+            <h2>Timing</h2>
+            <div id="timing-list" class="timing-list"></div>
+            <h2>Analyzer Extensions</h2>
+            <div id="extension-list" class="extension-grid"></div>
+            <h2>QC Variants</h2>
+            <div id="variant-list" class="variant-list"></div>
+            <div id="probe-error" class="error-box"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="nwb" class="tab-panel">
+        <div class="workflow-layout">
+          <aside class="panel selector-panel nwb-sidebar">
+            <h2>Recording</h2>
+            <p class="muted">NWB outputs are recording-level and combine units from all registered probes.</p>
+            <select id="nwb-recording-select"></select>
+            <div id="nwb-session-summary" class="summary-box"></div>
+
+            <div class="control-group">
+              <div class="control-title">Stimulus And Trials</div>
+              <button id="write-stimulus" type="button" class="primary">Create Trials CSV From Raw/Behavior</button>
+              <div id="stimulus-write-status" class="muted"></div>
+              <button id="load-default-stimulus" type="button">Load Default Trials CSV</button>
+              <button id="load-existing-stimulus" type="button">Choose External Trials CSV</button>
+              <button id="clear-trials-override" type="button">Clear External Trials CSV</button>
+              <input id="trials-csv-input" class="hidden-file-input" type="file" accept=".csv,text/csv" />
+              <button id="load-stimulus" type="button" class="secondary-action">Preview Trials From Raw/Behavior</button>
+              <details class="advanced">
+                <summary>Save one digital event stream</summary>
+                <label>
+                  Event
+                  <select id="digital-event-name"></select>
+                </label>
+                <label>
+                  Output name
+                  <input id="digital-output-name" type="text" value="gameframe" />
+                </label>
+                <button id="save-digital-event" type="button">Save Selected .npy</button>
+                <div id="digital-save-status" class="muted"></div>
+              </details>
+            </div>
+
+            <div class="control-group">
+              <div class="control-title">Units</div>
+              <button id="write-units" type="button" class="primary">Create Units CSV From Sorter/QC</button>
+              <div id="units-write-status" class="muted"></div>
+              <button id="load-default-units" type="button">Load Default Units CSV</button>
+              <button id="load-existing-units" type="button">Choose External Units CSV</button>
+              <button id="clear-units-override" type="button">Clear External Units CSV</button>
+              <input id="units-csv-input" class="hidden-file-input" type="file" accept=".csv,text/csv" />
+              <button id="load-units" type="button" class="secondary-action">Preview Units From Sorter/QC</button>
+            </div>
+
+            <div class="control-group">
+              <div class="section-header">
+                <h2>NWB Metadata</h2>
+                <span id="nwb-metadata-status" class="badge">config</span>
+              </div>
+              <div class="metadata-grid compact-metadata">
+                <label>Subject ID<input id="nwb-subject-id" type="text" /></label>
+                <label>Date of birth<input id="nwb-subject-dob" type="text" placeholder="YYYY-MM-DD" /></label>
+                <label>Computed age<input id="nwb-subject-age" type="text" placeholder="auto" readonly /></label>
+                <label>Sex<input id="nwb-subject-sex" type="text" placeholder="F, M, U, O" /></label>
+                <label>Strain<input id="nwb-subject-strain" type="text" /></label>
+                <label>Species<input id="nwb-subject-species" type="text" /></label>
+                <label class="wide">Subject description<input id="nwb-subject-description" type="text" /></label>
+                <label class="wide">Session description<input id="nwb-session-description" type="text" /></label>
+                <label class="wide">Experiment description<input id="nwb-experiment-description" type="text" /></label>
+                <label>Experimenter<input id="nwb-experimenter" type="text" /></label>
+                <label>Device name<input id="nwb-device-name" type="text" /></label>
+                <label class="wide">Keywords<input id="nwb-keywords" type="text" placeholder="comma,separated,keywords" /></label>
+              </div>
+              <button id="save-nwb-metadata" type="button">Save NWB Metadata</button>
+              <div id="nwb-metadata-message" class="muted"></div>
+            </div>
+
+            <div class="control-group">
+              <div class="control-title">Export</div>
+              <div class="status-row">
+                <span>Trials</span><span id="trials-input-status" class="badge pending">missing</span>
+              </div>
+              <div class="status-row">
+                <span>Units</span><span id="units-input-status" class="badge pending">missing</span>
+              </div>
+              <div class="status-row">
+                <span>Metadata</span><span id="metadata-input-status" class="badge pending">unsaved</span>
+              </div>
+              <div class="status-row">
+                <span>NWB</span><span id="nwb-file-status" class="badge pending">missing</span>
+              </div>
+              <div class="status-row">
+                <span>NWB backup</span><span id="nwb-backup-status" class="badge pending">missing</span>
+              </div>
+              <div class="status-row">
+                <span>Generated backup</span><span id="derived-backup-status" class="badge pending">missing</span>
+              </div>
+            </div>
+            <label class="checkbox">
+              <input id="overwrite-nwb" type="checkbox" />
+              Overwrite existing NWB
+            </label>
+            <button id="export-nwb-recording" type="button">Write NWB</button>
+          </aside>
+
+          <section class="panel workflow-panel">
+            <div class="section-header">
+              <h2>Current NWB Inputs</h2>
+              <span id="stimulus-status" class="badge">not loaded</span>
+            </div>
+            <div class="section-header subsection-header">
+              <h2>Stimulus/Behavior Events</h2>
+              <span id="stimulus-input-status" class="badge pending">missing</span>
+            </div>
+            <div id="stimulus-summary" class="summary-box"></div>
+            <div id="stimulus-residuals" class="summary-box"></div>
+            <div class="table-wrap compact-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Line</th>
+                    <th>Count</th>
+                    <th>Save .npy</th>
+                  </tr>
+                </thead>
+                <tbody id="stimulus-event-counts"></tbody>
+              </table>
+            </div>
+
+            <div class="subsection">
+              <div class="section-header">
+                <h2>Units Dataframe</h2>
+                <span id="units-status" class="badge">not loaded</span>
+              </div>
+              <div id="units-summary" class="summary-box"></div>
+              <div id="units-counts" class="summary-box"></div>
+            </div>
+          </section>
+
+          <section class="panel outputs-panel">
+            <h2>Preview And Files</h2>
+            <h2>Trials Preview</h2>
+            <div id="stimulus-preview" class="table-wrap compact-table"></div>
+            <h2>Units Preview</h2>
+            <div id="units-preview" class="table-wrap compact-table"></div>
+            <h2>Files</h2>
+            <div id="stimulus-files" class="file-grid"></div>
+            <div id="units-files" class="file-grid"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="logs" class="tab-panel">
+        <div class="logs-layout">
+          <section class="panel">
+            <div class="section-header">
+              <h2>Current Job</h2>
+              <span id="active-job" class="badge">idle</span>
+            </div>
+            <div id="progress-card" class="progress-card">No active progress.</div>
+            <div id="resource-card" class="resource-card">System resources unavailable.</div>
+            <div class="log-controls">
+              <button id="show-out" type="button">stdout</button>
+              <button id="show-err" type="button">stderr</button>
+            </div>
+            <pre id="log-output">No GUI-launched job yet.</pre>
+          </section>
+          <section class="panel">
+            <h2>Recent Jobs</h2>
+            <div id="job-list" class="job-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="config" class="tab-panel">
+        <div class="config-layout">
+          <section class="panel">
+            <div class="section-header">
+              <h2>Processing Profile</h2>
+              <span id="profile-version" class="badge">loading</span>
+            </div>
+            <label>Profile<select id="profile-select"></select></label>
+            <label>Name<input id="profile-name" type="text" /></label>
+            <label>Description<input id="profile-description" type="text" /></label>
+            <div class="profile-form">
+              <h3>Preprocessing</h3>
+              <label class="checkbox"><input id="profile-phase-shift" type="checkbox" /> Phase shift</label>
+              <label>High-pass Hz<input id="profile-highpass" type="number" min="0" step="10" /></label>
+              <label>CAR operator<select id="profile-car"><option value="median">median</option><option value="average">average</option></select></label>
+              <label class="checkbox"><input id="profile-exclude-bad" type="checkbox" /> Exclude detected bad channels</label>
+              <h3>Kilosort4</h3>
+              <label class="checkbox"><input id="profile-drift" type="checkbox" /> Kilosort drift correction</label>
+              <label>nblocks<input id="profile-nblocks" type="number" min="0" step="1" /></label>
+              <h3>SortingAnalyzer</h3>
+              <label>n_jobs<input id="profile-n-jobs" type="number" min="1" step="1" /></label>
+              <label>Fallback jobs<input id="profile-fallback-jobs" type="number" min="1" step="1" /></label>
+              <label>Spikes for sparsity<input id="profile-sparsity-spikes" type="number" min="1" step="10" /></label>
+              <label class="checkbox"><input id="profile-pcs" type="checkbox" /> Principal components</label>
+              <label class="checkbox"><input id="profile-spike-locations" type="checkbox" /> Spike locations</label>
+              <label class="checkbox"><input id="profile-unitrefine" type="checkbox" /> UnitRefine</label>
+              <label class="checkbox"><input id="profile-phy" type="checkbox" /> Export Phy</label>
+            </div>
+            <div class="step-actions">
+              <button id="save-profile" type="button" class="primary">Save Profile Version</button>
+              <button id="clone-profile" type="button">Clone As New Profile</button>
+            </div>
+            <div id="profile-save-status" class="muted"></div>
+            <h2>Effective Policy</h2>
+            <ul id="policy-list"></ul>
+          </section>
+          <section class="panel config-editor-panel">
+            <div class="section-header">
+              <h2>Profile YAML</h2>
+              <span class="muted">Advanced</span>
+            </div>
+            <textarea id="profile-editor" spellcheck="false"></textarea>
+            <details class="advanced infrastructure-config">
+              <summary>Infrastructure config</summary>
+              <p class="muted">Machine paths, backups, shared registry, and NWB defaults. Active probe snapshots are unaffected by edits.</p>
+              <button id="save-config" type="button">Save Infrastructure Config</button>
+              <textarea id="config-editor" spellcheck="false"></textarea>
+              <div id="config-save-status" class="muted"></div>
+            </details>
+          </section>
+        </div>
+      </section>
+
+      <section id="reports" class="tab-panel">
+        <div class="panel">
+          <h2>Reports</h2>
+          <div id="reports-list" class="reports-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js?v=20260717a"></script>
+  </body>
+</html>
+

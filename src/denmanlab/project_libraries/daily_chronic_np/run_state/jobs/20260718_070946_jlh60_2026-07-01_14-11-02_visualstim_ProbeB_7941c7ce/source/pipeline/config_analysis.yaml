@@ -1,0 +1,284 @@
+﻿machine:
+  role: analysis
+profiles:
+  root: pipeline/profiles
+  default: default
+staging:
+  enabled: true
+  server_raw_root: \\denmanlab\s2\mouse_arena_recordings
+  local_raw_root: C:\Users\jordan\Desktop\mouse_arena_recordings
+  auto_stage_before_run_pending: true
+  auto_stage_before_run_one: true
+  exclude_dir_prefixes:
+  - spikeinterface_output
+  - nwb
+acquisition:
+  local_raw_root: C:\Users\jordan\Desktop\mouse_arena_recordings
+  server_raw_root: \\denmanlab\s2\mouse_arena_recordings
+project:
+  raw_root: C:\Users\jordan\Desktop\mouse_arena_recordings
+  processed_root: C:\Users\jordan\daily_chronic_np\processed
+  registry_csv: \\denmanlab\s2\mouse_arena_recordings\_pipeline_registry\sessions.csv
+  output_layout: recording_local_probe_folder
+  recording_local_output_name: spikeinterface_output
+  require_completion_file: true
+  completion_file_name: recording_complete.txt
+  inactive_fallback_minutes: 60
+  allow_inactive_completion_fallback: true
+recordings:
+  minimum_duration_seconds: 300
+  load_sync_timestamps: true
+probes:
+  require_probeinterface_json: true
+  generate_probeinterface_from_recording: true
+  allow_missing_probe_map: false
+  sort_each_probe_independently: true
+preprocessing:
+  phase_shift:
+    enabled: true
+  highpass_filter:
+    enabled: true
+    freq_min: 300
+  bad_channels:
+    enabled: true
+    method: coherence+psd
+    exclude_from_sorting: false
+    exclude_labels:
+    - dead
+    - noise
+    - out
+  motion_correction:
+    enabled: false
+    preset: dredge_fast
+    save_motion_info: true
+  car:
+    enabled: true
+    reference: global
+    operator: median
+  trace_plots:
+    enabled: true
+    start_seconds: 0
+    seconds: 2
+    max_channels: 24
+sorting:
+  sorter_name: kilosort4
+  remove_existing_folder: false
+  docker_image: false
+  singularity_image: false
+  params:
+    do_CAR: false
+    do_correction: true
+    skip_kilosort_preprocessing: false
+    save_preprocessed_copy: false
+    delete_recording_dat: true
+    nblocks: 1
+qc:
+  compute_quality_metrics: true
+  compute_template_metrics: true
+  export_phy: true
+  phy_compute_pc_features: false
+  phy_compute_amplitudes: true
+  phy_copy_binary: false
+  phy_add_unitrefine_labels: true
+  phy_add_quality_metrics: false
+  phy_add_template_metrics: false
+  phy_prune_metric_tsvs: true
+  phy_dat_path:
+    enabled: true
+    source: original_continuous_dat
+    hp_filtered: false
+  sorting_analyzer:
+    sparse: true
+    num_spikes_for_sparsity: 200
+  analyzer_extensions:
+  - name: random_spikes
+    enabled: true
+  - name: waveforms
+    enabled: true
+  - name: templates
+    enabled: true
+  - name: noise_levels
+    enabled: true
+  - name: spike_amplitudes
+    enabled: true
+  - name: unit_locations
+    enabled: true
+  - name: spike_locations
+    enabled: true
+  - name: principal_components
+    enabled: true
+    params:
+      n_components: 5
+      mode: by_channel_local
+  - name: correlograms
+    enabled: true
+  - name: isi_histograms
+    enabled: true
+  - name: quality_metrics
+    enabled: true
+  - name: template_metrics
+    enabled: true
+  quality_metrics:
+    metric_names:
+    - firing_rate
+    - presence_ratio
+    - snr
+    - isi_violations_ratio
+    - rp_contamination
+    - sliding_rp_violation
+    - amplitude_cutoff
+    - amplitude_median
+    unitrefine_metric_names:
+    - num_spikes
+    - firing_rate
+    - presence_ratio
+    - snr
+    - isi_violation
+    - rp_violation
+    - sliding_rp_violation
+    - synchrony
+    - firing_range
+    - amplitude_cv
+    - amplitude_cutoff
+    - noise_cutoff
+    - amplitude_median
+    - drift
+    - sd_ratio
+    - mahalanobis
+    - d_prime
+    - nearest_neighbor
+    - silhouette
+    - nn_advanced
+  export_report: true
+  shareable_png:
+    enabled: true
+    filename: summary.png
+    max_car_channels: 8
+    example_units: 6
+  automated_labels:
+    enabled: true
+    method: unitrefine
+    label_set: unitrefine_full
+    noise_neural_classifier: SpikeInterface/UnitRefine_noise_neural_classifier
+    sua_mua_classifier: SpikeInterface/UnitRefine_sua_mua_classifier
+    fail_on_error: false
+jobs:
+  n_jobs: 8
+  fallback_n_jobs: 2
+  chunk_duration: 1s
+  progress_bar: true
+progress:
+  enabled: true
+backup:
+  enabled: true
+  mode: verify_only
+  require_before_processing: true
+  root: \\denmanlab\s2\mouse_arena_recordings
+  exclude_dir_prefixes:
+  - spikeinterface_output
+  local_recording_archive:
+    enabled: true
+    root: D:\mouse_arena_recordings_backup
+    auto_after_recording: true
+  derived_outputs:
+    enabled: true
+    auto_after_nwb_export: true
+    auto_after_processing: true
+    local_archive_root: D:\mouse_arena_processed_backup
+    include_dir_prefixes:
+    - spikeinterface_output
+    include_dir_names:
+    - nwb
+nwb:
+  default_protocol: auto
+  output_folder_name: nwb
+  output_filename_template: '{mouse_id}_{recording_date}_{recording_time}_{protocol}.nwb'
+  protocol_rules:
+  - match: '(visual[_-]?stim|visualstim|vstim)'
+    protocol: visual_stim
+  digital_events:
+    stream_folder: NI-DAQmx-109.PXI-6133
+    include_edges:
+    - rising
+    - falling
+    line_names:
+      '4': reward
+      '5': trial_start
+      '6': game_frame
+    time_zero: nidaq_continuous_start
+mouse_arena_nwb:
+  enabled: false
+  backup_root: \\denmanlab\s2\nwbs\mouse_arena
+  backup_by_mouse: true
+  source_resolution:
+    enabled: true
+    log_filename: nwb_source_resolution.json
+  output_folder_name: nwb
+  output_filename_template: '{mouse_id}_{recording_date}_{recording_time}_mouse_arena.nwb'
+  require_complete_probes: true
+  subjects:
+    jlh60:
+      subject_id: jlh60
+      date_of_birth: '2025-08-08'
+      sex: M
+      strain: C57/B6
+      species: Mus musculus
+      description: Mouse arena Neuropixels recording.
+      age: P327D
+  session:
+    session_description: Mouse arena Neuropixels session exported from the SpikeInterface
+      pipeline.
+    experiment_description: Mouse arena behavior with Neuropixels recordings.
+    experimenter: Hickman, Jordan
+    device_name: DenmanLab_MouseArena_Neuropixels
+    keywords:
+    - mouse arena
+    - chronic neuropixels
+    - behavior
+  probes:
+  - ProbeA
+  - ProbeB
+  behavior:
+    root: \\denmanlab\s1\behavior\mouse_arena\data
+    events_filename: events.csv
+    sync_events_filename: sync_events.csv
+    samples_filename: samples.csv
+    session_meta_filename: session_meta.json
+    match_by: nearest_datetime_same_date
+  digital_events:
+    stream_folder: NI-DAQmx-109.PXI-6133
+    trial_starts_line: 5
+    rewards_line: 4
+    frames_line: 6
+    edge: rising
+    time_zero: nidaq_continuous_start
+  trials:
+    source: behavior_events_csv
+    align_to_ttl_trial_starts: true
+    reward_times_from_ttl: true
+  clock_alignment:
+    method: game_frame_clock_fit
+    seed_method: game_frame_clock_fit
+    behavior_sync_event: game_frame
+    ephys_event: game_frame
+    max_lag_seconds: 0.025
+    deduplicate_ephys_matches: true
+  analog:
+    include: false
+    stream_folder: NI-DAQmx-109.PXI-6133
+    channel_names:
+      AI0: AI0
+      AI1: AI1
+      AI2: AI2
+      AI3: AI3
+      AI4: AI4
+      AI5: AI5
+      AI6: AI6
+      AI7: AI7
+unitmatch:
+  enabled: false
+  planned_only: true
+  require_same_site_hash: true
+
+
+

@@ -1,0 +1,1780 @@
+﻿let state = {
+  rows: [],
+  recordings: [],
+  queue: [],
+  worker: null,
+  profiles: [],
+  selectedProfileName: localStorage.getItem("selectedProfileName") || "default",
+  profilePayload: null,
+  profileDirty: false,
+  selectedSessionId: "",
+  selectedRecordingKey: localStorage.getItem("selectedRecordingKey") || "",
+  selectedProbe: null,
+  jobs: [],
+  activeJob: null,
+  stimulus: null,
+  units: null,
+  nwbMetadata: null,
+  logStream: "out",
+  mouseFilter: localStorage.getItem("mouseFilter") || "all",
+  dateFilter: localStorage.getItem("dateFilter") || "all",
+  machineRole: "analysis",
+};
+
+const $ = (id) => document.getElementById(id);
+
+async function api(path, options = {}) {
+  const response = await fetch(path, {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  });
+  if (!response.ok) {
+    let detail = response.statusText;
+    try {
+      detail = (await response.json()).detail || detail;
+    } catch (_) {}
+    throw new Error(detail);
+  }
+  return response.json();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function fileLink(path, label) {
+  if (!path) return "";
+  return `<a href="/files?path=${encodeURIComponent(path)}" target="_blank" rel="noreferrer">${label}</a>`;
+}
+
+function setBadge(id, text, klass) {
+  const element = $(id);
+  if (!element) return;
+  element.textContent = text;
+  element.className = `badge ${klass || stageClass(text)}`;
+}
+
+function badge(value) {
+  const text = value || "n/a";
+  const klass = String(text).replace(/[^A-Za-z0-9_-]+/g, "_");
+  return `<span class="badge ${klass}">${escapeHtml(text)}</span>`;
+}
+
+function stageClass(status) {
+  return String(status || "pending").replace(/[^A-Za-z0-9_-]+/g, "_");
+}
+
+function rowMouseId(row) {
+  return row.mouse_id || row.animal_id || "";
+}
+
+function recordingKey(row) {
+  return row.recording_id || row.raw_folder || `${rowMouseId(row)}|${row.recording_date || ""}|${row.task || ""}`;
+}
+
+function recordingName(row) {
+  const raw = row.raw_folder || "";
+  const parts = raw.split(/[\\/]+/).filter(Boolean);
+  const session = parts[parts.length - 1] || `${rowMouseId(row)} ${row.recording_date || ""}`;
+  return row.recording_block ? `${session} / ${row.recording_block}` : session;
+}
+
+function recordingGroups(rows) {
+  const groups = new Map();
+  rows.forEach((row) => {
+    const key = recordingKey(row);
+    if (!groups.has(key)) {
+      groups.set(key, { key, name: recordingName(row), rows: [], mouse: rowMouseId(row), date: row.recording_date || "", task: row.task || "" });
+    }
+    groups.get(key).rows.push(row);
+  });
+  return [...groups.values()].sort((a, b) => `${a.mouse} ${a.date} ${a.name}`.localeCompare(`${b.mouse} ${b.date} ${b.name}`));
+}
+
+function representativeRow(group) {
+  if (!group || !group.rows.length) return {};
+  return group.rows.find((row) => row.probe_label === "ProbeA") || group.rows[0];
+}
+
+function derivedBackupSummary(group) {
+  const rows = group?.rows || [];
+  const statuses = rows.map((row) => row.derived_backup_status || "").filter(Boolean);
+  if (!statuses.length) return { status: "missing", detail: "" };
+  if (statuses.some((status) => status === "failed")) {
+    const failed = rows.find((row) => row.derived_backup_status === "failed") || {};
+    return { status: "failed", detail: failed.derived_backup_error || "" };
+  }
+  if (statuses.every((status) => status === "verified")) {
+    const row = rows.find((item) => item.derived_backup_folder) || rows[0] || {};
+    return { status: "verified", detail: row.derived_backup_folder || "" };
+  }
+  return { status: "partial", detail: statuses.join(", ") };
+}
+
+function nwbBackupSummary(group) {
+  const rows = group?.rows || [];
+  const statuses = rows.map((row) => row.nwb_backup_status || "").filter(Boolean);
+  if (!statuses.length) return { status: "missing", detail: "" };
+  if (statuses.some((status) => status === "failed")) {
+    const failed = rows.find((row) => row.nwb_backup_status === "failed") || {};
+    return { status: "failed", detail: failed.nwb_backup_error || "" };
+  }
+  if (statuses.every((status) => status === "verified")) {
+    const row = rows.find((item) => item.nwb_backup_path || item.nwb_backup_folder) || rows[0] || {};
+    return { status: "verified", detail: row.nwb_backup_path || row.nwb_backup_folder || "" };
+  }
+  return { status: "partial", detail: statuses.join(", ") };
+}
+
+function selectedRecordingGroup() {
+  const groups = recordingGroups(filteredRows());
+  return groups.find((group) => group.key === state.selectedRecordingKey) || groups[0] || null;
+}
+
+function selectedNwbSessionId() {
+  return representativeRow(selectedRecordingGroup()).session_id || selectedSessionId();
+}
+
+function filteredRows() {
+  return state.rows.filter((row) => {
+    const mouseMatches = state.mouseFilter === "all" || rowMouseId(row) === state.mouseFilter;
+    const dateMatches = state.dateFilter === "all" || (row.recording_date || "") === state.dateFilter;
+    return mouseMatches && dateMatches;
+  });
+}
+
+function uniqueValues(rows, getter) {
+  return [...new Set(rows.map(getter).filter(Boolean))].sort();
+}
+
+function renderFilterOptions() {
+  const mouseValues = uniqueValues(state.rows, rowMouseId);
+  if (state.mouseFilter !== "all" && !mouseValues.includes(state.mouseFilter)) {
+    state.mouseFilter = "all";
+  }
+  $("mouse-filter").innerHTML = [
+    '<option value="all">All mice</option>',
+    ...mouseValues.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`),
+  ].join("");
+  $("mouse-filter").value = state.mouseFilter;
+
+  const rowsForDates = state.rows.filter((row) => state.mouseFilter === "all" || rowMouseId(row) === state.mouseFilter);
+  const dateValues = uniqueValues(rowsForDates, (row) => row.recording_date || "");
+  if (state.dateFilter !== "all" && !dateValues.includes(state.dateFilter)) {
+    state.dateFilter = "all";
+  }
+  $("date-filter").innerHTML = [
+    '<option value="all">All dates</option>',
+    ...dateValues.map((value) => `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`),
+  ].join("");
+  $("date-filter").value = state.dateFilter;
+}
+
+function renderStatus(payload) {
+  state.rows = payload.rows || [];
+  renderFilterOptions();
+  const rows = filteredRows();
+  const undiscovered = payload.undiscovered_recordings || [];
+  $("undiscovered-banner").innerHTML = undiscovered.length
+    ? `
+      <strong>${undiscovered.length} unregistered recording${undiscovered.length === 1 ? "" : "s"} found on disk.</strong>
+      <div class="muted">${undiscovered.map((item) => escapeHtml(item.name)).join(", ")}</div>
+      <div>Click <strong>Scan Recordings</strong> to add eligible ProbeA/ProbeB rows to the registry.</div>
+    `
+    : "";
+  if (!state.selectedSessionId && state.rows.length) {
+    state.selectedSessionId = localStorage.getItem("selectedSessionId") || rows[0]?.session_id || state.rows[0].session_id;
+  }
+  $("running-badge").textContent = payload.has_running_rows ? "running" : "idle";
+  $("running-badge").className = `badge ${payload.has_running_rows ? "running" : "complete"}`;
+
+  const select = $("session-select");
+  select.innerHTML = rows
+    .map(
+      (row) =>
+        `<option value="${escapeHtml(row.session_id)}">${escapeHtml(rowMouseId(row))} ${escapeHtml(row.recording_date || "")} ${escapeHtml(row.probe_label || "")}</option>`
+    )
+    .join("");
+  if (state.selectedSessionId) select.value = state.selectedSessionId;
+  if (select.value !== state.selectedSessionId && rows.length) {
+    state.selectedSessionId = rows[0].session_id;
+    select.value = state.selectedSessionId;
+    localStorage.setItem("selectedSessionId", state.selectedSessionId);
+  }
+  const groups = recordingGroups(rows);
+  const selectedGroupIsVisible = groups.some((group) => group.key === state.selectedRecordingKey);
+  if (!state.selectedRecordingKey || !selectedGroupIsVisible) {
+    const selectedRowGroup = rows.find((row) => row.session_id === state.selectedSessionId);
+    state.selectedRecordingKey = selectedRowGroup ? recordingKey(selectedRowGroup) : groups[0]?.key || "";
+    localStorage.setItem("selectedRecordingKey", state.selectedRecordingKey);
+  }
+  const nwbSelect = $("nwb-recording-select");
+  if (nwbSelect) {
+    nwbSelect.innerHTML = groups
+      .map((group) => {
+        const probes = group.rows.map((row) => row.probe_label || "probe").join("+");
+        return `<option value="${escapeHtml(group.key)}">${escapeHtml(group.mouse)} ${escapeHtml(group.date)} ${escapeHtml(group.name)} (${escapeHtml(probes)})</option>`;
+      })
+      .join("");
+    nwbSelect.value = state.selectedRecordingKey;
+  }
+
+  const statusBody = $("status-body");
+  if (statusBody) statusBody.innerHTML = groups
+    .map((group) => {
+      const probeBadges = group.rows
+        .map((row) => `${escapeHtml(row.probe_label || "probe")} ${badge(row.status)}`)
+        .join(" ");
+      const derived = derivedBackupSummary(group);
+      const header = `
+        <tr class="recording-row" data-recording-key="${escapeHtml(group.key)}">
+          <td colspan="7">
+            <strong>${escapeHtml(group.mouse)} ${escapeHtml(group.date)}</strong>
+            <span class="muted">${escapeHtml(group.name)}</span>
+            <span class="recording-probes">${probeBadges}</span>
+            <span class="recording-probes">generated backup ${badge(derived.status)}</span>
+          </td>
+        </tr>
+      `;
+      const probeRows = group.rows
+        .map((row) => {
+      const links = [
+        fileLink(row.report, "HTML"),
+        fileLink(row.summary_png, "PNG"),
+        fileLink(row.summary_json, "JSON"),
+        fileLink(row.unitrefine_labels, "Labels"),
+      ]
+        .filter(Boolean)
+        .join(" ");
+      const workflow = [
+        row.local_stage_status && `stage ${badge(row.local_stage_status)}`,
+        row.preprocess_status && `pre ${badge(row.preprocess_status)}`,
+        row.sort_status && `ks ${badge(row.sort_status)}`,
+        row.qc_status && `qc ${badge(row.qc_status)}`,
+        row.phy_export_status && `phy ${badge(row.phy_export_status)}`,
+        row.nwb_status && `nwb ${badge(row.nwb_status)}`,
+        row.nwb_backup_status && `nwb backup ${badge(row.nwb_backup_status)}`,
+        row.derived_backup_status && `synology out ${badge(row.derived_backup_status)}`,
+        row.derived_local_backup_status && `local out ${badge(row.derived_local_backup_status)}`,
+        row.local_recording_archive_status && `full D: ${badge(row.local_recording_archive_status)}`,
+      ]
+        .filter(Boolean)
+        .join(" ");
+      const selected = row.session_id === state.selectedSessionId ? "selected-row" : "";
+      return `
+        <tr class="${selected}" data-session-id="${escapeHtml(row.session_id)}">
+          <td><strong>${escapeHtml(rowMouseId(row))}</strong></td>
+          <td>
+            <strong>${escapeHtml(row.recording_date || "")}</strong>
+            <div class="muted">${escapeHtml(row.task || "")}</div>
+          </td>
+          <td>
+            <strong>${escapeHtml(row.probe_label || "")}</strong>
+            <div class="muted">${escapeHtml(row.session_id)}</div>
+          </td>
+          <td>${badge(row.status)}</td>
+          <td class="workflow-inline">${workflow || '<span class="muted">n/a</span>'}</td>
+          <td class="muted">${escapeHtml(row.last_updated || "")}</td>
+          <td>${links || '<span class="muted">none</span>'}</td>
+        </tr>
+      `;
+    })
+        .join("");
+      return `${header}${probeRows}`;
+    })
+    .join("") || '<tr><td colspan="7" class="muted">No rows match the current filters.</td></tr>';
+}
+
+async function loadSelectedProbe() {
+  if (!state.selectedSessionId) {
+    state.selectedProbe = null;
+    renderProbeDetail();
+    return;
+  }
+  state.selectedProbe = await api(`/api/probes/${encodeURIComponent(state.selectedSessionId)}`);
+  renderProbeDetail();
+}
+
+function renderProbeDetail() {
+  const detail = state.selectedProbe;
+  const selectedStatus = $("selected-status");
+  if (!detail) {
+    $("probe-summary").innerHTML = '<p class="muted">No probe selected.</p>';
+    $("workflow-steps").innerHTML = "";
+    $("probe-files").innerHTML = "";
+    $("timing-list").innerHTML = "";
+    $("extension-list").innerHTML = "";
+    $("variant-list").innerHTML = "";
+    $("probe-error").innerHTML = "";
+    selectedStatus.textContent = "n/a";
+    selectedStatus.className = "badge";
+    return;
+  }
+  const row = detail.row || {};
+  selectedStatus.textContent = row.status || "n/a";
+  selectedStatus.className = `badge ${stageClass(row.status)}`;
+  $("probe-summary").innerHTML = `
+    <div><strong>${escapeHtml(row.probe_label || "")}</strong></div>
+    <div>${escapeHtml(rowMouseId(row))} ${escapeHtml(row.recording_date || "")}</div>
+    <div class="muted">${escapeHtml(row.session_id || "")}</div>
+    <div>${badge(row.status)} raw backup ${badge(row.backup_status)} stage ${badge(row.local_stage_status || "missing")}</div>
+    <div>synology output ${badge(row.derived_backup_status || "missing")} local output ${badge(row.derived_local_backup_status || "missing")}</div>
+    <div>full recording D: archive ${badge(row.local_recording_archive_status || "missing")}</div>
+    <div class="muted">${escapeHtml(row.last_updated || "")}</div>
+  `;
+  $("workflow-steps").innerHTML = (detail.workflow || [])
+    .map(
+      (step) => `
+        <div class="workflow-step ${stageClass(step.status)}">
+          <div class="step-top">
+            <strong>${escapeHtml(step.label)}</strong>
+            ${badge(step.status)}
+          </div>
+          <div class="muted">${escapeHtml(step.detail || "")}</div>
+        </div>
+      `
+    )
+    .join("");
+  const outputs = detail.outputs || {};
+  $("probe-files").innerHTML = [
+    ["Folder", outputs.processed_folder],
+    ["HTML", outputs.summary_html],
+    ["PNG", outputs.summary_png],
+    ["quality_metrics", outputs.quality_metrics_csv],
+    ["channel_qc", outputs.channel_qc_csv],
+    ["UnitRefine", outputs.unitrefine_labels],
+    ["Phy params", outputs.phy_params],
+    ["QC timings", outputs.qc_timings],
+    ["NWB", outputs.nwb_nwb],
+    ["NWB units", outputs.nwb_units_csv],
+    ["NWB trials", outputs.nwb_trials_csv],
+    ["Stimulus trials_df", outputs.nwb_stimulus_trials_csv],
+    ["Frame sync residuals", outputs.nwb_frame_sync_residuals_csv],
+    ["NWB TTL events", outputs.nwb_digital_events_csv],
+    ["Stimulus manifest", outputs.nwb_stimulus_manifest],
+    ["NWB manifest", outputs.nwb_manifest],
+    ["NWB source log", outputs.nwb_source_resolution || outputs.nwb_source_resolution_json],
+  ]
+    .map(([label, path]) => `<div><span class="muted">${label}</span><br>${fileLink(path, path ? label : "") || '<span class="muted">missing</span>'}</div>`)
+    .join("");
+  $("timing-list").innerHTML = renderTimingList(detail.timings);
+  $("extension-list").innerHTML = (detail.extension_status || [])
+    .map((extension) => `<div class="extension ${stageClass(extension.status)}">${escapeHtml(extension.name)} ${badge(extension.status)}</div>`)
+    .join("");
+  $("variant-list").innerHTML = (detail.variants || [])
+    .map((variant) => {
+      const links = [
+        fileLink(variant.summary_html, "HTML"),
+        fileLink(variant.summary_png, "PNG"),
+        fileLink(variant.qc_params, "params"),
+        fileLink(variant.qc_timings, "timings"),
+        fileLink(variant.unitrefine_labels, "labels"),
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return `
+        <div class="variant-item">
+          <strong>${escapeHtml(variant.name)}</strong>
+          <div class="muted">${escapeHtml(timingTotalText(variant.timings))}</div>
+          <div>${links || '<span class="muted">no files</span>'}</div>
+        </div>
+      `;
+    })
+    .join("") || '<p class="muted">No QC variants yet.</p>';
+  $("probe-error").innerHTML = row.error_message ? `<strong>Error</strong><pre>${escapeHtml(row.error_message)}</pre>` : "";
+  renderNwbSessionSummary();
+}
+
+function renderNwbSessionSummary() {
+  const group = selectedRecordingGroup();
+  const row = representativeRow(group);
+  const paths = row || {};
+  const derived = derivedBackupSummary(group);
+  const nwbBackup = nwbBackupSummary(group);
+  if (!$("nwb-session-summary")) return;
+  $("nwb-session-summary").innerHTML = row?.session_id
+    ? `
+      <div><strong>${escapeHtml(rowMouseId(row))} ${escapeHtml(row.recording_date || "")}</strong></div>
+      <div>${escapeHtml(group?.name || recordingName(row))}</div>
+      <div>${(group?.rows || [row]).map((item) => `${escapeHtml(item.probe_label || "probe")} ${badge(item.status)}`).join(" ")}</div>
+      <div>NWB backup ${badge(nwbBackup.status)}</div>
+      <div class="muted">${escapeHtml(nwbBackup.detail || "not checked yet")}</div>
+      <div>Generated-output backup ${badge(derived.status)}</div>
+      <div class="muted">${escapeHtml(derived.detail || "not checked yet")}</div>
+      <div class="muted">Representative row: ${escapeHtml(row.session_id || "")}</div>
+      <div class="muted">${escapeHtml(row.raw_folder || "")}</div>
+    `
+    : '<p class="muted">No recording selected.</p>';
+  if (!state.stimulus) {
+    setBadge("stimulus-status", "not loaded", "pending");
+    setBadge("stimulus-input-status", "missing", "pending");
+    setBadge("trials-input-status", "missing", "pending");
+    $("stimulus-summary").innerHTML = '<p class="muted">Load digital events to preview stimulus/behavior processing.</p>';
+    $("stimulus-event-counts").innerHTML = "";
+    $("digital-event-name").innerHTML = "";
+    $("stimulus-residuals").innerHTML = "";
+    $("stimulus-preview").innerHTML = "";
+    $("stimulus-files").innerHTML = "";
+  }
+  if (!state.units) {
+    setBadge("units-status", "not loaded", "pending");
+    setBadge("units-input-status", "missing", "pending");
+    $("units-summary").innerHTML = '<p class="muted">Load units to preview the recording-level units dataframe.</p>';
+    $("units-counts").innerHTML = "";
+    $("units-preview").innerHTML = "";
+    $("units-files").innerHTML = "";
+  }
+  setBadge("nwb-file-status", paths.nwb_status === "complete" ? "exists" : "missing", paths.nwb_status === "complete" ? "complete" : "pending");
+  setBadge("nwb-backup-status", nwbBackup.status, stageClass(nwbBackup.status));
+  setBadge("derived-backup-status", derived.status, stageClass(derived.status));
+}
+
+function renderStimulus(payload) {
+  state.stimulus = payload;
+  setBadge("stimulus-status", "loaded", "complete");
+  setBadge("stimulus-input-status", "loaded", "complete");
+  setBadge("trials-input-status", payload.trials_count ? "loaded" : "missing", payload.trials_count ? "complete" : "pending");
+  const alignment = payload.alignment || {};
+  const residual = payload.frame_sync_residual_ms || {};
+  $("stimulus-summary").innerHTML = `
+    <div><strong>${escapeHtml(payload.trials_count || 0)}</strong> trials_df rows</div>
+    <div><strong>${escapeHtml(payload.digital_events_count || 0)}</strong> digital events</div>
+    <div><strong>${escapeHtml(payload.session_events_count || 0)}</strong> behavior/session event rows</div>
+    <div class="muted">Source: ${escapeHtml(payload.source || "rebuilt from raw/behavior files")}</div>
+    ${renderWarnings(payload.warnings || [])}
+    <div class="muted">Clock fit: ${escapeHtml(alignment.mode || "n/a")} Â· slope ${escapeHtml(formatNumber(alignment.slope, 9))}</div>
+  `;
+  const eventCounts = payload.event_counts || [];
+  $("stimulus-event-counts").innerHTML =
+    eventCounts
+      .map((row) => {
+        const eventName = row.event_name || "";
+        return `
+          <tr>
+            <td><strong>${escapeHtml(eventName)}</strong></td>
+            <td>${escapeHtml(row.line)}</td>
+            <td>${escapeHtml(row.count)}</td>
+            <td><button type="button" class="save-event-row" data-event-name="${escapeHtml(eventName)}">Use</button></td>
+          </tr>
+        `;
+      })
+      .join("") || '<tr><td colspan="4" class="muted">No digital events found.</td></tr>';
+  $("digital-event-name").innerHTML = eventCounts
+    .map((row) => `<option value="${escapeHtml(row.event_name)}">${escapeHtml(row.event_name)} (${escapeHtml(row.count)})</option>`)
+    .join("");
+  $("stimulus-residuals").innerHTML = `
+    <div><strong>Frame sync residuals</strong></div>
+    <div>mean ${escapeHtml(formatNumber(residual.mean, 3))} ms</div>
+    <div>median ${escapeHtml(formatNumber(residual.median, 3))} ms</div>
+    <div>median abs ${escapeHtml(formatNumber(residual.median_abs, 3))} ms</div>
+    <div>95% range ${escapeHtml(formatNumber(residual.q05, 3))} to ${escapeHtml(formatNumber(residual.q95, 3))} ms</div>
+  `;
+  $("stimulus-preview").innerHTML = renderRecordsTable(payload.trials_preview || []);
+  const paths = payload.paths || {};
+  const savedNpys = payload.saved_npys || [];
+  $("stimulus-files").innerHTML = [
+    ["active_trials_override", paths.active_trials_csv],
+    ["trials_df", paths.nwb_stimulus_trials_csv || paths.stimulus_trials_csv],
+    ["frame_sync_residuals", paths.nwb_frame_sync_residuals_csv || paths.frame_sync_residuals_csv],
+    ["stimulus_manifest", paths.nwb_stimulus_manifest || paths.stimulus_manifest],
+    ["digital_events_csv", paths.nwb_digital_events_csv || paths.digital_events_csv],
+    ["input_overrides", paths.input_overrides],
+    ...savedNpys.map((item) => [`${item.name}.npy`, item.path]),
+  ]
+    .map(([label, path]) => `<div><span class="muted">${escapeHtml(label)}</span><br>${fileLink(path, path ? label : "") || '<span class="muted">missing</span>'}</div>`)
+    .join("");
+}
+
+function renderUnits(payload) {
+  state.units = payload;
+  setBadge("units-status", "loaded", "complete");
+  setBadge("units-input-status", payload.unit_count ? "loaded" : "missing", payload.unit_count ? "complete" : "pending");
+  const columns = payload.columns || [];
+  $("units-summary").innerHTML = `
+    <div><strong>${escapeHtml(payload.unit_count || 0)}</strong> units across registered probes</div>
+    <div><strong>${escapeHtml(columns.length)}</strong> scalar columns in the CSV/NWB units table</div>
+    <div class="muted">Source: ${escapeHtml(payload.source || "rebuilt from pipeline outputs")}</div>
+    ${renderWarnings(payload.warnings || [])}
+    <div class="muted">Unique IDs use probe + sorter unit id, e.g. A_12 or B_12.</div>
+  `;
+  const probeCounts = payload.probe_counts || [];
+  const labelCounts = payload.label_counts || [];
+  $("units-counts").innerHTML = `
+    <div><strong>By probe</strong></div>
+    <div>${probeCounts.map((row) => `${escapeHtml(row.probe_label || "probe")}: ${escapeHtml(row.count)}`).join(" Â· ") || '<span class="muted">n/a</span>'}</div>
+    <div><strong>UnitRefine labels</strong></div>
+    <div>${labelCounts.map((row) => `${escapeHtml(row.unitrefine_label || "unlabeled")}: ${escapeHtml(row.count)}`).join(" Â· ") || '<span class="muted">n/a</span>'}</div>
+  `;
+  $("units-preview").innerHTML = renderRecordsTable(payload.preview || []);
+  const paths = payload.paths || {};
+  $("units-files").innerHTML = [
+    ["active_units_override", paths.active_units_csv],
+    ["nwb_units.csv", paths.nwb_units_csv || paths.units_csv],
+    ["units manifest", paths.nwb_units_manifest || paths.units_manifest],
+    ["input_overrides", paths.input_overrides],
+  ]
+    .map(([label, path]) => `<div><span class="muted">${escapeHtml(label)}</span><br>${fileLink(path, path ? label : "") || '<span class="muted">missing</span>'}</div>`)
+    .join("");
+}
+
+function renderWarnings(warnings) {
+  if (!warnings.length) return "";
+  return `<div class="warning-list">${warnings.map((warning) => `<div>${escapeHtml(warning)}</div>`).join("")}</div>`;
+}
+
+function renderLoadedTrialsCsv(file, records) {
+  const payload = {
+    source: `loaded CSV: ${file.name}`,
+    trials_count: records.length,
+    digital_events_count: 0,
+    session_events_count: 0,
+    event_counts: [],
+    alignment: {},
+    frame_sync_residual_ms: {},
+    trials_preview: records.slice(0, 5),
+    paths: {},
+    saved_npys: [],
+  };
+  renderStimulus(payload);
+  setBadge("trials-input-status", "csv preview", "complete");
+  $("stimulus-files").innerHTML = `<div><span class="muted">loaded_trials_csv</span><br>${escapeHtml(file.name)}</div>`;
+}
+
+function renderLoadedUnitsCsv(file, records) {
+  const units = records;
+  const probeCounts = countBy(units, "probe_label");
+  const labelCounts = countBy(units, "unitrefine_label");
+  const payload = {
+    source: `loaded CSV: ${file.name}`,
+    output_folder: "",
+    unit_count: units.length,
+    probe_counts: probeCounts,
+    label_counts: labelCounts,
+    columns: Object.keys(units[0] || {}),
+    preview: units.slice(0, 8),
+    paths: {},
+  };
+  renderUnits(payload);
+  setBadge("units-input-status", "csv preview", "complete");
+  $("units-files").innerHTML = `<div><span class="muted">loaded_units_csv</span><br>${escapeHtml(file.name)}</div>`;
+}
+
+function countBy(records, key) {
+  const counts = new Map();
+  records.forEach((row) => {
+    const value = row[key] || "unlabeled";
+    counts.set(value, (counts.get(value) || 0) + 1);
+  });
+  return [...counts.entries()].map(([value, count]) => ({ [key]: value, count }));
+}
+
+async function loadCsvFileFromInput(input, kind) {
+  const file = input.files?.[0];
+  input.value = "";
+  if (!file) return;
+  if (!file.name.toLowerCase().endsWith(".csv")) {
+    alert("Please select a .csv file.");
+    return;
+  }
+  const text = await file.text();
+  const records = parseCsvRecords(text);
+  if (!records.length) {
+    alert("The selected CSV did not contain any rows.");
+    return;
+  }
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  const payload = await api("/api/nwb/input-csv", {
+    method: "POST",
+    body: JSON.stringify({ session_id: sessionId, kind, filename: file.name, csv_text: text }),
+  });
+  if (kind === "trials") {
+    renderStimulus(payload);
+    setBadge("trials-input-status", "csv active", "complete");
+  } else {
+    renderUnits(payload);
+    setBadge("units-input-status", "csv active", "complete");
+  }
+}
+
+async function clearNwbCsvOverride(kind) {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  const payload = await api("/api/nwb/input-csv/clear", {
+    method: "POST",
+    body: JSON.stringify({ session_id: sessionId, kind }),
+  });
+  const paths = payload.paths || {};
+  const message = payload.removed_path ? `Cleared ${kind} CSV override.` : (payload.warnings || [`No active ${kind} override was set.`]).join(" ");
+  if (kind === "trials") {
+    setBadge("trials-input-status", paths.active_trials_csv ? "csv active" : "default", paths.active_trials_csv ? "complete" : "pending");
+    $("stimulus-files").innerHTML += `<div><span class="muted">override update</span><br>${escapeHtml(message)} ${fileLink(payload.overrides_json, "overrides")}</div>`;
+  } else {
+    setBadge("units-input-status", paths.active_units_csv ? "csv active" : "default", paths.active_units_csv ? "complete" : "pending");
+    $("units-files").innerHTML += `<div><span class="muted">override update</span><br>${escapeHtml(message)} ${fileLink(payload.overrides_json, "overrides")}</div>`;
+  }
+}
+
+function parseCsvRecords(text) {
+  const rows = parseCsvRows(text);
+  if (!rows.length) return [];
+  const headers = rows[0].map((header) => header.trim());
+  return rows
+    .slice(1)
+    .filter((row) => row.some((value) => String(value).trim() !== ""))
+    .map((row) => {
+      const record = {};
+      headers.forEach((header, index) => {
+        record[header || `column_${index}`] = parseCsvValue(row[index] ?? "");
+      });
+      return record;
+    });
+}
+
+function parseCsvRows(text) {
+  const rows = [];
+  let row = [];
+  let value = "";
+  let quoted = false;
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+    if (quoted) {
+      if (char === '"' && next === '"') {
+        value += '"';
+        index += 1;
+      } else if (char === '"') {
+        quoted = false;
+      } else {
+        value += char;
+      }
+      continue;
+    }
+    if (char === '"') {
+      quoted = true;
+    } else if (char === ",") {
+      row.push(value);
+      value = "";
+    } else if (char === "\n") {
+      row.push(value);
+      rows.push(row);
+      row = [];
+      value = "";
+    } else if (char !== "\r") {
+      value += char;
+    }
+  }
+  row.push(value);
+  rows.push(row);
+  return rows;
+}
+
+function parseCsvValue(value) {
+  const text = String(value ?? "").trim();
+  if (text === "") return "";
+  if (text.toLowerCase() === "true") return true;
+  if (text.toLowerCase() === "false") return false;
+  const number = Number(text);
+  return Number.isFinite(number) ? number : text;
+}
+
+function renderRecordsTable(records) {
+  if (!records.length) return '<p class="muted">No preview rows.</p>';
+  const preferred = [
+    "nwb_unit_id",
+    "unique_unit_id",
+    "probe_label",
+    "source_unit_id",
+    "n_spikes",
+    "firing_rate",
+    "snr",
+    "presence_ratio",
+    "amplitude_cutoff",
+    "unitrefine_label",
+    "unitrefine_probability",
+    "kilosort_label",
+    "kilosort_ks_label",
+    "trial_id",
+    "event_type",
+    "outcome",
+    "source_event_type",
+    "t_start",
+    "t_end",
+    "reward_time",
+    "stim_id",
+    "contrast",
+    "orientation",
+  ];
+  const keys = preferred.filter((key) => Object.prototype.hasOwnProperty.call(records[0], key));
+  const columns = keys.length ? keys : Object.keys(records[0]).slice(0, 10);
+  return `
+    <table>
+      <thead><tr>${columns.map((key) => `<th>${escapeHtml(key)}</th>`).join("")}</tr></thead>
+      <tbody>
+        ${records
+          .map((row) => `<tr>${columns.map((key) => `<td>${escapeHtml(formatCell(row[key]))}</td>`).join("")}</tr>`)
+          .join("")}
+      </tbody>
+    </table>
+  `;
+}
+
+function formatNumber(value, digits = 3) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return "n/a";
+  return Number(value).toFixed(digits);
+}
+
+function formatCell(value) {
+  if (value === null || value === undefined) return "";
+  if (typeof value === "number") return Number.isInteger(value) ? String(value) : value.toFixed(4);
+  return value;
+}
+
+function renderTimingList(timings) {
+  if (!timings || !timings.exists) {
+    return '<p class="muted">No timing log yet.</p>';
+  }
+  const events = timings.events || [];
+  const rows = events
+    .map(
+      (event) => `
+        <div class="timing-item">
+          <strong>${escapeHtml(event.name)}</strong> ${badge(event.status)}
+          <div class="muted">${escapeHtml(event.category || "")} Â· ${formatDuration(event.elapsed_seconds)}</div>
+        </div>
+      `
+    )
+    .join("");
+  return `<div class="muted">${escapeHtml(timingTotalText(timings))}</div>${rows}`;
+}
+
+function timingTotalText(timings) {
+  if (!timings || !timings.exists || timings.total_elapsed_seconds === null || timings.total_elapsed_seconds === undefined) {
+    return "timing unavailable";
+  }
+  return `phase total ${formatDuration(timings.total_elapsed_seconds)}`;
+}
+
+function formatDuration(seconds) {
+  const value = Number(seconds || 0);
+  if (value < 60) return `${value.toFixed(1)}s`;
+  const minutes = Math.floor(value / 60);
+  const remainder = Math.floor(value % 60);
+  if (minutes < 60) return `${minutes}m${String(remainder).padStart(2, "0")}s`;
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours}h${String(mins).padStart(2, "0")}m${String(remainder).padStart(2, "0")}s`;
+}
+
+function renderConfig(payload, textPayload) {
+  state.machineRole = payload.machine_role || payload.config?.machine?.role || "analysis";
+  document.body.dataset.machineRole = state.machineRole;
+  applyMachineRoleControls();
+  $("policy-list").innerHTML = (payload.effective_policy || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+  if (textPayload && document.activeElement !== $("config-editor")) {
+    $("config-editor").value = textPayload.text || "";
+  }
+}
+
+function applyMachineRoleControls() {
+  const acquisitionOnly = state.machineRole === "acquisition";
+  const hiddenInAcquisition = [
+    '[data-job="run-pending"]',
+    '[data-job="stage-pending"]',
+    '[data-job="backup-derived"]',
+    '[data-job="write-summary-png"]',
+    '#run-one',
+    '#resume-qc',
+    '#restart-qc',
+    '#unitrefine',
+    '#export-phy',
+    '#export-nwb',
+    '#run-qc-variant',
+    '#export-nwb-recording',
+  ];
+  hiddenInAcquisition.forEach((selector) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      element.classList.toggle("role-hidden", acquisitionOnly);
+    });
+  });
+}
+
+function renderReports(payload) {
+  const reports = payload.reports || [];
+  $("reports-list").innerHTML =
+    reports
+      .map((report) => {
+        const links = [
+          fileLink(report.report, "HTML"),
+          fileLink(report.summary_png, "PNG"),
+          fileLink(report.quality_metrics_csv, "quality_metrics"),
+          fileLink(report.unit_summary_csv, "unit_summary"),
+          fileLink(report.channel_qc_csv, "channel_qc"),
+          fileLink(report.unitrefine_labels_csv, "unitrefine_labels"),
+        ]
+          .filter(Boolean)
+          .join(" ");
+        return `
+          <div class="report-item">
+            <strong>${escapeHtml(report.session_id)}</strong> <span class="muted">${escapeHtml(report.probe_label || "")}</span>
+            <div>${badge(report.status)}</div>
+            <div>${links || '<span class="muted">no files</span>'}</div>
+          </div>
+        `;
+      })
+      .join("") || '<p class="muted">No reports found.</p>';
+}
+
+const nwbMetadataFields = {
+  "nwb-subject-id": ["subject", "subject_id"],
+  "nwb-subject-dob": ["subject", "date_of_birth"],
+  "nwb-subject-sex": ["subject", "sex"],
+  "nwb-subject-strain": ["subject", "strain"],
+  "nwb-subject-species": ["subject", "species"],
+  "nwb-subject-description": ["subject", "description"],
+  "nwb-session-description": ["session", "session_description"],
+  "nwb-experiment-description": ["session", "experiment_description"],
+  "nwb-experimenter": ["session", "experimenter"],
+  "nwb-device-name": ["session", "device_name"],
+  "nwb-keywords": ["session", "keywords"],
+};
+
+function renderNwbMetadata(payload) {
+  state.nwbMetadata = payload;
+  const ageInput = $("nwb-subject-age");
+  if (ageInput && document.activeElement !== ageInput) {
+    ageInput.value = payload?.subject?.age || "";
+  }
+  Object.entries(nwbMetadataFields).forEach(([id, [section, key]]) => {
+    const input = $(id);
+    if (!input || document.activeElement === input) return;
+    let value = payload?.[section]?.[key] ?? "";
+    if (Array.isArray(value)) value = value.join(", ");
+    if (id === "nwb-subject-id" && !value) {
+      value = rowMouseId(representativeRow(selectedRecordingGroup()));
+    }
+    input.value = value;
+  });
+  setBadge("metadata-input-status", "saved", "complete");
+  setBadge("nwb-metadata-status", payload?.mouse_id ? `mouse ${payload.mouse_id}` : "config", "complete");
+}
+
+function nwbMetadataPayloadFromInputs() {
+  const payload = { session_id: selectedNwbSessionId(), subject: {}, session: {} };
+  Object.entries(nwbMetadataFields).forEach(([id, [section, key]]) => {
+    const input = $(id);
+    if (input) payload[section][key] = input.value.trim();
+  });
+  return payload;
+}
+
+function markNwbMetadataUnsaved() {
+  setBadge("metadata-input-status", "unsaved", "pending");
+  setBadge("nwb-metadata-status", "unsaved", "pending");
+  const message = $("nwb-metadata-message");
+  if (message) message.textContent = "Unsaved metadata changes.";
+}
+
+function updateComputedAgeFromDob() {
+  const dobInput = $("nwb-subject-dob");
+  const ageInput = $("nwb-subject-age");
+  if (!dobInput || !ageInput) return;
+  const dob = parseIsoDate(dobInput.value);
+  const recordingDate = selectedRecordingDate();
+  if (!dob || !recordingDate) {
+    ageInput.value = "";
+    return;
+  }
+  const days = Math.max(0, Math.floor((recordingDate - dob) / 86400000));
+  ageInput.value = `P${days}D`;
+}
+
+function parseIsoDate(value) {
+  const text = String(value || "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null;
+  const date = new Date(`${text}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function selectedRecordingDate() {
+  const row = representativeRow(selectedRecordingGroup());
+  const raw = row.raw_folder || "";
+  const match = raw.match(/(\d{4}-\d{2}-\d{2})_(\d{2})-(\d{2})-(\d{2})/);
+  if (match) {
+    const date = new Date(`${match[1]}T${match[2]}:${match[3]}:${match[4]}`);
+    if (!Number.isNaN(date.getTime())) return date;
+  }
+  return parseIsoDate(row.recording_date || "");
+}
+
+function formatBytes(bytes) {
+  if (bytes === null || bytes === undefined || Number.isNaN(Number(bytes))) return "n/a";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  let value = Number(bytes);
+  let index = 0;
+  while (value >= 1024 && index < units.length - 1) {
+    value /= 1024;
+    index += 1;
+  }
+  return `${value.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
+}
+
+function renderSystem(payload) {
+  const parts = [];
+  const cpu = payload.cpu || {};
+  parts.push(`CPU ${cpu.percent === null || cpu.percent === undefined ? "warming up" : `${cpu.percent}%`}`);
+  const memory = payload.memory || {};
+  if (memory.available) {
+    parts.push(`RAM ${memory.percent}% (${formatBytes(memory.free_bytes)} free)`);
+  } else {
+    parts.push("RAM n/a");
+  }
+  (payload.disks || []).forEach((disk) => {
+    parts.push(`${disk.label} disk ${formatBytes(disk.free_bytes)} free`);
+  });
+  const gpus = payload.gpus || [];
+  if (gpus.length) {
+    gpus.forEach((gpu) => {
+      const used = gpu.memory_used_mib ?? "n/a";
+      const total = gpu.memory_total_mib ?? "n/a";
+      const util = gpu.utilization_percent ?? "n/a";
+      const temp = gpu.temperature_c ?? "n/a";
+      parts.push(`GPU${gpu.index ?? ""} ${util}% ${used}/${total} MiB ${temp}C`);
+    });
+  } else {
+    parts.push("GPU n/a");
+  }
+  $("resource-card").innerHTML = parts.map((part) => `<span>${escapeHtml(part)}</span>`).join("");
+}
+
+async function renderJobs(payload) {
+  state.activeJob = payload.active_job;
+  state.jobs = payload.jobs || [];
+  $("active-job").textContent = state.activeJob ? `${state.activeJob.kind} running` : "idle";
+  $("active-job").className = `badge ${state.activeJob ? "running" : "complete"}`;
+  document.querySelectorAll("button").forEach((button) => {
+    const navigational = button.classList.contains("tab") || ["refresh", "show-out", "show-err"].includes(button.id);
+    if (!navigational) button.disabled = Boolean(state.activeJob);
+  });
+
+  $("job-list").innerHTML =
+    state.jobs
+      .slice(0, 12)
+      .map(
+        (job) => `
+          <div class="job-item" data-job-id="${escapeHtml(job.job_id)}">
+            <strong>${escapeHtml(job.kind)}</strong> ${badge(job.status)}
+            <div>${escapeHtml(job.progress?.summary || "")}</div>
+            <div class="muted">${escapeHtml(job.job_id)}</div>
+            <div>${fileLink(job.stdout_log, "stdout")} ${fileLink(job.stderr_log, "stderr")}</div>
+          </div>
+        `
+      )
+      .join("") || '<p class="muted">No GUI-launched jobs yet.</p>';
+
+  const target = state.activeJob || state.jobs[0];
+  if (target) {
+    const progress = target.status === "running" ? await api(`/api/jobs/${target.job_id}/progress`) : target.progress;
+    $("progress-card").textContent = progress?.summary || "No active progress.";
+    const log = await api(`/api/jobs/${target.job_id}/logs?stream=${state.logStream}&tail=180`);
+    $("log-output").textContent = log.text || "No log output.";
+  } else {
+    $("progress-card").textContent = "No active progress.";
+    $("log-output").textContent = "No GUI-launched job yet.";
+  }
+}
+
+function renderRecordingQueue(payload) {
+  state.recordings = payload.recordings || [];
+  state.queue = payload.queue || [];
+  state.worker = payload.worker || {};
+  state.profiles = payload.profiles || state.profiles;
+  if (!state.selectedProfileName || !state.profiles.some((profile) => profile.name === state.selectedProfileName)) {
+    state.selectedProfileName = payload.default_profile || state.profiles[0]?.name || "default";
+    localStorage.setItem("selectedProfileName", state.selectedProfileName);
+  }
+
+  const profileOptions = state.profiles
+    .map((profile) => `<option value="${escapeHtml(profile.name)}">${escapeHtml(profile.name)} v${escapeHtml(profile.version)}</option>`)
+    .join("");
+  $("queue-profile-select").innerHTML = profileOptions;
+  $("queue-profile-select").value = state.selectedProfileName;
+
+  const workerStatus = state.worker.status || "stopped";
+  const activeSession = state.worker.active_session_id || "";
+  $("worker-strip").innerHTML = `
+    <strong>Queue ${badge(workerStatus)}</strong>
+    <span>${state.worker.pause_after_probe ? "pause requested after active probe" : "continuous processing"}</span>
+    ${activeSession ? `<span>active: ${escapeHtml(activeSession)}</span>` : ""}
+    ${state.worker.heartbeat_at ? `<span class="muted">heartbeat ${escapeHtml(state.worker.heartbeat_at)}</span>` : ""}
+  `;
+  $("running-badge").textContent = workerStatus;
+  $("running-badge").className = `badge ${stageClass(workerStatus)}`;
+
+  const visible = state.recordings.filter((recording) => {
+    const mouseMatches = state.mouseFilter === "all" || recording.mouse_id === state.mouseFilter;
+    const dateMatches = state.dateFilter === "all" || recording.recording_date === state.dateFilter;
+    return mouseMatches && dateMatches;
+  });
+  $("recording-body").innerHTML =
+    visible
+      .map((recording) => {
+        const probes = (recording.probes || [])
+          .map(
+            (probe) => `
+              <button class="probe-link" type="button" data-open-probe="${escapeHtml(probe.session_id)}">
+                ${escapeHtml(probe.probe_label || "probe")} ${badge(probe.status)}
+                ${probe.current_step ? `<span class="muted">${escapeHtml(probe.current_step)}</span>` : ""}
+              </button>
+            `
+          )
+          .join("");
+        const queue = recording.queue;
+        const queueText = queue
+          ? `${badge(queue.status)} #${escapeHtml(queue.position)}<div class="muted">${escapeHtml(queue.profile_name)}</div>`
+          : `<span class="muted">${escapeHtml(recording.eligibility_reason || "not queued")}</span>`;
+        const outputBadges = [
+          `local ${badge(recording.local_stage_status || "pending")}`,
+          `Synology ${badge(recording.derived_backup_status || "pending")}`,
+          `D: ${badge(recording.local_recording_archive_status || "pending")}`,
+          `NWB ${badge(recording.nwb_status || "pending")}`,
+          recording.survey_like ? badge("survey") : "",
+          new Set((recording.probes || []).map((probe) => `${probe.active_profile || ""}:${probe.profile_version || ""}`).filter(Boolean)).size > 1
+            ? badge("profile mismatch")
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+        const action = queue
+          ? '<span class="muted">queued</span>'
+          : recording.eligible || recording.short_recording
+            ? `<button type="button" class="enqueue-recording" data-recording-id="${escapeHtml(recording.recording_id)}" data-short="${recording.short_recording ? "true" : "false"}" data-survey="${recording.survey_like ? "true" : "false"}">
+                ${recording.short_recording || recording.survey_like ? "Queue Anyway" : "Queue"}
+              </button>`
+            : `<span class="muted">${escapeHtml(recording.eligibility_reason || recording.status)}</span>`;
+        return `
+          <tr class="${queue?.status === "running" ? "selected-row" : ""}">
+            <td><strong>${escapeHtml(recording.mouse_id)}</strong></td>
+            <td><strong>${escapeHtml(recording.recording_date)}</strong><div class="muted">${escapeHtml(recording.task || "")}</div></td>
+            <td><strong>${escapeHtml(recording.recording_block)}</strong><div class="muted">${escapeHtml(recording.record_node || "")}</div></td>
+            <td><strong>${formatDuration(recording.duration_seconds)}</strong></td>
+            <td>${badge(recording.status)}</td>
+            <td class="probe-stack">${probes}</td>
+            <td>${queueText}</td>
+            <td>${outputBadges}</td>
+            <td>${action}</td>
+          </tr>
+        `;
+      })
+      .join("") || '<tr><td colspan="9" class="muted">No recording blocks match the filters.</td></tr>';
+}
+
+function renderProfiles(payload) {
+  state.profiles = payload.profiles || [];
+  if (!state.selectedProfileName || !state.profiles.some((profile) => profile.name === state.selectedProfileName)) {
+    state.selectedProfileName = payload.default_profile || state.profiles[0]?.name || "default";
+  }
+  const options = state.profiles
+    .map((profile) => `<option value="${escapeHtml(profile.name)}">${escapeHtml(profile.name)} v${escapeHtml(profile.version)}</option>`)
+    .join("");
+  $("profile-select").innerHTML = options;
+  $("profile-select").value = state.selectedProfileName;
+  if (state.profileDirty || document.activeElement?.closest?.("#config")) return;
+  const selected = state.profiles.find((profile) => profile.name === state.selectedProfileName) || state.profiles[0];
+  if (!selected) return;
+  state.profilePayload = JSON.parse(JSON.stringify(selected.profile || {}));
+  state.profileDirty = false;
+  $("profile-name").value = selected.name || "";
+  $("profile-description").value = selected.description || selected.profile?._profile?.description || "";
+  $("profile-version").textContent = `v${selected.version || 1}`;
+  $("profile-version").className = "badge complete";
+  $("profile-editor").value = selected.yaml || "";
+  renderProfileForm(state.profilePayload);
+}
+
+function renderProfileForm(profile) {
+  const preprocessing = profile.preprocessing || {};
+  const sorting = profile.sorting || {};
+  const qc = profile.qc || {};
+  const jobs = profile.jobs || {};
+  $("profile-phase-shift").checked = preprocessing.phase_shift?.enabled !== false;
+  $("profile-highpass").value = preprocessing.highpass_filter?.freq_min ?? 300;
+  $("profile-car").value = preprocessing.car?.operator || "median";
+  $("profile-exclude-bad").checked = Boolean(preprocessing.bad_channels?.exclude_from_sorting);
+  $("profile-drift").checked = sorting.params?.do_correction !== false;
+  $("profile-nblocks").value = sorting.params?.nblocks ?? 1;
+  $("profile-n-jobs").value = jobs.n_jobs ?? 8;
+  $("profile-fallback-jobs").value = jobs.fallback_n_jobs ?? 2;
+  $("profile-sparsity-spikes").value = qc.sorting_analyzer?.num_spikes_for_sparsity ?? 200;
+  $("profile-pcs").checked = extensionEnabled(qc, "principal_components");
+  $("profile-spike-locations").checked = extensionEnabled(qc, "spike_locations");
+  $("profile-unitrefine").checked = qc.automated_labels?.enabled !== false;
+  $("profile-phy").checked = qc.export_phy !== false;
+}
+
+function extensionEnabled(qc, name) {
+  const extension = (qc.analyzer_extensions || []).find((item) => item.name === name);
+  return extension ? extension.enabled !== false : true;
+}
+
+function profileFromEditorAndForm() {
+  let profile;
+  try {
+    profile = parseSimpleYamlProfile($("profile-editor").value);
+  } catch (error) {
+    throw new Error(`Profile YAML is invalid: ${error.message}`);
+  }
+  profile.preprocessing ||= {};
+  profile.preprocessing.phase_shift ||= {};
+  profile.preprocessing.phase_shift.enabled = $("profile-phase-shift").checked;
+  profile.preprocessing.highpass_filter ||= {};
+  profile.preprocessing.highpass_filter.enabled = true;
+  profile.preprocessing.highpass_filter.freq_min = Number($("profile-highpass").value);
+  profile.preprocessing.car ||= {};
+  profile.preprocessing.car.operator = $("profile-car").value;
+  profile.preprocessing.bad_channels ||= {};
+  profile.preprocessing.bad_channels.exclude_from_sorting = $("profile-exclude-bad").checked;
+  profile.sorting ||= {};
+  profile.sorting.params ||= {};
+  profile.sorting.params.do_correction = $("profile-drift").checked;
+  profile.sorting.params.nblocks = Number($("profile-nblocks").value);
+  profile.jobs ||= {};
+  profile.jobs.n_jobs = Number($("profile-n-jobs").value);
+  profile.jobs.fallback_n_jobs = Number($("profile-fallback-jobs").value);
+  profile.qc ||= {};
+  profile.qc.sorting_analyzer ||= {};
+  profile.qc.sorting_analyzer.num_spikes_for_sparsity = Number($("profile-sparsity-spikes").value);
+  setExtensionEnabled(profile.qc, "principal_components", $("profile-pcs").checked);
+  setExtensionEnabled(profile.qc, "spike_locations", $("profile-spike-locations").checked);
+  profile.qc.automated_labels ||= {};
+  profile.qc.automated_labels.enabled = $("profile-unitrefine").checked;
+  profile.qc.export_phy = $("profile-phy").checked;
+  return profile;
+}
+
+function setExtensionEnabled(qc, name, enabled) {
+  qc.analyzer_extensions ||= [];
+  let extension = qc.analyzer_extensions.find((item) => item.name === name);
+  if (!extension) {
+    extension = { name };
+    qc.analyzer_extensions.push(extension);
+  }
+  extension.enabled = enabled;
+}
+
+function parseSimpleYamlProfile(text) {
+  const selected = state.profiles.find((profile) => profile.name === state.selectedProfileName);
+  if (selected && text.trim() === (selected.yaml || "").trim()) {
+    return JSON.parse(JSON.stringify(selected.profile || {}));
+  }
+  // YAML validation and parsing is authoritative on the backend. Keep form edits
+  // based on the last loaded object when the advanced text changed.
+  return JSON.parse(JSON.stringify(state.profilePayload || {}));
+}
+
+async function saveCurrentProfile({ clone = false } = {}) {
+  let name = $("profile-name").value.trim();
+  if (clone) {
+    name = prompt("New profile name", `${name}_copy`)?.trim() || "";
+    if (!name) return;
+  }
+  const formOverrides = {
+    "preprocessing.phase_shift.enabled": $("profile-phase-shift").checked,
+    "preprocessing.highpass_filter.enabled": true,
+    "preprocessing.highpass_filter.freq_min": Number($("profile-highpass").value),
+    "preprocessing.car.operator": $("profile-car").value,
+    "preprocessing.bad_channels.exclude_from_sorting": $("profile-exclude-bad").checked,
+    "sorting.params.do_correction": $("profile-drift").checked,
+    "sorting.params.nblocks": Number($("profile-nblocks").value),
+    "jobs.n_jobs": Number($("profile-n-jobs").value),
+    "jobs.fallback_n_jobs": Number($("profile-fallback-jobs").value),
+    "qc.sorting_analyzer.num_spikes_for_sparsity": Number($("profile-sparsity-spikes").value),
+    "qc.automated_labels.enabled": $("profile-unitrefine").checked,
+    "qc.export_phy": $("profile-phy").checked,
+    analyzer_extensions: {
+      principal_components: $("profile-pcs").checked,
+      spike_locations: $("profile-spike-locations").checked,
+    },
+  };
+  const response = await api(`/api/profiles/${encodeURIComponent(name)}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      yaml: $("profile-editor").value,
+      form_overrides: formOverrides,
+      description: $("profile-description").value.trim(),
+    }),
+  });
+  state.selectedProfileName = response.name;
+  state.profileDirty = false;
+  localStorage.setItem("selectedProfileName", state.selectedProfileName);
+  $("profile-save-status").textContent = `Saved ${response.name} v${response.version}. Unstarted probes will use this version.`;
+  await refresh();
+}
+
+function renderQueueActivity(payload) {
+  const events = payload.events || [];
+  const queueJobs = payload.jobs || [];
+  const eventHtml = events
+    .slice(-30)
+    .reverse()
+    .map(
+      (event) => `
+        <div class="job-item">
+          <strong>${escapeHtml(event.event)}</strong> ${event.level === "error" ? badge("failed") : ""}
+          <div>${escapeHtml(event.message)}</div>
+          <div class="muted">${escapeHtml(event.session_id || event.queue_id || "")} ${escapeHtml(event.created_at || "")}</div>
+        </div>
+      `
+    )
+    .join("");
+  const jobsHtml = queueJobs
+    .slice(0, 15)
+    .map(
+      (job) => `
+        <div class="job-item">
+          <strong>${escapeHtml(job.kind)}</strong> ${badge(job.status)}
+          <div>${escapeHtml(job.session_id || "")}</div>
+          <div class="muted">${escapeHtml(job.profile_name || "")} v${escapeHtml(job.profile_version || "")}</div>
+          <div>${fileLink(job.stdout_log, "stdout")} ${fileLink(job.stderr_log, "stderr")} ${fileLink(job.event_log, "events")}</div>
+        </div>
+      `
+    )
+    .join("");
+  $("job-list").innerHTML = `${jobsHtml}${eventHtml}` || '<p class="muted">No persistent queue activity yet.</p>';
+  if (payload.worker?.active_session_id) {
+    $("active-job").textContent = `${payload.worker.active_session_id} running`;
+    $("active-job").className = "badge running";
+    $("progress-card").textContent = `Current queue step: ${payload.worker.active_session_id}`;
+  }
+}
+
+async function refresh() {
+  const [status, recordings, profiles, queueEvents, config, configText, reports, jobs, system] = await Promise.all([
+    api("/api/status"),
+    api("/api/recordings"),
+    api("/api/profiles"),
+    api("/api/queue/events?limit=100"),
+    api("/api/config"),
+    api("/api/config/text"),
+    api("/api/reports"),
+    api("/api/jobs"),
+    api("/api/system"),
+  ]);
+  renderStatus(status);
+  renderRecordingQueue(recordings);
+  renderProfiles(profiles);
+  await loadSelectedProbe();
+  renderNwbMetadata(await api(`/api/nwb/metadata?session_id=${encodeURIComponent(selectedNwbSessionId() || "")}`));
+  renderConfig(config, configText);
+  renderReports(reports);
+  renderSystem(system);
+  await renderJobs(jobs);
+  renderQueueActivity(queueEvents);
+}
+
+async function startJob(kind, payload = {}) {
+  const job = await api(`/api/jobs/${kind}`, { method: "POST", body: JSON.stringify(payload) });
+  $("log-output").textContent = `Started ${job.kind}: ${job.job_id}`;
+  switchTab("logs");
+  await refresh();
+}
+
+function selectedSessionId() {
+  return $("session-select").value || state.selectedSessionId;
+}
+
+function selectedRow() {
+  const sessionId = selectedSessionId();
+  return state.rows.find((row) => row.session_id === sessionId) || {};
+}
+
+function confirmProbeAction(actionLabel) {
+  const row = selectedRow();
+  const probe = row.probe_label || "";
+  const session = row.session_id || selectedSessionId();
+  return confirm(`${actionLabel}\n\nProbe: ${probe}\nSession: ${session}`);
+}
+
+function resumeExtensions() {
+  return $("resume-extensions").value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function variantPayload() {
+  return {
+    session_id: selectedSessionId(),
+    variant_name: $("variant-name").value,
+    n_jobs: $("variant-n-jobs").value,
+    metric_names: $("variant-metrics").value,
+    include_spike_locations: $("variant-spike-locations").checked,
+    include_principal_components: $("variant-principal-components").checked,
+    phy_compute_pc_features: $("variant-phy-pc-features").checked,
+    skip_phy: $("variant-skip-phy").checked,
+  };
+}
+
+async function loadStimulus() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  setBadge("stimulus-status", "loading", "running");
+  setBadge("stimulus-input-status", "loading", "running");
+  const payload = await api(`/api/stimulus/${encodeURIComponent(sessionId)}`);
+  renderStimulus(payload);
+}
+
+async function loadExistingStimulus() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  setBadge("stimulus-status", "loading saved", "running");
+  setBadge("stimulus-input-status", "loading saved", "running");
+  const payload = await api(`/api/stimulus/${encodeURIComponent(sessionId)}/existing`);
+  renderStimulus(payload);
+}
+
+async function loadUnits() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  setBadge("units-status", "loading", "running");
+  setBadge("units-input-status", "loading", "running");
+  const payload = await api(`/api/units/${encodeURIComponent(sessionId)}`);
+  renderUnits(payload);
+}
+
+async function loadExistingUnits() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  setBadge("units-status", "loading saved", "running");
+  setBadge("units-input-status", "loading saved", "running");
+  const payload = await api(`/api/units/${encodeURIComponent(sessionId)}/existing`);
+  renderUnits(payload);
+}
+
+async function writeUnitsFile() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  $("units-write-status").textContent = "Creating units CSV...";
+  const result = await api(`/api/units/${encodeURIComponent(sessionId)}/write`, { method: "POST", body: JSON.stringify({}) });
+  $("units-write-status").textContent = `Wrote units files to ${Object.values(result.outputs || {}).join(", ")}`;
+  await loadUnits();
+  await loadSelectedProbe();
+}
+
+async function saveNwbMetadata() {
+  setBadge("nwb-metadata-status", "saving", "running");
+  setBadge("metadata-input-status", "saving", "running");
+  const payload = await api("/api/nwb/metadata", {
+    method: "PUT",
+    body: JSON.stringify(nwbMetadataPayloadFromInputs()),
+  });
+  renderNwbMetadata(payload);
+  setBadge("nwb-metadata-status", "saved", "complete");
+  setBadge("metadata-input-status", "saved", "complete");
+  $("nwb-metadata-message").textContent = "Saved NWB metadata to pipeline/config.yaml";
+}
+
+async function writeStimulusFiles() {
+  const sessionId = selectedNwbSessionId();
+  if (!sessionId) {
+    alert("Select a recording first.");
+    return;
+  }
+  $("stimulus-write-status").textContent = "Creating stimulus/trials CSVs...";
+  const result = await api(`/api/stimulus/${encodeURIComponent(sessionId)}/write`, { method: "POST", body: JSON.stringify({}) });
+  $("stimulus-write-status").textContent = `Wrote stimulus files to ${Object.values(result.outputs || {}).join(", ")}`;
+  await loadStimulus();
+  await loadSelectedProbe();
+}
+
+async function saveSelectedDigitalEvent() {
+  const eventName = $("digital-event-name").value;
+  const outputName = $("digital-output-name").value.trim();
+  if (!eventName) {
+    alert("Load digital events and select an event first.");
+    return;
+  }
+  if (!outputName) {
+    alert("Output name is required.");
+    return;
+  }
+  const result = await api("/api/stimulus/save-digital", {
+    method: "POST",
+    body: JSON.stringify({ session_id: selectedNwbSessionId(), event_name: eventName, output_name: outputName }),
+  });
+  $("digital-save-status").textContent = `Saved ${result.count} ${result.event_name} events to ${result.path}`;
+  await loadStimulus();
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll(".tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.tab === tabId));
+  document.querySelectorAll(".tab-panel").forEach((panel) => panel.classList.toggle("active", panel.id === tabId));
+}
+
+function bindTabs() {
+  document.querySelectorAll(".tab").forEach((tab) => {
+    tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+  });
+}
+
+function bindControls() {
+  const trialsInput = $("trials-csv-input");
+  if (trialsInput) {
+    trialsInput.addEventListener("change", () => loadCsvFileFromInput(trialsInput, "trials").catch((error) => alert(error.message)));
+  }
+  const unitsInput = $("units-csv-input");
+  if (unitsInput) {
+    unitsInput.addEventListener("change", () => loadCsvFileFromInput(unitsInput, "units").catch((error) => alert(error.message)));
+  }
+
+  document.addEventListener("input", (event) => {
+    if (Object.prototype.hasOwnProperty.call(nwbMetadataFields, event.target.id)) {
+      if (event.target.id === "nwb-subject-dob") updateComputedAgeFromDob();
+      markNwbMetadataUnsaved();
+    }
+    if (
+      ["profile-editor", "profile-name", "profile-description"].includes(event.target.id) ||
+      event.target.closest?.(".profile-form")
+    ) {
+      state.profileDirty = true;
+      $("profile-save-status").textContent = "Unsaved profile changes. Active probes remain on their frozen snapshots.";
+    }
+  });
+
+  document.addEventListener("change", async (event) => {
+    if (event.target.id === "queue-profile-select") {
+      state.selectedProfileName = event.target.value || "default";
+      localStorage.setItem("selectedProfileName", state.selectedProfileName);
+    }
+    if (event.target.id === "profile-select") {
+      if (state.profileDirty && !confirm("Discard unsaved profile changes?")) {
+        event.target.value = state.selectedProfileName;
+        return;
+      }
+      state.selectedProfileName = event.target.value || "default";
+      state.profileDirty = false;
+      localStorage.setItem("selectedProfileName", state.selectedProfileName);
+      renderProfiles({ profiles: state.profiles, default_profile: state.selectedProfileName });
+    }
+    if (event.target.id === "mouse-filter") {
+      state.mouseFilter = event.target.value || "all";
+      localStorage.setItem("mouseFilter", state.mouseFilter);
+      await refresh();
+    }
+    if (event.target.id === "date-filter") {
+      state.dateFilter = event.target.value || "all";
+      localStorage.setItem("dateFilter", state.dateFilter);
+      await refresh();
+    }
+    if (event.target.id === "session-select") {
+      state.selectedSessionId = event.target.value;
+      localStorage.setItem("selectedSessionId", state.selectedSessionId);
+      const row = selectedRow();
+      if (row.session_id) {
+        state.selectedRecordingKey = recordingKey(row);
+        localStorage.setItem("selectedRecordingKey", state.selectedRecordingKey);
+      }
+      state.stimulus = null;
+      state.units = null;
+      await loadSelectedProbe();
+    }
+    if (event.target.id === "nwb-recording-select") {
+      state.selectedRecordingKey = event.target.value;
+      localStorage.setItem("selectedRecordingKey", state.selectedRecordingKey);
+      state.stimulus = null;
+      state.units = null;
+      renderNwbSessionSummary();
+    }
+  });
+
+  document.addEventListener("click", async (event) => {
+    const recording = event.target.closest("tr[data-recording-key]");
+    if (recording) {
+      state.selectedRecordingKey = recording.dataset.recordingKey;
+      localStorage.setItem("selectedRecordingKey", state.selectedRecordingKey);
+      state.stimulus = null;
+      state.units = null;
+      renderNwbSessionSummary();
+      switchTab("nwb");
+      return;
+    }
+    const row = event.target.closest("tr[data-session-id]");
+    if (row) {
+      state.selectedSessionId = row.dataset.sessionId;
+      localStorage.setItem("selectedSessionId", state.selectedSessionId);
+      $("session-select").value = state.selectedSessionId;
+      const selected = selectedRow();
+      if (selected.session_id) {
+        state.selectedRecordingKey = recordingKey(selected);
+        localStorage.setItem("selectedRecordingKey", state.selectedRecordingKey);
+      }
+      state.stimulus = null;
+      state.units = null;
+      await loadSelectedProbe();
+      switchTab("workflow");
+      return;
+    }
+    const button = event.target.closest("button");
+    if (!button || button.classList.contains("tab")) return;
+    try {
+      if (button.id === "refresh") await refresh();
+      if (button.classList.contains("enqueue-recording")) {
+        const allowShort = button.dataset.short === "true";
+        const allowSurvey = button.dataset.survey === "true";
+        if ((allowShort || allowSurvey) && !confirm("This is a short or survey block excluded from the normal queue. Queue it anyway?")) return;
+        await api("/api/queue/enqueue", {
+          method: "POST",
+          body: JSON.stringify({
+            recording_id: button.dataset.recordingId,
+            profile_name: state.selectedProfileName,
+            allow_short: allowShort,
+            allow_survey: allowSurvey,
+          }),
+        });
+        await refresh();
+        return;
+      }
+      if (button.dataset.openProbe) {
+        state.selectedSessionId = button.dataset.openProbe;
+        localStorage.setItem("selectedSessionId", state.selectedSessionId);
+        $("session-select").value = state.selectedSessionId;
+        await loadSelectedProbe();
+        switchTab("workflow");
+        return;
+      }
+      if (button.id === "queue-all") {
+        if (!confirm(`Queue every eligible pending recording using profile "${state.selectedProfileName}"?`)) return;
+        await api("/api/queue/enqueue-all", {
+          method: "POST",
+          body: JSON.stringify({ profile_name: state.selectedProfileName }),
+        });
+        await refresh();
+        return;
+      }
+      if (button.id === "pause-queue") {
+        await api("/api/queue/pause", { method: "POST", body: "{}" });
+        await refresh();
+        return;
+      }
+      if (button.id === "resume-queue") {
+        await api("/api/queue/resume", { method: "POST", body: "{}" });
+        await refresh();
+        return;
+      }
+      if (button.id === "reconcile-interrupted") {
+        const result = await api("/api/queue/reconcile-interrupted", { method: "POST", body: "{}" });
+        alert(`Reconciled ${result.reconciled_session_ids.length} interrupted probe row(s).`);
+        await refresh();
+        return;
+      }
+      if (button.id === "save-profile") {
+        await saveCurrentProfile();
+        return;
+      }
+      if (button.id === "clone-profile") {
+        await saveCurrentProfile({ clone: true });
+        return;
+      }
+      if (button.classList.contains("save-event-row")) {
+        const eventName = button.dataset.eventName || "";
+        $("digital-event-name").value = eventName;
+        const defaults = { game_frame: "gameframe", trial_start: "trial_starts", reward: "rewards" };
+        $("digital-output-name").value = defaults[eventName] || eventName;
+      }
+      if (button.id === "load-stimulus") {
+        await loadStimulus();
+      }
+      if (button.id === "load-default-stimulus") {
+        await loadExistingStimulus();
+      }
+      if (button.id === "load-existing-stimulus") {
+        $("trials-csv-input").click();
+      }
+      if (button.id === "clear-trials-override") {
+        await clearNwbCsvOverride("trials");
+      }
+      if (button.id === "write-stimulus") {
+        await writeStimulusFiles();
+      }
+      if (button.id === "load-units") {
+        await loadUnits();
+      }
+      if (button.id === "load-default-units") {
+        await loadExistingUnits();
+      }
+      if (button.id === "load-existing-units") {
+        $("units-csv-input").click();
+      }
+      if (button.id === "clear-units-override") {
+        await clearNwbCsvOverride("units");
+      }
+      if (button.id === "write-units") {
+        await writeUnitsFile();
+      }
+      if (button.id === "save-nwb-metadata") {
+        await saveNwbMetadata();
+      }
+      if (button.id === "export-nwb-recording") {
+        const group = selectedRecordingGroup();
+        const probeList = (group?.rows || []).map((row) => `${row.probe_label || "probe"}=${row.status || "n/a"}`).join(", ");
+        const overwrite = $("overwrite-nwb").checked;
+        if (
+          !confirm(
+            `Export NWB for this recording?\n\nRecording: ${group?.name || "n/a"}\nProbes: ${probeList}\nOverwrite existing NWB: ${overwrite ? "yes" : "no"}\n\nThis combines units across registered probes and writes trials, units, digital TTL streams, and metadata.`
+          )
+        ) {
+          return;
+        }
+        await startJob("export-nwb", { session_id: selectedNwbSessionId(), overwrite });
+      }
+      if (button.id === "save-digital-event") {
+        await saveSelectedDigitalEvent();
+      }
+      if (button.id === "show-out") {
+        state.logStream = "out";
+        await refresh();
+      }
+      if (button.id === "show-err") {
+        state.logStream = "err";
+        await refresh();
+      }
+      if (button.dataset.job) {
+        const payload = {};
+        await startJob(button.dataset.job, payload);
+      }
+      if (button.id === "run-one") {
+        const row = selectedRow();
+        const recording = state.recordings.find((item) => (item.probes || []).some((probe) => probe.session_id === row.session_id));
+        if (!recording) throw new Error("Could not resolve the selected probe's recording.");
+        if (!confirmProbeAction(`Queue the selected probe with profile "${state.selectedProfileName}"?`)) return;
+        await api("/api/queue/enqueue", {
+          method: "POST",
+          body: JSON.stringify({
+            recording_id: recording.recording_id,
+            session_id: row.session_id,
+            profile_name: state.selectedProfileName,
+            allow_short: recording.short_recording,
+            allow_survey: recording.survey_like,
+          }),
+        });
+        await refresh();
+        switchTab("overview");
+        return;
+      }
+      if (button.id === "unitrefine") {
+        if (!confirmProbeAction("Run UnitRefine on the selected probe?")) return;
+        await startJob("unitrefine", { session_id: selectedSessionId(), label_set: "unitrefine_full" });
+      }
+      if (button.id === "export-phy") {
+        if (
+          !confirmProbeAction(
+            "Export Phy for the selected probe?\n\nThis uses the existing SortingAnalyzer and latest UnitRefine labels. It will refuse to overwrite an existing phy folder."
+          )
+        ) {
+          return;
+        }
+        await startJob("export-phy", { session_id: selectedSessionId(), overwrite_phy: false });
+      }
+      if (button.id === "export-nwb") {
+        const overwrite = $("overwrite-nwb")?.checked || false;
+        if (
+          !confirmProbeAction(
+            `Export the session-level mouse-arena NWB?\n\nThis combines ProbeA and ProbeB units with NI-DAQ TTLs and behavior events.\nOverwrite existing NWB: ${overwrite ? "yes" : "no"}`
+          )
+        ) {
+          return;
+        }
+        await startJob("export-nwb", { session_id: selectedSessionId(), overwrite });
+      }
+      if (button.id === "resume-qc") {
+        const row = selectedRow();
+        const recording = state.recordings.find((item) => (item.probes || []).some((probe) => probe.session_id === row.session_id));
+        if (!recording) throw new Error("Could not resolve the selected probe's recording.");
+        if (!confirmProbeAction("Continue from the last valid artifact?")) return;
+        await api("/api/queue/enqueue", {
+          method: "POST",
+          body: JSON.stringify({
+            recording_id: recording.recording_id,
+            session_id: row.session_id,
+            profile_name: state.selectedProfileName,
+            allow_short: recording.short_recording,
+            allow_survey: recording.survey_like,
+          }),
+        });
+        await refresh();
+        switchTab("overview");
+        return;
+      }
+      if (button.id === "restart-qc") {
+        if (
+          !confirmProbeAction(
+            "Restart QC from the selected probe's existing Kilosort output?\n\nThis archives the current SortingAnalyzer, UnitRefine, Phy, reports, and metric CSVs before rebuilding QC. Kilosort output and raw data are kept."
+          )
+        ) {
+          return;
+        }
+        await startJob("restart-qc", {
+          session_id: selectedSessionId(),
+          skip_phy: true,
+        });
+      }
+      if (button.id === "run-qc-variant") {
+        const payload = variantPayload();
+        if (!payload.variant_name || !payload.variant_name.trim()) {
+          alert("Variant name is required.");
+          return;
+        }
+        if (!confirmProbeAction(`Run QC variant "${payload.variant_name}" from the existing Kilosort output?`)) return;
+        await startJob("qc-variant", payload);
+      }
+      if (button.id === "save-config") {
+        const result = await api("/api/config/text", {
+          method: "PUT",
+          body: JSON.stringify({ text: $("config-editor").value }),
+        });
+        $("config-save-status").textContent = `Saved ${result.path}`;
+        await refresh();
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+}
+
+function init() {
+  bindTabs();
+  bindControls();
+  refresh().catch((error) => {
+    $("log-output").textContent = error.message;
+  });
+  setInterval(refresh, 5000);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+

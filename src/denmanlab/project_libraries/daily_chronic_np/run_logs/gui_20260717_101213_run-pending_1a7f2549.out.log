@@ -1,0 +1,44 @@
+[0.0s] run_pending: START discover and refresh registry
+[48.3s] run_pending: runnable rows: 27
+[48.3s] run_pending: DONE discover and refresh registry in 48.3s
+[48.3s] run_pending: START stage/run/archive recordings
+[48.3s] run_pending: recording 1/18: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-06-30_12-16-16
+[48.3s] run_pending: stage recording: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-06-30_12-16-16
+[49.4s] run_pending: probe 1/27: jlh60_2026-06-30_12-16-16_ProbeB ProbeB
+[0.0s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START verify raw backup
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-06-30_12-16-16
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE verify raw backup in 0.2s
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START initialize output and registry
+[0.3s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE initialize output and registry in 0.0s
+[0.3s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START load Open Ephys recording and probe map
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: recording: 384 channels, 2857.4s, 30000.0 Hz
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE load Open Ephys recording and probe map in 1.4s
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START validate geometry and compute hashes
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE validate geometry and compute hashes in 0.0s
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply Neuropixels phase shift
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: phase_shift applied
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply Neuropixels phase shift in 0.0s
+[1.6s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply SpikeInterface CAR and plot traces
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-06-30_12-16-16\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\report\figures\pre_post_car_traces.png
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply SpikeInterface CAR and plot traces in 2.6s
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply high-pass filter
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: highpass_filter applied: freq_min=300 Hz
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply high-pass filter in 0.0s
+[4.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START detect bad channels
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: bad channels detected: 98; excluded from sorting: 0
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE detect bad channels in 44.2s
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START optional SpikeInterface motion correction
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: using Kilosort4 drift correction
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE optional SpikeInterface motion correction in 0.0s
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START prepare Kilosort4 parameters
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE prepare Kilosort4 parameters in 0.1s
+[48.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START run Kilosort4
+Skipping common average reference.
+kilosort4 run time 1851.12s
+[1h21m53s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: Kilosort4 units: 447
+[1h21m53s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE run Kilosort4 in 1h21m04s
+[1h21m53s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START compute SortingAnalyzer extensions
+[2h38m09s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2
+[2h38m09s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: compute analyzer extension: random_spikes
+[2h38m10s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: compute analyzer extension: waveforms

@@ -1,0 +1,880 @@
+jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   0%|          | 0/16 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   0%|          | 0/16 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   0%|          | 0/16 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   0%|          | 0/16 [00:00<?, ?phase/s]jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   6%|6         | 1/16 [00:00<00:03,  4.22phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   6%|6         | 1/16 [00:00<00:03,  4.22phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:   6%|6         | 1/16 [00:00<00:03,  4.22phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  12%|#2        | 2/16 [00:00<00:03,  4.22phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  12%|#2        | 2/16 [00:01<00:03,  4.22phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  12%|#2        | 2/16 [00:01<00:03,  4.22phase/s]jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  19%|#8        | 3/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  19%|#8        | 3/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  19%|#8        | 3/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  25%|##5       | 4/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  25%|##5       | 4/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  25%|##5       | 4/16 [00:01<00:06,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  31%|###1      | 5/16 [00:01<00:05,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  31%|###1      | 5/16 [00:03<00:05,  1.98phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  31%|###1      | 5/16 [00:03<00:05,  1.98phase/s]jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  38%|###7      | 6/16 [00:03<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  38%|###7      | 6/16 [00:03<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  38%|###7      | 6/16 [00:03<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  38%|###7      | 6/16 [00:03<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  44%|####3     | 7/16 [00:03<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  44%|####3     | 7/16 [00:45<00:06,  1.46phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  44%|####3     | 7/16 [00:45<00:06,  1.46phase/s]jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  50%|#####     | 8/16 [00:45<01:05,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  50%|#####     | 8/16 [00:45<01:05,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  50%|#####     | 8/16 [00:45<01:05,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  50%|#####     | 8/16 [00:45<01:05,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  56%|#####6    | 9/16 [00:45<00:57,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  56%|#####6    | 9/16 [00:45<00:57,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  56%|#####6    | 9/16 [00:45<00:57,  8.19s/phase]                                                                                          jlh60_2026-06-30_12-16-16_ProbeB:ProbeB:  62%|######2   | 10/16 [00:45<00:49,  8.19s/phase]
+write_binary_recording (no parallelization):   0%|          | 0/2855 [00:00<?, ?it/s][A
+write_binary_recording (no parallelization):   0%|          | 1/2855 [00:00<40:52,  1.16it/s][A
+write_binary_recording (no parallelization):   0%|          | 2/2855 [00:01<47:43,  1.00s/it][A
+write_binary_recording (no parallelization):   0%|          | 3/2855 [00:03<48:30,  1.02s/it][A
+write_binary_recording (no parallelization):   0%|          | 4/2855 [00:04<48:26,  1.02s/it][A
+write_binary_recording (no parallelization):   0%|          | 5/2855 [00:05<48:34,  1.02s/it][A
+write_binary_recording (no parallelization):   0%|          | 6/2855 [00:06<48:35,  1.02s/it][A
+write_binary_recording (no parallelization):   0%|          | 7/2855 [00:07<49:49,  1.05s/it][A
+write_binary_recording (no parallelization):   0%|          | 8/2855 [00:08<49:42,  1.05s/it][A
+write_binary_recording (no parallelization):   0%|          | 9/2855 [00:09<49:41,  1.05s/it][A
+write_binary_recording (no parallelization):   0%|          | 10/2855 [00:10<50:06,  1.06s/it][A
+write_binary_recording (no parallelization):   0%|          | 11/2855 [00:11<49:45,  1.05s/it][A
+write_binary_recording (no parallelization):   0%|          | 12/2855 [00:12<50:04,  1.06s/it][A
+write_binary_recording (no parallelization):   0%|          | 13/2855 [00:13<49:47,  1.05s/it][A
+write_binary_recording (no parallelization):   0%|          | 14/2855 [00:14<49:23,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 15/2855 [00:15<49:06,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 16/2855 [00:16<49:53,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|          | 17/2855 [00:17<50:48,  1.07s/it][A
+write_binary_recording (no parallelization):   1%|          | 18/2855 [00:18<49:55,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|          | 19/2855 [00:19<49:16,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 20/2855 [00:20<48:59,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 21/2855 [00:21<49:39,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|          | 22/2855 [00:22<49:20,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|          | 23/2855 [00:23<48:34,  1.03s/it][A
+write_binary_recording (no parallelization):   1%|          | 24/2855 [00:24<49:11,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 25/2855 [00:26<48:56,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|          | 26/2855 [00:27<49:52,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|          | 27/2855 [00:28<49:57,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|          | 28/2855 [00:29<49:43,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|1         | 29/2855 [00:30<49:26,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 30/2855 [00:31<49:20,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 31/2855 [00:32<50:00,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|1         | 32/2855 [00:33<49:25,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 33/2855 [00:34<49:24,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 34/2855 [00:35<49:19,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 35/2855 [00:36<50:11,  1.07s/it][A
+write_binary_recording (no parallelization):   1%|1         | 36/2855 [00:37<49:55,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|1         | 37/2855 [00:38<49:34,  1.06s/it][A
+write_binary_recording (no parallelization):   1%|1         | 38/2855 [00:39<48:51,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|1         | 39/2855 [00:40<48:38,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|1         | 40/2855 [00:41<49:14,  1.05s/it][A
+write_binary_recording (no parallelization):   1%|1         | 41/2855 [00:42<48:45,  1.04s/it][A
+write_binary_recording (no parallelization):   1%|1         | 42/2855 [00:43<48:06,  1.03s/it][A
+write_binary_recording (no parallelization):   2%|1         | 43/2855 [00:44<47:59,  1.02s/it][A
+write_binary_recording (no parallelization):   2%|1         | 44/2855 [00:45<48:00,  1.02s/it][A
+write_binary_recording (no parallelization):   2%|1         | 45/2855 [00:46<48:45,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 46/2855 [00:48<48:47,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 47/2855 [00:49<48:24,  1.03s/it][A
+write_binary_recording (no parallelization):   2%|1         | 48/2855 [00:50<48:35,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 49/2855 [00:51<48:14,  1.03s/it][A
+write_binary_recording (no parallelization):   2%|1         | 50/2855 [00:52<48:50,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 51/2855 [00:53<49:02,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|1         | 52/2855 [00:54<48:44,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 53/2855 [00:55<48:45,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 54/2855 [00:56<48:30,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|1         | 55/2855 [00:57<49:38,  1.06s/it][A
+write_binary_recording (no parallelization):   2%|1         | 56/2855 [00:58<49:17,  1.06s/it][A
+write_binary_recording (no parallelization):   2%|1         | 57/2855 [00:59<49:22,  1.06s/it][A
+write_binary_recording (no parallelization):   2%|2         | 58/2855 [01:00<48:45,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 59/2855 [01:01<49:00,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 60/2855 [01:02<49:21,  1.06s/it][A
+write_binary_recording (no parallelization):   2%|2         | 61/2855 [01:03<49:01,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 62/2855 [01:04<48:36,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|2         | 63/2855 [01:05<48:43,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 64/2855 [01:06<49:33,  1.07s/it][A
+write_binary_recording (no parallelization):   2%|2         | 65/2855 [01:07<49:13,  1.06s/it][A
+write_binary_recording (no parallelization):   2%|2         | 66/2855 [01:08<48:30,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|2         | 67/2855 [01:10<48:18,  1.04s/it][A
+write_binary_recording (no parallelization):   2%|2         | 68/2855 [01:11<48:03,  1.03s/it][A
+write_binary_recording (no parallelization):   2%|2         | 69/2855 [01:12<48:39,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 70/2855 [01:13<48:43,  1.05s/it][A
+write_binary_recording (no parallelization):   2%|2         | 71/2855 [01:14<48:37,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 72/2855 [01:15<48:38,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 73/2855 [01:16<48:32,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 74/2855 [01:17<49:39,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|2         | 75/2855 [01:18<49:12,  1.06s/it][A
+write_binary_recording (no parallelization):   3%|2         | 76/2855 [01:19<48:34,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 77/2855 [01:20<48:27,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 78/2855 [01:21<48:15,  1.04s/it][A
+write_binary_recording (no parallelization):   3%|2         | 79/2855 [01:22<48:57,  1.06s/it][A
+write_binary_recording (no parallelization):   3%|2         | 80/2855 [01:23<48:13,  1.04s/it][A
+write_binary_recording (no parallelization):   3%|2         | 81/2855 [01:24<47:58,  1.04s/it][A
+write_binary_recording (no parallelization):   3%|2         | 82/2855 [01:25<48:28,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|2         | 83/2855 [01:26<49:25,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|2         | 84/2855 [01:27<49:19,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|2         | 85/2855 [01:29<49:47,  1.08s/it][A
+write_binary_recording (no parallelization):   3%|3         | 86/2855 [01:30<49:46,  1.08s/it][A
+write_binary_recording (no parallelization):   3%|3         | 87/2855 [01:31<49:49,  1.08s/it][A
+write_binary_recording (no parallelization):   3%|3         | 88/2855 [01:32<50:19,  1.09s/it][A
+write_binary_recording (no parallelization):   3%|3         | 89/2855 [01:33<49:29,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|3         | 90/2855 [01:34<49:05,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|3         | 91/2855 [01:35<48:34,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|3         | 92/2855 [01:36<48:34,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|3         | 93/2855 [01:37<49:07,  1.07s/it][A
+write_binary_recording (no parallelization):   3%|3         | 94/2855 [01:38<48:42,  1.06s/it][A
+write_binary_recording (no parallelization):   3%|3         | 95/2855 [01:39<48:08,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|3         | 96/2855 [01:40<47:44,  1.04s/it][A
+write_binary_recording (no parallelization):   3%|3         | 97/2855 [01:41<47:30,  1.03s/it][A
+write_binary_recording (no parallelization):   3%|3         | 98/2855 [01:42<48:14,  1.05s/it][A
+write_binary_recording (no parallelization):   3%|3         | 99/2855 [01:43<47:28,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|3         | 100/2855 [01:44<47:31,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|3         | 101/2855 [01:45<47:24,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|3         | 102/2855 [01:46<48:22,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|3         | 103/2855 [01:47<47:47,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|3         | 104/2855 [01:49<47:49,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|3         | 105/2855 [01:50<47:33,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|3         | 106/2855 [01:51<47:24,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|3         | 107/2855 [01:52<48:35,  1.06s/it][A
+write_binary_recording (no parallelization):   4%|3         | 108/2855 [01:53<48:04,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|3         | 109/2855 [01:54<47:32,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|3         | 110/2855 [01:55<47:17,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|3         | 111/2855 [01:56<47:36,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|3         | 112/2855 [01:57<48:19,  1.06s/it][A
+write_binary_recording (no parallelization):   4%|3         | 113/2855 [01:58<48:24,  1.06s/it][A
+write_binary_recording (no parallelization):   4%|3         | 114/2855 [01:59<47:55,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|4         | 115/2855 [02:00<47:24,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|4         | 116/2855 [02:01<47:28,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|4         | 117/2855 [02:02<47:58,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|4         | 118/2855 [02:03<47:06,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|4         | 119/2855 [02:04<46:49,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|4         | 120/2855 [02:05<46:51,  1.03s/it][A
+write_binary_recording (no parallelization):   4%|4         | 121/2855 [02:06<47:28,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|4         | 122/2855 [02:07<47:36,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|4         | 123/2855 [02:08<47:35,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|4         | 124/2855 [02:09<47:16,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|4         | 125/2855 [02:10<47:26,  1.04s/it][A
+write_binary_recording (no parallelization):   4%|4         | 126/2855 [02:12<48:13,  1.06s/it][A
+write_binary_recording (no parallelization):   4%|4         | 127/2855 [02:13<47:35,  1.05s/it][A
+write_binary_recording (no parallelization):   4%|4         | 128/2855 [02:14<47:33,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|4         | 129/2855 [02:15<47:32,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|4         | 130/2855 [02:16<47:03,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|4         | 131/2855 [02:17<48:23,  1.07s/it][A
+write_binary_recording (no parallelization):   5%|4         | 132/2855 [02:18<47:51,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|4         | 133/2855 [02:19<47:20,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|4         | 134/2855 [02:20<46:49,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|4         | 135/2855 [02:21<46:47,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|4         | 136/2855 [02:22<47:52,  1.06s/it][A
+write_binary_recording (no parallelization):   5%|4         | 137/2855 [02:23<47:17,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|4         | 138/2855 [02:24<47:14,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|4         | 139/2855 [02:25<47:17,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|4         | 140/2855 [02:26<47:34,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|4         | 141/2855 [02:27<47:42,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|4         | 142/2855 [02:28<47:14,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 143/2855 [02:29<47:13,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 144/2855 [02:30<46:44,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 145/2855 [02:31<47:28,  1.05s/it][A
+write_binary_recording (no parallelization):   5%|5         | 146/2855 [02:32<46:41,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 147/2855 [02:33<46:29,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 148/2855 [02:34<46:37,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 149/2855 [02:35<46:15,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 150/2855 [02:37<47:02,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 151/2855 [02:38<46:48,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 152/2855 [02:39<46:38,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 153/2855 [02:40<46:32,  1.03s/it][A
+write_binary_recording (no parallelization):   5%|5         | 154/2855 [02:41<46:51,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 155/2855 [02:42<47:34,  1.06s/it][A
+write_binary_recording (no parallelization):   5%|5         | 156/2855 [02:43<46:57,  1.04s/it][A
+write_binary_recording (no parallelization):   5%|5         | 157/2855 [02:44<46:30,  1.03s/it][A
+write_binary_recording (no parallelization):   6%|5         | 158/2855 [02:45<46:36,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|5         | 159/2855 [02:46<46:40,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|5         | 160/2855 [02:47<47:32,  1.06s/it][A
+write_binary_recording (no parallelization):   6%|5         | 161/2855 [02:48<47:20,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|5         | 162/2855 [02:49<47:30,  1.06s/it][A
+write_binary_recording (no parallelization):   6%|5         | 163/2855 [02:50<46:57,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|5         | 164/2855 [02:51<46:53,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|5         | 165/2855 [02:52<46:54,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|5         | 166/2855 [02:53<46:37,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|5         | 167/2855 [02:54<46:14,  1.03s/it][A
+write_binary_recording (no parallelization):   6%|5         | 168/2855 [02:55<46:08,  1.03s/it][A
+write_binary_recording (no parallelization):   6%|5         | 169/2855 [02:56<46:37,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|5         | 170/2855 [02:57<46:35,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|5         | 171/2855 [02:58<46:39,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|6         | 172/2855 [02:59<46:51,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 173/2855 [03:01<46:48,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 174/2855 [03:02<47:18,  1.06s/it][A
+write_binary_recording (no parallelization):   6%|6         | 175/2855 [03:03<47:01,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 176/2855 [03:04<46:32,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|6         | 177/2855 [03:05<47:03,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 178/2855 [03:06<46:40,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 179/2855 [03:07<47:37,  1.07s/it][A
+write_binary_recording (no parallelization):   6%|6         | 180/2855 [03:08<47:00,  1.05s/it][A
+write_binary_recording (no parallelization):   6%|6         | 181/2855 [03:09<46:24,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|6         | 182/2855 [03:10<46:02,  1.03s/it][A
+write_binary_recording (no parallelization):   6%|6         | 183/2855 [03:11<45:55,  1.03s/it][A
+write_binary_recording (no parallelization):   6%|6         | 184/2855 [03:12<46:11,  1.04s/it][A
+write_binary_recording (no parallelization):   6%|6         | 185/2855 [03:13<45:53,  1.03s/it][A
+write_binary_recording (no parallelization):   7%|6         | 186/2855 [03:14<45:35,  1.02s/it][A
+write_binary_recording (no parallelization):   7%|6         | 187/2855 [03:15<45:40,  1.03s/it][A
+write_binary_recording (no parallelization):   7%|6         | 188/2855 [03:16<45:54,  1.03s/it][A
+write_binary_recording (no parallelization):   7%|6         | 189/2855 [03:17<46:08,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|6         | 190/2855 [03:18<46:15,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|6         | 191/2855 [03:19<45:39,  1.03s/it][A
+write_binary_recording (no parallelization):   7%|6         | 192/2855 [03:20<45:44,  1.03s/it][A
+write_binary_recording (no parallelization):   7%|6         | 193/2855 [03:21<46:29,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|6         | 194/2855 [03:22<46:40,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|6         | 195/2855 [03:23<46:25,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|6         | 196/2855 [03:24<46:15,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|6         | 197/2855 [03:26<46:14,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|6         | 198/2855 [03:27<47:03,  1.06s/it][A
+write_binary_recording (no parallelization):   7%|6         | 199/2855 [03:28<46:18,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|7         | 200/2855 [03:29<46:03,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|7         | 201/2855 [03:30<45:17,  1.02s/it][A
+write_binary_recording (no parallelization):   7%|7         | 202/2855 [03:31<45:09,  1.02s/it][A
+write_binary_recording (no parallelization):   7%|7         | 203/2855 [03:32<46:38,  1.06s/it][A
+write_binary_recording (no parallelization):   7%|7         | 204/2855 [03:33<46:04,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|7         | 205/2855 [03:34<46:04,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|7         | 206/2855 [03:35<46:09,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|7         | 207/2855 [03:36<46:04,  1.04s/it][A
+write_binary_recording (no parallelization):   7%|7         | 208/2855 [03:37<47:06,  1.07s/it][A
+write_binary_recording (no parallelization):   7%|7         | 209/2855 [03:38<46:49,  1.06s/it][A
+write_binary_recording (no parallelization):   7%|7         | 210/2855 [03:39<46:22,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|7         | 211/2855 [03:40<46:28,  1.05s/it][A
+write_binary_recording (no parallelization):   7%|7         | 212/2855 [03:41<48:04,  1.09s/it][A
+write_binary_recording (no parallelization):   7%|7         | 213/2855 [03:42<47:27,  1.08s/it][A
+write_binary_recording (no parallelization):   7%|7         | 214/2855 [03:43<46:56,  1.07s/it][A
+write_binary_recording (no parallelization):   8%|7         | 215/2855 [03:44<46:25,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|7         | 216/2855 [03:46<46:05,  1.05s/it][A
+write_binary_recording (no parallelization):   8%|7         | 217/2855 [03:47<46:33,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|7         | 218/2855 [03:48<45:59,  1.05s/it][A
+write_binary_recording (no parallelization):   8%|7         | 219/2855 [03:49<45:18,  1.03s/it][A
+write_binary_recording (no parallelization):   8%|7         | 220/2855 [03:50<45:33,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|7         | 221/2855 [03:51<45:46,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|7         | 222/2855 [03:52<46:29,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|7         | 223/2855 [03:53<46:35,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|7         | 224/2855 [03:54<46:06,  1.05s/it][A
+write_binary_recording (no parallelization):   8%|7         | 225/2855 [03:55<45:46,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|7         | 226/2855 [03:56<46:15,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|7         | 227/2855 [03:57<47:25,  1.08s/it][A
+write_binary_recording (no parallelization):   8%|7         | 228/2855 [03:58<46:37,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|8         | 229/2855 [03:59<46:20,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|8         | 230/2855 [04:00<46:09,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|8         | 231/2855 [04:01<46:26,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|8         | 232/2855 [04:03<47:23,  1.08s/it][A
+write_binary_recording (no parallelization):   8%|8         | 233/2855 [04:04<46:43,  1.07s/it][A
+write_binary_recording (no parallelization):   8%|8         | 234/2855 [04:05<46:03,  1.05s/it][A
+write_binary_recording (no parallelization):   8%|8         | 235/2855 [04:06<45:38,  1.05s/it][A
+write_binary_recording (no parallelization):   8%|8         | 236/2855 [04:07<45:30,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|8         | 237/2855 [04:08<46:04,  1.06s/it][A
+write_binary_recording (no parallelization):   8%|8         | 238/2855 [04:09<45:28,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|8         | 239/2855 [04:10<45:07,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|8         | 240/2855 [04:11<44:52,  1.03s/it][A
+write_binary_recording (no parallelization):   8%|8         | 241/2855 [04:12<45:22,  1.04s/it][A
+write_binary_recording (no parallelization):   8%|8         | 242/2855 [04:13<45:40,  1.05s/it][A
+write_binary_recording (no parallelization):   9%|8         | 243/2855 [04:14<45:37,  1.05s/it][A
+write_binary_recording (no parallelization):   9%|8         | 244/2855 [04:15<45:15,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 245/2855 [04:16<45:19,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 246/2855 [04:17<46:41,  1.07s/it][A
+write_binary_recording (no parallelization):   9%|8         | 247/2855 [04:18<46:18,  1.07s/it][A
+write_binary_recording (no parallelization):   9%|8         | 248/2855 [04:19<45:42,  1.05s/it][A
+write_binary_recording (no parallelization):   9%|8         | 249/2855 [04:20<45:33,  1.05s/it][A
+write_binary_recording (no parallelization):   9%|8         | 250/2855 [04:21<45:16,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 251/2855 [04:22<45:56,  1.06s/it][A
+write_binary_recording (no parallelization):   9%|8         | 252/2855 [04:23<45:22,  1.05s/it][A
+write_binary_recording (no parallelization):   9%|8         | 253/2855 [04:24<45:00,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 254/2855 [04:25<44:54,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 255/2855 [04:26<44:54,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|8         | 256/2855 [04:28<45:53,  1.06s/it][A
+write_binary_recording (no parallelization):   9%|9         | 257/2855 [04:29<44:56,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|9         | 258/2855 [04:30<44:36,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 259/2855 [04:31<44:24,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 260/2855 [04:32<44:33,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 261/2855 [04:33<44:39,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 262/2855 [04:34<44:34,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 263/2855 [04:35<44:05,  1.02s/it][A
+write_binary_recording (no parallelization):   9%|9         | 264/2855 [04:36<43:46,  1.01s/it][A
+write_binary_recording (no parallelization):   9%|9         | 265/2855 [04:37<43:56,  1.02s/it][A
+write_binary_recording (no parallelization):   9%|9         | 266/2855 [04:38<44:53,  1.04s/it][A
+write_binary_recording (no parallelization):   9%|9         | 267/2855 [04:39<44:29,  1.03s/it][A
+write_binary_recording (no parallelization):   9%|9         | 268/2855 [04:40<44:10,  1.02s/it][A
+write_binary_recording (no parallelization):   9%|9         | 269/2855 [04:41<44:04,  1.02s/it][A
+write_binary_recording (no parallelization):   9%|9         | 270/2855 [04:42<44:08,  1.02s/it][A
+write_binary_recording (no parallelization):   9%|9         | 271/2855 [04:43<44:10,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|9         | 272/2855 [04:44<44:00,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|9         | 273/2855 [04:45<44:10,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|9         | 274/2855 [04:46<43:57,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|9         | 275/2855 [04:47<45:12,  1.05s/it][A
+write_binary_recording (no parallelization):  10%|9         | 276/2855 [04:48<45:17,  1.05s/it][A
+write_binary_recording (no parallelization):  10%|9         | 277/2855 [04:49<45:28,  1.06s/it][A
+write_binary_recording (no parallelization):  10%|9         | 278/2855 [04:50<45:04,  1.05s/it][A
+write_binary_recording (no parallelization):  10%|9         | 279/2855 [04:51<44:54,  1.05s/it][A
+write_binary_recording (no parallelization):  10%|9         | 280/2855 [04:52<44:23,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|9         | 281/2855 [04:53<44:09,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|9         | 282/2855 [04:54<43:49,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|9         | 283/2855 [04:55<43:39,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|9         | 284/2855 [04:56<43:32,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|9         | 285/2855 [04:57<43:42,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 286/2855 [04:58<43:47,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 287/2855 [04:59<44:02,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|#         | 288/2855 [05:00<44:05,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|#         | 289/2855 [05:02<43:56,  1.03s/it][A
+write_binary_recording (no parallelization):  10%|#         | 290/2855 [05:03<43:47,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 291/2855 [05:04<43:36,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 292/2855 [05:05<43:30,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 293/2855 [05:06<43:43,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 294/2855 [05:07<43:26,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 295/2855 [05:08<43:22,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 296/2855 [05:09<43:18,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 297/2855 [05:10<43:31,  1.02s/it][A
+write_binary_recording (no parallelization):  10%|#         | 298/2855 [05:11<44:45,  1.05s/it][A
+write_binary_recording (no parallelization):  10%|#         | 299/2855 [05:12<45:40,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 300/2855 [05:13<45:51,  1.08s/it][A
+write_binary_recording (no parallelization):  11%|#         | 301/2855 [05:14<45:19,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#         | 302/2855 [05:15<44:58,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#         | 303/2855 [05:16<45:46,  1.08s/it][A
+write_binary_recording (no parallelization):  11%|#         | 304/2855 [05:17<45:43,  1.08s/it][A
+write_binary_recording (no parallelization):  11%|#         | 305/2855 [05:18<45:38,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 306/2855 [05:19<45:29,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 307/2855 [05:20<45:03,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#         | 308/2855 [05:22<45:15,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 309/2855 [05:23<45:18,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 310/2855 [05:24<44:56,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#         | 311/2855 [05:25<44:40,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#         | 312/2855 [05:26<44:27,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#         | 313/2855 [05:27<45:31,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#         | 314/2855 [05:28<45:10,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 315/2855 [05:29<44:37,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 316/2855 [05:30<44:33,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 317/2855 [05:31<44:24,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 318/2855 [05:32<44:30,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 319/2855 [05:33<44:27,  1.05s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 320/2855 [05:34<44:02,  1.04s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 321/2855 [05:35<44:05,  1.04s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 322/2855 [05:36<44:47,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 323/2855 [05:37<45:19,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 324/2855 [05:38<45:10,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 325/2855 [05:40<44:58,  1.07s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 326/2855 [05:41<44:41,  1.06s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 327/2855 [05:42<45:29,  1.08s/it][A
+write_binary_recording (no parallelization):  11%|#1        | 328/2855 [05:43<45:21,  1.08s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 329/2855 [05:44<44:48,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 330/2855 [05:45<44:33,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 331/2855 [05:46<44:47,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 332/2855 [05:47<45:28,  1.08s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 333/2855 [05:48<44:46,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 334/2855 [05:49<44:19,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 335/2855 [05:50<44:10,  1.05s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 336/2855 [05:51<44:27,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 337/2855 [05:52<44:59,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 338/2855 [05:53<44:49,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 339/2855 [05:54<44:18,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 340/2855 [05:55<44:39,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 341/2855 [05:57<45:42,  1.09s/it][A
+write_binary_recording (no parallelization):  12%|#1        | 342/2855 [05:58<45:06,  1.08s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 343/2855 [05:59<44:18,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 344/2855 [06:00<44:43,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 345/2855 [06:01<44:25,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 346/2855 [06:02<45:05,  1.08s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 347/2855 [06:03<44:56,  1.08s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 348/2855 [06:04<44:15,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 349/2855 [06:05<44:26,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 350/2855 [06:06<44:24,  1.06s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 351/2855 [06:07<44:48,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 352/2855 [06:08<44:26,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 353/2855 [06:09<44:32,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 354/2855 [06:10<44:25,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 355/2855 [06:12<44:35,  1.07s/it][A
+write_binary_recording (no parallelization):  12%|#2        | 356/2855 [06:13<44:06,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 357/2855 [06:14<43:45,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 358/2855 [06:15<43:18,  1.04s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 359/2855 [06:16<43:09,  1.04s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 360/2855 [06:17<44:42,  1.08s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 361/2855 [06:18<44:44,  1.08s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 362/2855 [06:19<44:07,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 363/2855 [06:20<43:46,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 364/2855 [06:21<43:20,  1.04s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 365/2855 [06:22<44:07,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 366/2855 [06:23<43:51,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 367/2855 [06:24<43:19,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 368/2855 [06:25<43:37,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 369/2855 [06:26<43:58,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 370/2855 [06:27<44:01,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#2        | 371/2855 [06:28<43:24,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 372/2855 [06:29<43:23,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 373/2855 [06:30<43:28,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 374/2855 [06:32<44:23,  1.07s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 375/2855 [06:33<44:00,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 376/2855 [06:34<43:35,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 377/2855 [06:35<43:15,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 378/2855 [06:36<43:33,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 379/2855 [06:37<44:16,  1.07s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 380/2855 [06:38<43:38,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 381/2855 [06:39<43:18,  1.05s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 382/2855 [06:40<42:39,  1.03s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 383/2855 [06:41<42:59,  1.04s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 384/2855 [06:42<43:39,  1.06s/it][A
+write_binary_recording (no parallelization):  13%|#3        | 385/2855 [06:43<43:19,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 386/2855 [06:44<43:15,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 387/2855 [06:45<43:22,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 388/2855 [06:46<43:26,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 389/2855 [06:47<43:38,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 390/2855 [06:48<43:36,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 391/2855 [06:50<43:45,  1.07s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 392/2855 [06:51<43:43,  1.07s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 393/2855 [06:52<44:14,  1.08s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 394/2855 [06:53<43:52,  1.07s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 395/2855 [06:54<43:10,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 396/2855 [06:55<42:54,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 397/2855 [06:56<42:33,  1.04s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 398/2855 [06:57<43:28,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#3        | 399/2855 [06:58<43:02,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 400/2855 [06:59<42:20,  1.03s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 401/2855 [07:00<42:28,  1.04s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 402/2855 [07:01<42:40,  1.04s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 403/2855 [07:02<43:19,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 404/2855 [07:03<43:21,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 405/2855 [07:04<42:55,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 406/2855 [07:05<42:59,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 407/2855 [07:06<43:56,  1.08s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 408/2855 [07:07<43:20,  1.06s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 409/2855 [07:09<42:58,  1.05s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 410/2855 [07:10<44:59,  1.10s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 411/2855 [07:11<45:34,  1.12s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 412/2855 [07:12<45:51,  1.13s/it][A
+write_binary_recording (no parallelization):  14%|#4        | 413/2855 [07:13<45:22,  1.12s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 414/2855 [07:14<44:32,  1.09s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 415/2855 [07:15<44:41,  1.10s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 416/2855 [07:16<44:42,  1.10s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 417/2855 [07:17<44:44,  1.10s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 418/2855 [07:18<43:45,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 419/2855 [07:20<43:32,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 420/2855 [07:21<43:11,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 421/2855 [07:22<43:53,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 422/2855 [07:23<43:36,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 423/2855 [07:24<43:21,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 424/2855 [07:25<43:12,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 425/2855 [07:26<42:39,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 426/2855 [07:27<43:34,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 427/2855 [07:28<43:12,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#4        | 428/2855 [07:29<42:55,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 429/2855 [07:30<42:36,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 430/2855 [07:31<42:41,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 431/2855 [07:32<42:39,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 432/2855 [07:33<42:32,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 433/2855 [07:34<42:20,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 434/2855 [07:35<42:21,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 435/2855 [07:37<43:27,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 436/2855 [07:38<43:08,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 437/2855 [07:39<42:16,  1.05s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 438/2855 [07:40<42:38,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 439/2855 [07:41<42:31,  1.06s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 440/2855 [07:42<43:19,  1.08s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 441/2855 [07:43<42:55,  1.07s/it][A
+write_binary_recording (no parallelization):  15%|#5        | 442/2855 [07:44<42:14,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 443/2855 [07:45<42:09,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 444/2855 [07:46<42:14,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 445/2855 [07:47<43:09,  1.07s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 446/2855 [07:48<42:34,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 447/2855 [07:49<42:18,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 448/2855 [07:50<41:59,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 449/2855 [07:51<42:32,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 450/2855 [07:52<42:41,  1.07s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 451/2855 [07:54<42:43,  1.07s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 452/2855 [07:55<42:10,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 453/2855 [07:56<41:52,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 454/2855 [07:57<42:18,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 455/2855 [07:58<42:06,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#5        | 456/2855 [07:59<41:28,  1.04s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 457/2855 [08:00<41:17,  1.03s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 458/2855 [08:01<42:16,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 459/2855 [08:02<43:28,  1.09s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 460/2855 [08:03<43:07,  1.08s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 461/2855 [08:04<43:03,  1.08s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 462/2855 [08:05<42:58,  1.08s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 463/2855 [08:06<42:56,  1.08s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 464/2855 [08:07<42:26,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 465/2855 [08:08<41:48,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 466/2855 [08:09<42:07,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 467/2855 [08:10<41:24,  1.04s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 468/2855 [08:12<42:15,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 469/2855 [08:13<41:58,  1.06s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 470/2855 [08:14<41:54,  1.05s/it][A
+write_binary_recording (no parallelization):  16%|#6        | 471/2855 [08:15<41:26,  1.04s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 472/2855 [08:16<41:49,  1.05s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 473/2855 [08:17<42:33,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 474/2855 [08:18<42:34,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 475/2855 [08:19<42:37,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 476/2855 [08:20<42:13,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 477/2855 [08:21<42:08,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 478/2855 [08:22<42:35,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 479/2855 [08:23<42:04,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 480/2855 [08:24<41:47,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 481/2855 [08:25<41:43,  1.05s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 482/2855 [08:26<42:04,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 483/2855 [08:27<42:20,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 484/2855 [08:29<41:51,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#6        | 485/2855 [08:30<42:27,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 486/2855 [08:31<41:40,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 487/2855 [08:32<42:49,  1.08s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 488/2855 [08:33<42:01,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 489/2855 [08:34<41:59,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 490/2855 [08:35<41:37,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 491/2855 [08:36<41:38,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 492/2855 [08:37<42:20,  1.08s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 493/2855 [08:38<41:55,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 494/2855 [08:39<41:36,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 495/2855 [08:40<41:16,  1.05s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 496/2855 [08:41<41:32,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 497/2855 [08:42<41:56,  1.07s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 498/2855 [08:43<41:35,  1.06s/it][A
+write_binary_recording (no parallelization):  17%|#7        | 499/2855 [08:44<41:13,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 500/2855 [08:45<41:07,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 501/2855 [08:47<41:36,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 502/2855 [08:48<41:28,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 503/2855 [08:49<41:21,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 504/2855 [08:50<40:45,  1.04s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 505/2855 [08:51<40:51,  1.04s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 506/2855 [08:52<41:57,  1.07s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 507/2855 [08:53<41:25,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 508/2855 [08:54<41:09,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 509/2855 [08:55<41:00,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 510/2855 [08:56<41:07,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 511/2855 [08:57<41:28,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 512/2855 [08:58<41:39,  1.07s/it][A
+write_binary_recording (no parallelization):  18%|#7        | 513/2855 [08:59<40:57,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 514/2855 [09:00<40:49,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 515/2855 [09:01<40:16,  1.03s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 516/2855 [09:02<41:18,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 517/2855 [09:03<40:55,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 518/2855 [09:04<40:34,  1.04s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 519/2855 [09:05<40:25,  1.04s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 520/2855 [09:07<41:14,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 521/2855 [09:08<42:02,  1.08s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 522/2855 [09:09<41:16,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 523/2855 [09:10<40:59,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 524/2855 [09:11<40:42,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 525/2855 [09:12<40:38,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 526/2855 [09:13<40:52,  1.05s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 527/2855 [09:14<41:17,  1.06s/it][A
+write_binary_recording (no parallelization):  18%|#8        | 528/2855 [09:15<40:52,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 529/2855 [09:16<40:43,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 530/2855 [09:17<41:23,  1.07s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 531/2855 [09:18<41:16,  1.07s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 532/2855 [09:19<41:00,  1.06s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 533/2855 [09:20<40:54,  1.06s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 534/2855 [09:21<40:34,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 535/2855 [09:22<41:53,  1.08s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 536/2855 [09:24<41:15,  1.07s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 537/2855 [09:25<41:07,  1.06s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 538/2855 [09:26<40:32,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 539/2855 [09:27<40:12,  1.04s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 540/2855 [09:28<40:41,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 541/2855 [09:29<40:20,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#8        | 542/2855 [09:30<40:12,  1.04s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 543/2855 [09:31<39:55,  1.04s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 544/2855 [09:32<40:00,  1.04s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 545/2855 [09:33<40:30,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 546/2855 [09:34<40:12,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 547/2855 [09:35<39:48,  1.03s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 548/2855 [09:36<39:44,  1.03s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 549/2855 [09:37<40:11,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 550/2855 [09:38<40:53,  1.06s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 551/2855 [09:39<40:21,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 552/2855 [09:40<40:11,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 553/2855 [09:41<39:58,  1.04s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 554/2855 [09:42<40:20,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 555/2855 [09:43<40:04,  1.05s/it][A
+write_binary_recording (no parallelization):  19%|#9        | 556/2855 [09:44<39:31,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 557/2855 [09:45<39:13,  1.02s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 558/2855 [09:46<39:16,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 559/2855 [09:48<40:33,  1.06s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 560/2855 [09:49<39:58,  1.05s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 561/2855 [09:50<39:25,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 562/2855 [09:51<39:11,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 563/2855 [09:52<39:19,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 564/2855 [09:53<40:05,  1.05s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 565/2855 [09:54<39:27,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 566/2855 [09:55<39:11,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 567/2855 [09:56<39:16,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 568/2855 [09:57<39:09,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 569/2855 [09:58<39:10,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|#9        | 570/2855 [09:59<39:25,  1.04s/it][A
+write_binary_recording (no parallelization):  20%|##        | 571/2855 [10:00<39:01,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 572/2855 [10:01<39:12,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 573/2855 [10:02<39:06,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 574/2855 [10:03<39:02,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 575/2855 [10:04<39:06,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 576/2855 [10:05<39:10,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 577/2855 [10:06<38:57,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 578/2855 [10:07<39:01,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 579/2855 [10:08<38:57,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 580/2855 [10:09<39:28,  1.04s/it][A
+write_binary_recording (no parallelization):  20%|##        | 581/2855 [10:10<38:59,  1.03s/it][A
+write_binary_recording (no parallelization):  20%|##        | 582/2855 [10:11<38:44,  1.02s/it][A
+write_binary_recording (no parallelization):  20%|##        | 583/2855 [10:12<38:24,  1.01s/it][A
+write_binary_recording (no parallelization):  20%|##        | 584/2855 [10:13<38:13,  1.01s/it][A
+write_binary_recording (no parallelization):  20%|##        | 585/2855 [10:14<38:15,  1.01s/it][A
+write_binary_recording (no parallelization):  21%|##        | 586/2855 [10:15<38:06,  1.01s/it][A
+write_binary_recording (no parallelization):  21%|##        | 587/2855 [10:16<38:06,  1.01s/it][A
+write_binary_recording (no parallelization):  21%|##        | 588/2855 [10:17<38:39,  1.02s/it][A
+write_binary_recording (no parallelization):  21%|##        | 589/2855 [10:18<39:37,  1.05s/it][A
+write_binary_recording (no parallelization):  21%|##        | 590/2855 [10:19<39:22,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 591/2855 [10:20<39:06,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 592/2855 [10:21<39:02,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 593/2855 [10:22<39:06,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 594/2855 [10:23<38:48,  1.03s/it][A
+write_binary_recording (no parallelization):  21%|##        | 595/2855 [10:25<39:50,  1.06s/it][A
+write_binary_recording (no parallelization):  21%|##        | 596/2855 [10:26<39:16,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 597/2855 [10:27<39:06,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##        | 598/2855 [10:28<38:53,  1.03s/it][A
+write_binary_recording (no parallelization):  21%|##        | 599/2855 [10:29<38:51,  1.03s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 600/2855 [10:30<39:53,  1.06s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 601/2855 [10:31<40:54,  1.09s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 602/2855 [10:32<41:16,  1.10s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 603/2855 [10:33<41:01,  1.09s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 604/2855 [10:34<40:26,  1.08s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 605/2855 [10:35<40:20,  1.08s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 606/2855 [10:36<40:18,  1.08s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 607/2855 [10:37<40:05,  1.07s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 608/2855 [10:38<39:34,  1.06s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 609/2855 [10:39<39:17,  1.05s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 610/2855 [10:40<38:58,  1.04s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 611/2855 [10:42<39:26,  1.05s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 612/2855 [10:43<39:21,  1.05s/it][A
+write_binary_recording (no parallelization):  21%|##1       | 613/2855 [10:44<39:09,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 614/2855 [10:45<38:55,  1.04s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 615/2855 [10:46<38:56,  1.04s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 616/2855 [10:47<39:54,  1.07s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 617/2855 [10:48<39:18,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 618/2855 [10:49<39:21,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 619/2855 [10:50<39:23,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 620/2855 [10:51<39:51,  1.07s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 621/2855 [10:52<39:41,  1.07s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 622/2855 [10:53<39:22,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 623/2855 [10:54<38:54,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 624/2855 [10:55<38:53,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 625/2855 [10:56<39:14,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 626/2855 [10:57<38:52,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 627/2855 [10:58<38:19,  1.03s/it][A
+write_binary_recording (no parallelization):  22%|##1       | 628/2855 [10:59<38:11,  1.03s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 629/2855 [11:00<38:32,  1.04s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 630/2855 [11:02<38:57,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 631/2855 [11:03<38:56,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 632/2855 [11:04<38:55,  1.05s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 633/2855 [11:05<38:30,  1.04s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 634/2855 [11:06<38:23,  1.04s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 635/2855 [11:07<39:17,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 636/2855 [11:08<39:02,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 637/2855 [11:09<39:11,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 638/2855 [11:10<39:03,  1.06s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 639/2855 [11:11<39:35,  1.07s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 640/2855 [11:12<39:52,  1.08s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 641/2855 [11:13<39:47,  1.08s/it][A
+write_binary_recording (no parallelization):  22%|##2       | 642/2855 [11:14<39:12,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 643/2855 [11:15<38:58,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 644/2855 [11:16<39:09,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 645/2855 [11:17<38:41,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 646/2855 [11:18<38:25,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 647/2855 [11:19<38:12,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 648/2855 [11:20<38:04,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 649/2855 [11:22<38:14,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 650/2855 [11:23<38:18,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 651/2855 [11:24<38:04,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 652/2855 [11:25<38:15,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 653/2855 [11:26<38:17,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 654/2855 [11:27<39:17,  1.07s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 655/2855 [11:28<38:52,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##2       | 656/2855 [11:29<38:36,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 657/2855 [11:30<37:58,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 658/2855 [11:31<38:35,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 659/2855 [11:32<38:48,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 660/2855 [11:33<38:18,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 661/2855 [11:34<38:13,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 662/2855 [11:35<38:02,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 663/2855 [11:36<38:13,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 664/2855 [11:37<37:54,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 665/2855 [11:38<37:54,  1.04s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 666/2855 [11:39<37:37,  1.03s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 667/2855 [11:40<37:41,  1.03s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 668/2855 [11:41<38:19,  1.05s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 669/2855 [11:43<38:42,  1.06s/it][A
+write_binary_recording (no parallelization):  23%|##3       | 670/2855 [11:44<38:36,  1.06s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 671/2855 [11:45<38:17,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 672/2855 [11:46<38:01,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 673/2855 [11:47<38:48,  1.07s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 674/2855 [11:48<38:28,  1.06s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 675/2855 [11:49<38:09,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 676/2855 [11:50<38:08,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 677/2855 [11:51<38:04,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 678/2855 [11:52<38:38,  1.07s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 679/2855 [11:53<38:11,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 680/2855 [11:54<37:53,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 681/2855 [11:55<37:38,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 682/2855 [11:56<37:47,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 683/2855 [11:57<38:01,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 684/2855 [11:58<37:51,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##3       | 685/2855 [11:59<37:32,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 686/2855 [12:00<37:25,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 687/2855 [12:01<37:54,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 688/2855 [12:02<37:58,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 689/2855 [12:03<37:47,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 690/2855 [12:05<37:48,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 691/2855 [12:06<37:30,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 692/2855 [12:07<37:24,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 693/2855 [12:08<37:22,  1.04s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 694/2855 [12:09<37:14,  1.03s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 695/2855 [12:10<37:10,  1.03s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 696/2855 [12:11<37:13,  1.03s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 697/2855 [12:12<36:53,  1.03s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 698/2855 [12:13<37:44,  1.05s/it][A
+write_binary_recording (no parallelization):  24%|##4       | 699/2855 [12:14<37:18,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 700/2855 [12:15<36:58,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 701/2855 [12:16<36:57,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 702/2855 [12:17<36:52,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 703/2855 [12:18<36:55,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 704/2855 [12:19<36:53,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 705/2855 [12:20<37:18,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 706/2855 [12:21<37:09,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 707/2855 [12:22<37:02,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 708/2855 [12:23<37:00,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 709/2855 [12:24<37:29,  1.05s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 710/2855 [12:25<37:54,  1.06s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 711/2855 [12:26<38:07,  1.07s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 712/2855 [12:27<37:31,  1.05s/it][A
+write_binary_recording (no parallelization):  25%|##4       | 713/2855 [12:28<37:05,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 714/2855 [12:29<36:52,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 715/2855 [12:30<36:37,  1.03s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 716/2855 [12:32<37:29,  1.05s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 717/2855 [12:33<37:20,  1.05s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 718/2855 [12:34<36:57,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 719/2855 [12:35<37:10,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 720/2855 [12:36<36:53,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 721/2855 [12:37<38:03,  1.07s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 722/2855 [12:38<37:54,  1.07s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 723/2855 [12:39<37:45,  1.06s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 724/2855 [12:40<37:25,  1.05s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 725/2855 [12:41<37:03,  1.04s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 726/2855 [12:42<37:37,  1.06s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 727/2855 [12:43<37:57,  1.07s/it][A
+write_binary_recording (no parallelization):  25%|##5       | 728/2855 [12:44<37:29,  1.06s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 729/2855 [12:45<36:59,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 730/2855 [12:46<37:04,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 731/2855 [12:47<36:36,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 732/2855 [12:48<36:31,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 733/2855 [12:49<36:26,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 734/2855 [12:50<36:22,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 735/2855 [12:51<37:01,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 736/2855 [12:52<36:44,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 737/2855 [12:54<36:47,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 738/2855 [12:55<36:31,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 739/2855 [12:56<36:52,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 740/2855 [12:57<37:36,  1.07s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 741/2855 [12:58<37:01,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##5       | 742/2855 [12:59<36:43,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 743/2855 [13:00<36:52,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 744/2855 [13:01<36:29,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 745/2855 [13:02<37:28,  1.07s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 746/2855 [13:03<36:52,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 747/2855 [13:04<36:46,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 748/2855 [13:05<36:25,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 749/2855 [13:06<36:29,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 750/2855 [13:07<36:44,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 751/2855 [13:08<36:24,  1.04s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 752/2855 [13:09<36:11,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 753/2855 [13:10<35:58,  1.03s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 754/2855 [13:11<36:44,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 755/2855 [13:12<36:35,  1.05s/it][A
+write_binary_recording (no parallelization):  26%|##6       | 756/2855 [13:13<36:26,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 757/2855 [13:14<36:49,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 758/2855 [13:15<36:29,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 759/2855 [13:17<36:42,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 760/2855 [13:18<37:09,  1.06s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 761/2855 [13:19<36:29,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 762/2855 [13:20<36:28,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 763/2855 [13:21<36:11,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 764/2855 [13:22<37:04,  1.06s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 765/2855 [13:23<36:54,  1.06s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 766/2855 [13:24<36:25,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 767/2855 [13:25<36:02,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 768/2855 [13:26<35:51,  1.03s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 769/2855 [13:27<36:28,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##6       | 770/2855 [13:28<36:03,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 771/2855 [13:29<35:46,  1.03s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 772/2855 [13:30<35:25,  1.02s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 773/2855 [13:31<36:07,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 774/2855 [13:32<36:31,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 775/2855 [13:33<36:24,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 776/2855 [13:34<36:14,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 777/2855 [13:35<36:07,  1.04s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 778/2855 [13:36<36:49,  1.06s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 779/2855 [13:37<36:42,  1.06s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 780/2855 [13:39<36:21,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 781/2855 [13:40<36:07,  1.05s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 782/2855 [13:41<37:10,  1.08s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 783/2855 [13:42<37:33,  1.09s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 784/2855 [13:43<37:03,  1.07s/it][A
+write_binary_recording (no parallelization):  27%|##7       | 785/2855 [13:44<36:50,  1.07s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 786/2855 [13:45<36:24,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 787/2855 [13:46<37:00,  1.07s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 788/2855 [13:47<37:35,  1.09s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 789/2855 [13:48<37:11,  1.08s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 790/2855 [13:49<36:25,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 791/2855 [13:50<36:35,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 792/2855 [13:51<36:50,  1.07s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 793/2855 [13:52<36:13,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 794/2855 [13:53<36:07,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 795/2855 [13:54<35:47,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 796/2855 [13:56<36:17,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 797/2855 [13:57<36:13,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 798/2855 [13:58<36:29,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##7       | 799/2855 [13:59<35:55,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 800/2855 [14:00<35:39,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 801/2855 [14:01<35:27,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 802/2855 [14:02<35:51,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 803/2855 [14:03<36:02,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 804/2855 [14:04<35:51,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 805/2855 [14:05<35:24,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 806/2855 [14:06<35:23,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 807/2855 [14:07<35:40,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 808/2855 [14:08<36:39,  1.07s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 809/2855 [14:09<36:06,  1.06s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 810/2855 [14:10<35:48,  1.05s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 811/2855 [14:11<35:27,  1.04s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 812/2855 [14:12<36:22,  1.07s/it][A
+write_binary_recording (no parallelization):  28%|##8       | 813/2855 [14:13<35:56,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 814/2855 [14:14<35:48,  1.05s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 815/2855 [14:16<35:43,  1.05s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 816/2855 [14:17<36:33,  1.08s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 817/2855 [14:18<36:45,  1.08s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 818/2855 [14:19<36:15,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 819/2855 [14:20<35:53,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 820/2855 [14:21<35:40,  1.05s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 821/2855 [14:22<37:06,  1.09s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 822/2855 [14:23<36:18,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 823/2855 [14:24<35:42,  1.05s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 824/2855 [14:25<35:08,  1.04s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 825/2855 [14:26<35:09,  1.04s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 826/2855 [14:27<35:41,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##8       | 827/2855 [14:28<35:46,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 828/2855 [14:29<35:10,  1.04s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 829/2855 [14:30<34:58,  1.04s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 830/2855 [14:31<34:46,  1.03s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 831/2855 [14:33<37:08,  1.10s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 832/2855 [14:34<36:01,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 833/2855 [14:35<35:39,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 834/2855 [14:36<36:01,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 835/2855 [14:37<36:00,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 836/2855 [14:38<35:57,  1.07s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 837/2855 [14:39<35:37,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 838/2855 [14:40<35:32,  1.06s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 839/2855 [14:41<35:23,  1.05s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 840/2855 [14:42<36:52,  1.10s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 841/2855 [14:43<36:31,  1.09s/it][A
+write_binary_recording (no parallelization):  29%|##9       | 842/2855 [14:44<36:01,  1.07s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 843/2855 [14:45<35:21,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 844/2855 [14:46<35:24,  1.06s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 845/2855 [14:48<36:43,  1.10s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 846/2855 [14:49<36:28,  1.09s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 847/2855 [14:50<36:23,  1.09s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 848/2855 [14:51<35:54,  1.07s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 849/2855 [14:52<35:36,  1.07s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 850/2855 [14:53<35:42,  1.07s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 851/2855 [14:54<35:08,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 852/2855 [14:55<34:55,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 853/2855 [14:56<34:57,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 854/2855 [14:57<35:13,  1.06s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 855/2855 [14:58<36:13,  1.09s/it][A
+write_binary_recording (no parallelization):  30%|##9       | 856/2855 [14:59<35:59,  1.08s/it][A
+write_binary_recording (no parallelization):  30%|###       | 857/2855 [15:00<35:41,  1.07s/it][A
+write_binary_recording (no parallelization):  30%|###       | 858/2855 [15:01<35:21,  1.06s/it][A
+write_binary_recording (no parallelization):  30%|###       | 859/2855 [15:02<34:58,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|###       | 860/2855 [15:03<34:46,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|###       | 861/2855 [15:04<34:37,  1.04s/it][A
+write_binary_recording (no parallelization):  30%|###       | 862/2855 [15:05<34:22,  1.03s/it][A
+write_binary_recording (no parallelization):  30%|###       | 863/2855 [15:07<35:00,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|###       | 864/2855 [15:08<34:46,  1.05s/it][A
+write_binary_recording (no parallelization):  30%|###       | 865/2855 [15:09<34:26,  1.04s/it][A
+write_binary_recording (no parallelization):  30%|###       | 866/2855 [15:10<34:16,  1.03s/it][A
+write_binary_recording (no parallelization):  30%|###       | 867/2855 [15:11<34:28,  1.04s/it][A
+write_binary_recording (no parallelization):  30%|###       | 868/2855 [15:12<34:27,  1.04s/it][A
+write_binary_recording (no parallelization):  30%|###       | 869/2855 [15:13<34:19,  1.04s/it][A
+write_binary_recording (no parallelization):  30%|###       | 870/2855 [15:14<34:07,  1.03s/it][A
+write_binary_recording (no parallelization):  31%|###       | 871/2855 [15:15<34:06,  1.03s/it][A
+write_binary_recording (no parallelization):  31%|###       | 872/2855 [15:16<34:17,  1.04s/it][A
+write_binary_recording (no parallelization):  31%|###       | 873/2855 [15:17<34:14,  1.04s/it][A
+write_binary_recording (no parallelization):  31%|###       | 874/2855 [15:18<34:12,  1.04s/it][A
+write_binary_recording (no parallelization):  31%|###       | 875/2855 [15:19<34:55,  1.06s/it][A
+write_binary_recording (no parallelization):  31%|###       | 876/2855 [15:20<34:32,  1.05s/it][A
+write_binary_recording (no parallelization):  31%|###       | 877/2855 [15:21<34:23,  1.04s/it][A
+write_binary_recording (no parallelization):  31%|###       | 878/2855 [15:22<34:32,  1.05s/it][A
