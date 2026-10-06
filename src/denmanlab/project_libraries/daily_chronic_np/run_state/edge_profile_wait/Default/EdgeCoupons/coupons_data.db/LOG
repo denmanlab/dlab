@@ -1,0 +1,5 @@
+2026/07/17-13:38:36.248 6658 Creating DB C:\Users\jordan\daily_chronic_np\run_state\edge_profile_wait\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/07/17-13:38:36.264 6658 Reusing MANIFEST C:\Users\jordan\daily_chronic_np\run_state\edge_profile_wait\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/07/17-13:38:36.436 9c3c Level-0 table #5: started
+2026/07/17-13:38:36.441 9c3c Level-0 table #5: 683041 bytes OK
+2026/07/17-13:38:36.444 9c3c Delete type=0 #3

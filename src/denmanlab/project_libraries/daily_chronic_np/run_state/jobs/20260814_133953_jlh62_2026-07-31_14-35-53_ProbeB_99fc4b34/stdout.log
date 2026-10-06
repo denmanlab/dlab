@@ -1,0 +1,38 @@
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START validate existing Kilosort output
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: Kilosort output: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-31_14-35-53\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\kilosort4
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE validate existing Kilosort output in 0.0s
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START archive existing QC outputs
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: archive analyzer
+[0.0s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: archive report
+[0.1s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: archived previous QC outputs: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-31_14-35-53\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\qc_archive\20260814_134008
+[0.1s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE archive existing QC outputs in 0.1s
+[0.1s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START rebuild preprocessed recording view
+[1.5s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: recording: 384 channels, 1898.0s, 30000.0 Hz
+[1.5s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE rebuild preprocessed recording view in 1.5s
+[1.6s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START load Kilosort sorting and compute analyzer
+[6.5s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: Kilosort units: 386
+[45m46s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2
+[45m46s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: random_spikes
+[45m46s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: waveforms
+[1h07m30s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: templates
+[1h07m32s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: noise_levels
+[1h08m11s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: spike_amplitudes
+[1h40m27s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: unit_locations
+[1h40m40s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: spike_locations
+[2h13m13s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: principal_components
+[3h13m46s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: correlograms
+[3h13m49s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: isi_histograms
+[3h13m50s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: quality_metrics
+[6h13m34s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: compute analyzer extension: template_metrics
+[6h13m36s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE load Kilosort sorting and compute analyzer in 6h13m35s
+[6h13m36s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START export metrics and reports
+[6h13m49s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE export metrics and reports in 12.2s
+[6h13m49s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: START export Phy
+[6h13m49s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: Phy export will reuse existing analyzer extension: spike_amplitudes
+[6h13m49s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: Phy export will skip pc_features.npy because qc.phy_compute_pc_features=false
+Run:
+phy template-gui  C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-31_14-35-53\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\phy\params.py
+[6h14m00s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: Phy dat_path patched to original recording: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh62_2026-07-31_14-35-53\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\continuous.dat
+[6h14m00s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: wrote Phy UnitRefine TSVs: cluster_unitrefine_label.tsv, cluster_unitrefine_probability.tsv
+[6h14m00s] jlh62_2026-07-31_14-35-53_ProbeB:ProbeB:restart_qc: DONE export Phy in 11.7s
+jlh62_2026-07-31_14-35-53_ProbeB | ProbeB | complete

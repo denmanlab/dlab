@@ -1,0 +1,30 @@
+[0.0s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START verify raw backup
+[0.1s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\bp2_2026-09-17_13-15-32
+[0.1s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE verify raw backup in 0.1s
+[0.1s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START initialize output and registry
+[0.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE initialize output and registry in 0.0s
+[0.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START load Open Ephys recording and probe map
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: recording: 384 channels, 2105.3s, 30000.0 Hz
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE load Open Ephys recording and probe map in 1.0s
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START validate geometry and compute hashes
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE validate geometry and compute hashes in 0.0s
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START apply Neuropixels phase shift
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: phase_shift applied
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE apply Neuropixels phase shift in 0.0s
+[1.2s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START apply SpikeInterface CAR and plot traces
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\bp2_2026-09-17_13-15-32\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\report\figures\pre_post_car_traces.png
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE apply SpikeInterface CAR and plot traces in 2.3s
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START apply high-pass filter
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: highpass_filter applied: freq_min=300 Hz
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE apply high-pass filter in 0.0s
+[3.5s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START detect bad channels
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: bad channels detected: 384; excluded from sorting: 0
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE detect bad channels in 37.1s
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START optional SpikeInterface motion correction
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: using Kilosort4 drift correction
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE optional SpikeInterface motion correction in 0.0s
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START prepare Kilosort4 parameters
+[40.6s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[40.9s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: DONE prepare Kilosort4 parameters in 0.2s
+[40.9s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: START run Kilosort4
+[40.9s] bp2_2026-09-17_13-15-32_ProbeB:ProbeB: FAILED run Kilosort4 after 0.0s

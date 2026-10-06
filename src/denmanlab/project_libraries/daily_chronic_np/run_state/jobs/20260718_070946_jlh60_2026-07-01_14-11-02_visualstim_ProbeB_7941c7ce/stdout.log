@@ -1,0 +1,44 @@
+[0.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START verify raw backup
+[0.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-07-01_14-11-02_visualstim
+[0.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE verify raw backup in 0.1s
+[0.2s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START initialize output and registry
+[0.2s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE initialize output and registry in 0.0s
+[0.2s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START load Open Ephys recording and probe map
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: recording: 384 channels, 486.2s, 30000.0 Hz
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE load Open Ephys recording and probe map in 0.5s
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START validate geometry and compute hashes
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE validate geometry and compute hashes in 0.0s
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START apply Neuropixels phase shift
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: phase_shift applied
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE apply Neuropixels phase shift in 0.0s
+[0.7s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START apply SpikeInterface CAR and plot traces
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_14-11-02_visualstim\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\report\figures\pre_post_car_traces.png
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE apply SpikeInterface CAR and plot traces in 2.2s
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START apply high-pass filter
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: highpass_filter applied: freq_min=300 Hz
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE apply high-pass filter in 0.0s
+[2.9s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START detect bad channels
+[43.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: bad channels detected: 229; excluded from sorting: 0
+[43.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE detect bad channels in 40.1s
+[43.0s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START optional SpikeInterface motion correction
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: using Kilosort4 drift correction
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE optional SpikeInterface motion correction in 0.0s
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START prepare Kilosort4 parameters
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE prepare Kilosort4 parameters in 0.1s
+[43.1s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START run Kilosort4
+Skipping common average reference.
+kilosort4 run time 395.20s
+[15m31s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: Kilosort4 units: 407
+[15m31s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: DONE run Kilosort4 in 14m48s
+[15m31s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: START compute SortingAnalyzer extensions
+[28m37s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2
+[28m37s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: random_spikes
+[28m37s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: waveforms
+[35m18s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: templates
+[35m20s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: noise_levels
+[36m00s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: spike_amplitudes
+[39m19s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: unit_locations
+[39m24s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: spike_locations
+[48m46s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: compute analyzer extension: principal_components
+[1h55m55s] jlh60_2026-07-01_14-11-02_visualstim_ProbeB:ProbeB: FAILED compute SortingAnalyzer extensions after 1h40m23s

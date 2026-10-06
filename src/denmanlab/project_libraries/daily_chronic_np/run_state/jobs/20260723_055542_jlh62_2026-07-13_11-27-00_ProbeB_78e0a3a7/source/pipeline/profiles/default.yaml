@@ -1,0 +1,150 @@
+recordings:
+  minimum_duration_seconds: 300
+  load_sync_timestamps: true
+probes:
+  require_probeinterface_json: true
+  generate_probeinterface_from_recording: true
+  allow_missing_probe_map: false
+  sort_each_probe_independently: true
+preprocessing:
+  phase_shift:
+    enabled: true
+  highpass_filter:
+    enabled: true
+    freq_min: 300
+  bad_channels:
+    enabled: true
+    method: coherence+psd
+    exclude_from_sorting: false
+    exclude_labels:
+    - dead
+    - noise
+    - out
+  motion_correction:
+    enabled: false
+    preset: dredge_fast
+    save_motion_info: true
+  car:
+    enabled: true
+    reference: global
+    operator: median
+  trace_plots:
+    enabled: true
+    start_seconds: 0
+    seconds: 2
+    max_channels: 24
+sorting:
+  sorter_name: kilosort4
+  remove_existing_folder: false
+  docker_image: false
+  singularity_image: false
+  params:
+    do_CAR: false
+    do_correction: true
+    skip_kilosort_preprocessing: false
+    save_preprocessed_copy: false
+    delete_recording_dat: true
+    nblocks: 1
+qc:
+  compute_quality_metrics: true
+  compute_template_metrics: true
+  export_phy: true
+  phy_compute_pc_features: false
+  phy_compute_amplitudes: true
+  phy_copy_binary: false
+  phy_add_unitrefine_labels: true
+  phy_add_quality_metrics: false
+  phy_add_template_metrics: false
+  phy_prune_metric_tsvs: true
+  phy_dat_path:
+    enabled: true
+    source: original_continuous_dat
+    hp_filtered: false
+  sorting_analyzer:
+    sparse: true
+    num_spikes_for_sparsity: 200
+  analyzer_extensions:
+  - name: random_spikes
+    enabled: true
+  - name: waveforms
+    enabled: true
+  - name: templates
+    enabled: true
+  - name: noise_levels
+    enabled: true
+  - name: spike_amplitudes
+    enabled: true
+  - name: unit_locations
+    enabled: true
+  - name: spike_locations
+    enabled: true
+  - name: principal_components
+    enabled: true
+    params:
+      n_components: 5
+      mode: by_channel_local
+  - name: correlograms
+    enabled: true
+  - name: isi_histograms
+    enabled: true
+  - name: quality_metrics
+    enabled: true
+  - name: template_metrics
+    enabled: true
+  quality_metrics:
+    metric_names:
+    - firing_rate
+    - presence_ratio
+    - snr
+    - isi_violations_ratio
+    - rp_contamination
+    - sliding_rp_violation
+    - amplitude_cutoff
+    - amplitude_median
+    unitrefine_metric_names:
+    - num_spikes
+    - firing_rate
+    - presence_ratio
+    - snr
+    - isi_violation
+    - rp_violation
+    - sliding_rp_violation
+    - synchrony
+    - firing_range
+    - amplitude_cv
+    - amplitude_cutoff
+    - noise_cutoff
+    - amplitude_median
+    - drift
+    - sd_ratio
+    - mahalanobis
+    - d_prime
+    - nearest_neighbor
+    - silhouette
+    - nn_advanced
+  export_report: true
+  shareable_png:
+    enabled: true
+    filename: summary.png
+    max_car_channels: 8
+    example_units: 6
+  automated_labels:
+    enabled: true
+    method: unitrefine
+    label_set: unitrefine_full
+    noise_neural_classifier: SpikeInterface/UnitRefine_noise_neural_classifier
+    sua_mua_classifier: SpikeInterface/UnitRefine_sua_mua_classifier
+    fail_on_error: false
+jobs:
+  n_jobs: 8
+  fallback_n_jobs: 2
+  chunk_duration: 1s
+  progress_bar: true
+progress:
+  enabled: true
+_profile:
+  name: default
+  description: Default processing settings migrated from the analysis config.
+  created_at: '2026-07-17T19:17:55.373371+00:00'
+  updated_at: '2026-07-17T19:17:55.373371+00:00'
+  version: 1

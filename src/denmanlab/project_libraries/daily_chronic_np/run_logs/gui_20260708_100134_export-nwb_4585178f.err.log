@@ -1,0 +1,2 @@
+C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\pynwb\file.py:158: UserWarning: Date is missing timezone information. Updating to local timezone.
+  args_to_set['date_of_birth'] = _add_missing_timezone(date_of_birth)

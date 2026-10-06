@@ -1,0 +1,13 @@
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: START load existing SortingAnalyzer
+[4.5s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: attached UnitRefine labels: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\unitrefine\unitrefine_full\unit_labels.csv
+[4.5s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: DONE load existing SortingAnalyzer in 4.5s
+[4.5s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: START export Phy
+[4.5s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: Phy export will reuse existing analyzer extension: spike_amplitudes
+[4.5s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: Phy export will skip pc_features.npy because qc.phy_compute_pc_features=false
+Run:
+phy template-gui  C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\phy\params.py
+[17.6s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: Phy dat_path patched to original recording: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\continuous.dat
+[17.6s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: wrote Phy UnitRefine TSVs: cluster_unitrefine_label.tsv, cluster_unitrefine_probability.tsv
+[17.6s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: Phy exported: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\phy
+[17.6s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:export_phy: DONE export Phy in 13.1s
+jlh60_2026-07-01_13-49-41_ProbeB | ProbeB | complete

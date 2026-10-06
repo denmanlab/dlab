@@ -1,0 +1,29 @@
+[0.0s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START verify raw backup
+[0.3s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh602026-06-29_14-31-15
+[0.3s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE verify raw backup in 0.3s
+[0.3s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START initialize output and registry
+[0.3s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE initialize output and registry in 0.0s
+[0.3s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START load Open Ephys recording and probe map
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: recording: 384 channels, 2503.1s, 30000.0 Hz
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE load Open Ephys recording and probe map in 1.2s
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START validate geometry and compute hashes
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE validate geometry and compute hashes in 0.0s
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START apply Neuropixels phase shift
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: phase_shift applied
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE apply Neuropixels phase shift in 0.0s
+[1.5s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START apply SpikeInterface CAR and plot traces
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh602026-06-29_14-31-15\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeA\spikeinterface_output_phasecar_hp300_unitrefine\report\figures\pre_post_car_traces.png
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE apply SpikeInterface CAR and plot traces in 2.2s
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START apply high-pass filter
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: highpass_filter applied: freq_min=300 Hz
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE apply high-pass filter in 0.0s
+[3.7s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START detect bad channels
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: bad channels detected: 105; excluded from sorting: 0
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE detect bad channels in 41.2s
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START optional SpikeInterface motion correction
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: using Kilosort4 drift correction
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE optional SpikeInterface motion correction in 0.0s
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START prepare Kilosort4 parameters
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: DONE prepare Kilosort4 parameters in 0.0s
+[44.9s] jlh60_2026-06-29_14-31-15_ProbeA_phasecar_hp300_unitrefine:ProbeA: START run Kilosort4

@@ -1,0 +1,7 @@
+[0.0s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: START verify raw backup
+[0.1s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-06-30_12-16-16
+[0.1s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: DONE verify raw backup in 0.1s
+[0.1s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: START initialize output and registry
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: DONE initialize output and registry in 0.0s
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: START load Open Ephys recording and probe map
+[0.4s] jlh60_2026-06-30_12-16-16_ProbeA:ProbeA: FAILED load Open Ephys recording and probe map after 0.2s

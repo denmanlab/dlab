@@ -1,0 +1,27 @@
+jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   0%|          | 0/15 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   0%|          | 0/15 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   0%|          | 0/15 [00:00<?, ?phase/s]                                                                                  jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   0%|          | 0/15 [00:00<?, ?phase/s]jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   7%|6         | 1/15 [00:00<00:01,  7.60phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   7%|6         | 1/15 [00:00<00:01,  7.60phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:   7%|6         | 1/15 [00:00<00:01,  7.60phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:  13%|#3        | 2/15 [00:00<00:01,  7.60phase/s]                                                                                          jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:  13%|#3        | 2/15 [00:00<00:01,  7.60phase/s]jlh60_2026-06-30_12-16-16_ProbeA:ProbeA:  13%|#3        | 2/15 [00:00<00:03,  4.26phase/s]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 1244, in <module>
+    main()
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 1232, in main
+    completed = run_registry_row(
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\run_one.py", line 132, in run_registry_row
+    recording, probe_json = load_recording_with_probe(row, config)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\daily_chronic_np\pipeline\probe_maps.py", line 33, in load_recording_with_probe
+    recording = si.read_openephys(
+                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\extractors\neoextractors\openephys.py", line 521, in read_openephys
+    recording = OpenEphysBinaryRecordingExtractor(folder_path, **kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\extractors\neoextractors\openephys.py", line 265, in __init__
+    available_experiments = self.get_available_experiments(folder_path)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\extractors\neoextractors\openephys.py", line 213, in get_available_experiments
+    _, possible_experiments = OpenEphysBinaryRawIO._parse_folder_structure(str(folder_path), experiment_names=None)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\neo\rawio\openephysbinaryrawio.py", line 910, in _parse_folder_structure
+    raise ValueError(
+ValueError: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-06-30_12-16-16\Record Node 101 is not a valid Open Ephys binary folder. No 'structure.oebin' files were found in sub-folders.

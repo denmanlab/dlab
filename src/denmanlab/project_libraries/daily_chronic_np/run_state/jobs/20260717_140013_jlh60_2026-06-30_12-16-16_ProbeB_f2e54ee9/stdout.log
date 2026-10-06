@@ -1,0 +1,29 @@
+[0.0s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START verify raw backup
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: raw backup verified: \\denmanlab\s2\mouse_arena_recordings\jlh60_2026-06-30_12-16-16
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE verify raw backup in 0.2s
+[0.2s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START initialize output and registry
+[0.3s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE initialize output and registry in 0.0s
+[0.3s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START load Open Ephys recording and probe map
+[1.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: recording: 384 channels, 2857.4s, 30000.0 Hz
+[1.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE load Open Ephys recording and probe map in 1.2s
+[1.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START validate geometry and compute hashes
+[1.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE validate geometry and compute hashes in 0.0s
+[1.4s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply Neuropixels phase shift
+[1.5s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: phase_shift applied
+[1.5s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply Neuropixels phase shift in 0.0s
+[1.5s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply SpikeInterface CAR and plot traces
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: CAR operator=median; pre/post CAR plot: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-06-30_12-16-16\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\report\figures\pre_post_car_traces.png
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply SpikeInterface CAR and plot traces in 2.4s
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START apply high-pass filter
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: highpass_filter applied: freq_min=300 Hz
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE apply high-pass filter in 0.0s
+[3.8s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START detect bad channels
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: bad channels detected: 93; excluded from sorting: 0
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE detect bad channels in 42.0s
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START optional SpikeInterface motion correction
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: using Kilosort4 drift correction
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE optional SpikeInterface motion correction in 0.0s
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START prepare Kilosort4 parameters
+[45.9s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: Kilosort4 preprocessing: do_CAR=False, do_correction=True, bad_channels=0
+[46.0s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: DONE prepare Kilosort4 parameters in 0.1s
+[46.0s] jlh60_2026-06-30_12-16-16_ProbeB:ProbeB: START run Kilosort4

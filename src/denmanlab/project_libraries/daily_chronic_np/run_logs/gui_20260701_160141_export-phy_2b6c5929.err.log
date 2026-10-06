@@ -1,0 +1,1522 @@
+jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:   0%|          | 0/2 [00:00<?, ?phase/s]                                                                                            jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:   0%|          | 0/2 [00:00<?, ?phase/s]                                                                                            jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:   0%|          | 0/2 [00:07<?, ?phase/s]                                                                                            jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:   0%|          | 0/2 [00:07<?, ?phase/s]jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [00:07<00:07,  7.02s/phase]                                                                                                    jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [00:07<00:07,  7.02s/phase]                                                                                                    jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [00:07<00:07,  7.02s/phase]                                                                                                    jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [00:07<00:07,  7.02s/phase]C:\Users\jordan\AppData\Local\anaconda3\envs\spikeinterface\Lib\site-packages\spikeinterface\postprocessing\template_similarity.py:345: NumbaTypeSafetyWarning: [1m[1m[1munsafe cast from uint64 to int64. Precision may be lost.[0m[0m[0m
+  overlapping_ids = overlapping_j_list[i]
+
+extract PCs (workers: 8 processes spawn):   0%|          | 0/2501 [00:00<?, ?it/s][A
+extract PCs (workers: 8 processes spawn):   1%|          | 18/2501 [00:00<00:31, 79.79it/s][A
+extract PCs (workers: 8 processes spawn):   1%|1         | 26/2501 [00:15<30:17,  1.36it/s][A
+extract PCs (workers: 8 processes spawn):   1%|1         | 29/2501 [00:17<29:54,  1.38it/s][A
+extract PCs (workers: 8 processes spawn):   1%|1         | 33/2501 [00:25<43:35,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):   1%|1         | 37/2501 [00:28<40:16,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 39/2501 [00:29<37:20,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 40/2501 [00:35<57:10,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 42/2501 [00:35<46:30,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 43/2501 [00:36<42:56,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 44/2501 [00:38<52:10,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 46/2501 [00:39<37:18,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 47/2501 [00:41<46:59,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 48/2501 [00:46<1:18:44,  1.93s/it][A
+extract PCs (workers: 8 processes spawn):   2%|1         | 49/2501 [00:46<1:02:51,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):   2%|2         | 51/2501 [00:47<48:21,  1.18s/it]  [A
+extract PCs (workers: 8 processes spawn):   2%|2         | 55/2501 [00:51<40:56,  1.00s/it][A
+extract PCs (workers: 8 processes spawn):   2%|2         | 56/2501 [00:58<1:20:21,  1.97s/it][A
+extract PCs (workers: 8 processes spawn):   2%|2         | 57/2501 [01:00<1:23:24,  2.05s/it][A
+extract PCs (workers: 8 processes spawn):   2%|2         | 58/2501 [01:01<1:15:32,  1.86s/it][A
+extract PCs (workers: 8 processes spawn):   2%|2         | 62/2501 [01:02<37:30,  1.08it/s]  [A
+extract PCs (workers: 8 processes spawn):   3%|2         | 63/2501 [01:03<38:46,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 64/2501 [01:09<1:22:17,  2.03s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 66/2501 [01:11<1:01:57,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 67/2501 [01:12<1:03:46,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 68/2501 [01:14<1:03:38,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 72/2501 [01:15<36:16,  1.12it/s]  [A
+extract PCs (workers: 8 processes spawn):   3%|2         | 73/2501 [01:20<1:02:08,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 74/2501 [01:23<1:10:09,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):   3%|2         | 75/2501 [01:27<1:29:42,  2.22s/it][A
+extract PCs (workers: 8 processes spawn):   3%|3         | 81/2501 [01:27<34:54,  1.16it/s]  [A
+extract PCs (workers: 8 processes spawn):   3%|3         | 82/2501 [01:33<58:12,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):   3%|3         | 84/2501 [01:35<52:30,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):   3%|3         | 86/2501 [01:35<38:51,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):   3%|3         | 87/2501 [01:36<42:09,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 89/2501 [01:37<32:56,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 90/2501 [01:43<1:11:08,  1.77s/it][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 92/2501 [01:43<48:17,  1.20s/it]  [A
+extract PCs (workers: 8 processes spawn):   4%|3         | 96/2501 [01:44<29:26,  1.36it/s][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 97/2501 [01:48<47:58,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 98/2501 [01:54<1:20:54,  2.02s/it][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 99/2501 [01:55<1:13:12,  1.83s/it][A
+extract PCs (workers: 8 processes spawn):   4%|3         | 100/2501 [01:55<1:01:45,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 102/2501 [01:57<50:08,  1.25s/it]  [A
+extract PCs (workers: 8 processes spawn):   4%|4         | 103/2501 [01:57<40:38,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 105/2501 [01:58<29:54,  1.34it/s][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 106/2501 [02:05<1:22:04,  2.06s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 107/2501 [02:07<1:25:57,  2.15s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 108/2501 [02:09<1:23:49,  2.10s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 109/2501 [02:09<1:06:35,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 110/2501 [02:10<55:12,  1.39s/it]  [A
+extract PCs (workers: 8 processes spawn):   4%|4         | 111/2501 [02:11<47:38,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):   4%|4         | 112/2501 [02:12<48:06,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 113/2501 [02:14<52:05,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 114/2501 [02:14<40:33,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 115/2501 [02:19<1:26:54,  2.19s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 116/2501 [02:21<1:31:14,  2.30s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 117/2501 [02:23<1:20:47,  2.03s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 119/2501 [02:24<53:06,  1.34s/it]  [A
+extract PCs (workers: 8 processes spawn):   5%|4         | 123/2501 [02:30<56:09,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):   5%|4         | 124/2501 [02:33<1:08:52,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 127/2501 [02:34<42:05,  1.06s/it]  [A
+extract PCs (workers: 8 processes spawn):   5%|5         | 128/2501 [02:36<52:20,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 130/2501 [02:36<37:02,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 131/2501 [02:37<35:11,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 132/2501 [02:45<1:35:24,  2.42s/it][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 133/2501 [02:46<1:22:06,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):   5%|5         | 136/2501 [02:51<1:13:33,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):   6%|5         | 140/2501 [02:57<1:04:45,  1.65s/it][A
+extract PCs (workers: 8 processes spawn):   6%|5         | 141/2501 [03:01<1:17:12,  1.96s/it][A
+extract PCs (workers: 8 processes spawn):   6%|5         | 142/2501 [03:02<1:13:06,  1.86s/it][A
+extract PCs (workers: 8 processes spawn):   6%|5         | 143/2501 [03:02<59:27,  1.51s/it]  [A
+extract PCs (workers: 8 processes spawn):   6%|5         | 148/2501 [03:11<1:05:33,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 151/2501 [03:12<45:57,  1.17s/it]  [A
+extract PCs (workers: 8 processes spawn):   6%|6         | 152/2501 [03:14<52:57,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 153/2501 [03:15<52:46,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 155/2501 [03:16<40:05,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 156/2501 [03:23<1:24:47,  2.17s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 157/2501 [03:24<1:11:46,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):   6%|6         | 160/2501 [03:26<53:41,  1.38s/it]  [A
+extract PCs (workers: 8 processes spawn):   6%|6         | 161/2501 [03:28<53:40,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 163/2501 [03:29<45:41,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 164/2501 [03:32<58:16,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 165/2501 [03:34<1:01:08,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 167/2501 [03:36<50:15,  1.29s/it]  [A
+extract PCs (workers: 8 processes spawn):   7%|6         | 168/2501 [03:39<1:10:42,  1.82s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 170/2501 [03:40<51:41,  1.33s/it]  [A
+extract PCs (workers: 8 processes spawn):   7%|6         | 171/2501 [03:42<52:42,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 172/2501 [03:44<1:00:55,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 173/2501 [03:44<48:03,  1.24s/it]  [A
+extract PCs (workers: 8 processes spawn):   7%|6         | 174/2501 [03:46<52:32,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):   7%|6         | 175/2501 [03:50<1:15:16,  1.94s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 176/2501 [03:51<1:04:06,  1.65s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 178/2501 [03:51<41:32,  1.07s/it]  [A
+extract PCs (workers: 8 processes spawn):   7%|7         | 179/2501 [03:54<59:30,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 180/2501 [03:56<56:58,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 182/2501 [03:58<52:33,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 183/2501 [04:02<1:12:13,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):   7%|7         | 186/2501 [04:02<37:13,  1.04it/s]  [A
+extract PCs (workers: 8 processes spawn):   7%|7         | 187/2501 [04:06<1:03:23,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):   8%|7         | 189/2501 [04:07<45:03,  1.17s/it]  [A
+extract PCs (workers: 8 processes spawn):   8%|7         | 190/2501 [04:11<1:09:49,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):   8%|7         | 191/2501 [04:13<1:09:04,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):   8%|7         | 195/2501 [04:16<47:59,  1.25s/it]  [A
+extract PCs (workers: 8 processes spawn):   8%|7         | 197/2501 [04:19<52:08,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):   8%|7         | 198/2501 [04:27<1:30:32,  2.36s/it][A
+extract PCs (workers: 8 processes spawn):   8%|8         | 203/2501 [04:28<46:24,  1.21s/it]  [A
+extract PCs (workers: 8 processes spawn):   8%|8         | 205/2501 [04:29<38:03,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):   8%|8         | 206/2501 [04:35<1:06:23,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):   8%|8         | 207/2501 [04:39<1:23:36,  2.19s/it][A
+extract PCs (workers: 8 processes spawn):   8%|8         | 210/2501 [04:40<51:14,  1.34s/it]  [A
+extract PCs (workers: 8 processes spawn):   8%|8         | 211/2501 [04:41<49:57,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):   9%|8         | 214/2501 [04:46<55:26,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):   9%|8         | 216/2501 [04:51<1:10:01,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):   9%|8         | 217/2501 [04:52<1:02:59,  1.65s/it][A
+extract PCs (workers: 8 processes spawn):   9%|8         | 222/2501 [04:58<51:07,  1.35s/it]  [A
+extract PCs (workers: 8 processes spawn):   9%|8         | 224/2501 [04:59<45:48,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):   9%|8         | 225/2501 [05:01<51:21,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 227/2501 [05:02<40:30,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 229/2501 [05:03<33:08,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 230/2501 [05:06<45:16,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 231/2501 [05:08<50:30,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 232/2501 [05:09<53:37,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 233/2501 [05:12<1:02:10,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):   9%|9         | 237/2501 [05:13<32:46,  1.15it/s]  [A
+extract PCs (workers: 8 processes spawn):  10%|9         | 238/2501 [05:17<51:30,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 239/2501 [05:19<1:01:43,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 240/2501 [05:22<1:14:24,  1.97s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 241/2501 [05:23<57:34,  1.53s/it]  [A
+extract PCs (workers: 8 processes spawn):  10%|9         | 242/2501 [05:23<46:48,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 243/2501 [05:24<40:44,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 244/2501 [05:24<30:46,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 245/2501 [05:25<36:45,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 247/2501 [05:28<44:08,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 248/2501 [05:31<1:00:47,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 249/2501 [05:34<1:11:11,  1.90s/it][A
+extract PCs (workers: 8 processes spawn):  10%|9         | 250/2501 [05:34<54:09,  1.44s/it]  [A
+extract PCs (workers: 8 processes spawn):  10%|#         | 252/2501 [05:36<48:40,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  10%|#         | 255/2501 [05:38<38:45,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  10%|#         | 256/2501 [05:43<1:04:58,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):  10%|#         | 257/2501 [05:46<1:12:00,  1.93s/it][A
+extract PCs (workers: 8 processes spawn):  10%|#         | 260/2501 [05:48<48:22,  1.30s/it]  [A
+extract PCs (workers: 8 processes spawn):  10%|#         | 262/2501 [05:48<35:40,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 263/2501 [05:50<42:16,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 264/2501 [05:53<57:45,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 265/2501 [05:54<53:23,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 266/2501 [05:55<51:44,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 267/2501 [05:57<50:46,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 268/2501 [06:00<1:06:37,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 271/2501 [06:00<32:12,  1.15it/s]  [A
+extract PCs (workers: 8 processes spawn):  11%|#         | 272/2501 [06:03<47:03,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 273/2501 [06:05<52:09,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 274/2501 [06:06<56:21,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#         | 275/2501 [06:10<1:21:03,  2.18s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 277/2501 [06:11<51:26,  1.39s/it]  [A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 279/2501 [06:12<37:50,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 280/2501 [06:15<55:21,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 281/2501 [06:17<1:01:36,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 282/2501 [06:19<59:56,  1.62s/it]  [A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 283/2501 [06:22<1:16:46,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 286/2501 [06:23<40:49,  1.11s/it]  [A
+extract PCs (workers: 8 processes spawn):  11%|#1        | 287/2501 [06:25<50:16,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 288/2501 [06:28<1:02:03,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 289/2501 [06:29<53:48,  1.46s/it]  [A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 290/2501 [06:30<47:24,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 291/2501 [06:31<45:53,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 292/2501 [06:32<46:42,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 293/2501 [06:34<47:18,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 294/2501 [06:35<46:52,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 295/2501 [06:37<1:01:45,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 296/2501 [06:40<1:08:25,  1.86s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 297/2501 [06:42<1:17:10,  2.10s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#1        | 299/2501 [06:45<1:05:57,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 302/2501 [06:47<42:10,  1.15s/it]  [A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 303/2501 [06:50<58:26,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 304/2501 [06:51<50:45,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 305/2501 [06:53<56:43,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 306/2501 [06:54<56:24,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 307/2501 [06:55<51:07,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 308/2501 [06:56<40:38,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 309/2501 [06:58<47:24,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 311/2501 [06:59<35:32,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  12%|#2        | 312/2501 [06:59<32:03,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 313/2501 [07:01<44:26,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 314/2501 [07:08<1:36:08,  2.64s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 320/2501 [07:10<35:31,  1.02it/s]  [A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 321/2501 [07:14<53:48,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 322/2501 [07:16<55:00,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 323/2501 [07:18<57:18,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#2        | 324/2501 [07:21<1:09:17,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 329/2501 [07:23<36:52,  1.02s/it]  [A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 330/2501 [07:26<48:56,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 332/2501 [07:27<38:52,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 333/2501 [07:28<35:48,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 335/2501 [07:31<42:36,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 336/2501 [07:31<39:35,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  13%|#3        | 337/2501 [07:33<42:11,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 338/2501 [07:37<1:03:34,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 339/2501 [07:37<51:35,  1.43s/it]  [A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 340/2501 [07:40<1:01:34,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 341/2501 [07:40<48:43,  1.35s/it]  [A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 343/2501 [07:41<32:36,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 344/2501 [07:41<27:37,  1.30it/s][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 346/2501 [07:45<48:53,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 348/2501 [07:48<50:34,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 349/2501 [07:51<56:38,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#3        | 350/2501 [07:52<51:53,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 353/2501 [07:53<35:30,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 354/2501 [07:55<42:48,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 355/2501 [07:56<38:13,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 356/2501 [07:59<55:58,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 357/2501 [08:00<50:29,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 358/2501 [08:05<1:28:45,  2.49s/it][A
+extract PCs (workers: 8 processes spawn):  14%|#4        | 362/2501 [08:07<41:37,  1.17s/it]  [A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 363/2501 [08:08<43:19,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 364/2501 [08:12<1:01:56,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 368/2501 [08:16<49:20,  1.39s/it]  [A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 369/2501 [08:18<50:15,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 370/2501 [08:19<51:57,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 371/2501 [08:20<45:12,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#4        | 374/2501 [08:25<50:12,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 376/2501 [08:28<52:15,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 377/2501 [08:31<59:30,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 380/2501 [08:31<35:01,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 382/2501 [08:32<31:58,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 384/2501 [08:39<56:14,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 385/2501 [08:43<1:09:59,  1.98s/it][A
+extract PCs (workers: 8 processes spawn):  15%|#5        | 387/2501 [08:44<57:09,  1.62s/it]  [A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 390/2501 [08:46<42:45,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 392/2501 [08:47<36:16,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 393/2501 [08:51<49:59,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 394/2501 [08:53<55:01,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 395/2501 [08:55<55:34,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 398/2501 [08:56<35:56,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#5        | 399/2501 [08:58<41:08,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 401/2501 [09:01<43:58,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 402/2501 [09:04<58:18,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 404/2501 [09:05<47:10,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 405/2501 [09:06<42:20,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 406/2501 [09:07<42:25,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 407/2501 [09:08<34:34,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 409/2501 [09:09<32:41,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 410/2501 [09:10<28:19,  1.23it/s][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 411/2501 [09:13<52:17,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  16%|#6        | 412/2501 [09:16<1:02:45,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 413/2501 [09:18<1:00:52,  1.75s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 414/2501 [09:20<1:08:07,  1.96s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 416/2501 [09:21<41:02,  1.18s/it]  [A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 417/2501 [09:22<42:44,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 418/2501 [09:24<46:12,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 419/2501 [09:26<51:59,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 420/2501 [09:28<1:03:39,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 422/2501 [09:29<44:22,  1.28s/it]  [A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 423/2501 [09:32<57:32,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 424/2501 [09:33<47:59,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#6        | 425/2501 [09:34<41:56,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#7        | 427/2501 [09:36<44:49,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#7        | 429/2501 [09:38<38:13,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#7        | 431/2501 [09:44<1:04:04,  1.86s/it][A
+extract PCs (workers: 8 processes spawn):  17%|#7        | 436/2501 [09:48<43:21,  1.26s/it]  [A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 439/2501 [09:53<47:29,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 443/2501 [09:54<30:36,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 444/2501 [09:57<41:31,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 445/2501 [09:58<37:24,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 446/2501 [09:58<35:49,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 447/2501 [10:01<46:30,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#7        | 448/2501 [10:05<1:04:37,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 451/2501 [10:06<40:22,  1.18s/it]  [A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 452/2501 [10:07<37:07,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 453/2501 [10:09<44:02,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 455/2501 [10:10<35:43,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 456/2501 [10:14<54:42,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 457/2501 [10:15<50:47,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 458/2501 [10:16<44:18,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 459/2501 [10:17<47:21,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  18%|#8        | 461/2501 [10:22<59:21,  1.75s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 464/2501 [10:22<34:23,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 465/2501 [10:26<53:28,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 466/2501 [10:28<53:16,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 468/2501 [10:28<35:15,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 469/2501 [10:31<46:27,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 470/2501 [10:35<1:05:20,  1.93s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 473/2501 [10:37<45:12,  1.34s/it]  [A
+extract PCs (workers: 8 processes spawn):  19%|#8        | 475/2501 [10:40<49:40,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 477/2501 [10:42<44:41,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 478/2501 [10:44<43:19,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 480/2501 [10:45<38:09,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 481/2501 [10:49<58:47,  1.75s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 482/2501 [10:50<51:13,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 483/2501 [10:52<56:34,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 485/2501 [10:53<40:48,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 486/2501 [10:55<46:51,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  19%|#9        | 487/2501 [10:57<45:13,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  20%|#9        | 489/2501 [11:02<1:04:01,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  20%|#9        | 492/2501 [11:03<36:20,  1.09s/it]  [A
+extract PCs (workers: 8 processes spawn):  20%|#9        | 493/2501 [11:06<52:04,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  20%|#9        | 494/2501 [11:08<52:57,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  20%|#9        | 497/2501 [11:13<52:02,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 501/2501 [11:17<45:47,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 504/2501 [11:19<35:47,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 505/2501 [11:19<34:01,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 506/2501 [11:20<30:52,  1.08it/s][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 507/2501 [11:23<46:31,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 508/2501 [11:23<37:42,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 509/2501 [11:27<54:14,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 510/2501 [11:27<41:53,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  20%|##        | 512/2501 [11:28<31:29,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 513/2501 [11:30<41:05,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 514/2501 [11:32<49:16,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 515/2501 [11:34<47:44,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 517/2501 [11:36<41:58,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 518/2501 [11:39<54:51,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 520/2501 [11:39<36:00,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 522/2501 [11:44<51:11,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 523/2501 [11:46<53:51,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##        | 525/2501 [11:47<38:59,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 526/2501 [11:50<55:21,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 527/2501 [11:51<51:14,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 529/2501 [11:52<36:00,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 530/2501 [11:53<31:55,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 531/2501 [11:59<1:14:50,  2.28s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 533/2501 [12:01<54:18,  1.66s/it]  [A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 534/2501 [12:02<49:52,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 536/2501 [12:03<36:58,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  21%|##1       | 537/2501 [12:04<37:03,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 538/2501 [12:05<37:00,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 539/2501 [12:09<58:57,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 540/2501 [12:09<47:21,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 541/2501 [12:14<1:15:45,  2.32s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 546/2501 [12:16<35:33,  1.09s/it]  [A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 547/2501 [12:20<50:18,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##1       | 550/2501 [12:23<43:01,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##2       | 551/2501 [12:24<42:25,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##2       | 555/2501 [12:27<31:14,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  22%|##2       | 556/2501 [12:30<41:55,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##2       | 557/2501 [12:34<57:13,  1.77s/it][A
+extract PCs (workers: 8 processes spawn):  22%|##2       | 558/2501 [12:37<1:05:11,  2.01s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 563/2501 [12:38<29:45,  1.09it/s]  [A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 564/2501 [12:44<56:57,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 565/2501 [12:46<57:29,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 567/2501 [12:49<52:58,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 570/2501 [12:50<37:17,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 571/2501 [12:52<38:37,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 572/2501 [12:54<45:00,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 573/2501 [12:59<1:06:09,  2.06s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 574/2501 [12:59<53:50,  1.68s/it]  [A
+extract PCs (workers: 8 processes spawn):  23%|##2       | 575/2501 [13:00<45:24,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 576/2501 [13:00<35:16,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 577/2501 [13:00<29:15,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 578/2501 [13:04<50:59,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 581/2501 [13:11<1:06:07,  2.07s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 582/2501 [13:13<1:08:22,  2.14s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 583/2501 [13:14<1:00:05,  1.88s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 584/2501 [13:15<52:09,  1.63s/it]  [A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 585/2501 [13:16<47:40,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  23%|##3       | 587/2501 [13:17<32:10,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 588/2501 [13:18<28:25,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 589/2501 [13:21<51:05,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 590/2501 [13:23<49:56,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 591/2501 [13:23<39:54,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 593/2501 [13:24<26:10,  1.21it/s][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 594/2501 [13:24<21:39,  1.47it/s][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 595/2501 [13:27<42:42,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 597/2501 [13:33<1:01:00,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 598/2501 [13:34<1:00:06,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##3       | 599/2501 [13:36<53:35,  1.69s/it]  [A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 601/2501 [13:38<46:45,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 603/2501 [13:39<35:32,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 605/2501 [13:46<1:00:29,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 607/2501 [13:48<51:43,  1.64s/it]  [A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 611/2501 [13:48<28:37,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  24%|##4       | 612/2501 [13:50<31:20,  1.00it/s][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 613/2501 [13:57<1:04:29,  2.05s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 614/2501 [14:00<1:08:34,  2.18s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 618/2501 [14:01<37:56,  1.21s/it]  [A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 621/2501 [14:07<44:41,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 622/2501 [14:07<41:38,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 623/2501 [14:08<35:31,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 624/2501 [14:11<47:04,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##4       | 625/2501 [14:13<52:55,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 627/2501 [14:14<39:59,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 629/2501 [14:16<34:53,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 631/2501 [14:17<27:03,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 632/2501 [14:22<52:14,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 633/2501 [14:27<1:20:26,  2.58s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 634/2501 [14:28<1:06:26,  2.14s/it][A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 636/2501 [14:29<43:28,  1.40s/it]  [A
+extract PCs (workers: 8 processes spawn):  25%|##5       | 637/2501 [14:30<45:21,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 638/2501 [14:32<48:01,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 639/2501 [14:34<49:13,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 641/2501 [14:37<46:43,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 642/2501 [14:40<59:19,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 643/2501 [14:41<49:11,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 646/2501 [14:45<48:37,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 649/2501 [14:49<43:22,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##5       | 650/2501 [14:51<48:20,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 652/2501 [14:54<46:55,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 655/2501 [14:55<31:09,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 657/2501 [14:57<29:34,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 658/2501 [15:00<44:59,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 659/2501 [15:03<49:23,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 661/2501 [15:04<39:17,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  26%|##6       | 662/2501 [15:07<46:31,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 666/2501 [15:07<22:21,  1.37it/s][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 667/2501 [15:14<53:49,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 669/2501 [15:15<43:47,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 670/2501 [15:18<49:49,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 671/2501 [15:19<49:43,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 672/2501 [15:20<41:09,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 674/2501 [15:21<30:57,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##6       | 675/2501 [15:23<40:50,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 676/2501 [15:24<36:15,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 678/2501 [15:28<44:17,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 679/2501 [15:29<46:02,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 680/2501 [15:31<46:45,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 681/2501 [15:33<49:05,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 682/2501 [15:34<45:13,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 683/2501 [15:36<47:02,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 686/2501 [15:39<40:51,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  27%|##7       | 687/2501 [15:42<48:35,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 689/2501 [15:43<34:33,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 690/2501 [15:45<44:16,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 692/2501 [15:46<30:26,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 693/2501 [15:49<40:55,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 694/2501 [15:50<38:27,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 695/2501 [15:51<39:57,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 696/2501 [15:52<35:19,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 697/2501 [15:52<31:57,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##7       | 699/2501 [15:55<36:01,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 701/2501 [15:58<40:31,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 702/2501 [16:00<42:17,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 703/2501 [16:01<39:17,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 704/2501 [16:03<41:35,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 705/2501 [16:05<45:54,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 706/2501 [16:06<48:37,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 707/2501 [16:07<36:36,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 708/2501 [16:08<38:52,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 709/2501 [16:08<29:08,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):  28%|##8       | 710/2501 [16:11<48:04,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 713/2501 [16:15<40:45,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 714/2501 [16:17<43:48,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 715/2501 [16:20<57:46,  1.94s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 718/2501 [16:21<30:22,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 720/2501 [16:21<21:45,  1.36it/s][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 721/2501 [16:23<31:02,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 722/2501 [16:26<44:13,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 723/2501 [16:32<1:09:07,  2.33s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##8       | 725/2501 [16:35<58:54,  1.99s/it]  [A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 727/2501 [16:35<41:13,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 729/2501 [16:37<36:37,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 730/2501 [16:39<39:56,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 732/2501 [16:41<39:02,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 733/2501 [16:45<54:19,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):  29%|##9       | 735/2501 [16:46<37:53,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 738/2501 [16:47<25:14,  1.16it/s][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 739/2501 [16:49<32:32,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 740/2501 [16:54<54:21,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 741/2501 [16:58<1:04:22,  2.19s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 742/2501 [16:58<54:16,  1.85s/it]  [A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 743/2501 [16:59<43:05,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 747/2501 [17:01<25:49,  1.13it/s][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 748/2501 [17:04<38:43,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 749/2501 [17:05<37:52,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  30%|##9       | 750/2501 [17:06<37:45,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 751/2501 [17:09<45:39,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 755/2501 [17:12<32:07,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 757/2501 [17:16<41:09,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 758/2501 [17:18<42:37,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 759/2501 [17:19<41:06,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  30%|###       | 760/2501 [17:20<33:56,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 764/2501 [17:21<22:17,  1.30it/s][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 765/2501 [17:26<42:42,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 766/2501 [17:28<44:55,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 767/2501 [17:30<46:15,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 768/2501 [17:31<39:50,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 770/2501 [17:32<31:27,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 771/2501 [17:32<25:58,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 772/2501 [17:34<32:35,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 773/2501 [17:38<55:24,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 774/2501 [17:41<58:33,  2.03s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###       | 775/2501 [17:41<45:55,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 776/2501 [17:41<35:40,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 777/2501 [17:42<33:09,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 778/2501 [17:46<57:46,  2.01s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 781/2501 [17:49<37:27,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 782/2501 [17:52<49:41,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  31%|###1      | 784/2501 [17:54<42:42,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 788/2501 [17:55<25:04,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 789/2501 [18:00<40:44,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 790/2501 [18:05<59:24,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 793/2501 [18:05<35:57,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 797/2501 [18:10<35:23,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 798/2501 [18:12<38:24,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 799/2501 [18:16<47:02,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###1      | 800/2501 [18:18<53:37,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 805/2501 [18:20<28:00,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 806/2501 [18:23<34:59,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 807/2501 [18:25<40:29,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 808/2501 [18:28<48:16,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 809/2501 [18:30<49:44,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  32%|###2      | 812/2501 [18:30<26:47,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 813/2501 [18:32<30:56,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 816/2501 [18:38<42:17,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 817/2501 [18:39<36:51,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 818/2501 [18:40<38:03,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 819/2501 [18:44<51:50,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 820/2501 [18:45<47:56,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 824/2501 [18:47<27:07,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  33%|###2      | 825/2501 [18:48<27:28,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 826/2501 [18:49<29:32,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 827/2501 [18:55<57:48,  2.07s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 828/2501 [18:55<49:09,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 830/2501 [18:56<31:28,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 831/2501 [18:57<31:48,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 832/2501 [18:58<32:38,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 833/2501 [19:01<45:42,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 834/2501 [19:03<42:35,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  33%|###3      | 835/2501 [19:08<1:13:30,  2.65s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 838/2501 [19:09<38:45,  1.40s/it]  [A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 839/2501 [19:11<39:17,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 840/2501 [19:12<39:01,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 841/2501 [19:14<41:27,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 843/2501 [19:15<32:42,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 844/2501 [19:18<40:37,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 845/2501 [19:21<49:57,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 847/2501 [19:23<43:15,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 848/2501 [19:26<50:18,  1.83s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###3      | 850/2501 [19:27<35:44,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 851/2501 [19:27<28:43,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 852/2501 [19:31<46:43,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 853/2501 [19:34<58:19,  2.12s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 857/2501 [19:37<37:08,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 858/2501 [19:39<37:42,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  34%|###4      | 862/2501 [19:41<25:34,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 863/2501 [19:43<32:18,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 864/2501 [19:44<30:58,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 865/2501 [19:50<54:13,  1.99s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 868/2501 [19:52<37:49,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 869/2501 [19:52<32:01,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 871/2501 [19:56<39:00,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 873/2501 [20:00<43:36,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###4      | 874/2501 [20:04<58:11,  2.15s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###5      | 877/2501 [20:07<43:53,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###5      | 881/2501 [20:12<40:12,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###5      | 882/2501 [20:17<50:33,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):  35%|###5      | 883/2501 [20:18<50:20,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 889/2501 [20:25<38:56,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 890/2501 [20:29<44:44,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 891/2501 [20:30<43:15,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 892/2501 [20:32<43:11,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 897/2501 [20:36<31:23,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 898/2501 [20:37<32:34,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 899/2501 [20:39<37:09,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###5      | 900/2501 [20:41<37:14,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###6      | 905/2501 [20:45<29:05,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###6      | 906/2501 [20:49<39:34,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###6      | 907/2501 [20:51<39:37,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###6      | 908/2501 [20:52<40:43,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  36%|###6      | 911/2501 [20:53<23:30,  1.13it/s][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 913/2501 [20:55<26:37,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 914/2501 [20:58<36:34,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 915/2501 [20:59<32:25,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 916/2501 [21:02<44:36,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 917/2501 [21:05<50:22,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 918/2501 [21:09<1:03:41,  2.41s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 922/2501 [21:09<26:12,  1.00it/s]  [A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 924/2501 [21:12<32:35,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###6      | 925/2501 [21:13<29:45,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 926/2501 [21:17<44:33,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 927/2501 [21:20<50:51,  1.94s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 928/2501 [21:20<39:50,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 931/2501 [21:22<26:18,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 932/2501 [21:24<31:57,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 934/2501 [21:28<42:33,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 936/2501 [21:29<30:03,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  37%|###7      | 937/2501 [21:30<30:29,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 938/2501 [21:34<43:51,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 941/2501 [21:36<30:41,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 943/2501 [21:41<43:21,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 944/2501 [21:41<36:46,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 945/2501 [21:43<36:36,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 946/2501 [21:44<33:26,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###7      | 949/2501 [21:48<34:47,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 951/2501 [21:51<38:22,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 952/2501 [21:52<33:44,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 953/2501 [21:55<41:30,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 955/2501 [21:55<28:29,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 956/2501 [21:57<29:59,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 957/2501 [22:00<46:06,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 960/2501 [22:02<29:00,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 961/2501 [22:06<43:59,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  38%|###8      | 962/2501 [22:07<38:11,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 963/2501 [22:07<30:17,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 964/2501 [22:07<26:45,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 965/2501 [22:09<31:35,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 968/2501 [22:09<16:02,  1.59it/s][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 969/2501 [22:17<50:17,  1.97s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 970/2501 [22:21<1:02:42,  2.46s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###8      | 973/2501 [22:23<39:31,  1.55s/it]  [A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 977/2501 [22:28<35:16,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 978/2501 [22:29<34:56,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 980/2501 [22:31<30:41,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 981/2501 [22:31<25:48,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 985/2501 [22:36<30:45,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  39%|###9      | 986/2501 [22:40<39:06,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 989/2501 [22:41<27:42,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 990/2501 [22:42<29:31,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 993/2501 [22:46<30:27,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 994/2501 [22:50<38:45,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 995/2501 [22:53<49:07,  1.96s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 997/2501 [22:54<33:17,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 998/2501 [22:55<32:19,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  40%|###9      | 999/2501 [22:55<28:40,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1002/2501 [22:58<25:23,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1003/2501 [23:04<46:15,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1005/2501 [23:07<44:36,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1006/2501 [23:08<42:21,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1007/2501 [23:10<41:41,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1011/2501 [23:12<25:18,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  40%|####      | 1012/2501 [23:15<34:01,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1013/2501 [23:15<29:31,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1014/2501 [23:18<36:14,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1015/2501 [23:19<34:13,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1016/2501 [23:19<26:41,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1019/2501 [23:23<30:21,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1020/2501 [23:26<39:36,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1022/2501 [23:27<28:15,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1023/2501 [23:29<35:01,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####      | 1024/2501 [23:31<34:24,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1027/2501 [23:33<24:45,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1028/2501 [23:34<27:35,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1029/2501 [23:38<39:10,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1030/2501 [23:38<32:23,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1031/2501 [23:41<43:05,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1032/2501 [23:41<33:18,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1033/2501 [23:43<33:07,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1036/2501 [23:44<21:14,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  41%|####1     | 1037/2501 [23:50<46:58,  1.93s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1040/2501 [23:54<41:34,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1042/2501 [23:56<33:46,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1045/2501 [24:00<33:23,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1046/2501 [24:01<33:11,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1047/2501 [24:02<31:34,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####1     | 1048/2501 [24:03<31:22,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1051/2501 [24:08<34:35,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1053/2501 [24:12<36:37,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1054/2501 [24:13<37:39,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1056/2501 [24:14<26:34,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1059/2501 [24:19<32:17,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1060/2501 [24:20<32:04,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  42%|####2     | 1061/2501 [24:24<45:48,  1.91s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1063/2501 [24:26<35:06,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1064/2501 [24:27<32:40,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1067/2501 [24:29<26:18,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1068/2501 [24:30<24:30,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1069/2501 [24:33<34:48,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1071/2501 [24:35<32:04,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1072/2501 [24:37<32:17,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1073/2501 [24:38<34:21,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1074/2501 [24:39<27:56,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####2     | 1075/2501 [24:41<32:10,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1076/2501 [24:41<27:29,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1078/2501 [24:43<25:50,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1079/2501 [24:47<42:52,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1081/2501 [24:48<29:14,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1082/2501 [24:52<41:00,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1083/2501 [24:54<43:23,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):  43%|####3     | 1087/2501 [25:00<40:14,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1089/2501 [25:01<32:06,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1090/2501 [25:02<28:47,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1091/2501 [25:06<40:22,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1095/2501 [25:14<45:25,  1.94s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1097/2501 [25:17<42:19,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####3     | 1099/2501 [25:18<32:56,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####4     | 1103/2501 [25:27<41:50,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####4     | 1104/2501 [25:29<41:46,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####4     | 1106/2501 [25:31<36:16,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####4     | 1109/2501 [25:32<27:44,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  44%|####4     | 1111/2501 [25:38<36:56,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####4     | 1113/2501 [25:45<48:03,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####4     | 1119/2501 [25:52<38:27,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####4     | 1120/2501 [25:53<35:04,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####4     | 1123/2501 [25:55<29:05,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1126/2501 [25:56<21:29,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1127/2501 [26:04<42:17,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1129/2501 [26:06<37:51,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1130/2501 [26:06<32:10,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1135/2501 [26:14<34:33,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  45%|####5     | 1136/2501 [26:15<32:25,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1139/2501 [26:17<26:04,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1141/2501 [26:17<20:49,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1142/2501 [26:19<24:47,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1143/2501 [26:26<46:20,  2.05s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1144/2501 [26:27<40:56,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####5     | 1145/2501 [26:31<54:42,  2.42s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1151/2501 [26:34<25:20,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1152/2501 [26:38<34:07,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1153/2501 [26:40<35:20,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1154/2501 [26:42<37:55,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1157/2501 [26:42<21:17,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1158/2501 [26:44<26:45,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1160/2501 [26:45<20:37,  1.08it/s][A
+extract PCs (workers: 8 processes spawn):  46%|####6     | 1161/2501 [26:51<41:43,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1163/2501 [26:56<45:22,  2.03s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1165/2501 [26:56<30:40,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1169/2501 [26:59<24:29,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1171/2501 [27:03<28:28,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1172/2501 [27:05<31:00,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1173/2501 [27:07<33:17,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####6     | 1174/2501 [27:07<29:19,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1177/2501 [27:12<30:35,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1179/2501 [27:14<30:01,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1180/2501 [27:17<34:18,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1181/2501 [27:17<28:49,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1183/2501 [27:20<30:33,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1186/2501 [27:24<27:42,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  47%|####7     | 1187/2501 [27:26<33:17,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1188/2501 [27:30<43:39,  1.99s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1193/2501 [27:31<19:55,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1194/2501 [27:33<24:52,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1195/2501 [27:37<34:48,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1196/2501 [27:38<31:26,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####7     | 1199/2501 [27:40<23:21,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1201/2501 [27:40<17:45,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1202/2501 [27:46<35:20,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1203/2501 [27:49<43:15,  2.00s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1204/2501 [27:50<39:00,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1205/2501 [27:52<39:13,  1.82s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1209/2501 [27:53<18:06,  1.19it/s][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1210/2501 [27:59<37:19,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  48%|####8     | 1211/2501 [28:01<40:20,  1.88s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1213/2501 [28:02<28:46,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1215/2501 [28:04<27:24,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1216/2501 [28:05<24:43,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1218/2501 [28:11<40:12,  1.88s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1220/2501 [28:14<34:00,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1222/2501 [28:14<24:53,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1223/2501 [28:17<32:35,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####8     | 1224/2501 [28:18<28:28,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1227/2501 [28:21<26:44,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1228/2501 [28:24<31:39,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1229/2501 [28:24<26:16,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1232/2501 [28:29<29:19,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1233/2501 [28:31<33:21,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1235/2501 [28:32<24:12,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1236/2501 [28:34<29:13,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  49%|####9     | 1237/2501 [28:37<37:26,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1240/2501 [28:39<24:00,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1241/2501 [28:41<26:54,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1244/2501 [28:47<33:18,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1246/2501 [28:47<25:12,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1247/2501 [28:50<29:42,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  50%|####9     | 1248/2501 [28:52<33:28,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1252/2501 [28:53<18:31,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1253/2501 [28:57<30:17,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1254/2501 [28:59<30:31,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1255/2501 [29:04<47:24,  2.28s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1258/2501 [29:04<25:19,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1260/2501 [29:06<23:24,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1261/2501 [29:07<19:49,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1262/2501 [29:11<36:39,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  50%|#####     | 1263/2501 [29:13<33:57,  1.65s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1264/2501 [29:13<26:18,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1265/2501 [29:14<25:03,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1267/2501 [29:19<35:52,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1270/2501 [29:20<22:00,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1271/2501 [29:22<26:43,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1272/2501 [29:22<22:41,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1273/2501 [29:24<22:32,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####     | 1275/2501 [29:27<27:19,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1276/2501 [29:32<43:00,  2.11s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1279/2501 [29:33<26:51,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1281/2501 [29:34<21:23,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1282/2501 [29:37<26:20,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1285/2501 [29:42<31:02,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1286/2501 [29:43<27:48,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1287/2501 [29:44<28:33,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  51%|#####1    | 1288/2501 [29:45<25:39,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1290/2501 [29:46<18:24,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1291/2501 [29:49<27:32,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1293/2501 [29:50<23:43,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1294/2501 [29:51<23:20,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1296/2501 [29:53<20:10,  1.00s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1298/2501 [29:53<14:01,  1.43it/s][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1299/2501 [29:57<27:33,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####1    | 1300/2501 [29:58<24:22,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1301/2501 [30:00<29:43,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1302/2501 [30:05<47:55,  2.40s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1307/2501 [30:08<22:22,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1309/2501 [30:12<28:54,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1310/2501 [30:13<25:12,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  52%|#####2    | 1312/2501 [30:16<27:30,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####2    | 1316/2501 [30:19<21:19,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####2    | 1317/2501 [30:24<31:58,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####2    | 1319/2501 [30:24<23:38,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####2    | 1321/2501 [30:27<26:38,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####2    | 1325/2501 [30:32<24:56,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1328/2501 [30:35<23:16,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1330/2501 [30:36<19:19,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1331/2501 [30:37<20:04,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1332/2501 [30:39<23:09,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1333/2501 [30:42<30:00,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1336/2501 [30:44<21:01,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  53%|#####3    | 1338/2501 [30:44<14:59,  1.29it/s][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1339/2501 [30:47<22:19,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1340/2501 [30:49<26:51,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1342/2501 [30:49<18:21,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1343/2501 [30:51<22:23,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1344/2501 [30:54<30:51,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1345/2501 [30:56<32:44,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1348/2501 [30:58<21:14,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1349/2501 [30:59<19:25,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####3    | 1350/2501 [31:01<25:37,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1351/2501 [31:02<25:21,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1352/2501 [31:06<35:12,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1354/2501 [31:10<38:52,  2.03s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1355/2501 [31:11<31:01,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1358/2501 [31:14<24:25,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1359/2501 [31:14<21:27,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1360/2501 [31:15<22:16,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1361/2501 [31:16<21:57,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1362/2501 [31:18<26:15,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  54%|#####4    | 1363/2501 [31:19<20:55,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1364/2501 [31:21<25:17,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1366/2501 [31:24<28:34,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1367/2501 [31:25<27:24,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1368/2501 [31:26<22:03,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1369/2501 [31:29<32:27,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1370/2501 [31:31<34:53,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1374/2501 [31:36<26:26,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####4    | 1375/2501 [31:39<31:39,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1376/2501 [31:41<32:36,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1377/2501 [31:42<32:48,  1.75s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1378/2501 [31:43<26:02,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1380/2501 [31:44<19:51,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1382/2501 [31:49<30:31,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1383/2501 [31:50<27:20,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1384/2501 [31:52<30:00,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1385/2501 [31:58<49:30,  2.66s/it][A
+extract PCs (workers: 8 processes spawn):  55%|#####5    | 1387/2501 [31:59<34:57,  1.88s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1391/2501 [32:00<16:51,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1392/2501 [32:06<33:40,  1.82s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1393/2501 [32:10<39:41,  2.15s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1394/2501 [32:12<39:50,  2.16s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1395/2501 [32:14<37:19,  2.02s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1399/2501 [32:16<21:03,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####5    | 1400/2501 [32:18<24:29,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1401/2501 [32:20<28:20,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1402/2501 [32:22<27:57,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1407/2501 [32:26<20:25,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1408/2501 [32:29<24:28,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1409/2501 [32:33<33:36,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1410/2501 [32:35<35:46,  1.97s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1412/2501 [32:36<25:18,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  56%|#####6    | 1413/2501 [32:37<21:47,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1414/2501 [32:38<23:42,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1415/2501 [32:41<30:17,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1417/2501 [32:43<26:29,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1418/2501 [32:48<38:07,  2.11s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1419/2501 [32:48<30:12,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1420/2501 [32:49<25:48,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1421/2501 [32:49<19:25,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1423/2501 [32:49<11:59,  1.50it/s][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1424/2501 [32:55<32:01,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####6    | 1425/2501 [32:55<26:57,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1426/2501 [32:59<37:47,  2.11s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1428/2501 [33:01<30:17,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1432/2501 [33:04<20:11,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1433/2501 [33:05<20:13,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1434/2501 [33:06<19:17,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1435/2501 [33:09<26:06,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1436/2501 [33:11<29:31,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1437/2501 [33:12<23:54,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  57%|#####7    | 1438/2501 [33:12<18:41,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1439/2501 [33:13<19:07,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1440/2501 [33:16<27:44,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1443/2501 [33:18<19:00,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1444/2501 [33:23<35:20,  2.01s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1447/2501 [33:24<20:38,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1448/2501 [33:25<18:29,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####7    | 1449/2501 [33:27<22:16,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1452/2501 [33:31<24:21,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1453/2501 [33:32<23:31,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1454/2501 [33:34<25:48,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1455/2501 [33:35<23:29,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1456/2501 [33:36<20:54,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1457/2501 [33:36<15:55,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1458/2501 [33:38<18:23,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1460/2501 [33:44<33:53,  1.95s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1461/2501 [33:45<29:03,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1462/2501 [33:47<31:07,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  58%|#####8    | 1463/2501 [33:48<27:17,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1467/2501 [33:49<14:08,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1468/2501 [33:55<28:42,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1469/2501 [33:56<27:23,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1470/2501 [33:56<22:41,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1471/2501 [33:58<22:17,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1472/2501 [33:58<19:34,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1473/2501 [33:59<16:12,  1.06it/s][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1474/2501 [34:01<20:24,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####8    | 1475/2501 [34:01<19:13,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1476/2501 [34:05<32:47,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1477/2501 [34:08<34:23,  2.02s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1478/2501 [34:11<41:37,  2.44s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1480/2501 [34:11<23:55,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1483/2501 [34:12<14:19,  1.18it/s][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1484/2501 [34:14<17:35,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  59%|#####9    | 1485/2501 [34:20<35:13,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):  60%|#####9    | 1489/2501 [34:22<19:29,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  60%|#####9    | 1492/2501 [34:26<21:16,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  60%|#####9    | 1493/2501 [34:33<35:53,  2.14s/it][A
+extract PCs (workers: 8 processes spawn):  60%|#####9    | 1498/2501 [34:34<18:23,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  60%|#####9    | 1499/2501 [34:36<20:50,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1501/2501 [34:40<24:29,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1503/2501 [34:43<24:11,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1505/2501 [34:45<21:04,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1506/2501 [34:46<20:28,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1508/2501 [34:47<18:13,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1509/2501 [34:51<26:12,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1511/2501 [34:53<22:57,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1512/2501 [34:55<25:03,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  60%|######    | 1513/2501 [34:56<22:33,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1514/2501 [34:56<18:29,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1517/2501 [34:58<13:21,  1.23it/s][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1518/2501 [35:01<22:12,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1519/2501 [35:03<24:22,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1520/2501 [35:04<20:41,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######    | 1522/2501 [35:07<23:01,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1526/2501 [35:08<13:00,  1.25it/s][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1527/2501 [35:14<26:21,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1530/2501 [35:18<23:03,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1533/2501 [35:18<14:50,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1535/2501 [35:19<12:54,  1.25it/s][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1536/2501 [35:23<22:49,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1537/2501 [35:24<19:15,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  61%|######1   | 1538/2501 [35:25<21:26,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1539/2501 [35:28<24:27,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1541/2501 [35:28<16:51,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1542/2501 [35:29<15:00,  1.06it/s][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1544/2501 [35:33<22:29,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1545/2501 [35:34<20:34,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1546/2501 [35:36<22:01,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1547/2501 [35:37<23:02,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######1   | 1550/2501 [35:40<17:50,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1551/2501 [35:41<19:25,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1552/2501 [35:45<26:40,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1554/2501 [35:47<23:09,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1555/2501 [35:48<20:21,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1557/2501 [35:48<13:20,  1.18it/s][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1558/2501 [35:53<29:22,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1559/2501 [35:55<27:32,  1.75s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1561/2501 [35:56<19:35,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  62%|######2   | 1562/2501 [36:00<29:42,  1.90s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1566/2501 [36:04<20:36,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1567/2501 [36:04<19:24,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1568/2501 [36:08<26:50,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1570/2501 [36:08<17:38,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1573/2501 [36:10<14:27,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1574/2501 [36:13<18:13,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######2   | 1575/2501 [36:16<24:46,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1576/2501 [36:17<22:28,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1578/2501 [36:18<16:35,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1580/2501 [36:20<17:09,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1581/2501 [36:22<19:30,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1582/2501 [36:23<17:37,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1583/2501 [36:27<30:30,  1.99s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1585/2501 [36:29<23:58,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  63%|######3   | 1588/2501 [36:30<14:44,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1589/2501 [36:31<13:53,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1590/2501 [36:33<18:43,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1591/2501 [36:38<29:39,  1.96s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1594/2501 [36:39<18:20,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1595/2501 [36:40<16:23,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1596/2501 [36:41<16:12,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1597/2501 [36:42<17:13,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1598/2501 [36:45<23:13,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1599/2501 [36:46<22:12,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######3   | 1600/2501 [36:47<19:31,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######4   | 1601/2501 [36:48<20:39,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######4   | 1604/2501 [36:51<15:06,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######4   | 1606/2501 [36:56<22:55,  1.54s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######4   | 1607/2501 [36:59<29:11,  1.96s/it][A
+extract PCs (workers: 8 processes spawn):  64%|######4   | 1611/2501 [37:00<15:04,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1614/2501 [37:03<14:25,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1615/2501 [37:06<18:22,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1616/2501 [37:08<20:52,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1617/2501 [37:11<25:22,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1621/2501 [37:11<12:15,  1.20it/s][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1622/2501 [37:14<18:00,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1623/2501 [37:17<20:50,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######4   | 1624/2501 [37:19<25:12,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1626/2501 [37:21<20:41,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1628/2501 [37:21<13:51,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1629/2501 [37:23<15:15,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1630/2501 [37:23<12:44,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1631/2501 [37:27<23:05,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1634/2501 [37:31<20:57,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1635/2501 [37:33<22:42,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1636/2501 [37:34<19:20,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  65%|######5   | 1638/2501 [37:34<14:32,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1639/2501 [37:35<13:21,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1641/2501 [37:37<14:01,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1642/2501 [37:41<21:50,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1643/2501 [37:44<27:01,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1644/2501 [37:46<28:52,  2.02s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1645/2501 [37:47<22:32,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1646/2501 [37:47<17:45,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1647/2501 [37:48<18:33,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1648/2501 [37:49<17:07,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######5   | 1650/2501 [37:50<12:27,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1651/2501 [37:55<24:20,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1653/2501 [37:59<26:09,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1658/2501 [38:02<15:28,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1659/2501 [38:03<16:43,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1660/2501 [38:06<19:44,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1662/2501 [38:07<15:23,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  66%|######6   | 1663/2501 [38:07<13:47,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1665/2501 [38:08<11:23,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1666/2501 [38:10<14:44,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1667/2501 [38:14<21:29,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1668/2501 [38:17<29:13,  2.10s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1672/2501 [38:20<16:28,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1673/2501 [38:20<14:01,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######6   | 1675/2501 [38:23<16:42,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1676/2501 [38:26<21:15,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1677/2501 [38:28<21:31,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1678/2501 [38:31<26:23,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1683/2501 [38:31<10:35,  1.29it/s][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1684/2501 [38:32<11:38,  1.17it/s][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1685/2501 [38:36<17:21,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1686/2501 [38:38<19:15,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  67%|######7   | 1687/2501 [38:39<17:35,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1690/2501 [38:41<13:47,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1692/2501 [38:43<15:18,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1693/2501 [38:48<23:12,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1696/2501 [38:50<18:05,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1698/2501 [38:52<16:35,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1699/2501 [38:54<17:14,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######7   | 1700/2501 [38:55<16:29,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1701/2501 [38:59<24:33,  1.84s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1703/2501 [38:59<16:25,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1704/2501 [39:00<15:31,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1706/2501 [39:02<14:52,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1707/2501 [39:04<16:29,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1709/2501 [39:08<18:41,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1710/2501 [39:09<17:18,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1711/2501 [39:09<15:00,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1712/2501 [39:11<18:17,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  68%|######8   | 1713/2501 [39:12<16:56,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1714/2501 [39:15<22:48,  1.74s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1717/2501 [39:19<19:41,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1718/2501 [39:20<16:56,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1720/2501 [39:22<16:21,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1723/2501 [39:25<15:49,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1724/2501 [39:28<18:52,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######8   | 1725/2501 [39:30<21:14,  1.64s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1727/2501 [39:32<16:10,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1731/2501 [39:34<12:20,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1732/2501 [39:37<15:55,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1733/2501 [39:41<22:41,  1.77s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1734/2501 [39:42<20:13,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1735/2501 [39:44<19:51,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1736/2501 [39:44<17:29,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  69%|######9   | 1737/2501 [39:47<20:10,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1740/2501 [39:49<14:10,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1741/2501 [39:52<19:19,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1742/2501 [39:54<21:06,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1743/2501 [39:57<24:17,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1746/2501 [39:57<12:58,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1748/2501 [40:00<15:16,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  70%|######9   | 1749/2501 [40:02<16:03,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1751/2501 [40:03<13:23,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1752/2501 [40:07<19:24,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1753/2501 [40:08<17:42,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1754/2501 [40:08<13:56,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1756/2501 [40:11<16:36,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1757/2501 [40:13<17:50,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1759/2501 [40:15<16:26,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  70%|#######   | 1762/2501 [40:17<11:32,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1764/2501 [40:22<17:57,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1765/2501 [40:23<17:11,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1766/2501 [40:24<15:10,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1767/2501 [40:25<13:49,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1768/2501 [40:25<12:29,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1769/2501 [40:28<17:00,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1772/2501 [40:34<21:43,  1.79s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######   | 1773/2501 [40:35<19:14,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1776/2501 [40:39<17:06,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1779/2501 [40:39<11:18,  1.06it/s][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1780/2501 [40:44<19:11,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1781/2501 [40:47<21:05,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1782/2501 [40:49<22:39,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  71%|#######1  | 1788/2501 [40:52<11:19,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1789/2501 [40:53<12:09,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1790/2501 [40:55<12:40,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1792/2501 [40:56<11:59,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1793/2501 [40:57<10:36,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1796/2501 [41:00<12:07,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1797/2501 [41:02<13:40,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1799/2501 [41:06<17:19,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######1  | 1800/2501 [41:09<19:37,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1802/2501 [41:09<13:26,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1804/2501 [41:10<09:36,  1.21it/s][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1806/2501 [41:10<08:03,  1.44it/s][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1807/2501 [41:18<23:21,  2.02s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1808/2501 [41:22<26:44,  2.32s/it][A
+extract PCs (workers: 8 processes spawn):  72%|#######2  | 1809/2501 [41:23<25:27,  2.21s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######2  | 1815/2501 [41:29<15:42,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######2  | 1816/2501 [41:30<15:03,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######2  | 1817/2501 [41:33<17:42,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######2  | 1818/2501 [41:33<15:28,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######2  | 1823/2501 [41:40<15:05,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1826/2501 [41:44<14:37,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1828/2501 [41:44<11:41,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1831/2501 [41:46<10:31,  1.06it/s][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1832/2501 [41:49<13:46,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1833/2501 [41:53<17:49,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1834/2501 [41:55<19:10,  1.73s/it][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1837/2501 [41:55<10:51,  1.02it/s][A
+extract PCs (workers: 8 processes spawn):  73%|#######3  | 1838/2501 [41:57<11:13,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1839/2501 [41:57<09:41,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1840/2501 [41:59<13:12,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1841/2501 [42:01<13:51,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1842/2501 [42:03<16:32,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1843/2501 [42:04<14:18,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1844/2501 [42:07<21:18,  1.95s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1847/2501 [42:08<11:22,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1848/2501 [42:11<14:51,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######3  | 1849/2501 [42:12<14:40,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1851/2501 [42:14<12:47,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1852/2501 [42:15<13:08,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1854/2501 [42:18<13:50,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1855/2501 [42:19<13:00,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1856/2501 [42:20<12:09,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1857/2501 [42:20<10:18,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1858/2501 [42:22<12:35,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1859/2501 [42:23<11:15,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1860/2501 [42:25<14:31,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1862/2501 [42:27<13:29,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  74%|#######4  | 1863/2501 [42:29<13:48,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1864/2501 [42:30<13:30,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1865/2501 [42:31<12:15,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1866/2501 [42:33<16:00,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1867/2501 [42:34<15:38,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1868/2501 [42:35<13:32,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1870/2501 [42:37<12:28,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1871/2501 [42:40<15:34,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1873/2501 [42:41<10:57,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######4  | 1875/2501 [42:46<16:51,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1877/2501 [42:47<13:32,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1878/2501 [42:48<11:57,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1879/2501 [42:48<10:22,  1.00s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1880/2501 [42:49<09:11,  1.13it/s][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1882/2501 [42:51<11:00,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1883/2501 [42:58<23:01,  2.24s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1885/2501 [42:59<16:29,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  75%|#######5  | 1886/2501 [43:01<16:37,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1891/2501 [43:06<12:39,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1892/2501 [43:09<15:22,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1894/2501 [43:10<12:37,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1895/2501 [43:10<11:05,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1896/2501 [43:13<14:51,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1899/2501 [43:15<10:38,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######5  | 1900/2501 [43:19<16:20,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1901/2501 [43:20<15:13,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1905/2501 [43:22<09:02,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1907/2501 [43:24<09:48,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1908/2501 [43:28<14:57,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1909/2501 [43:29<13:33,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  76%|#######6  | 1910/2501 [43:32<15:48,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1915/2501 [43:34<08:57,  1.09it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1916/2501 [43:37<12:09,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1918/2501 [43:38<09:40,  1.00it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1919/2501 [43:38<08:45,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1921/2501 [43:42<11:16,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######6  | 1924/2501 [43:45<10:42,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1926/2501 [43:45<08:08,  1.18it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1927/2501 [43:47<08:49,  1.08it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1928/2501 [43:47<08:08,  1.17it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1929/2501 [43:48<08:41,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1931/2501 [43:49<07:27,  1.27it/s][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1932/2501 [43:55<16:19,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1934/2501 [43:57<14:02,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  77%|#######7  | 1935/2501 [43:57<12:07,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1939/2501 [44:00<08:23,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1940/2501 [44:06<16:32,  1.77s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1942/2501 [44:06<11:27,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1943/2501 [44:08<12:11,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1944/2501 [44:08<09:51,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1945/2501 [44:09<11:02,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1948/2501 [44:13<10:55,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1949/2501 [44:16<13:48,  1.50s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######7  | 1950/2501 [44:17<13:49,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1951/2501 [44:20<15:37,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1953/2501 [44:21<12:10,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1957/2501 [44:27<13:03,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1958/2501 [44:29<13:52,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1959/2501 [44:31<13:19,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1960/2501 [44:32<13:43,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  78%|#######8  | 1962/2501 [44:33<10:15,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1965/2501 [44:35<07:17,  1.23it/s][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1966/2501 [44:40<13:56,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1967/2501 [44:41<13:30,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1969/2501 [44:44<13:54,  1.57s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1971/2501 [44:45<09:29,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1974/2501 [44:47<08:59,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######8  | 1975/2501 [44:51<12:38,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1977/2501 [44:53<11:25,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1978/2501 [44:55<13:07,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1982/2501 [44:57<07:43,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1984/2501 [45:00<09:36,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1985/2501 [45:02<10:02,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1986/2501 [45:02<09:34,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1987/2501 [45:03<09:22,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  79%|#######9  | 1988/2501 [45:05<09:46,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1990/2501 [45:06<07:06,  1.20it/s][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1991/2501 [45:07<08:54,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1992/2501 [45:08<07:36,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1993/2501 [45:08<06:04,  1.39it/s][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1994/2501 [45:11<10:41,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1995/2501 [45:14<16:23,  1.94s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1996/2501 [45:16<16:35,  1.97s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1997/2501 [45:17<12:28,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 1999/2501 [45:19<10:18,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  80%|#######9  | 2000/2501 [45:19<08:45,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2001/2501 [45:20<08:22,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2003/2501 [45:23<09:38,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2004/2501 [45:25<12:18,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2005/2501 [45:28<14:36,  1.77s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2006/2501 [45:29<13:01,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2007/2501 [45:30<11:55,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2012/2501 [45:37<11:11,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  80%|########  | 2013/2501 [45:38<10:57,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2014/2501 [45:39<10:13,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2016/2501 [45:40<08:00,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2017/2501 [45:41<08:23,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2018/2501 [45:42<08:51,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2019/2501 [45:42<07:04,  1.13it/s][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2020/2501 [45:46<12:24,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2022/2501 [45:49<12:23,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2024/2501 [45:50<09:32,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########  | 2025/2501 [45:52<10:34,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2028/2501 [45:55<08:49,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2029/2501 [45:57<10:51,  1.38s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2030/2501 [45:59<10:30,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2031/2501 [45:59<09:14,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2033/2501 [46:02<10:25,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2034/2501 [46:03<08:54,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2036/2501 [46:03<06:01,  1.29it/s][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2037/2501 [46:05<07:23,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  81%|########1 | 2038/2501 [46:08<11:17,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2040/2501 [46:08<07:29,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2041/2501 [46:14<16:16,  2.12s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2044/2501 [46:15<08:38,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2046/2501 [46:15<06:14,  1.22it/s][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2047/2501 [46:19<09:51,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2048/2501 [46:20<10:01,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########1 | 2049/2501 [46:25<16:08,  2.14s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2051/2501 [46:25<10:33,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2052/2501 [46:27<10:34,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2055/2501 [46:27<05:54,  1.26it/s][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2056/2501 [46:30<08:29,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2057/2501 [46:33<11:51,  1.60s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2058/2501 [46:35<12:02,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2059/2501 [46:35<09:52,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  82%|########2 | 2060/2501 [46:37<09:47,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########2 | 2064/2501 [46:39<05:51,  1.24it/s][A
+extract PCs (workers: 8 processes spawn):  83%|########2 | 2065/2501 [46:42<09:46,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########2 | 2066/2501 [46:46<13:11,  1.82s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########2 | 2073/2501 [46:53<08:52,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########2 | 2075/2501 [46:53<07:07,  1.00s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2076/2501 [46:57<09:32,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2078/2501 [46:57<07:22,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2081/2501 [46:58<05:46,  1.21it/s][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2082/2501 [47:01<07:07,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2083/2501 [47:03<08:46,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  83%|########3 | 2085/2501 [47:05<07:51,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2089/2501 [47:05<04:20,  1.58it/s][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2090/2501 [47:11<09:48,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2091/2501 [47:16<13:45,  2.01s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2093/2501 [47:16<09:45,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2096/2501 [47:17<05:53,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2098/2501 [47:23<09:45,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########3 | 2100/2501 [47:23<07:36,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2101/2501 [47:25<07:56,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2102/2501 [47:27<09:50,  1.48s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2104/2501 [47:28<07:14,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2106/2501 [47:30<06:41,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2108/2501 [47:33<08:15,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2109/2501 [47:34<07:27,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2110/2501 [47:37<09:51,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  84%|########4 | 2111/2501 [47:38<09:29,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########4 | 2116/2501 [47:44<07:58,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########4 | 2117/2501 [47:45<07:44,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########4 | 2118/2501 [47:50<12:15,  1.92s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########4 | 2123/2501 [47:51<06:03,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  85%|########4 | 2124/2501 [47:53<07:06,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2126/2501 [47:56<07:12,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2127/2501 [47:57<07:01,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2129/2501 [47:59<07:10,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2132/2501 [48:01<05:20,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2133/2501 [48:04<07:46,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2134/2501 [48:06<08:28,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2136/2501 [48:06<06:11,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  85%|########5 | 2137/2501 [48:08<06:50,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2140/2501 [48:10<05:25,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2141/2501 [48:16<11:13,  1.87s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2142/2501 [48:17<09:54,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2143/2501 [48:18<09:07,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2144/2501 [48:19<08:05,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2146/2501 [48:20<06:02,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2149/2501 [48:25<08:01,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########5 | 2150/2501 [48:26<07:22,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2151/2501 [48:29<08:56,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2153/2501 [48:30<07:02,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2154/2501 [48:33<08:37,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2157/2501 [48:35<06:57,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2158/2501 [48:37<07:01,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2159/2501 [48:40<09:14,  1.62s/it][A
+extract PCs (workers: 8 processes spawn):  86%|########6 | 2162/2501 [48:41<05:38,  1.00it/s][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2165/2501 [48:46<07:25,  1.33s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2168/2501 [48:47<05:33,  1.00s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2172/2501 [48:48<03:34,  1.53it/s][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2173/2501 [48:52<05:48,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2174/2501 [48:56<08:02,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########6 | 2175/2501 [48:56<06:56,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########7 | 2176/2501 [48:59<09:08,  1.69s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########7 | 2181/2501 [49:04<06:32,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########7 | 2182/2501 [49:06<07:37,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########7 | 2185/2501 [49:09<06:19,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  87%|########7 | 2186/2501 [49:11<06:49,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2189/2501 [49:13<05:40,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2191/2501 [49:14<04:54,  1.05it/s][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2192/2501 [49:16<05:58,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2193/2501 [49:20<07:57,  1.55s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2194/2501 [49:21<07:28,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2196/2501 [49:22<05:32,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########7 | 2200/2501 [49:25<04:52,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2201/2501 [49:30<08:02,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2203/2501 [49:32<06:55,  1.39s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2204/2501 [49:33<06:37,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2207/2501 [49:33<03:57,  1.24it/s][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2208/2501 [49:36<05:13,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2209/2501 [49:38<06:06,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2210/2501 [49:41<08:37,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2212/2501 [49:42<05:42,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  88%|########8 | 2213/2501 [49:46<08:39,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########8 | 2218/2501 [49:52<06:37,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########8 | 2220/2501 [49:52<05:14,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########8 | 2221/2501 [49:53<04:48,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########8 | 2222/2501 [49:57<07:02,  1.51s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########9 | 2226/2501 [50:02<06:27,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########9 | 2232/2501 [50:06<04:47,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########9 | 2233/2501 [50:07<04:30,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########9 | 2234/2501 [50:11<06:22,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  89%|########9 | 2235/2501 [50:14<07:47,  1.76s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2241/2501 [50:16<03:40,  1.18it/s][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2242/2501 [50:21<06:09,  1.43s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2243/2501 [50:22<05:33,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2245/2501 [50:22<04:17,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2246/2501 [50:23<03:39,  1.16it/s][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2247/2501 [50:24<03:47,  1.12it/s][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2248/2501 [50:27<06:08,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2249/2501 [50:28<05:25,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  90%|########9 | 2250/2501 [50:30<06:48,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2252/2501 [50:31<04:12,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2253/2501 [50:33<05:25,  1.31s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2254/2501 [50:36<06:37,  1.61s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2256/2501 [50:38<06:14,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2258/2501 [50:40<05:15,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2259/2501 [50:41<04:31,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2261/2501 [50:43<04:18,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  90%|######### | 2263/2501 [50:46<05:00,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2264/2501 [50:50<07:19,  1.85s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2267/2501 [50:51<04:44,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2268/2501 [50:52<04:34,  1.18s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2271/2501 [50:53<02:43,  1.41it/s][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2272/2501 [50:56<04:26,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2273/2501 [50:57<04:15,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2274/2501 [50:57<03:31,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  91%|######### | 2275/2501 [50:58<03:30,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2276/2501 [51:03<06:48,  1.81s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2278/2501 [51:03<04:16,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2280/2501 [51:05<04:12,  1.14s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2281/2501 [51:09<05:47,  1.58s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2284/2501 [51:09<03:21,  1.07it/s][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2285/2501 [51:12<04:51,  1.35s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2286/2501 [51:13<04:24,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2287/2501 [51:15<04:38,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  91%|#########1| 2288/2501 [51:16<04:35,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2289/2501 [51:19<06:03,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2290/2501 [51:21<06:15,  1.78s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2294/2501 [51:22<02:51,  1.21it/s][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2295/2501 [51:25<04:12,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2296/2501 [51:26<04:06,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2297/2501 [51:26<03:28,  1.02s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2298/2501 [51:27<02:48,  1.21it/s][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2299/2501 [51:28<03:02,  1.10it/s][A
+extract PCs (workers: 8 processes spawn):  92%|#########1| 2300/2501 [51:30<04:06,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2301/2501 [51:31<03:57,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2302/2501 [51:31<03:19,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2303/2501 [51:33<03:40,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2305/2501 [51:33<02:15,  1.45it/s][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2307/2501 [51:36<02:54,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2308/2501 [51:39<04:44,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2309/2501 [51:42<06:02,  1.89s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2310/2501 [51:42<04:36,  1.45s/it][A
+extract PCs (workers: 8 processes spawn):  92%|#########2| 2311/2501 [51:45<05:23,  1.70s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2316/2501 [51:47<02:41,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2317/2501 [51:52<04:28,  1.46s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2318/2501 [51:53<04:10,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2320/2501 [51:54<03:16,  1.09s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2321/2501 [51:55<03:22,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########2| 2325/2501 [52:00<03:26,  1.17s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2326/2501 [52:01<03:28,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2327/2501 [52:02<03:04,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2328/2501 [52:04<03:47,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2329/2501 [52:05<03:32,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2331/2501 [52:05<02:10,  1.31it/s][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2332/2501 [52:07<02:42,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2334/2501 [52:10<03:23,  1.22s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2335/2501 [52:11<03:02,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2336/2501 [52:15<05:13,  1.90s/it][A
+extract PCs (workers: 8 processes spawn):  93%|#########3| 2337/2501 [52:18<05:35,  2.05s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########3| 2343/2501 [52:19<02:12,  1.19it/s][A
+extract PCs (workers: 8 processes spawn):  94%|#########3| 2344/2501 [52:23<03:17,  1.26s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########3| 2345/2501 [52:24<03:08,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########3| 2348/2501 [52:25<02:17,  1.11it/s][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2351/2501 [52:26<01:36,  1.55it/s][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2352/2501 [52:32<03:34,  1.44s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2353/2501 [52:33<03:18,  1.34s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2354/2501 [52:33<02:43,  1.11s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2355/2501 [52:35<03:13,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2357/2501 [52:37<02:59,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2360/2501 [52:41<02:53,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2361/2501 [52:42<02:57,  1.27s/it][A
+extract PCs (workers: 8 processes spawn):  94%|#########4| 2363/2501 [52:46<03:16,  1.42s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2364/2501 [52:46<02:49,  1.24s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2368/2501 [52:51<02:38,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2369/2501 [52:53<02:59,  1.36s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2371/2501 [52:54<02:25,  1.12s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2372/2501 [52:55<02:14,  1.05s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########4| 2373/2501 [52:58<03:15,  1.52s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2376/2501 [53:03<03:11,  1.53s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2379/2501 [53:04<02:00,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2381/2501 [53:05<01:44,  1.15it/s][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2382/2501 [53:06<01:55,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2384/2501 [53:10<02:23,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2385/2501 [53:11<02:19,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2386/2501 [53:13<02:49,  1.47s/it][A
+extract PCs (workers: 8 processes spawn):  95%|#########5| 2388/2501 [53:15<02:10,  1.16s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2389/2501 [53:15<01:50,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2390/2501 [53:15<01:28,  1.25it/s][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2391/2501 [53:18<02:15,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2394/2501 [53:22<02:20,  1.32s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2395/2501 [53:23<02:12,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########5| 2396/2501 [53:27<03:09,  1.80s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2401/2501 [53:29<01:35,  1.04it/s][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2402/2501 [53:30<01:45,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2403/2501 [53:31<01:42,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2404/2501 [53:36<02:43,  1.68s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2405/2501 [53:37<02:40,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2408/2501 [53:38<01:30,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2409/2501 [53:39<01:39,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2411/2501 [53:40<01:16,  1.18it/s][A
+extract PCs (workers: 8 processes spawn):  96%|#########6| 2412/2501 [53:45<02:21,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2414/2501 [53:45<01:32,  1.06s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2415/2501 [53:46<01:29,  1.04s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2417/2501 [53:47<01:13,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2418/2501 [53:50<01:39,  1.20s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2420/2501 [53:50<01:10,  1.14it/s][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2421/2501 [53:55<02:12,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2423/2501 [53:55<01:24,  1.08s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########6| 2424/2501 [53:56<01:24,  1.10s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2426/2501 [54:01<01:56,  1.56s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2427/2501 [54:01<01:34,  1.28s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2430/2501 [54:05<01:24,  1.19s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2432/2501 [54:08<01:29,  1.30s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2434/2501 [54:11<01:32,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2436/2501 [54:11<01:06,  1.03s/it][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2437/2501 [54:12<01:02,  1.03it/s][A
+extract PCs (workers: 8 processes spawn):  97%|#########7| 2438/2501 [54:14<01:12,  1.15s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2440/2501 [54:14<00:47,  1.27it/s][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2441/2501 [54:18<01:24,  1.41s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2443/2501 [54:22<01:38,  1.71s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2444/2501 [54:23<01:24,  1.49s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2445/2501 [54:25<01:33,  1.67s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2446/2501 [54:26<01:15,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########7| 2449/2501 [54:29<01:03,  1.23s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2451/2501 [54:34<01:22,  1.66s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2452/2501 [54:34<01:06,  1.37s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2453/2501 [54:35<00:58,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2454/2501 [54:35<00:46,  1.01it/s][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2456/2501 [54:35<00:28,  1.57it/s][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2457/2501 [54:38<00:49,  1.13s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2458/2501 [54:40<00:53,  1.25s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2459/2501 [54:44<01:27,  2.09s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2460/2501 [54:46<01:25,  2.08s/it][A
+extract PCs (workers: 8 processes spawn):  98%|#########8| 2461/2501 [54:47<01:08,  1.72s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2466/2501 [54:48<00:25,  1.35it/s][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2467/2501 [54:55<00:55,  1.63s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2470/2501 [54:55<00:33,  1.07s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2472/2501 [54:59<00:35,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2474/2501 [55:01<00:32,  1.21s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########8| 2475/2501 [55:04<00:41,  1.59s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2476/2501 [55:05<00:34,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2479/2501 [55:06<00:20,  1.06it/s][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2480/2501 [55:10<00:29,  1.40s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2483/2501 [55:11<00:18,  1.01s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2485/2501 [55:15<00:20,  1.29s/it][A
+extract PCs (workers: 8 processes spawn):  99%|#########9| 2486/2501 [55:17<00:21,  1.43s/it][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2489/2501 [55:18<00:10,  1.13it/s][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2490/2501 [55:20<00:11,  1.07s/it][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2491/2501 [55:22<00:12,  1.28s/it][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2494/2501 [55:25<00:08,  1.22s/it][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2496/2501 [55:28<00:06,  1.33s/it][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2499/2501 [55:29<00:01,  1.21it/s][A
+extract PCs (workers: 8 processes spawn): 100%|#########9| 2500/2501 [55:29<00:00,  1.23it/s][Aextract PCs (workers: 8 processes spawn): 100%|##########| 2501/2501 [55:29<00:00,  1.33s/it]
+                                                                                                    jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [57:05<00:07,  7.02s/phase]                                                                                                    jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy:  50%|#####     | 1/2 [57:05<00:07,  7.02s/phase]jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy: 100%|##########| 2/2 [57:05<00:00, 2013.57s/phase]jlh60_2026-06-29_14-31-15_ProbeB:ProbeB:export_phy: 100%|##########| 2/2 [57:05<00:00, 1712.59s/phase]

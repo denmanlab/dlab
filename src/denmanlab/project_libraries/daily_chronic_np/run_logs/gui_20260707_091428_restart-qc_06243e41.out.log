@@ -1,0 +1,43 @@
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START validate existing Kilosort output
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: Kilosort output: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\kilosort4
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE validate existing Kilosort output in 0.0s
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START archive existing QC outputs
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive sorting_analyzer
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive quality_metrics.csv
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive template_metrics.csv
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive unit_summary.csv
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive summary.json
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive manifest.json
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive phy
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive unitrefine
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archive report
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: archived previous QC outputs: C:\Users\jordan\Desktop\mouse_arena_recordings\jlh60_2026-07-01_13-49-41\Record Node 101\experiment1\recording1\continuous\Neuropix-PXI-100.ProbeB\spikeinterface_output\qc_archive\20260707_091434
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE archive existing QC outputs in 0.0s
+[0.0s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START rebuild preprocessed recording view
+[0.9s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: recording: 384 channels, 1222.1s, 30000.0 Hz
+[0.9s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE rebuild preprocessed recording view in 0.9s
+[0.9s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START load Kilosort sorting and compute analyzer
+[7.4s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: Kilosort units: 499
+[32m46s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: SortingAnalyzer job kwargs: chunk_duration=1s, n_jobs=8, progress_bar=True; multiprocessing fallback_n_jobs=2
+[32m46s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: random_spikes
+[32m46s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: waveforms
+[48m05s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: templates
+[48m08s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: noise_levels
+[48m48s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: spike_amplitudes
+[50m03s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: spike_amplitudes failed with multiprocessing error ([Errno 22] Invalid argument); retrying with chunk_duration=1s, n_jobs=2, progress_bar=True
+[50m03s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: SpikeInterface could not delete partial spike_amplitudes; removing extension folder
+[1h19m59s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: using fallback SortingAnalyzer job kwargs for remaining extensions: chunk_duration=1s, n_jobs=2, progress_bar=True
+[1h19m59s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: unit_locations
+[1h20m04s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: spike_locations
+[1h50m09s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: principal_components
+[2h59m49s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: correlograms
+[3h00m26s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: isi_histograms
+[3h00m28s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: quality_metrics
+[14h00m36s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: compute analyzer extension: template_metrics
+[14h00m40s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE load Kilosort sorting and compute analyzer in 14h00m39s
+[14h00m40s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START export metrics and reports
+[14h00m56s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE export metrics and reports in 16.3s
+[14h00m56s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: START export Phy
+[14h00m56s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: Phy export skipped
+[14h00m56s] jlh60_2026-07-01_13-49-41_ProbeB:ProbeB:restart_qc: DONE export Phy in 0.0s
+jlh60_2026-07-01_13-49-41_ProbeB | ProbeB | complete
