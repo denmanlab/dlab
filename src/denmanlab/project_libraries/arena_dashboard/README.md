@@ -5,7 +5,7 @@ discrimination task run in the VR arena (`vr_task_v0`, `varying_orientation`).
 
 ## Launch
 
-Launch the dashboard by pointing it at a folder containing the task performance data for multiple mice. One option is to point it at the s1 location where data are stored. 
+Launch the dashboard by pointing it at a folder containing the task performance data for multiple mice. One option is to point it at the s1 location where data are stored. This means replace `~/behavior_data` in the below with `Volumes/s1/behavior/mouse_arena_discrimination/data` on a Mac or the s1 path on Windows (`\\denmanlab\s1\behavior....`).
 
 For the below to work, you need to `cd` to the directory where this README and the `dashboard_app.py` are stored. 
 
@@ -17,13 +17,7 @@ streamlit run dashboard_app.py -- --data-root ~/behavior_data
 The `--` is required: it separates Streamlit's own arguments from the app's.
 The data root can also be set with the `ARENA_DATA_ROOT` environment variable.
 
-**The repository is opened read-only and is never written to.** The data lives
-on a network volume (`/Volumes/s1/behavior/mouse_arena_discrimination/data`)
-reached through a read-only bindfs mirror:
 
-```bash
-bindfs -r /Volumes/s1/behavior/mouse_arena_discrimination/data ~/behavior_data
-```
 
 ### First load
 
