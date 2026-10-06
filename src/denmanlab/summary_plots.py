@@ -7,8 +7,8 @@ import svgutils.compose as sc
 import numpy as np
 import pickle as pkl
 import seaborn as sns
-from dlab.sglx_analysis import readAPMeta
-from dlab import sorting_quality as sq
+from denmanlab.sglx_analysis import readAPMeta
+from denmanlab import sorting_quality as sq
 from matplotlib.gridspec import GridSpec
 
 """
