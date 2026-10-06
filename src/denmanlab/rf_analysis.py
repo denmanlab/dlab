@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.ndimage as ndimage
-import dlab.psth_and_raster as par
-from dlab.generalephys import placeAxesOnGrid, smoothRF
+import denmanlab.psth_and_raster as par
+from denmanlab.generalephys import placeAxesOnGrid, smoothRF
 from matplotlib.patches import Rectangle, Circle
 from matplotlib.collections import PatchCollection
 import scipy.optimize as opt
@@ -32,7 +32,8 @@ def smoothRF(img,size=3):
     smooth = ndimage.gaussian_filter(img,(size,size))
     return smooth
 
-from scipy.signal import boxcar,convolve
+from scipy.signal import convolve
+from scipy.signal.windows import boxcar
 def smooth_boxcar(data,boxcar_size=3):
     """smooths an impulse respone of an already computed receptive field. uses a boxcar to smooth.
 
