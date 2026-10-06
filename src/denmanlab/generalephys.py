@@ -1668,7 +1668,8 @@ def smoothRF(img,size=3):
     smooth = ndimage.gaussian_filter(img,(size,size))
     return smooth
 
-from scipy.signal import boxcar,convolve
+from scipy.signal import convolve
+from scipy.signal.windows import boxcar
 def smooth_boxcar(data,boxcar_size):
     smoothed = convolve(data,boxcar(boxcar_size))/boxcar_size
     smoothed = smoothed[boxcar_size/2:len(data)+(boxcar_size/2)]

@@ -3,10 +3,10 @@ import pandas as pd
 import warnings
 import os, h5py, csv
 from glob import glob
-from dlab.generalephys import option234_positions
-from dlab.sglx_analysis import readAPMeta
-from dlab.utils import get_peak_waveform_from_template
-import dlab.continuous_traces as ct
+from denmanlab.generalephys import option234_positions
+from denmanlab.sglx_analysis import readAPMeta
+from denmanlab.utils import get_peak_waveform_from_template
+import denmanlab.continuous_traces as ct
 from random import sample
 
 try:

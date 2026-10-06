@@ -5,7 +5,7 @@ import os, sys,glob, copy, csv
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.colors import Normalize
-from  dlab.continuous_traces import get_channel_count, filtr
+from  denmanlab.continuous_traces import get_channel_count, filtr
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 from sklearn.manifold import TSNE
 from scipy.cluster.vq import kmeans2

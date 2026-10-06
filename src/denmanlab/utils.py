@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from dlab.generalephys import get_waveform_duration,get_waveform_PTratio,get_waveform_repolarizationslope,option234_positions
+from denmanlab.generalephys import get_waveform_duration,get_waveform_PTratio,get_waveform_repolarizationslope,option234_positions
 from scipy.cluster.vq import kmeans2
 import seaborn as sns;sns.set_style("ticks")
 import matplotlib.pyplot as plt
